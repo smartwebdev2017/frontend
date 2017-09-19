@@ -1,0 +1,246 @@
+<div ba-panel ba-panel-class="profile-page">
+  <div class="panel-content">
+    <!--<div class="progress-info">Your profile is 70% Complete</div>
+    <div class="progress">
+      <div class="progress-bar progress-bar-primary progress-bar-striped active" role="progressbar"
+           aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+      </div>
+    </div>-->
+
+    <h3 class="with-line">{{carData.listing_title}}</h3>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group row clearfix">
+          <label for="vin" class="col-sm-3 control-label">VIN :</label>
+
+          <div class="col-sm-9">
+            <input type="text" ng-model="carData.vin" class="form-control" id="vin" placeholder="" >
+          </div>
+        </div>
+        <div class="form-group row clearfix">
+          <label for="listing_model" class="col-sm-3 control-label">Model</label>
+
+          <div class="col-sm-9">
+            <input type="text" ng-model="carData.listing_model" class="form-control" id="listing_model" placeholder="" value="">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group row clearfix">
+          <label class="col-sm-3 control-label">Make</label>
+
+          <div class="col-sm-9">
+            <input type="text" ng-model="carData.listing_make" class="form-control" id="listing_make" placeholder="" value="">
+          </div>
+        </div>
+
+        <div class="form-group row clearfix">
+          <label for="listing_year" class="col-sm-3 control-label">Year</label>
+
+          <div class="col-sm-9">
+            <input type="text" ng-model="carData.listing_year" class="form-control" id="listing_year" placeholder="" value="">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group row clearfix">
+          <label class="col-sm-3 control-label">Sold Status</label>
+
+          <div class="col-sm-9">
+            <input type="text" ng-model="carData.sold_state" class="form-control" id="listing_sold_state" placeholder="" value="">
+          </div>
+        </div>
+
+        <div class="form-group row clearfix">
+          <label for="listing_sold_date" class="col-sm-3 control-label">Sold Date</label>
+
+          <div class="col-sm-9">
+            <input type="text" ng-model="carData.sold_date" class="form-control" id="listing_sold_date" placeholder="" value="">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group row clearfix">
+          <label class="col-sm-3 control-label">Listing URL</label>
+
+          <div class="col-sm-9">
+            <input type="text" ng-model="carData.listing_url" class="form-control" id="listing_url" placeholder="" value="">
+          </div>
+        </div>
+
+        <div class="form-group row clearfix">
+          <label for="listing_date" class="col-sm-3 control-label">Listing Date</label>
+
+          <div class="col-sm-9">
+            <input type="text" ng-model="carData.listing_date" class="form-control" id="listing_date" placeholder="" value="">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <h3 class="with-line">Detailed Information</h3>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group row clearfix">
+          <label for="price" class="col-sm-3 control-label">Price</label>
+
+          <div class="col-sm-9">
+            <input type="text" ng-model="carData.price" class="form-control" id="price" placeholder="" >
+          </div>
+        </div>
+        <div class="form-group row clearfix">
+          <label for="mileage" class="col-sm-3 control-label">Mileage</label>
+
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="mileage" placeholder="" ng-model="carData.mileage">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group row clearfix">
+          <label class="col-sm-3 control-label">City</label>
+
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="city" placeholder="" ng-model="carData.city">
+          </div>
+        </div>
+        <div class="form-group row clearfix">
+          <label for="state" class="col-sm-3 control-label">State</label>
+
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="state" placeholder="" ng-model="carData.state">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group row clearfix">
+          <label class="col-sm-3 control-label">Listing Date</label>
+
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="listing_date" placeholder="" ng-model="carData.listing_date">
+          </div>
+        </div>
+        <div class="form-group row clearfix">
+          <label for="cond" class="col-sm-3 control-label">Condition</label>
+
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="cond" placeholder="" ng-model="carData.cond">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group row clearfix">
+          <label class="col-sm-3 control-label">Seller Type</label>
+
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="seller_type" placeholder="" ng-model="carData.seller_type">
+          </div>
+        </div>
+        <div class="form-group row clearfix">
+          <label for="vhr_link" class="col-sm-3 control-label">VHR Link</label>
+
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="vhr_link" placeholder="" ng-model="carData.vhr_link">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group row clearfix">
+          <label class="col-sm-3 control-label">Listing Exterior Color</label>
+
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="listing_exterior_color" placeholder="" ng-model="carData.listing_exterior_color">
+          </div>
+        </div>
+        <div class="form-group row clearfix">
+          <label for="listing_interior_color" class="col-sm-3 control-label">Listing Interior Color</label>
+
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="listing_interior_color" placeholder="" ng-model="carData.listing_interior_color">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group row clearfix">
+          <label class="col-sm-3 control-label">Transmission</label>
+
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="listing_transmission" placeholder="" ng-model="carData.listing_transmission">
+          </div>
+        </div>
+        <div class="form-group row clearfix">
+          <label for="listing_transmission_detail" class="col-sm-3 control-label">Transmission Detail</label>
+
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="listing_transmission_detail" placeholder="" ng-model="carData.listing_transmission_detail">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group row clearfix">
+          <label class="col-sm-3 control-label">Engine Size</label>
+
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="listing_engine_size" placeholder="" ng-model="carData.listing_engine_size">
+          </div>
+        </div>
+        <div class="form-group row clearfix">
+          <label for="listing_transmission_detail" class="col-sm-3 control-label">Transmission Detail</label>
+
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="test" placeholder="" ng-model="carData.listing_transmission_detail">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group row clearfix">
+          <label class="col-sm-3 control-label">Listing Body Type</label>
+
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="listing_body_type" placeholder="" ng-model="carData.listing_body_type">
+          </div>
+        </div>
+        <div class="form-group row clearfix">
+          <label for="listing_drivetrain" class="col-sm-3 control-label">Listing Drivetrain</label>
+
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="listing_drivetrain" placeholder="" ng-model="carData.listing_drivetrain">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <!--<div class="col-md-12 col-lg-4">
+        <div ba-panel ba-panel-class="xsmall-panel light-text" style="height:auto!important;">{{carData.listing_description}}</div>
+      </div>-->
+
+        <div class="col-md-12 col-lg-8">
+          <div class="panel panel-default bootstrap-panel xsmall-panel" style="height:auto!important;">
+            <div class="panel-heading">Listing Description</div>
+            <div class="panel-body">
+              <p class="p-with-code" style="white-space:pre;">{{carData.listing_description}}
+              </p>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+    <button type="button" class="btn btn-primary btn-with-icon save-profile">
+      <i class="ion-android-checkmark-circle"></i>Update Profile
+    </button>
+  </div>
+</div>

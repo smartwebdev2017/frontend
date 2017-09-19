@@ -1,0 +1,18 @@
+<div class="widgets"   ng-controller="SearchPageCtrl">
+    <div class="row" >
+    <div class="col-md-12">
+      <div
+          ba-panel
+          ba-panel-class="with-scroll horizontal-tabs tabs-panel medium-panel">
+        <div ng-include="'app/pages/ui/tabs/mainTabs.html'"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div ba-panel ba-panel-title="Smart Table With Filtering, Sorting And Pagination" ba-panel-class="with-scroll">
+        <div include-with-scope="app/pages/search/widgets/smartTable.html"></div>
+      </div>
+    </div>
+  </div>
+</div>
