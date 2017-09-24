@@ -25,15 +25,15 @@
       }
     }
 
-    $q.all(whatToWait).then(function () {
-      $rootScope.$pageFinishedLoading = true;
-    });
-
-    $timeout(function () {
-      if (!$rootScope.$pageFinishedLoading) {
-        $rootScope.$pageFinishedLoading = true;
-      }
-    }, 7000);
+    //$q.all(whatToWait).then(function () {
+    //  $rootScope.$pageFinishedLoading = true;
+    //});
+    //
+    //$timeout(function () {
+    //  if (!$rootScope.$pageFinishedLoading) {
+    //    $rootScope.$pageFinishedLoading = true;
+    //  }
+    //}, 7000);
 
     $rootScope.$baSidebarService = baSidebarService;
   }

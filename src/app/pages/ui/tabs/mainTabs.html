@@ -1,65 +1,144 @@
+<script>
+    function onChangedYear(data){
+        var scope = angular.element("#year_value").scope();
+        scope.year_value = data.value;
+        scope.filter_car(scope.model,scope.title, scope.city_selected, scope.state_selected, scope.price_value, scope.mileage_value, scope.year_value, scope.description);
+    };
+    function onChangedMileage(data){
+        var scope = angular.element("#mileage_value").scope();
+        scope.mileage_value = data.value;
+        console.log(scope);
+        scope.filter_car(scope.model,scope.title, scope.city_selected, scope.state_selected, scope.price_value, scope.mileage_value, scope.year_value, scope.description);
+    };
+    function onChangedPrice(data){
+        var scope = angular.element("#price_value").scope();
+        scope.price_value = data.value;
+        scope.filter_car(scope.model,scope.title, scope.city_selected, scope.state_selected, scope.price_value, scope.mileage_value, scope.year_value, scope.description);
+    };
+</script>
 <uib-tabset active="$tabSetStatus.activeTab">
-  <uib-tab heading="Start">
-    <p>
-      Take up one idea. Make that one idea your life--think of it, dream of it, live on that idea. Let the brain,
-      muscles, nerves, every part of your body, be full of that idea, and just leave every other idea alone. This is the
-      way to success.
-    </p>
+  <uib-tab heading="From the Listing">
+    <div class="row">
+      <div class="col-sm-2">
+        <input ng-model="title" ng-change="filter_car(model,title, selectpickerVm.groupedByCities.selected['name'], selectpickerVm.groupedByStates.selected['name'], price_value, mileage_value, year_value, description)" placeholder="Title" class="input-sm form-control search-input" type="text"/>
+        <input id="year_value" type="hidden" ng-model="year_value" />
+        <input id="mileage_value" type="hidden" ng-model="mileage_value"  />
+        <input id="price_value" type="hidden" ng-model="price_value" />
+      </div>
+      <div class="col-sm-2">
+        <div class="slider-box">
+          <h5>Year</h5>
+          <ion-slider ng-model='year' type="single"
+                      grid="true"
+                      min="1955"
+                      max="2019"
+                      from="1955"
+                      to = "year_to"
+                      step="1"
+                      prettify-separator="."
+                      prettify="true"
+                      onChange="onChangedYear(event.target)"
+                      disable="false">
+          </ion-slider>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="slider-box">
+          <h5>Mileage</h5>
+          <ion-slider type="single"
+                      grid="true"
+                      min="0"
+                      max="19800"
+                      from="500"
+                      step="1000"
+                      prettify-separator="."
+                      prettify="true"
+                      onChange="onChangedMileage(event.target)"
+                      disable="false">
+          </ion-slider>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <input  ng-model="model" placeholder="Model" class="input-sm form-control search-input" type="search"/>
+      </div>
+      <div class="col-sm-2">
+        <div class="slider-box">
+          <h5>Price</h5>
+          <ion-slider type="single"
+                      grid="true"
+                      min="0"
+                      max="10000000"
+                      from="30000"
+                      step="1000"
+                      prettify-separator="."
+                      prettify="true"
+                      onChange="onChangedPrice(event.target)"
+                      disable="false" onchange="">
+          </ion-slider>
+        </div>
+      </div>
+    </div>
+    <div class="ng-cloak row" ng-controller="SelectpickerPanelCtrl as selectpickerVm">
+      <div class="col-sm-2">
+        <div class="form-group">
+          <ui-select ng-model="selectpickerVm.groupedByCities.selected"
+                     class="btn-group bootstrap-select form-control"
+                     ng-disabled="false"
+                     append-to-body="true"
+                     search-enabled="true">
+            <ui-select-match placeholder="City">
+              {{$select.selected.name}}
+            </ui-select-match>
+            <ui-select-choices
+                repeat="groupedByCities in selectpickerVm.groupedByCitisItems | filter: $select.search"
+                group-by="selectpickerVm.someGroupFn">
+              <span ng-bind-html="groupedByCities.name | highlight: $select.search"></span>
+            </ui-select-choices>
+          </ui-select>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="form-group">
+            <select name="city" id="city" ng-model="city_selected" ng-change="filter_car(model,title, city_selected, state_select, price_value, mileage_value, year_value, description)">
+                <option>Select City</option>
+                <option ng-repeat="option in city" value="{{option.name}}">{{option.name}}</option>
+            </select>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="form-group">
+            <select name="state" id="state" ng-model="state_selected" ng-change="filter_car(model,title, city_selected, state_select, price_value, mileage_value, year_value, description)">
+                <option value="empty">Select State</option>
+                <!--<option ng-repeat="option in state" value="{{option.name}}">{{option.name}}</option>-->
+            </select>
+        </div>
+      </div>
+      <!--<div class="col-sm-2">
+        <div class="form-group">
+          <ui-select ng-model="selectpickerVm.groupedByStates.selected"
+                     class="btn-group bootstrap-select form-control"
+                     ng-disabled="false"
+                     append-to-body="true"
+                     search-enabled="true">
+            <ui-select-match placeholder="States">
+              {{$select.selected.name}}
+            </ui-select-match>
+            <ui-select-choices
+                repeat="groupedByStates in selectpickerVm.groupedByStatesItems | filter: $select.search"
+                group-by="selectpickerVm.someGroupFn">
+              <span ng-bind-html="groupedByStates.name | highlight: $select.search"></span>
+            </ui-select-choices>
+          </ui-select>
+        </div>
+      </div>-->
+      <div class="col-sm-2">
+        <input  ng-model="description"  placeholder="Search Description" class="input-sm form-control search-input" type="search"/>
+      </div>
 
-    <p>
-      People who succeed have momentum. The more they succeed, the more they want to succeed, and the more they find a
-      way to succeed. Similarly, when someone is failing, the tendency is to get on a downward spiral that can even
-      become a self-fulfilling prophecy.
-    </p>
-
-    <div class="text-center">
-      <div class="kameleon-icon with-round-bg primary inline-icon"><img ng-src="{{::( 'Shop' | kameleonImg )}}"></div>
-      <div class="kameleon-icon with-round-bg primary inline-icon"><img ng-src="{{::( 'Programming' | kameleonImg )}}"></div>
-      <div class="kameleon-icon with-round-bg primary inline-icon"><img ng-src="{{::( 'Dna' | kameleonImg )}}"></div>
     </div>
 
-    <p>
-      The reason most people never reach their goals is that they don't define them, or ever seriously consider them as
-      believable or achievable. Winners can tell you where they are going, what they plan to do along the way, and who
-      will be sharing the adventure with them.
-    </p>
 
   </uib-tab>
-  <uib-tab heading="Getting Done">
-    <p>
-      You can't connect the dots looking forward; you can only connect them looking backwards. So you have to trust that
-      the dots will somehow connect in your future. You have to trust in something--your gut, destiny, life, karma,
-      whatever. This approach has never let me down, and it has made all the difference in my life.
-    </p>
-
-    <p>
-      The reason most people never reach their goals is that they don't define them, or ever seriously consider them as
-      believable or achievable. Winners can tell you where they are going, what they plan to do along the way, and who
-      will be sharing the adventure with them.
-    </p>
-  </uib-tab>
-  <uib-tab ng-init="$dropdownTabActive = 1" class="with-dropdown">
-    <uib-tab-heading uib-dropdown>
-      <a uib-dropdown-toggle ng-click="$event.stopPropagation()">
-        Dropdown tab <i class="caret"></i>
-      </a>
-      <ul class="dropdown-menu" uib-dropdown-menu>
-        <li><a ng-click="$dropdownTabActive = 1; $tabSetStatus.activeTab = 3">Tab 1</a></li>
-        <li><a ng-click="$dropdownTabActive = 2; $tabSetStatus.activeTab = 3">Tab 2</a></li>
-      </ul>
-    </uib-tab-heading>
-    <div ng-show="$dropdownTabActive == 1">
-      <p>
-        Success is ... knowing your purpose in life, growing to reach your maximum potential, and sowing seeds that
-        benefit others.
-      </p>
-
-      <p>Failure is the condiment that gives success its flavor.</p>
-    </div>
-    <div ng-show="$dropdownTabActive == 2">
-      <p class="text-center">
-        <button class="btn btn-danger">I'm just a dummy button</button>
-      </p>
-    </div>
+  <uib-tab heading="From additional PCar Data">
   </uib-tab>
 </uib-tabset>

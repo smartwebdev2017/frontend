@@ -84,7 +84,9 @@
                 $element.data("ionRangeSlider").update({disable: value});
               });
             });
+
       }
+
     };
   }
 

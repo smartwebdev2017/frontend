@@ -11,9 +11,9 @@
   /** @ngInject */
   function routeConfig($stateProvider) {
     $stateProvider
-        .state('profile', {
-          url: '/profile',
-          title: 'Profile',
+        .state('normal.detail', {
+          url: '/detail/:vin',
+          title: 'Detail Information',
           templateUrl: 'app/pages/profile/profile.html',
           controller: 'ProfilePageCtrl',
         });

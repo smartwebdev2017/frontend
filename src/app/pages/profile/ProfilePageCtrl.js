@@ -1,15 +1,12 @@
-/**
- * @author v.lugovsky
- * created on 16.12.2015
- */
 (function () {
   'use strict';
 
   angular.module('BlurAdmin.pages.profile')
-    .controller('ProfilePageCtrl', ProfilePageCtrl);
+      .controller('ProfilePageCtrl', ProfilePageCtrl);
 
   /** @ngInject */
-  function ProfilePageCtrl($scope, fileReader, $filter, $uibModal) {
+  function ProfilePageCtrl($http, $window, $scope, fileReader, $filter, $uibModal, $stateParams) {
+    $scope.carData = {};
     $scope.picture = $filter('profilePicture')('Nasta');
 
     $scope.removePicture = function () {
@@ -72,8 +69,8 @@
         controller: 'ProfileModalCtrl',
         templateUrl: 'app/pages/profile/profileModal.html'
       }).result.then(function (link) {
-          item.href = link;
-        });
+            item.href = link;
+          });
     };
 
     $scope.getFile = function () {
@@ -83,6 +80,23 @@
           });
     };
 
+    $scope.getCarDetail = function(vin) {
+      $http({
+        method: 'GET',
+        url: '/api/cars/' + vin,
+        headers: {'Authorization':'Token' + $window.sessionStorage.user_token}
+      })
+      .success(function(response){
+        if ( response.length > 0) {
+          $scope.carData = response[0];
+        }
+      })
+      .error(function(response){
+        console.log('Search Error!');
+      })
+    };
+    console.log($stateParams);
+    $scope.getCarDetail($stateParams.vin);
     $scope.switches = [true, true, false, true, true, false];
   }
 
