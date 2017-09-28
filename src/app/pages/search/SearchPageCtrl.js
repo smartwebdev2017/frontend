@@ -10,7 +10,7 @@
 
     /** @ngInject */
     function SearchPageCtrl($http, $window, $scope, $state, $filter, $rootScope, editableOptions, editableThemes) {
-        $scope.smartTablePageSize = 10;
+        /*$scope.smartTablePageSize = 10;
         $scope.title = '';
         $scope.model = '';
         $scope.year_value=2017;
@@ -111,7 +111,7 @@
 
         $scope.getAllCities();
         $scope.getAllStates();
-        $scope.getAllCars();
+        $scope.getAllCars();*/
 
     }
 })();

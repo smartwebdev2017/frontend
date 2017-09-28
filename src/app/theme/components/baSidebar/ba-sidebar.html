@@ -1,59 +1,115 @@
-<aside class="al-sidebar" ng-swipe-right="$baSidebarService.setMenuCollapsed(false)" ng-swipe-left="$baSidebarService.setMenuCollapsed(true)"
-       ng-mouseleave="hoverElemTop=selectElemTop">
-  <ul class="al-sidebar-list" slimscroll="{height: '{{menuHeight}}px'}" slimscroll-watch="menuHeight" >
-    <li ng-repeat="item in ::menuItems" class="al-sidebar-list-item"
-        ng-class="::{'with-sub-menu': item.subMenu}" ui-sref-active="selected"
-        ba-sidebar-toggling-item="item">
+<script>
+    function onChangedYear(data){
+        var scope = angular.element("#year_value").scope();
+        console.log(scope);
+        scope.year_value = (data.value).replace(';','-');
+        scope.filter_car(scope.model,scope.title, scope.city_selected, scope.state_selected, scope.price_value, scope.mileage_value, scope.year_value, scope.description);
+    };
+    function onChangedMileage(data){
+        var scope = angular.element("#mileage_value").scope();
+        scope.mileage_value = (data.value).replace(';','-');
+        console.log(scope);
+        scope.filter_car(scope.model,scope.title, scope.city_selected, scope.state_selected, scope.price_value, scope.mileage_value, scope.year_value, scope.description);
+    };
+    function onChangedPrice(data){
+        var scope = angular.element("#price_value").scope();
+        scope.price_value = (data.value).replace(';','-');
+        scope.filter_car(scope.model,scope.title, scope.city_selected, scope.state_selected, scope.price_value, scope.mileage_value, scope.year_value, scope.description);
+    };
+</script>
+<aside ng-if="!$isLogged" class="al-sidebar">
 
-      <a ng-mouseenter="hoverItem($event, item)" ui-state="item.stateRef || ''" ng-href="{{::(item.fixedHref ? item.fixedHref: '')}}" ng-if="::!item.subMenu" class="al-sidebar-list-link">
-        <i class="{{ ::item.icon }}"></i><span>{{ ::item.title }}</span>
-      </a>
+    <div class="row">
+        <div class="col-sm-12">
+            <input ng-model="title" ng-change="filter_car(model,title, selectpickerVm.groupedByCities.selected['name'], selectpickerVm.groupedByStates.selected['name'], price_value, mileage_value, year_value, description)" placeholder="Title" class="input-sm form-control search-input" type="text"/>
+            <input id="year_value" type="hidden" ng-model="year_value" />
+            <input id="mileage_value" type="hidden" ng-model="mileage_value"  />
+            <input id="price_value" type="hidden" ng-model="price_value" />
+        </div>
+    </div>
 
-      <a ng-mouseenter="hoverItem($event, item)" ng-if="::item.subMenu"
-         class="al-sidebar-list-link" ba-ui-sref-toggler>
-        <i class="{{ ::item.icon }}"></i><span>{{ ::item.title }}</span>
-        <b class="fa fa-angle-down" ui-sref-active="fa-angle-up"
-           ng-if="::item.subMenu"></b>
-      </a>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="slider-box">
+                <h5>Year</h5>
+                <ion-slider ng-model='year' type="double"
+                            grid="true"
+                            min="1955"
+                            max="2019"
+                            from="1955"
+                            to = "year_to"
+                            step="1"
+                            prettify-separator="-"
+                            prettify="true"
+                            onChange="onChangedYear(event.target)"
+                            disable="false">
+                </ion-slider>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="slider-box">
+                <h5>Mileage</h5>
+                <ion-slider type="double"
+                            grid="true"
+                            min="0"
+                            max="198000"
+                            from="500"
+                            step="1000"
+                            prettify-separator="."
+                            prettify="true"
+                            onChange="onChangedMileage(event.target)"
+                            disable="false">
+                </ion-slider>
+            </div>
+        </div></div>
+    <div class="row">
+        <div class="col-sm-12">
+            <input  ng-model="model"  ng-change="filter_car(model,title, selectpickerVm.groupedByCities.selected['name'], selectpickerVm.groupedByStates.selected['name'], price_value, mileage_value, year_value, description)" placeholder="Model" class="input-sm form-control search-input" type="search"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="slider-box">
+                <h5>Price</h5>
+                <ion-slider type="double"
+                            grid="true"
+                            min="0"
+                            max="100000"
+                            from="10000"
+                            step="1000"
+                            prettify-separator="."
+                            prettify="true"
+                            onChange="onChangedPrice(event.target)"
+                            disable="false" onchange="">
+                </ion-slider>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <select name="city" id="city" ng-model="city_selected" ng-change="filter_car(model,title, city_selected, state_select, price_value, mileage_value, year_value, description)">
+                    <option>Select City</option>
+                    <option ng-repeat="option in city" value="{{option.name}}">{{option.name}}</option>
+                </select>
+            </div>
+        </div></div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <select name="state" id="state" ng-model="state_selected" ng-change="filter_car(model,title, city_selected, state_select, price_value, mileage_value, year_value, description)">
+                    <option value="empty">Select State</option>
+                    <!--<option ng-repeat="option in state" value="{{option.name}}">{{option.name}}</option>-->
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <input  ng-model="description"  ng-change="filter_car(model,title, selectpickerVm.groupedByCities.selected['name'], selectpickerVm.groupedByStates.selected['name'], price_value, mileage_value, year_value, description)"  placeholder="Search Description" class="input-sm form-control search-input" type="search"/>
+        </div>
+    </div>
 
-      <ul ng-if="::item.subMenu" class="al-sidebar-sublist"
-          ng-class="{'slide-right': item.slideRight}"
-          ba-ui-sref-toggling-submenu>
-        <li ng-repeat="subitem in ::item.subMenu" ng-class="::{'with-sub-menu': subitem.subMenu}" ui-sref-active="selected"
-            ba-sidebar-toggling-item="subitem" class="ba-sidebar-sublist-item">
-          <a ng-mouseenter="hoverItem($event, item)" ng-if="::subitem.subMenu" ba-ui-sref-toggler
-             class="al-sidebar-list-link subitem-submenu-link"><span>{{ ::subitem.title }}</span>
-            <b class="fa" ng-class="{'fa-angle-up': subitem.expanded, 'fa-angle-down': !subitem.expanded}"
-               ng-if="::subitem.subMenu"></b>
-          </a>
-          <ul ng-if="::subitem.subMenu" class="al-sidebar-sublist subitem-submenu-list"
-              ng-class="{expanded: subitem.expanded, 'slide-right': subitem.slideRight}"
-              ba-ui-sref-toggling-submenu>
-            <li ng-mouseenter="hoverItem($event, item)" ng-repeat="subSubitem in ::subitem.subMenu" ui-sref-active="selected">
-              <a ng-mouseenter="hoverItem($event, item)" href ng-if="::subSubitem.disabled" class="al-sidebar-list-link">
-                {{ ::subSubitem.title }}
-              </a>
-              <a ng-mouseenter="hoverItem($event, item)"
-                 ui-state="subSubitem.stateRef || ''"
-                 ng-if="::!subSubitem.disabled"
-                 ng-href="{{::(subSubitem.fixedHref ? subSubitem.fixedHref: '')}}">
-                {{::subSubitem.title }}
-              </a>
-            </li>
-          </ul>
-          <a ng-mouseenter="hoverItem($event, item)" href ng-if="::(!subitem.subMenu && subitem.disabled)" class="al-sidebar-list-link">
-            {{ ::subitem.title }}
-          </a>
-          <a ng-mouseenter="hoverItem($event, item)" target="{{::(subitem.blank ? '_blank' : '_self')}}"
-             ng-if="::(!subitem.subMenu && !subitem.disabled)"
-             ui-state="subitem.stateRef || ''"
-             ng-href="{{::(subitem.fixedHref ? subitem.fixedHref: '')}}">
-            {{ ::subitem.title}}
-          </a>
-        </li>
-      </ul>
-    </li>
-  </ul>
-  <div class="sidebar-hover-elem" ng-style="{top: hoverElemTop + 'px', height: hoverElemHeight + 'px'}"
-       ng-class="{'show-hover-elem': showHoverElem }"></div>
 </aside>

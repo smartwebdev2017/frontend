@@ -1,4 +1,4 @@
-$sidebar-width: 180px;
+$sidebar-width: 300px;
 $angle-left: "\f100";
 $angle-right: "\f101";
 
@@ -12,11 +12,19 @@ $angle-right: "\f101";
   background-color: $sidebar;
   height: 100%;
   position: fixed;
+  padding:20px;
+  .row {
+    margin-top:20px;
+  }
+  input.search-input {
+    margin:0;
+    padding:0;
+  }
 }
 
 .al-sidebar-list {
   margin: 0;
-  padding: 18px 0 0 0;
+  /*padding: 18px 0 0 0;*/
   list-style: none;
 }
 
