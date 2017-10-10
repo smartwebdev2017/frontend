@@ -6,56 +6,33 @@
       </select>
     </label>
   </div>
-  <table class="table" st-table="carData" st-safe-src="carData1">
+  <table class="table" st-table="$carData" st-safe-src="$carData1">
     <thead>
     <tr class="sortable ">
       <th class="table-id" st-sort="id" st-sort-default="true">#</th>
-      <th st-sort="site">Site Name</th>
-      <th st-sort="vin">VIN</th>
-      <th st-sort="listing_make">Listing Make</th>
-      <th st-sort="listing_model">Listing Model</th>
-      <th st-sort="listing_model_detail">Listing Model Detail</th>
-      <th st-sort="listing_year">Listing Year</th>
+      <th st-sort="title">PCar</th>
       <th st-sort="mileage">Mileage</th>
-      <th st-sort="city">City</th>
-      <th st-sort="state">State</th>
-      <th st-sort="price">Listing Price</th>
-      <th>Detail View</th>
+      <th st-sort="price">Price</th>
+      <th st-sort="location">Location</th>
+      <th st-sort="buildsheet">BuildSheet</th>
+
     </tr>
-    <tr>
-      <th></th>
-      <th><input st-search="site" placeholder="Search Site Name" class="input-sm form-control search-input" type="search"/></th>
-      <th><input st-search="vin" placeholder="Search VIN" class="input-sm form-control search-input" type="search"/></th>
-      <th><input st-search="listing_make" placeholder="Search Listing Make" class="input-sm form-control search-input"  type="search"/></th>
-      <th><input st-search="listing_model" placeholder="Search Listing Model" class="input-sm form-control search-input" type="search"/></th>
-      <th><input st-search="listing_model_detail" placeholder="Search Listing Model More detail" class="input-sm form-control search-input" type="search"/></th>
-      <th><input st-search="listing_year" placeholder="Search Listing Year" class="input-sm form-control search-input" type="search"/></th>
-      <th><input st-search="mileage" placeholder="Search Listing Mileage" class="input-sm form-control search-input" type="search"/></th>
-      <th><input st-search="city" placeholder="Search Listing City" class="input-sm form-control search-input" type="search"/></th>
-      <th><input st-search="state" placeholder="Search Listing State" class="input-sm form-control search-input" type="search"/></th>
-      <th><input st-search="price" placeholder="Search Listing Price" class="input-sm form-control search-input" type="search"/></th>
-      <th></th>
-    </tr>
+
     </thead>
     <tbody>
-    <tr ng-repeat="item in carData" ng-link="/basic">
+    <tr ng-repeat="item in $carData" ng-link="/basic">
       <td class="table-id">{{item.id}}</td>
-      <td>{{item.site.sitename}}</td>
-      <td>{{item.vin}}</td>
-      <td>{{item.listing_make}}</td>
-      <td>{{item.listing_model}}</td>
-      <td>{{item.listing_model_detail}}</td>
-      <td>{{item.listing_year}}</td>
+      <td>{{item.listing_title}}</td>
       <td>{{item.mileage}}</td>
-      <td>{{item.city}}</td>
-      <td>{{item.state}}</td>
       <td>{{item.price}}</td>
-      <td><a class="email-link" ng-href="/#/normal/detail/{{item.vin}}">Detail View</a></td>
+      <td>{{item.city}} {{item.state}}</td>
+      <td>{{item.vin.vin}}</td>
+      <td><a class="email-link" ng-href="/#/normal/detail/{{item.vin.vin}}">Detail View</a></td>
     </tr>
     </tbody>
     <tfoot>
     <tr>
-      <td colspan="6" class="text-center">
+      <td colspan="7" class="text-center">
         <div st-pagination="" st-items-by-page="smartTablePageSize" st-displayed-pages="5"></div>
       </td>
     </tr>

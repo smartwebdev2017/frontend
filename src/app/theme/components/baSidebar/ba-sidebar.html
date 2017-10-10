@@ -21,15 +21,31 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <input ng-model="title" ng-change="filter_car(model,title, selectpickerVm.groupedByCities.selected['name'], selectpickerVm.groupedByStates.selected['name'], price_value, mileage_value, year_value, description)" placeholder="Title" class="input-sm form-control search-input" type="text"/>
+            <div class="form-group">
+                <input ng-model="title" ng-change="filter_car(model,title, selectpickerVm.groupedByCities.selected['name'], selectpickerVm.groupedByStates.selected['name'], price_value, mileage_value, year_value, description)" placeholder="Title" class="form-control" type="text"/>
+            </div>
             <input id="year_value" type="hidden" ng-model="year_value" />
             <input id="mileage_value" type="hidden" ng-model="mileage_value"  />
             <input id="price_value" type="hidden" ng-model="price_value" />
         </div>
     </div>
-
     <div class="row">
         <div class="col-sm-12">
+            <div class="form-group">
+                <input  ng-model="model"  ng-change="filter_car(model,title, selectpickerVm.groupedByCities.selected['name'], selectpickerVm.groupedByStates.selected['name'], price_value, mileage_value, year_value, description)" placeholder="Model" class="form-control" type="search"/>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <input  ng-model="description"  ng-change="filter_car(model,title, selectpickerVm.groupedByCities.selected['name'], selectpickerVm.groupedByStates.selected['name'], price_value, mileage_value, year_value, description)"  placeholder="Search Description" class="form-control" type="search"/>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+
             <div class="slider-box">
                 <h5>Year</h5>
                 <ion-slider ng-model='year' type="double"
@@ -64,11 +80,7 @@
                 </ion-slider>
             </div>
         </div></div>
-    <div class="row">
-        <div class="col-sm-12">
-            <input  ng-model="model"  ng-change="filter_car(model,title, selectpickerVm.groupedByCities.selected['name'], selectpickerVm.groupedByStates.selected['name'], price_value, mileage_value, year_value, description)" placeholder="Model" class="input-sm form-control search-input" type="search"/>
-        </div>
-    </div>
+
     <div class="row">
         <div class="col-sm-12">
             <div class="slider-box">
@@ -106,10 +118,6 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <input  ng-model="description"  ng-change="filter_car(model,title, selectpickerVm.groupedByCities.selected['name'], selectpickerVm.groupedByStates.selected['name'], price_value, mileage_value, year_value, description)"  placeholder="Search Description" class="input-sm form-control search-input" type="search"/>
-        </div>
-    </div>
+
 
 </aside>

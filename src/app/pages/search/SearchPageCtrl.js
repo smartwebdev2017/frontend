@@ -10,6 +10,24 @@
 
     /** @ngInject */
     function SearchPageCtrl($http, $window, $scope, $state, $filter, $rootScope, editableOptions, editableThemes) {
+        console.log($scope);
+
+        $scope.search_car = function(){
+            $rootScope.keyword = $scope.keyword;
+            $http({
+                method: 'GET',
+                url: '/api/cars' + '?model=' + $rootScope.model + '&title=' + $rootScope.title + '&city=' + $rootScope.city + '&state=' + $rootScope.state + '&price=' + $rootScope.price + '&mileage=' + $rootScope.mileage + '&year=' + $rootScope.year + '&description=' + $rootScope.description + '&keyword=' + $rootScope.keyword,
+                headers: {'Authorization':'Token' + $window.sessionStorage.user_token}
+            })
+                .success(function(response){
+                    console.log('Search Done!');
+                    $rootScope.$carData =  response;
+                    $rootScope.$carData1 =  response;
+                })
+                .error(function(response){
+                    console.log('Search Error!');
+                })
+        };
         /*$scope.smartTablePageSize = 10;
         $scope.title = '';
         $scope.model = '';

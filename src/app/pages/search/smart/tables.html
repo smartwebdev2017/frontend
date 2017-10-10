@@ -1,5 +1,12 @@
 <div class="widgets search_page"   ng-controller="SearchPageCtrl">
   <div class="row">
+    <div class="col-md-8">
+        <div class="form-group">
+          <input placeholder="Enter keyword" class="input-lg form-control" type="search" ng-model="keyword" ng-change="search_car()"/>
+        </div>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-md-12">
       <div ba-panel ba-panel-title="Smart Table With Filtering, Sorting And Pagination" ba-panel-class="with-scroll">
         <div include-with-scope="app/pages/search/widgets/smartTable.html"></div>

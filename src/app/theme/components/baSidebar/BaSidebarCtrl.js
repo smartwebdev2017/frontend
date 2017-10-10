@@ -23,8 +23,8 @@
         if ( $window.sessionStorage.user_token) {
             $rootScope.$pageFinishedLoading = true;
             $rootScope.$isLogged = true;
-            //$state.go('main.basic');
         }
+
         $scope.getAllCars = function(){
             $http({
                 method: 'GET',
@@ -33,15 +33,24 @@
             })
                 .success(function(response){
                     console.log('Load data from server successfully');
-                    $scope.carData =  response;
-                    $scope.carData1 =  response;
+                    $rootScope.$carData =  response;
+                    $rootScope.$carData1 =  response;
                 })
                 .error(function(response){
                     $scope.carData =  [];
                 })
         };
 
+
         $scope.filter_car = function(model,title, city, state, price, mileage, year, description){
+            $rootScope.title = title;
+            $rootScope.model = model;
+            $rootScope.city = city;
+            $rootScope.state = state;
+            $rootScope.price = price;
+            $rootScope.mileage = mileage;
+            $rootScope.year = year;
+            $rootScope.description = description;
             if (city == null) {
                 city = '';
             }
@@ -51,13 +60,13 @@
             }
             $http({
                 method: 'GET',
-                url: '/api/cars' + '?model=' + model + '&title=' + title + '&city=' + city + '&state=' + state + '&price=' + price + '&mileage=' + mileage + '&year=' + year + '&description=' + description,
+                url: '/api/cars' + '?model=' + model + '&title=' + title + '&city=' + city + '&state=' + state + '&price=' + price + '&mileage=' + mileage + '&year=' + year + '&description=' + description + '&keyword=' + $rootScope.keyword,
                 headers: {'Authorization':'Token' + $window.sessionStorage.user_token}
             })
                 .success(function(response){
                     console.log('Search Done!');
-                    $scope.carData =  response;
-                    $scope.carData1 =  response;
+                    $rootScope.$carData =  response;
+                    $rootScope.$carData1 =  response;
                 })
                 .error(function(response){
                     console.log('Search Error!');
