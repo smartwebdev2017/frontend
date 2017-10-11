@@ -238,7 +238,76 @@
         </div>
     </div>
 
+    <h3 class="with-line">BuildSheet Information</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group row clearfix">
+          <label class="col-sm-3 control-label">MSRP</label>
 
+          <div class="col-sm-9">
+            <input type="text" ng-model="carData.vin.msrp" class="form-control" id="msrp" placeholder="" value="">
+          </div>
+        </div>
+
+        <div class="form-group row clearfix">
+          <label class="col-sm-3 control-label">Warranty Start</label>
+
+          <div class="col-sm-9">
+            <input type="text" ng-model="carData.vin.warranty_start" class="form-control" id="warranty_start" placeholder="" value="">
+          </div>
+        </div>
+
+        <div class="form-group row clearfix">
+          <label class="col-sm-3 control-label">Model Year</label>
+
+          <div class="col-sm-9">
+            <input type="text" ng-model="carData.vin.model_year" class="form-control" id="model_year" placeholder="" value="">
+          </div>
+        </div>
+
+        <div class="form-group row clearfix">
+          <label class="col-sm-3 control-label">Model Detail</label>
+
+          <div class="col-sm-9">
+            <input type="text" ng-model="carData.vin.model_detail" class="form-control" id="model_detail" placeholder="" value="">
+          </div>
+        </div>
+
+        <div class="form-group row clearfix">
+          <label class="col-sm-3 control-label">Color</label>
+
+          <div class="col-sm-9">
+            <input type="text" ng-model="carData.vin.color" class="form-control" id="color" placeholder="" value="">
+          </div>
+        </div>
+
+        <div class="form-group row clearfix">
+          <label class="col-sm-3 control-label">Production Month</label>
+
+          <div class="col-sm-9">
+            <input type="text" ng-model="carData.vin.production_month" class="form-control" id="production_month" placeholder="" value="">
+          </div>
+        </div>
+        <div class="form-group row clearfix">
+          <label class="col-sm-3 control-label">Interior</label>
+
+          <div class="col-sm-9">
+            <input type="text" ng-model="carData.vin.interior" class="form-control" id="interior" placeholder="" value="">
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-6">
+          <div class="panel panel-default bootstrap-panel xsmall-panel" style="height:auto!important;">
+            <div class="panel-heading">Options</div>
+            <div class="panel-body">
+              <p ng-repeat="item in carData.vin.options">
+                <span>{{item.code}} : {{item.value}}</span>
+              </p>
+            </div>
+          </div>
+      </div>
+    </div>
     <!--<button type="button" class="btn btn-primary btn-with-icon save-profile">
       <i class="ion-android-checkmark-circle"></i>Update Profile
     </button>-->

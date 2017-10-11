@@ -9,24 +9,32 @@
         .controller('SearchPageCtrl', SearchPageCtrl);
 
     /** @ngInject */
-    function SearchPageCtrl($http, $window, $scope, $state, $filter, $rootScope, editableOptions, editableThemes) {
+    function SearchPageCtrl($http, $window, $scope, $state, $filter, $rootScope, editableOptions, editableThemes, $timeout) {
         console.log($scope);
+        var promise = '';
 
         $scope.search_car = function(){
-            $rootScope.keyword = $scope.keyword;
-            $http({
-                method: 'GET',
-                url: '/api/cars' + '?model=' + $rootScope.model + '&title=' + $rootScope.title + '&city=' + $rootScope.city + '&state=' + $rootScope.state + '&price=' + $rootScope.price + '&mileage=' + $rootScope.mileage + '&year=' + $rootScope.year + '&description=' + $rootScope.description + '&keyword=' + $rootScope.keyword,
-                headers: {'Authorization':'Token' + $window.sessionStorage.user_token}
-            })
-                .success(function(response){
-                    console.log('Search Done!');
-                    $rootScope.$carData =  response;
-                    $rootScope.$carData1 =  response;
+            if(promise){
+                $timeout.cancel(promise);
+            }
+            promise = $timeout(function(){
+                $rootScope.keyword = $scope.keyword;
+
+                $http({
+                    method: 'GET',
+                    url: '/api/cars' + '?model=' + $rootScope.model + '&title=' + $rootScope.title + '&city=' + $rootScope.city + '&state=' + $rootScope.state + '&price=' + $rootScope.price + '&mileage=' + $rootScope.mileage + '&year=' + $rootScope.year + '&description=' + $rootScope.description + '&keyword=' + $rootScope.keyword,
+                    headers: {'Authorization':'Token' + $window.sessionStorage.user_token}
                 })
-                .error(function(response){
-                    console.log('Search Error!');
-                })
+                    .success(function(response){
+                        console.log('Search Done!');
+                        $rootScope.$carData =  response;
+                        $rootScope.$carData1 =  response;
+                    })
+                    .error(function(response){
+                        console.log('Search Error!');
+                    })
+
+            }, 300);
         };
         /*$scope.smartTablePageSize = 10;
         $scope.title = '';
