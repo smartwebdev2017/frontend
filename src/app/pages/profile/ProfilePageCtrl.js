@@ -5,8 +5,10 @@
       .controller('ProfilePageCtrl', ProfilePageCtrl);
 
   /** @ngInject */
-  function ProfilePageCtrl($http, $window, $scope, fileReader, $filter, $uibModal, $stateParams) {
+  function ProfilePageCtrl($http, $window, $scope, fileReader, $rootScope, $filter, $uibModal, $stateParams, searchTerms) {
     $scope.carData = {};
+    $scope.keyword = searchTerms.value['keyword']
+
     $scope.picture = $filter('profilePicture')('Nasta');
 
     $scope.removePicture = function () {

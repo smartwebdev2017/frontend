@@ -15,14 +15,14 @@
           <label for="vin" class="col-sm-3 control-label">VIN :</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.vin_code" class="form-control" id="vin" placeholder="" >
+            <div ng-bind-html="carData.vin_code | highlight: keyword"></div>
           </div>
         </div>
         <div class="form-group row clearfix">
           <label for="listing_model" class="col-sm-3 control-label">Model</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.listing_model" class="form-control" id="listing_model" placeholder="" value="">
+            <div ng-bind-html="carData.listing_model | highlight: keyword"></div>
           </div>
         </div>
       </div>
@@ -31,7 +31,7 @@
           <label class="col-sm-3 control-label">Make</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.listing_make" class="form-control" id="listing_make" placeholder="" value="">
+            <div ng-bind-html="carData.listing_make | highlight: keyword"></div>
           </div>
         </div>
 
@@ -39,7 +39,7 @@
           <label for="listing_year" class="col-sm-3 control-label">Year</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.listing_year" class="form-control" id="listing_year" placeholder="" value="">
+            <div ng-bind-html="carData.listing_year | highlight: keyword"></div>
           </div>
         </div>
       </div>
@@ -51,7 +51,7 @@
           <label class="col-sm-3 control-label">Sold Status</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.sold_state" class="form-control" id="listing_sold_state" placeholder="" value="">
+            <div ng-bind-html="carData.listing_year | highlight: keyword"></div>
           </div>
         </div>
 
@@ -59,7 +59,7 @@
           <label for="listing_sold_date" class="col-sm-3 control-label">Sold Date</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.sold_date" class="form-control" id="listing_sold_date" placeholder="" value="">
+            <div ng-bind-html="carData.sold_date | highlight: keyword"></div>
           </div>
         </div>
       </div>
@@ -69,7 +69,7 @@
           <label class="col-sm-3 control-label">Listing URL</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.listing_url" class="form-control" id="listing_url" placeholder="" value="">
+            <div ng-bind-html="carData.listing_url | highlight: keyword"></div>
           </div>
         </div>
 
@@ -77,7 +77,7 @@
           <label for="listing_date" class="col-sm-3 control-label">Listing Date</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.listing_date" class="form-control" id="listing_date" placeholder="" value="">
+            <div ng-bind-html="carData.listing_date | highlight: keyword"></div>
           </div>
         </div>
       </div>
@@ -92,14 +92,14 @@
           <label for="price" class="col-sm-3 control-label">Price</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.price" class="form-control" id="price" placeholder="" >
+            <div ng-bind-html="carData.price | highlight: keyword"></div>
           </div>
         </div>
         <div class="form-group row clearfix">
           <label for="mileage" class="col-sm-3 control-label">Mileage</label>
 
           <div class="col-sm-9">
-            <input type="text" class="form-control" id="mileage" placeholder="" ng-model="carData.mileage">
+            <div ng-bind-html="carData.mileage | highlight: keyword"></div>
           </div>
         </div>
       </div>
@@ -108,31 +108,31 @@
           <label class="col-sm-3 control-label">City</label>
 
           <div class="col-sm-9">
-            <input type="text" class="form-control" id="city" placeholder="" ng-model="carData.city">
+            <div ng-bind-html="carData.city | highlight: keyword"></div>
           </div>
         </div>
         <div class="form-group row clearfix">
           <label for="state" class="col-sm-3 control-label">State</label>
 
           <div class="col-sm-9">
-            <input type="text" class="form-control" id="state" placeholder="" ng-model="carData.state">
+            <div ng-bind-html="carData.state | highlight: keyword"></div>
           </div>
         </div>
       </div>
 
       <div class="col-md-6">
-        <div class="form-group row clearfix">
-          <label class="col-sm-3 control-label">Listing Date</label>
+        <!--<div class="form-group row clearfix">-->
+          <!--<label class="col-sm-3 control-label">Listing Date</label>-->
 
-          <div class="col-sm-9">
-            <input type="text" class="form-control" id="listing_date" placeholder="" ng-model="carData.listing_date">
-          </div>
-        </div>
+          <!--<div class="col-sm-9">-->
+            <!--<input type="text" class="form-control" id="listing_date" placeholder="" ng-model="carData.listing_date">-->
+          <!--</div>-->
+        <!--</div>-->
         <div class="form-group row clearfix">
           <label for="cond" class="col-sm-3 control-label">Condition</label>
 
           <div class="col-sm-9">
-            <input type="text" class="form-control" id="cond" placeholder="" ng-model="carData.cond">
+            <div ng-bind-html="carData.cond | highlight: keyword"></div>
           </div>
         </div>
       </div>
@@ -142,14 +142,14 @@
           <label class="col-sm-3 control-label">Seller Type</label>
 
           <div class="col-sm-9">
-            <input type="text" class="form-control" id="seller_type" placeholder="" ng-model="carData.seller_type">
+            <div ng-bind-html="carData.seller_type | highlight: keyword"></div>
           </div>
         </div>
         <div class="form-group row clearfix">
           <label for="vhr_link" class="col-sm-3 control-label">VHR Link</label>
 
           <div class="col-sm-9">
-            <input type="text" class="form-control" id="vhr_link" placeholder="" ng-model="carData.vhr_link">
+            <div ng-bind-html="carData.vhr_link | highlight: keyword"></div>
           </div>
         </div>
       </div>
@@ -159,14 +159,14 @@
           <label class="col-sm-3 control-label">Listing Exterior Color</label>
 
           <div class="col-sm-9">
-            <input type="text" class="form-control" id="listing_exterior_color" placeholder="" ng-model="carData.listing_exterior_color">
+            <div ng-bind-html="carData.listing_exterior_color | highlight: keyword"></div>
           </div>
         </div>
         <div class="form-group row clearfix">
           <label for="listing_interior_color" class="col-sm-3 control-label">Listing Interior Color</label>
 
           <div class="col-sm-9">
-            <input type="text" class="form-control" id="listing_interior_color" placeholder="" ng-model="carData.listing_interior_color">
+            <div ng-bind-html="carData.listing_interior_color | highlight: keyword"></div>
           </div>
         </div>
       </div>
@@ -176,14 +176,14 @@
           <label class="col-sm-3 control-label">Transmission</label>
 
           <div class="col-sm-9">
-            <input type="text" class="form-control" id="listing_transmission" placeholder="" ng-model="carData.listing_transmission">
+            <div ng-bind-html="carData.listing_transmission | highlight: keyword"></div>
           </div>
         </div>
         <div class="form-group row clearfix">
           <label for="listing_transmission_detail" class="col-sm-3 control-label">Transmission Detail</label>
 
           <div class="col-sm-9">
-            <input type="text" class="form-control" id="listing_transmission_detail" placeholder="" ng-model="carData.listing_transmission_detail">
+            <div ng-bind-html="carData.listing_transmission_detail | highlight: keyword"></div>
           </div>
         </div>
       </div>
@@ -193,16 +193,16 @@
           <label class="col-sm-3 control-label">Engine Size</label>
 
           <div class="col-sm-9">
-            <input type="text" class="form-control" id="listing_engine_size" placeholder="" ng-model="carData.listing_engine_size">
+            <div ng-bind-html="carData.listing_engine_size | highlight: keyword"></div>
           </div>
         </div>
-        <div class="form-group row clearfix">
-          <label for="listing_transmission_detail" class="col-sm-3 control-label">Transmission Detail</label>
+        <!--<div class="form-group row clearfix">-->
+          <!--<label for="listing_transmission_detail" class="col-sm-3 control-label">Transmission Detail</label>-->
 
-          <div class="col-sm-9">
-            <input type="text" class="form-control" id="test" placeholder="" ng-model="carData.listing_transmission_detail">
-          </div>
-        </div>
+          <!--<div class="col-sm-9">-->
+            <!--<input type="text" class="form-control" id="test" placeholder="" ng-model="carData.listing_transmission_detail">-->
+          <!--</div>-->
+        <!--</div>-->
       </div>
 
       <div class="col-md-6">
@@ -210,14 +210,14 @@
           <label class="col-sm-3 control-label">Listing Body Type</label>
 
           <div class="col-sm-9">
-            <input type="text" class="form-control" id="listing_body_type" placeholder="" ng-model="carData.listing_body_type">
+            <div ng-bind-html="carData.listing_body_type | highlight: keyword"></div>
           </div>
         </div>
         <div class="form-group row clearfix">
           <label for="listing_drivetrain" class="col-sm-3 control-label">Listing Drivetrain</label>
 
           <div class="col-sm-9">
-            <input type="text" class="form-control" id="listing_drivetrain" placeholder="" ng-model="carData.listing_drivetrain">
+            <div ng-bind-html="carData.listing_drivetrain | highlight: keyword"></div>
           </div>
         </div>
       </div>
@@ -231,7 +231,7 @@
           <div class="panel panel-default bootstrap-panel xsmall-panel" style="height:auto!important;">
             <div class="panel-heading">Listing Description</div>
             <div class="panel-body">
-              <p class="p-with-code" style="white-space:pre;">{{carData.listing_description}}
+              <p class="p-with-code" style="white-space:pre;" ng-bind-html="carData.listing_description | highlight: keyword">
               </p>
             </div>
           </div>
@@ -245,7 +245,7 @@
           <label class="col-sm-3 control-label">MSRP</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.vin.msrp" class="form-control" id="msrp" placeholder="" value="">
+            <div ng-bind-html="carData.vin.msrp | highlight: keyword"></div>
           </div>
         </div>
 
@@ -253,7 +253,7 @@
           <label class="col-sm-3 control-label">Warranty Start</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.vin.warranty_start" class="form-control" id="warranty_start" placeholder="" value="">
+            <div ng-bind-html="carData.vin.warranty_start | highlight: keyword"></div>
           </div>
         </div>
 
@@ -261,7 +261,7 @@
           <label class="col-sm-3 control-label">Model Year</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.vin.model_year" class="form-control" id="model_year" placeholder="" value="">
+            <div ng-bind-html="carData.vin.model_year | highlight: keyword"></div>
           </div>
         </div>
 
@@ -269,7 +269,7 @@
           <label class="col-sm-3 control-label">Model Detail</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.vin.model_detail" class="form-control" id="model_detail" placeholder="" value="">
+            <div ng-bind-html="carData.vin.model_detail | highlight: keyword"></div>
           </div>
         </div>
 
@@ -277,7 +277,7 @@
           <label class="col-sm-3 control-label">Color</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.vin.color" class="form-control" id="color" placeholder="" value="">
+            <div ng-bind-html="carData.vin.color | highlight: keyword"></div>
           </div>
         </div>
 
@@ -285,14 +285,14 @@
           <label class="col-sm-3 control-label">Production Month</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.vin.production_month" class="form-control" id="production_month" placeholder="" value="">
+            <div ng-bind-html="carData.vin.production_month | highlight: keyword"></div>
           </div>
         </div>
         <div class="form-group row clearfix">
           <label class="col-sm-3 control-label">Interior</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.vin.interior" class="form-control" id="interior" placeholder="" value="">
+            <div ng-bind-html="carData.vin.interior | highlight: keyword"></div>
           </div>
         </div>
 
@@ -302,7 +302,7 @@
             <div class="panel-heading">Options</div>
             <div class="panel-body">
               <p ng-repeat="item in carData.vin.options">
-                <span>{{item.code}} : {{item.value}}</span>
+                <span ng-bind-html="item.code | highlight: keyword"></span>&nbsp;:&nbsp;<span ng-bind-html="item.value | highlight: keyword"></span>
               </p>
             </div>
           </div>
@@ -315,18 +315,17 @@
           <label class="col-sm-3 control-label">ID</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.pcf.vid" class="form-control" id="vid" placeholder="" value="">
+            <div ng-bind-html="carData.pcf.vid | highlight: keyword"></div>
           </div>
         </div>
       </div>
 
-
       <div class="col-md-6">
         <div class="form-group row clearfix">
-          <label class="col-sm-3 control-label">Longhood</label>
+          <label class="col-sm-3 control-label">VIN Model Number</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.pcf.longhood" class="form-control" id="longhood" placeholder="" value="">
+            <div ng-bind-html="carData.pcf.model_number | highlight: keyword"></div>
           </div>
         </div>
       </div>
@@ -336,7 +335,7 @@
           <label class="col-sm-3 control-label">Widebody</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.pcf.widebody" class="form-control" id="widebody" placeholder="" value="">
+            <div ng-bind-html="carData.pcf.widebody | highlight: keyword"></div>
           </div>
         </div>
       </div>
@@ -346,7 +345,7 @@
           <label class="col-sm-3 control-label">PTS</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.pcf.pts" class="form-control" id="pts" placeholder="" value="">
+            <div ng-bind-html="carData.pcf.pts | highlight: keyword"></div>
           </div>
         </div>
       </div>
@@ -356,7 +355,7 @@
           <label class="col-sm-3 control-label">Longhood</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.pcf.longhood" class="form-control" id="longhood" placeholder="" value="">
+            <div ng-bind-html="carData.pcf.longhood | highlight: keyword"></div>
           </div>
         </div>
       </div>
@@ -366,7 +365,7 @@
           <label class="col-sm-3 control-label">PCCB</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.pcf.pccb" class="form-control" id="pccb" placeholder="" value="">
+            <div ng-bind-html="carData.pcf.pccb | highlight: keyword"></div>
           </div>
         </div>
       </div>
@@ -376,7 +375,7 @@
           <label class="col-sm-3 control-label">Color</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.pcf.color" class="form-control" id="color" placeholder="" value="">
+            <div ng-bind-html="carData.pcf.color | highlight: keyword"></div>
           </div>
         </div>
       </div>
@@ -386,7 +385,7 @@
           <label class="col-sm-3 control-label">Body Type</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.pcf.body_type" class="form-control" id="body_type" placeholder="" value="">
+            <div ng-bind-html="carData.pcf.body_type | highlight: keyword"></div>
           </div>
         </div>
       </div>
@@ -396,7 +395,7 @@
           <label class="col-sm-3 control-label">Air cooled</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.pcf.air_cooled" class="form-control" id="air_cooled" placeholder="" value="">
+            <div ng-bind-html="carData.pcf.air_cooled | highlight: keyword"></div>
           </div>
         </div>
       </div>
@@ -405,7 +404,7 @@
           <label class="col-sm-3 control-label">Gap To MSRP</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.pcf.gap_to_msrp" class="form-control" id="gap_to_msrp" placeholder="" value="">
+            <div ng-bind-html="carData.pcf.gap_to_msrp | highlight: keyword"></div>
           </div>
         </div>
       </div>
@@ -414,7 +413,7 @@
           <label class="col-sm-3 control-label">Listing Age</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.pcf.listing_age" class="form-control" id="listing_age" placeholder="" value="">
+            <div ng-bind-html="carData.pcf.listing_age | highlight: keyword"></div>
           </div>
         </div>
       </div>
@@ -423,7 +422,7 @@
           <label class="col-sm-3 control-label">LWB Seats</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.pcf.lwb_seats" class="form-control" id="lwb_seats" placeholder="" value="">
+            <div ng-bind-html="carData.pcf.lwb_seats | highlight: keyword"></div>
           </div>
         </div>
       </div>
@@ -432,7 +431,7 @@
           <label class="col-sm-3 control-label">Auto transmission</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.pcf.auto_trans" class="form-control" id="auto_trans" placeholder="" value="">
+            <div ng-bind-html="carData.pcf.auto_trans | highlight: keyword"></div>
           </div>
         </div>
       </div>
@@ -441,7 +440,7 @@
           <label class="col-sm-3 control-label">Option Code</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.pcf.option_code" class="form-control" id="option_code" placeholder="" value="">
+            <div ng-bind-html="carData.pcf.option_code | highlight: keyword"></div>
           </div>
         </div>
       </div>
@@ -450,7 +449,7 @@
           <label class="col-sm-3 control-label">Option Description</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.pcf.option_description" class="form-control" id="option_description" placeholder="" value="">
+            <div ng-bind-html="carData.pcf.option_description | highlight: keyword"></div>
           </div>
         </div>
       </div>
@@ -459,7 +458,7 @@
           <label class="col-sm-3 control-label">0~60</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.pcf.placeholder" class="form-control" id="placeholder" placeholder="" value="">
+            <div ng-bind-html="carData.pcf.placeholder | highlight: keyword"></div>
           </div>
         </div>
       </div>
@@ -468,7 +467,7 @@
           <label class="col-sm-3 control-label">Produced USA</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.pcf.produced_usa" class="form-control" id="produced_usa" placeholder="" value="">
+            <div ng-bind-html="carData.pcf.produced_usa | highlight: keyword"></div>
           </div>
         </div>
       </div>
@@ -477,7 +476,7 @@
           <label class="col-sm-3 control-label">Produced Globally</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.pcf.produced_globally" class="form-control" id="produced_globally" placeholder="" value="">
+            <div ng-bind-html="carData.pcf.produced_globally | highlight: keyword"></div>
           </div>
         </div>
       </div>
@@ -487,7 +486,7 @@
           <label class="col-sm-3 control-label">Same Counts</label>
 
           <div class="col-sm-9">
-            <input type="text" ng-model="carData.pcf.same_counts" class="form-control" id="same_counts" placeholder="" value="">
+            <div ng-bind-html="carData.pcf.same_counts | highlight: keyword"></div>
           </div>
         </div>
       </div>
