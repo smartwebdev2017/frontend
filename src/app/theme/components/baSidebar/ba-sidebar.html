@@ -195,6 +195,22 @@
                ng-change="filter_car()"
                append-to-body="true"
                search-enabled="false">
+      <ui-select-match placeholder="Select VIN Model Number">
+        <span> {{$select.selected.label}}</span>
+      </ui-select-match>
+      <ui-select-choices repeat="m in model_numbers">
+        <span ng-bind-html="m.label"></span>
+      </ui-select-choices>
+    </ui-select>
+  </div>
+
+  <div class="form-group">
+    <ui-select ng-model="BaSidebarCtrl.selectedItem.selected"
+               class="btn-group bootstrap-select form-control"
+               ng-disabled="false"
+               ng-change="filter_car()"
+               append-to-body="true"
+               search-enabled="false">
       <ui-select-match placeholder="Select Transmission">
         <span> {{$select.selected.label}}</span>
       </ui-select-match>
@@ -203,4 +219,6 @@
       </ui-select-choices>
     </ui-select>
   </div>
+
+
 </aside>

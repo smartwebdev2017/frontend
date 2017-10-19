@@ -24,7 +24,7 @@
                     url: '/api/cars' + '?model=' + searchTerms.value['model'] + '&title=' + searchTerms.value['title'] + '&city=' + searchTerms.value['city'] +
                     '&state=' + searchTerms.value['state'] + '&price=' + searchTerms.value['price'] + '&mileage=' + searchTerms.value['mileage'] + '&year=' + searchTerms.value['year'] +
                     '&description=' + searchTerms.value['description'] + '&longhood=' + searchTerms.value['longhood'] + '&widebody=' + searchTerms.value['widebody'] + '&pts=' + searchTerms.value['pts'] +
-                    '&pccb=' + searchTerms.value['pccb'] + '&lwb=' + searchTerms.value['lwb'] + '&aircooled=' + searchTerms.value['aircooled'] + '&auto_trans=' + searchTerms.value['auto_trans'] +
+                    '&pccb=' + searchTerms.value['pccb'] + '&lwb=' + searchTerms.value['lwb'] + '&aircooled=' + searchTerms.value['aircooled'] + '&auto_trans=' + searchTerms.value['auto_trans'] + '&model_number=' + searchTerms.value['model_number'] +
                     '&keyword=' + searchTerms.value['keyword'],
                     headers: {'Authorization':'Token' + $window.sessionStorage.user_token}
                 })

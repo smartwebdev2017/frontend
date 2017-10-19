@@ -55,6 +55,7 @@
             var auto_trans = '';
             var city = '';
             var state = '';
+            var model_number = '';
 
             if (this.$select != undefined){
                 if ( this.$select.placeholder == 'Select State'){
@@ -66,6 +67,9 @@
                 }else if ( this.$select.placeholder == 'Select Transmission'){
                     auto_trans = this.$select.selected.value;
                     searchTerms.set('auto_trans', auto_trans);
+                }else if ( this.$select.placeholder == 'Select VIN Model Number'){
+                    model_number = this.$select.selected.value;
+                    searchTerms.set('model_number', model_number);
                 }
 
             }
@@ -89,7 +93,7 @@
                 method: 'GET',
                 url: '/api/cars' + '?model=' + this.model + '&title=' + this.title + '&city=' + searchTerms.value['city'] + '&state=' + searchTerms.value['state'] + '&price=' + this.price_value +
                 '&mileage=' + this.mileage_value + '&year=' + this.year_value + '&description=' + this.description + '&longhood=' + this.longhood + '&widebody=' + this.widebody +
-                '&pts=' + this.pts + '&pccb=' + this.pccb + '&lwb=' + this.lwb + '&aircooled=' + this.aircooled + '&auto_trans=' + auto_trans +
+                '&pts=' + this.pts + '&pccb=' + this.pccb + '&lwb=' + this.lwb + '&aircooled=' + this.aircooled + '&auto_trans=' + auto_trans + '&model_number=' + searchTerms.value['model_number'] +
                 '&keyword=' + searchTerms.value['keyword'],
                 headers: {'Authorization':'Token' + $window.sessionStorage.user_token}
             })
@@ -127,7 +131,28 @@
                     //$scope.carData =  [];
                 })
         };
+        $scope.getAllModelNumber = function(){
+            $http({
+                method: 'GET',
+                url: '/api/codes',
+                headers: {'Authorization':'Token' + $window.sessionStorage.user_token}
+            })
+                .success(function(response){
+                    console.log('Load VIN model numbers from server successfully');
 
+                    $scope.model_numbers = [];
+                    for ( var index = 0; index<response.length; index++){
+                        var temp= {};
+                        temp['label'] = response[index]['model_number'];
+                        temp['value'] = response[index]['model_number'];
+                        $scope.model_numbers.push(temp);
+                    }
+
+                })
+                .error(function(response){
+                    //$scope.carData =  [];
+                })
+        };
         $scope.getAllStates = function(){
             $http({
                 method: 'GET',
@@ -153,6 +178,7 @@
 
         $scope.getAllCities();
         $scope.getAllStates();
+        $scope.getAllModelNumber();
         $scope.getAllCars();
 
 

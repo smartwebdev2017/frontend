@@ -12,6 +12,7 @@ $angle-right: "\f101";
   background-color: $sidebar;
   height: 100%;
   position: fixed;
+  overflow: auto;
   padding:20px;
   .row {
     margin-top:20px;
