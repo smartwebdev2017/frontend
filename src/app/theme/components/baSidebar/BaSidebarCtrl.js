@@ -14,7 +14,7 @@
         $scope.smartTablePageSize = 10;
         $scope.title = '';
         $scope.model = '';
-        $scope.year_value=2017;
+        $scope.year_value=2019;
         $scope.mileage_value=0;
         $scope.price_value=10000000;
 
