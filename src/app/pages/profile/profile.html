@@ -297,16 +297,16 @@
         </div>
 
       </div>
-      <!--<div class="col-md-6">-->
-          <!--<div class="panel panel-default bootstrap-panel xsmall-panel" style="height:auto!important;">-->
-            <!--<div class="panel-heading">Options</div>-->
-            <!--<div class="panel-body">-->
-              <!--<p ng-repeat="item in carData.vin.options">-->
-                <!--<span ng-bind-html="item.code | highlight: keyword"></span>&nbsp;:&nbsp;<span ng-bind-html="item.value | highlight: keyword"></span>-->
-              <!--</p>-->
-            <!--</div>-->
-          <!--</div>-->
-      <!--</div>-->
+      <div class="col-md-6">
+          <div class="panel panel-default bootstrap-panel xsmall-panel" style="height:auto!important;">
+            <div class="panel-heading">Options</div>
+            <div class="panel-body">
+              <ul ng-repeat="item in carData.vin.options">
+                <li><span ng-bind-html="item.code | highlight: keyword"></span>&nbsp;:&nbsp;<span ng-bind-html="item.value | highlight: keyword"></span></li>
+              </ul>
+            </div>
+          </div>
+      </div>
     </div>
     <h3 class="with-line">PCF Information</h3>
     <div class="row">
