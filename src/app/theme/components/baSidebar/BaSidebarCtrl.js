@@ -43,8 +43,10 @@
             })
                 .success(function(response){
                     console.log('Load data from server successfully');
-                    $rootScope.$carData =  response;
-                    $rootScope.$carData1 =  response;
+                    $rootScope.$carData =  response.results;
+                    $rootScope.$carData1 =  response.results;
+                    $rootScope.$next = response.next;
+                    $rootScope.$prev = response.previous;
                 })
                 .error(function(response){
                     $scope.carData =  [];
@@ -99,8 +101,10 @@
             })
                 .success(function(response){
                     console.log('Search Done!');
-                    $rootScope.$carData =  response;
-                    $rootScope.$carData1 =  response;
+                    $rootScope.$carData =  response.results;
+                    $rootScope.$carData1 =  response.results;
+                    $rootScope.$next = response.next;
+                    $rootScope.$prev = response.previous;
                 })
                 .error(function(response){
                     console.log('Search Error!');
@@ -173,6 +177,48 @@
                 })
                 .error(function(response){
                     //$scope.carData =  [];
+                })
+        };
+        $rootScope.extractURL = function(url){
+            var a = document.createElement('a');
+            a.href = url;
+            return a.pathname + a.search;
+        };
+        $rootScope.nextPage = function(){
+            var newURL = $rootScope.extractURL($rootScope.$next);
+
+            $http({
+                method: 'GET',
+                url: newURL,
+                headers: {'Authorization':'Token' + $window.sessionStorage.user_token}
+            })
+                .success(function(response){
+                    $rootScope.$carData =  response.results;
+                    $rootScope.$carData1 =  response.results;
+                    $rootScope.$next = response.next;
+                    $rootScope.$prev = response.previous;
+                })
+                .error(function(response){
+
+                })
+        };
+
+        $rootScope.prevPage = function(){
+            var newURL = $rootScope.extractURL($rootScope.$prev);
+
+            $http({
+                method: 'GET',
+                url: newURL,
+                headers: {'Authorization':'Token' + $window.sessionStorage.user_token}
+            })
+                .success(function(response){
+                    $rootScope.$carData =  response.results;
+                    $rootScope.$carData1 =  response.results;
+                    $rootScope.$next = response.next;
+                    $rootScope.$prev = response.previous;
+                })
+                .error(function(response){
+
                 })
         };
 

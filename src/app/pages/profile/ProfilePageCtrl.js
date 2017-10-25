@@ -89,8 +89,8 @@
         headers: {'Authorization':'Token' + $window.sessionStorage.user_token}
       })
       .success(function(response){
-        if ( response.length > 0) {
-          $scope.carData = response[0];
+        if ( response.results.length > 0) {
+          $scope.carData = response.results[0];
         }
       })
       .error(function(response){

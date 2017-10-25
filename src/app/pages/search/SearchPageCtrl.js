@@ -30,8 +30,10 @@
                 })
                     .success(function(response){
                         console.log('Search Done!');
-                        $rootScope.$carData =  response;
-                        $rootScope.$carData1 =  response;
+                        $rootScope.$carData =  response.results;
+                        $rootScope.$carData1 =  response.results;
+                        $rootScope.$next = response.next;
+                        $rootScope.$prev = response.previous;
                     })
                     .error(function(response){
                         console.log('Search Error!');
