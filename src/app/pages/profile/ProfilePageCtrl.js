@@ -5,9 +5,10 @@
       .controller('ProfilePageCtrl', ProfilePageCtrl);
 
   /** @ngInject */
-  function ProfilePageCtrl($http, $window, $scope, fileReader, $rootScope, $filter, $uibModal, $stateParams, searchTerms) {
+  function ProfilePageCtrl($http, $window, $scope, fileReader, $rootScope, $filter, $uibModal, $stateParams, OfferDetail, SearchOptions) {
     $scope.carData = {};
-    $scope.keyword = searchTerms.value['keyword']
+    $scope.offer = {};
+    $scope.filter = SearchOptions.filter;
 
     $scope.picture = $filter('profilePicture')('Nasta');
 
@@ -83,19 +84,19 @@
     };
 
     $scope.getCarDetail = function(vin) {
-      $http({
-        method: 'GET',
-        url: '/api/cars/' + vin,
-        headers: {'Authorization':'Token' + $window.sessionStorage.user_token}
-      })
-      .success(function(response){
-        if ( response.results.length > 0) {
-          $scope.carData = response.results[0];
-        }
-      })
-      .error(function(response){
-        console.log('Search Error!');
-      })
+        $rootScope.isLoading = true;
+
+        var filter = angular.copy($scope.filter);
+        //filter.page = $scope.page;
+
+        OfferDetail.get({id:vin}, function (offers) {
+            $rootScope.isLoading = false;
+
+            $scope.carData = offers[0]
+        }, function(err){
+            $rootScope.isLoading = false;
+            $rootScope.handleErrors($scope,err);
+        });
     };
     console.log($stateParams);
     $scope.getCarDetail($stateParams.vin);

@@ -2,3 +2,27 @@
 
 // injector
 // endinjector
+.noUi-horizontal {
+  height: 2px !important;
+}
+.noUi-handle {
+  border-radius: 7px !important;
+  border: 1px solid #ff0000 !important;
+}
+.noUi-horizontal .noUi-handle {
+    width: 14px !important;
+    height: 14px !important;
+    left: 0px !important;
+}
+.noUi-target {
+  border: none !important;
+}
+.noUi-handle:before, .noUi-handle:after {
+  content:none !important;
+}
+.slider {
+  height: 20px;
+}
+.year-to, .mileage-to, .price-to {
+  float: right;
+}

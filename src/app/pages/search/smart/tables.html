@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-8">
         <div class="form-group">
-          <input placeholder="Enter keyword" class="input-lg form-control" type="search" ng-model="keyword" ng-change="search_car()"/>
+          <input placeholder="Enter keyword" class="input-lg form-control" type="search" ng-model="filter.keyword" ng-model-options="{debounce: 1000}" ng-change="search_car()"/>
         </div>
     </div>
   </div>

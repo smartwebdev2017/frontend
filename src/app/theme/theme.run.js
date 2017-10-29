@@ -6,7 +6,9 @@
   'use strict';
 
   angular.module('BlurAdmin.theme')
-    .run(themeRun);
+      .constant("moment", moment)
+      .constant("_", _)
+      .run(runBlock);
 
   /** @ngInject */
   function themeRun($timeout, $rootScope, layoutPaths, preloader, $q, baSidebarService, themeLayoutSettings) {
@@ -38,4 +40,83 @@
     $rootScope.$baSidebarService = baSidebarService;
   }
 
+  function runBlock($location, $rootScope, $document, $timeout, $state, toastr, CFG, $localStorage){
+
+    $rootScope.isLogined = function(){
+      return !!localStorage.getItem(CFG.auth.localStorageName);
+    };
+
+    $rootScope.showNotify = function(title, msg, type){
+
+      var settings = {};
+
+      if (typeof(title) === 'object') {
+        settings = angular.extend(settings, title);
+        type = title.type || 'error';
+      } else if (typeof(title) === 'string'){
+        settings = angular.extend(settings, {
+          title: title,
+          msg: msg
+        });
+        if (angular.isString(settings.msg)){
+          toasty[type](settings);
+        }else{
+          toasty.error('Have problem from our system. please take a picture and send to support');
+        }
+      }
+    };
+
+    $rootScope.handleErrors = function($scope, err){
+      $scope.$applyAsync(function(){
+        $scope.isUpdating = false;
+        $rootScope.isLoading = false;
+      });
+
+      if (err){
+        switch (err.status){
+          case 403:
+          {
+            if ($scope.showPop === true){
+              var msg = '';
+              if (angular.isObject(err.data.errors)){
+                var flat = _.flatten(_.map(err.data.errors, _.values));
+                msg = flat.join(" and ");
+                $scope = false
+              }
+              $rootScope.showNotify('Error', msg, 'error');
+            }
+            localStorage.setItem(CFG.auth.localStorageNameRedirect, $location.url());
+
+            Auth.logout();
+            $location.path('/Login');
+          }
+            break;
+
+          case 409:
+          {
+            if (err.data & err.data.errors){
+              var dlg_title = err.data.errors_title || "Error";
+              var dlg_type = err.data.errors_type || "error";
+
+              $document.duScrollTop(0, 500).then(function() {
+                var msg = '';
+                if (angular.isObject(err.data.errors)) {
+                  var flat = _.flatten(_.map(err.data.errors, _.values));
+                  msg = flat.join(" and ");
+                }
+                $rootScope.showNotify(dlg_title, msg, dlg_type);
+              });
+
+              $scope.$applyAsync(function () {
+                $scope.errors = err.data.errors;
+              });
+            } else {
+              $rootScope.showNotify('Error', err);
+            }
+          }
+        }
+      }
+    }
+
+  }
 })();

@@ -23,7 +23,7 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="form-group">
-                <input ng-model="title" ng-change="filter_car()" placeholder="Title" class="form-control" type="text"/>
+                <input ng-model="filter.title" placeholder="Title" class="form-control" type="text"/>
             </div>
             <input id="year_value" type="hidden" ng-model="year_value" />
             <input id="mileage_value" type="hidden" ng-model="mileage_value"  />
@@ -33,79 +33,53 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="form-group">
-                <input  ng-model="model"  ng-change="filter_car()" placeholder="Model" class="form-control" type="search"/>
+                <input  ng-model="filter.model"  placeholder="Model" class="form-control" type="search"/>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-12">
             <div class="form-group">
-                <input  ng-model="description"  ng-change="filter_car()"  placeholder="Search Description" class="form-control" type="search"/>
+                <input  ng-model="filter.description"  ng-change="filter_car()"  placeholder="Search Description" class="form-control" type="search"/>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-12">
-
-            <div class="slider-box">
-                <h5>Year</h5>
-                <ion-slider ng-model='year' type="double"
-                            grid="true"
-                            min="1955"
-                            max="2019"
-                            from="1955"
-                            to = "year_to"
-                            step="1"
-                            prettify-separator="-"
-                            prettify="true"
-                            onChange="onChangedYear(event.target)"
-                            disable="false">
-                </ion-slider>
+            <label>Year</label>
+            <div class="slider">
+                <div nouislider ng-from="filter.year_from" ng-to="filter.year_to" start='{{filterOptions.year.start}}' end='{{filterOptions.year.end}}' step='{{filterOptions.year.step}}'></div>
             </div>
+            <span class="year-from ">{{filter.year_from}}</span>
+            <span class="year-to">{{filter.year_to}}</span>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <div class="slider-box">
-                <h5>Mileage</h5>
-                <ion-slider type="double"
-                            grid="true"
-                            min="0"
-                            max="198000"
-                            from="500"
-                            step="1000"
-                            prettify-separator="."
-                            prettify="true"
-                            onChange="onChangedMileage(event.target)"
-                            disable="false">
-                </ion-slider>
+            <label>Mileage</label>
+            <div class="slider">
+                <div nouislider ng-from="filter.mileage_from" ng-to="filter.mileage_to" start='{{filterOptions.mileage.start}}' end='{{filterOptions.mileage.end}}' step='{{filterOptions.mileage.step}}' callback="change"></div>
             </div>
-        </div></div>
+            <span class="year-from">{{filter.mileage_from}}</span>
+            <span class="year-to">{{filter.mileage_to}}</span>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-sm-12">
-            <div class="slider-box">
-                <h5>Price</h5>
-                <ion-slider type="double"
-                            grid="true"
-                            min="0"
-                            max="100000"
-                            from="10000"
-                            step="1000"
-                            prettify-separator="."
-                            prettify="true"
-                            onChange="onChangedPrice(event.target)"
-                            disable="false" onchange="">
-                </ion-slider>
+            <label>Price</label>
+            <div class="slider">
+                <div nouislider ng-from="filter.price_from" ng-to="filter.price_to" start='{{filterOptions.price.start}}' end='{{filterOptions.price.end}}' step='{{filterOptions.price.step}}' callback="change"></div>
             </div>
+            <span class="year-from">${{filter.price_from}}</span>
+            <span class="year-to">${{filter.price_to}}</span>
         </div>
     </div>
     <div class="row">
        <div class="form-group">
-        <ui-select ng-model="BaSidebarCtrl.selectedItem.selected"
+        <ui-select ng-model="filter.city"
                    class="btn-group bootstrap-select form-control"
                    ng-disabled="false"
-                   ng-change="filter_car()"
                    append-to-body="true"
                    search-enabled="false">
           <ui-select-match placeholder="Select City">
@@ -119,10 +93,9 @@
 
 
        <div class="form-group">
-        <ui-select ng-model="BaSidebarCtrl.selectedItem.selected"
+        <ui-select ng-model="filter.state"
                    class="btn-group bootstrap-select form-control"
                    ng-disabled="false"
-                   ng-change="filter_car()"
                    append-to-body="true"
                    search-enabled="false">
           <ui-select-match placeholder="Select State">
@@ -137,7 +110,7 @@
     <div class="has-success">
       <div class="checkbox">
         <label class="custom-checkbox">
-          <input type="checkbox" ng-model="longhood" ng-change="filter_car()">
+          <input type="checkbox" ng-model="filter.longhood">
           <span>Longhood</span>
         </label>
       </div>
@@ -146,7 +119,7 @@
     <div class="has-success">
       <div class="checkbox">
         <label class="custom-checkbox">
-          <input type="checkbox" ng-model="widebody" ng-change="filter_car()">
+          <input type="checkbox" ng-model="filter.widebody">
           <span>Widebody</span>
         </label>
       </div>
@@ -155,7 +128,7 @@
     <div class="has-success">
       <div class="checkbox">
         <label class="custom-checkbox">
-          <input type="checkbox" ng-model="pts" ng-change="filter_car()">
+          <input type="checkbox" ng-model="filter.pts">
           <span>PTS</span>
         </label>
       </div>
@@ -164,7 +137,7 @@
     <div class="has-success">
       <div class="checkbox">
         <label class="custom-checkbox">
-          <input type="checkbox" ng-model="pccb" ng-change="filter_car()">
+          <input type="checkbox" ng-model="filter.pccb">
           <span>PCCB</span>
         </label>
       </div>
@@ -173,7 +146,7 @@
     <div class="has-success">
       <div class="checkbox">
         <label class="custom-checkbox">
-          <input type="checkbox" ng-model="aircooled" ng-change="filter_car()">
+          <input type="checkbox" ng-model="filter.aircooled">
           <span>Air-cooled</span>
         </label>
       </div>
@@ -182,17 +155,16 @@
     <div class="has-success">
       <div class="checkbox">
         <label class="custom-checkbox">
-          <input type="checkbox" ng-model="lwb" ng-change="filter_car()">
+          <input type="checkbox" ng-model="filter.lwb">
           <span>LWB Seats</span>
         </label>
       </div>
     </div>
 
   <div class="form-group">
-    <ui-select ng-model="BaSidebarCtrl.selectedItem.selected"
+    <ui-select ng-model="filter.model_number"
                class="btn-group bootstrap-select form-control"
                ng-disabled="false"
-               ng-change="filter_car()"
                append-to-body="true"
                search-enabled="false">
       <ui-select-match placeholder="Select VIN Model Number">
@@ -208,7 +180,6 @@
     <ui-select ng-model="BaSidebarCtrl.selectedItem.selected"
                class="btn-group bootstrap-select form-control"
                ng-disabled="false"
-               ng-change="filter_car()"
                append-to-body="true"
                search-enabled="false">
       <ui-select-match placeholder="Select Transmission">
