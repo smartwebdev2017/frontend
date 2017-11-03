@@ -1,4 +1,6 @@
-<div ba-panel ba-panel-class="detail-page">
+<div class="detail-page">
+  <a href="#">BACK TO RESULTS</a>
+  <a href={{$carData.next}}>NEXT LISTING</a>
   <div class="panel-content">
     <!--<div class="progress-info">Your profile is 70% Complete</div>
     <div class="progress">
@@ -25,8 +27,7 @@
             <div ng-bind-html="carData.listing_model | highlight: keyword"></div>
           </div>
         </div>
-      </div>
-      <div class="col-md-6">
+
         <div class="form-group row clearfix">
           <label class="col-sm-3 control-label">Make</label>
 
@@ -42,11 +43,7 @@
             <div ng-bind-html="carData.listing_year | highlight: keyword"></div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col-md-6">
         <div class="form-group row clearfix">
           <label class="col-sm-3 control-label">Sold Status</label>
 
@@ -62,9 +59,7 @@
             <div ng-bind-html="carData.sold_date | highlight: keyword"></div>
           </div>
         </div>
-      </div>
 
-      <div class="col-md-6">
         <div class="form-group row clearfix">
           <label class="col-sm-3 control-label">Listing URL</label>
 
@@ -80,14 +75,7 @@
             <div ng-bind-html="carData.listing_date | highlight: keyword"></div>
           </div>
         </div>
-      </div>
 
-    </div>
-
-    <h3 class="with-line">Detailed Information</h3>
-
-    <div class="row">
-      <div class="col-md-6">
         <div class="form-group row clearfix">
           <label for="price" class="col-sm-3 control-label">Price</label>
 
@@ -102,8 +90,7 @@
             <div ng-bind-html="carData.mileage | highlight: keyword"></div>
           </div>
         </div>
-      </div>
-      <div class="col-md-6">
+
         <div class="form-group row clearfix">
           <label class="col-sm-3 control-label">City</label>
 
@@ -118,9 +105,7 @@
             <div ng-bind-html="carData.state | highlight: keyword"></div>
           </div>
         </div>
-      </div>
 
-      <div class="col-md-6">
         <!--<div class="form-group row clearfix">-->
           <!--<label class="col-sm-3 control-label">Listing Date</label>-->
 
@@ -135,9 +120,7 @@
             <div ng-bind-html="carData.cond | highlight: keyword"></div>
           </div>
         </div>
-      </div>
 
-      <div class="col-md-6">
         <div class="form-group row clearfix">
           <label class="col-sm-3 control-label">Seller Type</label>
 
@@ -152,9 +135,7 @@
             <div ng-bind-html="carData.vhr_link | highlight: keyword"></div>
           </div>
         </div>
-      </div>
 
-      <div class="col-md-6">
         <div class="form-group row clearfix">
           <label class="col-sm-3 control-label">Listing Exterior Color</label>
 
@@ -169,9 +150,7 @@
             <div ng-bind-html="carData.listing_interior_color | highlight: keyword"></div>
           </div>
         </div>
-      </div>
 
-      <div class="col-md-6">
         <div class="form-group row clearfix">
           <label class="col-sm-3 control-label">Transmission</label>
 
@@ -186,9 +165,7 @@
             <div ng-bind-html="carData.listing_transmission_detail | highlight: keyword"></div>
           </div>
         </div>
-      </div>
 
-      <div class="col-md-6">
         <div class="form-group row clearfix">
           <label class="col-sm-3 control-label">Engine Size</label>
 
@@ -203,9 +180,7 @@
             <!--<input type="text" class="form-control" id="test" placeholder="" ng-model="carData.listing_transmission_detail">-->
           <!--</div>-->
         <!--</div>-->
-      </div>
 
-      <div class="col-md-6">
         <div class="form-group row clearfix">
           <label class="col-sm-3 control-label">Listing Body Type</label>
 
@@ -221,13 +196,12 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="row">
+      <div class="col-md-6">
       <!--<div class="col-md-12 col-lg-4">
         <div ba-panel ba-panel-class="xsmall-panel light-text" style="height:auto!important;">{{carData.listing_description}}</div>
       </div>-->
 
-        <div class="col-md-12 col-lg-8">
+
           <div class="panel panel-default bootstrap-panel xsmall-panel" style="height:auto!important;">
             <div class="panel-heading">Listing Description</div>
             <div class="panel-body">
@@ -236,6 +210,7 @@
             </div>
           </div>
         </div>
+
     </div>
 
     <h3 class="with-line">BuildSheet Information</h3>

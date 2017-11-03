@@ -43,7 +43,7 @@
   color: $default-text;
   @include placeholderStyle($default-text, 0.7);
   border: 1px solid $input-border;
-  border-radius: 5px;
+  border-radius: 0px;
   background-color: $input-background;
   box-shadow: none;
   &:focus {
@@ -287,7 +287,7 @@ label.custom-checkbox {
     display: inline-block;
     margin: 0;
     line-height: 16px;
-    font-weight: $font-light;
+    font-weight: bold;
     cursor: pointer;
     padding-left: 22px;
     width: 100%;
@@ -401,7 +401,7 @@ label.custom-input-danger {
   }
 
   label.custom-checkbox {
-    color: $color;
+    color: #000;
     & > span {
       &:before {
         color: $color;

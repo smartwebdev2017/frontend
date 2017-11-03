@@ -38,9 +38,14 @@
             'filter.aircooled',
             'filter.auto_trans',
             'filter.model_number',
+            'filter.transmission',
             'filter.keyword'
         ], doSearch));
-
+        $scope.auto_trans = [
+            {label: 'Sportomatic', value: 'Sportomatic'},
+            {label: 'Tiptronic', value: 'tiptronic'},
+            {label: 'PDK', value: 'pdk'}
+        ];
         function loadCities() {
 
             Cities.query({}, function(cities){
@@ -90,9 +95,15 @@
             //filter.page = $scope.page;
             if ( typeof(filter.city) === 'object' ) filter.city = filter.city.value;
             if ( typeof(filter.state) === 'object' ) filter.state = filter.state.value;
+            if ( typeof(filter.auto_trans) === 'object' ) filter.auto_trans = filter.auto_trans.value;
 
             Offer.query(filter, {}, function (offers) {
                 $rootScope.isLoading = false;
+
+                for ( var i = 0;  i< offers.results.length - 1; i++){
+                    offers.results[i].next = offers.results[i+1].pcf.vid;
+                    console.log(offers.results[i+1].pcf.vid);
+                }
 
                 $rootScope.$carData = offers.results;
                 $rootScope.$carData1 = offers.results;

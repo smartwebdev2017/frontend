@@ -7,7 +7,7 @@
 
   var basic = {
     default: '#ffffff',
-    defaultText: '#666666',
+    defaultText: '#1b1d1f',
     border: '#dddddd',
     borderDark: '#aaaaaa',
   };

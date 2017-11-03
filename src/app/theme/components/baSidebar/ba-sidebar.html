@@ -46,68 +46,79 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <label>Year</label>
-            <div class="slider">
-                <div nouislider ng-from="filter.year_from" ng-to="filter.year_to" start='{{filterOptions.year.start}}' end='{{filterOptions.year.end}}' step='{{filterOptions.year.step}}'></div>
+            <div class="form-group">
+                <label>Year</label>
+                <div class="slider">
+                    <div nouislider ng-from="filter.year_from" ng-to="filter.year_to" start='{{filterOptions.year.start}}' end='{{filterOptions.year.end}}' step='{{filterOptions.year.step}}'></div>
+                </div>
+                <span class="year-from ">{{filter.year_from}}</span>
+                <span class="year-to">{{filter.year_to}}</span>
             </div>
-            <span class="year-from ">{{filter.year_from}}</span>
-            <span class="year-to">{{filter.year_to}}</span>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <label>Mileage</label>
-            <div class="slider">
-                <div nouislider ng-from="filter.mileage_from" ng-to="filter.mileage_to" start='{{filterOptions.mileage.start}}' end='{{filterOptions.mileage.end}}' step='{{filterOptions.mileage.step}}' callback="change"></div>
+            <div class="form-group">
+                <label>Mileage</label>
+                <div class="slider">
+                    <div nouislider ng-from="filter.mileage_from" ng-to="filter.mileage_to" start='{{filterOptions.mileage.start}}' end='{{filterOptions.mileage.end}}' step='{{filterOptions.mileage.step}}' callback="change"></div>
+                </div>
+                <span class="mileage-from">{{filter.mileage_from | number}}</span>
+                <span class="mileage-to">{{filter.mileage_to | number}}</span>
             </div>
-            <span class="year-from">{{filter.mileage_from}}</span>
-            <span class="year-to">{{filter.mileage_to}}</span>
         </div>
     </div>
 
     <div class="row">
         <div class="col-sm-12">
-            <label>Price</label>
-            <div class="slider">
-                <div nouislider ng-from="filter.price_from" ng-to="filter.price_to" start='{{filterOptions.price.start}}' end='{{filterOptions.price.end}}' step='{{filterOptions.price.step}}' callback="change"></div>
+            <div class="form-group">
+                <label>Price</label>
+                <div class="slider">
+                    <div nouislider ng-from="filter.price_from" ng-to="filter.price_to" start='{{filterOptions.price.start}}' end='{{filterOptions.price.end}}' step='{{filterOptions.price.step}}' callback="change"></div>
+                </div>
+                <span class="year-from">${{filter.price_from | number}}</span>
+                <span class="year-to">${{filter.price_to | number}}</span>
             </div>
-            <span class="year-from">${{filter.price_from}}</span>
-            <span class="year-to">${{filter.price_to}}</span>
         </div>
     </div>
     <div class="row">
-       <div class="form-group">
-        <ui-select ng-model="filter.city"
-                   class="btn-group bootstrap-select form-control"
-                   ng-disabled="false"
-                   append-to-body="true"
-                   search-enabled="false">
-          <ui-select-match placeholder="Select City">
-            <span> {{$select.selected.label}}</span>
-          </ui-select-match>
-          <ui-select-choices repeat="city in cities">
-            <span ng-bind-html="city.label"></span>
-          </ui-select-choices>
-        </ui-select>
-      </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <ui-select ng-model="filter.city"
+                           class="btn-group bootstrap-select form-control"
+                           ng-disabled="false"
+                           append-to-body="true"
+                           search-enabled="false">
+                  <ui-select-match placeholder="Select City">
+                    <span> {{$select.selected.label}}</span>
+                  </ui-select-match>
+                  <ui-select-choices repeat="city in cities">
+                    <span ng-bind-html="city.label"></span>
+                  </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
 
 
-       <div class="form-group">
-        <ui-select ng-model="filter.state"
-                   class="btn-group bootstrap-select form-control"
-                   ng-disabled="false"
-                   append-to-body="true"
-                   search-enabled="false">
-          <ui-select-match placeholder="Select State">
-            <span> {{$select.selected.label}}</span>
-          </ui-select-match>
-          <ui-select-choices repeat="state in states">
-            <span ng-bind-html="state.label"></span>
-          </ui-select-choices>
-        </ui-select>
-      </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <ui-select ng-model="filter.state"
+                           class="btn-group bootstrap-select form-control"
+                           ng-disabled="false"
+                           append-to-body="true"
+                           search-enabled="false">
+                  <ui-select-match placeholder="Select State">
+                    <span> {{$select.selected.label}}</span>
+                  </ui-select-match>
+                  <ui-select-choices repeat="state in states">
+                    <span ng-bind-html="state.label"></span>
+                  </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+    </div>
 
-    <div class="has-success">
+    <div class="">
       <div class="checkbox">
         <label class="custom-checkbox">
           <input type="checkbox" ng-model="filter.longhood">
@@ -116,7 +127,7 @@
       </div>
     </div>
 
-    <div class="has-success">
+    <div class="">
       <div class="checkbox">
         <label class="custom-checkbox">
           <input type="checkbox" ng-model="filter.widebody">
@@ -125,7 +136,7 @@
       </div>
     </div>
 
-    <div class="has-success">
+    <div class="">
       <div class="checkbox">
         <label class="custom-checkbox">
           <input type="checkbox" ng-model="filter.pts">
@@ -134,7 +145,7 @@
       </div>
     </div>
 
-    <div class="has-success">
+    <div class="">
       <div class="checkbox">
         <label class="custom-checkbox">
           <input type="checkbox" ng-model="filter.pccb">
@@ -143,7 +154,7 @@
       </div>
     </div>
 
-    <div class="has-success">
+    <div class="">
       <div class="checkbox">
         <label class="custom-checkbox">
           <input type="checkbox" ng-model="filter.aircooled">
@@ -152,7 +163,7 @@
       </div>
     </div>
 
-    <div class="has-success">
+    <div class="">
       <div class="checkbox">
         <label class="custom-checkbox">
           <input type="checkbox" ng-model="filter.lwb">
@@ -160,36 +171,39 @@
         </label>
       </div>
     </div>
-
-  <div class="form-group">
-    <ui-select ng-model="filter.model_number"
-               class="btn-group bootstrap-select form-control"
-               ng-disabled="false"
-               append-to-body="true"
-               search-enabled="false">
-      <ui-select-match placeholder="Select VIN Model Number">
-        <span> {{$select.selected.label}}</span>
-      </ui-select-match>
-      <ui-select-choices repeat="m in model_numbers">
-        <span ng-bind-html="m.label"></span>
-      </ui-select-choices>
-    </ui-select>
-  </div>
-
-  <div class="form-group">
-    <ui-select ng-model="BaSidebarCtrl.selectedItem.selected"
-               class="btn-group bootstrap-select form-control"
-               ng-disabled="false"
-               append-to-body="true"
-               search-enabled="false">
-      <ui-select-match placeholder="Select Transmission">
-        <span> {{$select.selected.label}}</span>
-      </ui-select-match>
-      <ui-select-choices repeat="transmission in vm.transmissions">
-        <span ng-bind-html="transmission.label"></span>
-      </ui-select-choices>
-    </ui-select>
-  </div>
+  <div class="row">
+      <div class="col-sm-12">
+          <div class="form-group">
+            <ui-select ng-model="filter.model_number"
+                       class="btn-group bootstrap-select form-control"
+                       ng-disabled="false"
+                       append-to-body="true"
+                       search-enabled="false">
+              <ui-select-match placeholder="Select VIN Model Number">
+                <span> {{$select.selected.label}}</span>
+              </ui-select-match>
+              <ui-select-choices repeat="m in model_numbers">
+                <span ng-bind-html="m.label"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+      </div>
+      <div class="col-sm-12">
+          <div class="form-group">
+            <ui-select ng-model="filter.auto_trans"
+                       class="btn-group bootstrap-select form-control"
+                       ng-disabled="false"
+                       append-to-body="true"
+                       search-enabled="false">
+              <ui-select-match placeholder="Select Transmission">
+                <span> {{$select.selected.label}}</span>
+              </ui-select-match>
+              <ui-select-choices repeat="transmission in auto_trans">
+                <span ng-bind-html="transmission.label"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+      </div>
 
 
 </aside>
