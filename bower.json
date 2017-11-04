@@ -59,7 +59,7 @@
     "angular-xeditable": "~0.5.0",
     "ng-js-tree": "~0.0.7",
     "angular-ui-select": "^0.19.6",
-    "nouislider": "~6.2.0",
+    "nouislider": "~9.2.0",
     "async": "^2.5.0"
   },
   "resolutions": {

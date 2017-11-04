@@ -6,8 +6,6 @@
   height: 7px !important;
 }
 .noUi-handle {
-
-
   background: url(../assets/img/scroll_bar.png) no-repeat !important;
 }
 .noUi-horizontal .noUi-handle {
@@ -31,9 +29,45 @@
 .year-to, .mileage-to, .price-to {
   float: right;
 }
+.logo {
+  display:inline-block;
 
-.detail-page .form-group {
-  margin-bottom: 0px;
+  img {
+    width: 50%;
+    margin: 20px 0px;
+  }
+}
+.detail-page {
+  .back_link { float:left;}
+  .next_link { float:right;}
+  .detail_link {text-decoration: underline !important; color:blue;}
+  .small_info label{font-size: 10px !important; color: gray;}
+  .left {float:left;}
+  .detail_title_content {
+    margin: 0 auto !important;
+    float: none;
+    border: 1px solid #000;
+    .detail_title {
+      text-align:center;
+      margin-top: 15px;
+
+    }
+    .detail_pcfid {
+      text-align:center;
+      margin-bottom: 15px;
+    }
+  }
+  .p-with-code {
+    white-space:pre;
+  }
+
+  .form-group {
+    margin-bottom: 0px;
+
+    label {
+      font-size: 14px;
+    }
+  }
 }
 .search-results .sortable {
   background-color:#d9d9d9;

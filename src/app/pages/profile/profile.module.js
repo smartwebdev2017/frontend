@@ -12,10 +12,18 @@
   function routeConfig($stateProvider) {
     $stateProvider
         .state('normal.detail', {
+          views: {
+              'baSidebar':{
+                controller: 'BaSidebarCtrl',
+                templateUrl: 'app/theme/components/baSidebar/ba-sidebar.html',
+              },
+              'content':{
+                controller: 'ProfilePageCtrl',
+                templateUrl: 'app/pages/profile/profile.html',
+              }
+          },
           url: '/detail/:vin',
           title: 'Detail Information',
-          templateUrl: 'app/pages/profile/profile.html',
-          controller: 'ProfilePageCtrl',
         });
   }
 

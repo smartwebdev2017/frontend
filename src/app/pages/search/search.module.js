@@ -31,10 +31,18 @@
           },
         })
         .state('normal.search', {
+          views: {
+              'baSidebar':{
+                controller: 'BaSidebarCtrl',
+                templateUrl: 'app/theme/components/baSidebar/ba-sidebar.html',
+              },
+              'content':{
+                controller: 'SearchPageCtrl',
+                templateUrl: 'app/pages/search/smart/tables.html',
+                title: 'Search Smart Tables',
+              }
+          },
           url: '/search',
-          controller: 'SearchPageCtrl',
-          templateUrl: 'app/pages/search/smart/tables.html',
-          title: 'Search Smart Tables',
         });
     //$urlRouterProvider.when('/search','/search/basic');
   }

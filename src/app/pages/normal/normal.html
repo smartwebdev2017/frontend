@@ -1,10 +1,12 @@
 <div class="body-bg"></div>
 <main  ng-class=" { 'menu-collapsed': $baSidebarService.isMenuCollapsed() }">
-    <ba-sidebar></ba-sidebar>
+    <div ui-view="baSidebar"></div>
     <page-top></page-top>
     <div class="al-main">
         <div class="al-content">
-            <div ui-view autoscroll="true" autoscroll-body-top></div>
+            <div ui-view="content" autoscroll="true" autoscroll-body-top>
+
+            </div>
         </div>
     </div>
     <footer class="al-footer clearfix">

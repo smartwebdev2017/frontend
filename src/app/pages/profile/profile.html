@@ -1,50 +1,64 @@
 <div class="detail-page">
-  <a href="#">BACK TO RESULTS</a>
-  <a href={{$carData.next}}>NEXT LISTING</a>
+
   <div class="panel-content">
+      <div class="row">
+        <div class="col-md-12">
+          <a class="back_link" href="#">BACK TO RESULTS</a>
+          <a class="next_link" href={{$carData.next}}>NEXT LISTING</a>
+          </div>
+      </div>
     <!--<div class="progress-info">Your profile is 70% Complete</div>
     <div class="progress">
       <div class="progress-bar progress-bar-primary progress-bar-striped active" role="progressbar"
            aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
       </div>
     </div>-->
+    <div class="row">
+      <div class="from-group row clearfix col-md-1 detail_title_content">
+        <div class="col-md-12 detail_title">
+          <label>PCF ID</label>
+        </div>
 
-    <h3 class="with-line">{{carData.listing_title}}</h3>
+        <div class="col-md-12 detail_pcfid">
+          <label ng-bind-html="carData.pcf.vid | highlight: keyword"></label>
+        </div>
+      </div>
+    </div>
+    <h3 class="with-line">Listing</h3>
 
     <div class="row">
       <div class="col-md-6">
-        <div class="form-group row clearfix">
-          <label for="vin" class="col-sm-3 control-label">VIN :</label>
-
+        <div class="form-group row clearfix" ng-if="carData.listing_title">
           <div class="col-sm-9">
-            <div ng-bind-html="carData.vin_code | highlight: keyword"></div>
-          </div>
-        </div>
-        <div class="form-group row clearfix">
-          <label for="listing_model" class="col-sm-3 control-label">Model</label>
-
-          <div class="col-sm-9">
-            <div ng-bind-html="carData.listing_model | highlight: keyword"></div>
+            <a class="detail_link" href={{carData.listing_url}}><span ng-bind-html="carData.listing_title | highlight: keyword"></span></a>
           </div>
         </div>
 
+        <div class="form-group row clearfix"  ng-if="carData.vin_code">
+          <div class="col-sm-9">
+            <label ng-bind-html="carData.vin_code | highlight: keyword"></label>
+          </div>
+        </div>
         <div class="form-group row clearfix">
+          <div class="col-sm-9">
+            <div class="left" ng-if="carData.listing_year"><label ng-bind-html="carData.listing_year | highlight: keyword"></label>&nbsp;</div>
+            <div class="left" ng-if="carData.listing_model"><label ng-bind-html="carData.listing_model | highlight: keyword"></label>&nbsp;</div>
+            <div class="left" ng-if="carData.listing_trim"><label ng-bind-html="carData.listing_trim | highlight: keyword"></label>&nbsp;</div>
+            <div class="left" ng-if="carData.listing_body_type"><label ng-bind-html="carData.listing_body_type | highlight: keyword"></label>&nbsp;</div>
+            <div class="left" ng-if="carData.cond">(<label ng-bind-html="carData.cond | highlight: keyword"></label>)</div>
+          </div>
+        </div>
+
+        <!--<div class="form-group row clearfix">
           <label class="col-sm-3 control-label">Make</label>
 
           <div class="col-sm-9">
             <div ng-bind-html="carData.listing_make | highlight: keyword"></div>
           </div>
-        </div>
+        </div>-->
 
-        <div class="form-group row clearfix">
-          <label for="listing_year" class="col-sm-3 control-label">Year</label>
 
-          <div class="col-sm-9">
-            <div ng-bind-html="carData.listing_year | highlight: keyword"></div>
-          </div>
-        </div>
-
-        <div class="form-group row clearfix">
+        <!--<div class="form-group row clearfix">
           <label class="col-sm-3 control-label">Sold Status</label>
 
           <div class="col-sm-9">
@@ -58,9 +72,9 @@
           <div class="col-sm-9">
             <div ng-bind-html="carData.sold_date | highlight: keyword"></div>
           </div>
-        </div>
+        </div>-->
 
-        <div class="form-group row clearfix">
+        <!--<div class="form-group row clearfix">
           <label class="col-sm-3 control-label">Listing URL</label>
 
           <div class="col-sm-9">
@@ -74,37 +88,56 @@
           <div class="col-sm-9">
             <div ng-bind-html="carData.listing_date | highlight: keyword"></div>
           </div>
-        </div>
+        </div>-->
 
-        <div class="form-group row clearfix">
-          <label for="price" class="col-sm-3 control-label">Price</label>
-
+        <div class="form-group row clearfix"  ng-if="carData.price">
           <div class="col-sm-9">
-            <div ng-bind-html="carData.price | highlight: keyword"></div>
+            $<label ng-bind-html="carData.price | highlight: keyword | number"></label>
           </div>
         </div>
-        <div class="form-group row clearfix">
-          <label for="mileage" class="col-sm-3 control-label">Mileage</label>
-
+        <div class="form-group row clearfix"   ng-if="carData.mileage">
           <div class="col-sm-9">
-            <div ng-bind-html="carData.mileage | highlight: keyword"></div>
+            <label ng-bind-html="carData.mileage | highlight: keyword | number"></label>mi
           </div>
         </div>
 
-        <div class="form-group row clearfix">
-          <label class="col-sm-3 control-label">City</label>
+        <div class="form-group row clearfix" ng-if="carData.exterior_color">
+          <label class="col-sm-1 control-label">Exterior:</label>
 
           <div class="col-sm-9">
-            <div ng-bind-html="carData.city | highlight: keyword"></div>
+            <label ng-bind-html="carData.listing_exterior_color | highlight: keyword"></label>
           </div>
         </div>
-        <div class="form-group row clearfix">
-          <label for="state" class="col-sm-3 control-label">State</label>
+        <div class="form-group row clearfix" ng-if="carData.interior_color">
+          <label class="col-sm-1 control-label">Interior:</label>
 
           <div class="col-sm-9">
-            <div ng-bind-html="carData.state | highlight: keyword"></div>
+            <label ng-bind-html="carData.listing_interior_color | highlight: keyword"></label>
           </div>
         </div>
+
+        <div class="form-group row clearfix">
+          <div class="col-sm-9">
+            <label ng-if="carData.listing_transmission"  ng-bind-html="carData.listing_transmission | highlight: keyword">,&nbsp;</label>
+            <label ng-if="carData.listing_engine_size"  ng-bind-html="carData.listing_engine_size | highlight: keyword">,&nbsp;</label>
+            <label ng-if="carData.listing_drivetrain" ng-bind-html="carData.listing_drivetrain | highlight: keyword"></label>
+            <a class="detail_link" ng-if="carData.vhr_link !='' " href={{carData.vhr_link}}>&nbsp;VHR</a>
+          </div>
+        </div>
+
+        <div class="form-group row clearfix" ng-if="carData.seller_type" >
+          <div class="col-sm-9">
+            <label ng-bind-html="carData.seller_type | highlight: keyword"></label>
+          </div>
+        </div>
+
+        <div class="form-group row clearfix">
+          <div class="col-sm-9">
+            <div class="left" ng-if="carData.city"><label ng-bind-html="carData.city | highlight: keyword"></label>,&nbsp;</div>
+            <div class="left" ng-if="carData.state"><label ng-if="carData.state" ng-bind-html="carData.state | highlight: keyword"></label></div>
+          </div>
+        </div>
+
 
         <!--<div class="form-group row clearfix">-->
           <!--<label class="col-sm-3 control-label">Listing Date</label>-->
@@ -113,66 +146,32 @@
             <!--<input type="text" class="form-control" id="listing_date" placeholder="" ng-model="carData.listing_date">-->
           <!--</div>-->
         <!--</div>-->
-        <div class="form-group row clearfix">
-          <label for="cond" class="col-sm-3 control-label">Condition</label>
 
-          <div class="col-sm-9">
-            <div ng-bind-html="carData.cond | highlight: keyword"></div>
-          </div>
-        </div>
 
-        <div class="form-group row clearfix">
-          <label class="col-sm-3 control-label">Seller Type</label>
-
-          <div class="col-sm-9">
-            <div ng-bind-html="carData.seller_type | highlight: keyword"></div>
-          </div>
-        </div>
-        <div class="form-group row clearfix">
+        <!--<div class="form-group row clearfix">
           <label for="vhr_link" class="col-sm-3 control-label">VHR Link</label>
 
           <div class="col-sm-9">
             <div ng-bind-html="carData.vhr_link | highlight: keyword"></div>
           </div>
-        </div>
+        </div>-->
 
-        <div class="form-group row clearfix">
-          <label class="col-sm-3 control-label">Listing Exterior Color</label>
 
-          <div class="col-sm-9">
-            <div ng-bind-html="carData.listing_exterior_color | highlight: keyword"></div>
-          </div>
-        </div>
-        <div class="form-group row clearfix">
-          <label for="listing_interior_color" class="col-sm-3 control-label">Listing Interior Color</label>
-
-          <div class="col-sm-9">
-            <div ng-bind-html="carData.listing_interior_color | highlight: keyword"></div>
-          </div>
-        </div>
-
-        <div class="form-group row clearfix">
-          <label class="col-sm-3 control-label">Transmission</label>
-
-          <div class="col-sm-9">
-            <div ng-bind-html="carData.listing_transmission | highlight: keyword"></div>
-          </div>
-        </div>
-        <div class="form-group row clearfix">
+        <!--<div class="form-group row clearfix">
           <label for="listing_transmission_detail" class="col-sm-3 control-label">Transmission Detail</label>
 
           <div class="col-sm-9">
             <div ng-bind-html="carData.listing_transmission_detail | highlight: keyword"></div>
           </div>
-        </div>
+        </div>-->
 
-        <div class="form-group row clearfix">
+        <!--<div class="form-group row clearfix">
           <label class="col-sm-3 control-label">Engine Size</label>
 
           <div class="col-sm-9">
             <div ng-bind-html="carData.listing_engine_size | highlight: keyword"></div>
           </div>
-        </div>
+        </div>-->
         <!--<div class="form-group row clearfix">-->
           <!--<label for="listing_transmission_detail" class="col-sm-3 control-label">Transmission Detail</label>-->
 
@@ -181,20 +180,20 @@
           <!--</div>-->
         <!--</div>-->
 
-        <div class="form-group row clearfix">
+        <!--<div class="form-group row clearfix">
           <label class="col-sm-3 control-label">Listing Body Type</label>
 
           <div class="col-sm-9">
             <div ng-bind-html="carData.listing_body_type | highlight: keyword"></div>
           </div>
-        </div>
-        <div class="form-group row clearfix">
+        </div>-->
+        <!--<div class="form-group row clearfix">
           <label for="listing_drivetrain" class="col-sm-3 control-label">Listing Drivetrain</label>
 
           <div class="col-sm-9">
             <div ng-bind-html="carData.listing_drivetrain | highlight: keyword"></div>
           </div>
-        </div>
+        </div>-->
       </div>
       <div class="col-md-6">
       <!--<div class="col-md-12 col-lg-4">
@@ -202,76 +201,68 @@
       </div>-->
 
 
-          <div class="panel panel-default bootstrap-panel xsmall-panel" style="height:auto!important;">
-            <div class="panel-heading">Listing Description</div>
+          <div class="" style="height:auto!important;" ng-if="carData.listing_description">
             <div class="panel-body">
-              <p class="p-with-code" ng-bind-html="carData.listing_description | highlight: keyword">
-              </p>
+              <p class="p-with-code" ng-bind-html="carData.listing_description | highlight: keyword | limitTo:numLimit"></p>
+              <button ng-if="numLimit == 150" type='button' ng-click="readMore()">read more</button>
+              <button ng-if="numLimit > 150" type='button' ng-click="readLess()">read less</button>
             </div>
           </div>
         </div>
 
     </div>
 
-    <h3 class="with-line">BuildSheet Information</h3>
+    <h3 class="with-line">Build Sheet</h3>
     <div class="row">
       <div class="col-md-6">
         <div class="form-group row clearfix">
-          <label class="col-sm-3 control-label">MSRP</label>
-
           <div class="col-sm-9">
-            <div ng-bind-html="carData.vin.msrp | highlight: keyword"></div>
+            <div class="left" ng-if="carData.vin.model_year"><label ng-if="carData.vin.model_year" ng-bind-html="carData.vin.model_year | highlight: keyword"></label>&nbsp;</div>
+            <div class="left" ng-if="carData.vin.model_detail"><label ng-if="carData.vin.model_detail" ng-bind-html="carData.vin.model_detail | highlight: keyword"></label></div>
           </div>
         </div>
 
-        <div class="form-group row clearfix">
-          <label class="col-sm-3 control-label">Warranty Start</label>
+        <div class="form-group row clearfix"  ng-if="carData.vin.msrp" >
+          <label class="col-sm-1 control-label">MSRP:</label>
 
           <div class="col-sm-9">
-            <div ng-bind-html="carData.vin.warranty_start | highlight: keyword"></div>
+            $<label ng-bind-html="carData.vin.msrp | highlight: keyword | number"></label>
           </div>
         </div>
 
-        <div class="form-group row clearfix">
+        <!--<div class="form-group row clearfix">
           <label class="col-sm-3 control-label">Model Year</label>
 
           <div class="col-sm-9">
             <div ng-bind-html="carData.vin.model_year | highlight: keyword"></div>
           </div>
-        </div>
+        </div>-->
 
-        <div class="form-group row clearfix">
-          <label class="col-sm-3 control-label">Model Detail</label>
+        <div class="form-group row clearfix" ng-if="carData.vin.color" >
+          <label class="col-sm-1 control-label">Exterior:</label>
 
           <div class="col-sm-9">
-            <div ng-bind-html="carData.vin.model_detail | highlight: keyword"></div>
+            <label ng-bind-html="carData.vin.color | highlight: keyword"></label>
           </div>
         </div>
 
-        <div class="form-group row clearfix">
-          <label class="col-sm-3 control-label">Color</label>
+        <div class="form-group row clearfix" ng-if="carData.vin.interior">
+          <label class="col-sm-1 control-label">Interior:</label>
 
           <div class="col-sm-9">
-            <div ng-bind-html="carData.vin.color | highlight: keyword"></div>
+            <label ng-bind-html="carData.vin.interior | highlight: keyword"></label>
           </div>
         </div>
 
-        <div class="form-group row clearfix">
-          <label class="col-sm-3 control-label">Production Month</label>
-
-          <div class="col-sm-9">
-            <div ng-bind-html="carData.vin.production_month | highlight: keyword"></div>
-          </div>
-        </div>
-        <div class="form-group row clearfix">
-          <label class="col-sm-3 control-label">Interior</label>
-
-          <div class="col-sm-9">
-            <div ng-bind-html="carData.vin.interior | highlight: keyword"></div>
-          </div>
+        <div ng-if="carData.vin.warranty_start" class="form-group row clearfix small_info">
+          <label class="col-sm-2 control-label">Warranty Start</label>&nbsp;<label ng-bind-html="carData.vin.warranty_start | highlight: keyword"></label>
         </div>
 
+        <div ng-if="carData.vin.production_month" class="form-group row clearfix small_info">
+          <label class="col-sm-2 control-label">Production Month</label>&nbsp;<label ng-bind-html="carData.vin.production_month | highlight: keyword"></label>
+        </div>
       </div>
+
       <div class="col-md-6">
           <div class="panel panel-default bootstrap-panel xsmall-panel" style="height:auto!important;">
             <div class="panel-heading">Options</div>
@@ -283,9 +274,10 @@
           </div>
       </div>
     </div>
-    <h3 class="with-line">PCF Information</h3>
+
+    <h3 class="with-line">PCF Data</h3>
     <div class="row">
-      <div class="col-md-6">
+      <!--<div class="col-md-6">
         <div class="form-group row clearfix">
           <label class="col-sm-3 control-label">ID</label>
 
@@ -293,19 +285,17 @@
             <div ng-bind-html="carData.pcf.vid | highlight: keyword"></div>
           </div>
         </div>
-      </div>
+      </div>-->
 
-      <div class="col-md-6">
+      <div class="col-md-6" ng-if="carData.pcf.model_number">
         <div class="form-group row clearfix">
-          <label class="col-sm-3 control-label">VIN Model Number</label>
-
           <div class="col-sm-9">
-            <div ng-bind-html="carData.pcf.model_number | highlight: keyword"></div>
+            <label ng-bind-html="carData.pcf.model_number | highlight: keyword"></label>
           </div>
         </div>
       </div>
 
-      <div class="col-md-6">
+      <!--<div class="col-md-6">
         <div class="form-group row clearfix">
           <label class="col-sm-3 control-label">Widebody</label>
 
@@ -333,19 +323,20 @@
             <div ng-bind-html="carData.pcf.longhood | highlight: keyword"></div>
           </div>
         </div>
-      </div>
+      </div>-->
 
       <div class="col-md-6">
-        <div class="form-group row clearfix">
-          <label class="col-sm-3 control-label">PCCB</label>
+        <div class="form-group row clearfix" ng-if="carData.pcf.pccb == 1">
+          <label class="col-sm-2 control-label">PCCB</label>
 
           <div class="col-sm-9">
-            <div ng-bind-html="carData.pcf.pccb | highlight: keyword"></div>
+            <!--<label ng-if="carData.pcf.pccb == 0">No</label>-->
+            <label>Yes</label>
           </div>
         </div>
       </div>
 
-      <div class="col-md-6">
+      <!--<div class="col-md-6">
         <div class="form-group row clearfix">
           <label class="col-sm-3 control-label">Color</label>
 
@@ -353,19 +344,28 @@
             <div ng-bind-html="carData.pcf.color | highlight: keyword"></div>
           </div>
         </div>
-      </div>
-
+      </div>-->
       <div class="col-md-6">
-        <div class="form-group row clearfix">
-          <label class="col-sm-3 control-label">Body Type</label>
+        <div class="form-group row clearfix" ng-if="carData.pcf.gap_to_msrp">
+          <label class="col-sm-2 control-label">% of MSRP</label>
 
           <div class="col-sm-9">
-            <div ng-bind-html="carData.pcf.body_type | highlight: keyword"></div>
+            <label ng-bind-html="carData.pcf.gap_to_msrp | highlight: keyword"></label>
           </div>
         </div>
       </div>
 
       <div class="col-md-6">
+        <div class="form-group row clearfix" ng-if="carData.pcf.body_type">
+          <label class="col-sm-2 control-label">Body Type</label>
+
+          <div class="col-sm-9">
+            <label ng-bind-html="carData.pcf.body_type | highlight: keyword"></label>
+          </div>
+        </div>
+      </div>
+
+      <!--<div class="col-md-6">
         <div class="form-group row clearfix">
           <label class="col-sm-3 control-label">Air cooled</label>
 
@@ -373,17 +373,9 @@
             <div ng-bind-html="carData.pcf.air_cooled | highlight: keyword"></div>
           </div>
         </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group row clearfix">
-          <label class="col-sm-3 control-label">Gap To MSRP</label>
+      </div>-->
 
-          <div class="col-sm-9">
-            <div ng-bind-html="carData.pcf.gap_to_msrp | highlight: keyword"></div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
+      <!--<div class="col-md-6">
         <div class="form-group row clearfix">
           <label class="col-sm-3 control-label">Listing Age</label>
 
@@ -391,8 +383,8 @@
             <div ng-bind-html="carData.pcf.listing_age | highlight: keyword"></div>
           </div>
         </div>
-      </div>
-      <div class="col-md-6">
+      </div>-->
+      <!--<div class="col-md-6">
         <div class="form-group row clearfix">
           <label class="col-sm-3 control-label">LWB Seats</label>
 
@@ -409,8 +401,8 @@
             <div ng-bind-html="carData.pcf.auto_trans | highlight: keyword"></div>
           </div>
         </div>
-      </div>
-      <div class="col-md-6">
+      </div>-->
+      <!--<div class="col-md-6">
         <div class="form-group row clearfix">
           <label class="col-sm-3 control-label">Option Code</label>
 
@@ -427,8 +419,8 @@
             <div ng-bind-html="carData.pcf.option_description | highlight: keyword"></div>
           </div>
         </div>
-      </div>
-      <div class="col-md-6">
+      </div>-->
+      <!--<div class="col-md-6">
         <div class="form-group row clearfix">
           <label class="col-sm-3 control-label">0~60</label>
 
@@ -436,8 +428,8 @@
             <div ng-bind-html="carData.pcf.placeholder | highlight: keyword"></div>
           </div>
         </div>
-      </div>
-      <div class="col-md-6">
+      </div>-->
+      <!--<div class="col-md-6">
         <div class="form-group row clearfix">
           <label class="col-sm-3 control-label">Produced USA</label>
 
@@ -445,8 +437,8 @@
             <div ng-bind-html="carData.pcf.produced_usa | highlight: keyword"></div>
           </div>
         </div>
-      </div>
-      <div class="col-md-6">
+      </div>-->
+      <!--<div class="col-md-6">
         <div class="form-group row clearfix">
           <label class="col-sm-3 control-label">Produced Globally</label>
 
@@ -454,9 +446,9 @@
             <div ng-bind-html="carData.pcf.produced_globally | highlight: keyword"></div>
           </div>
         </div>
-      </div>
+      </div>-->
 
-      <div class="col-md-6">
+      <!--<div class="col-md-6">
         <div class="form-group row clearfix">
           <label class="col-sm-3 control-label">Same Counts</label>
 
@@ -464,7 +456,7 @@
             <div ng-bind-html="carData.pcf.same_counts | highlight: keyword"></div>
           </div>
         </div>
-      </div>
+      </div>-->
 
     </div>
     <!--<button type="button" class="btn btn-primary btn-with-icon save-profile">
