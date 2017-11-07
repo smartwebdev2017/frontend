@@ -14,5 +14,6 @@ angular.module('BlurAdmin', [
   'angular-progress-button-styles',
   "nouislider",
   'BlurAdmin.theme',
-  'BlurAdmin.pages'
+  'BlurAdmin.pages',
+   "ui.grid"
 ]);

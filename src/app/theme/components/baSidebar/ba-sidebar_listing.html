@@ -1,0 +1,27 @@
+<aside ng-if="!$isLogged" class="al-sidebar">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>Listings</h2>
+            <div class="active_listings">
+                <h3>Active</h3>
+                <ul>
+                    <li class="history-items" ng-repeat="item in $active track by $index">
+                      <a class="email-link" ng-click="getActiveListingByIndex($index)">{{item.listing_date}}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="inactive_listings">
+                <h3>Inactive</h3>
+                <ul>
+                    <li class="history-items" ng-repeat="item in $inactive">
+                      <a class="email-link" ng-click="getInactiveListingByIndex($index)">{{item.listing_date}}</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+
+</aside>

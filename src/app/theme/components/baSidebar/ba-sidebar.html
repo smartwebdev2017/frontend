@@ -61,7 +61,7 @@
             <div class="form-group">
                 <label>Mileage</label>
                 <div class="slider">
-                    <div nouislider ng-from="filter.mileage_from" ng-to="filter.mileage_to" start='{{filterOptions.mileage.start}}' end='{{filterOptions.mileage.end}}' step='{{filterOptions.mileage.step}}' callback="change"></div>
+                    <div nouislider ng-from="filter.mileage_from" ng-to="filter.mileage_to" start='{{filterOptions.mileage.start}}' end='{{filterOptions.mileage.end}}' step='{{filterOptions.mileage.step}}'></div>
                 </div>
                 <span class="mileage-from">{{filter.mileage_from | number}}</span>
                 <span class="mileage-to">{{filter.mileage_to | number}}</span>
@@ -74,7 +74,7 @@
             <div class="form-group">
                 <label>Price</label>
                 <div class="slider">
-                    <div nouislider ng-from="filter.price_from" ng-to="filter.price_to" start='{{filterOptions.price.start}}' end='{{filterOptions.price.end}}' step='{{filterOptions.price.step}}' callback="change"></div>
+                    <div nouislider ng-from="filter.price_from" ng-to="filter.price_to" start='{{filterOptions.price.start}}' end='{{filterOptions.price.end}}' step='{{filterOptions.price.step}}'></div>
                 </div>
                 <span class="year-from">${{filter.price_from | number}}</span>
                 <span class="year-to">${{filter.price_to | number}}</span>

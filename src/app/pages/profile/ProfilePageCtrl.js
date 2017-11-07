@@ -5,7 +5,7 @@
       .controller('ProfilePageCtrl', ProfilePageCtrl);
 
   /** @ngInject */
-  function ProfilePageCtrl($http, $window, $scope, fileReader, $rootScope, $filter, $uibModal, $stateParams, OfferDetail, SearchOptions) {
+  function ProfilePageCtrl($http, $window, $scope, fileReader, $rootScope, $filter, $uibModal, $stateParams, OfferDetail, ActiveOfferDetail, InactiveOfferDetail, SearchOptions) {
     $scope.carData = {};
     $scope.offer = {};
     $scope.filter = SearchOptions.filter;
@@ -36,14 +36,46 @@
         OfferDetail.get({id:vin}, function (offers) {
             $rootScope.isLoading = false;
 
-            $scope.carData = offers[0]
+            $rootScope.$detailData = offers[0]
         }, function(err){
             $rootScope.isLoading = false;
             $rootScope.handleErrors($scope,err);
         });
     };
+    function getActiveListings(vin) {
+        $rootScope.isLoading = true;
+
+        var filter = angular.copy($scope.filter);
+        //filter.page = $scope.page;
+
+        ActiveOfferDetail.get({id:vin}, function (offers) {
+            $rootScope.isLoading = false;
+
+            $rootScope.$active = offers;
+        }, function(err){
+            $rootScope.isLoading = false;
+            $rootScope.handleErrors($scope,err);
+        });
+    }
+    function getInactiveListings(vin) {
+        $rootScope.isLoading = true;
+
+        var filter = angular.copy($scope.filter);
+        //filter.page = $scope.page;
+
+        InactiveOfferDetail.get({id:vin}, function (offers) {
+            $rootScope.isLoading = false;
+
+            $rootScope.$inactive = offers;
+        }, function(err){
+            $rootScope.isLoading = false;
+            $rootScope.handleErrors($scope,err);
+        });
+    }
 
     $scope.getCarDetail($stateParams.vin);
+    getActiveListings($stateParams.vin);
+    getInactiveListings($stateParams.vin);
   }
 
 })();

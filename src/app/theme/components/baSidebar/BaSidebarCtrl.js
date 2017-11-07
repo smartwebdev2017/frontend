@@ -9,7 +9,7 @@
     .controller('BaSidebarCtrl', BaSidebarCtrl);
 
   /** @ngInject */
-  function BaSidebarCtrl($scope, $rootScope, $filter, $location, $timeout, $interval, $http, $state, $stateParams, CFG, Offer, Cities, States, Vins, SearchOptions){
+  function BaSidebarCtrl($scope, $rootScope, $filter, $location, $timeout, $interval, $http, $state, $stateParams, CFG, Offer, ActiveOfferDetail, Cities, States, Vins, SearchOptions){
         $scope.offer = {};
         $scope.filter = SearchOptions.filter;
         $scope.filterOptions = SearchOptions.options;
@@ -88,6 +88,7 @@
                 $rootScope.handleErrors($scope, err);
             });
         }
+
         function loadOffers(){
             $rootScope.isLoading = true;
 
@@ -100,9 +101,9 @@
             Offer.query(filter, {}, function (offers) {
                 $rootScope.isLoading = false;
 
+                $rootScope.$next_list = {};
                 for ( var i = 0;  i< offers.results.length - 1; i++){
-                    offers.results[i].next = offers.results[i+1].pcf.vid;
-                    console.log(offers.results[i+1].pcf.vid);
+                    $rootScope.$next_list[offers.results[i].pcf.vid] = offers.results[i+1].pcf.vid;
                 }
 
                 $rootScope.$carData = offers.results;
@@ -126,7 +127,12 @@
                 loadOffers()
             }
         }
-
+        $scope.getActiveListingByIndex = function(index){
+          $rootScope.$detailData = $rootScope.$active[index];
+        };
+        $scope.getInactiveListingByIndex = function(index){
+          $rootScope.$detailData = $rootScope.$inactive[index];
+        };
         loadCities();
         loadStates();
         loadModelNumbers();

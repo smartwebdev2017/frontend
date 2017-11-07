@@ -29,12 +29,18 @@
 .year-to, .mileage-to, .price-to {
   float: right;
 }
-.logo {
-  display:inline-block;
+.page-top {
+  .signin {
+    margin:25px 0;
+    float:right;
+  }
+  .logo {
+    display: inline-block;
 
-  img {
-    width: 50%;
-    margin: 20px 0px;
+    img {
+      width: 50%;
+      margin: 20px 0px;
+    }
   }
 }
 .detail-page {
@@ -84,4 +90,8 @@
   .noUi-background {
     background-color: #ddd !important;
   }
+}
+.history-items {
+  list-style-type:none;
+  margin:20px 0px;
 }

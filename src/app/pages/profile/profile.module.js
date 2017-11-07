@@ -15,7 +15,7 @@
           views: {
               'baSidebar':{
                 controller: 'BaSidebarCtrl',
-                templateUrl: 'app/theme/components/baSidebar/ba-sidebar.html',
+                templateUrl: 'app/theme/components/baSidebar/ba-sidebar_listing.html',
               },
               'content':{
                 controller: 'ProfilePageCtrl',
