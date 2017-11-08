@@ -1,39 +1,47 @@
 <div class="horizontal-scroll">
-  <!--<div class="form-group select-page-size-wrap ">
-    <label>Rows on page
-      <select class="form-control selectpicker show-tick" title="Rows on page" selectpicker
-              ng-model="smartTablePageSize" ng-options="i for i in [5,10,15,20,25]">
-      </select>
-    </label>
-  </div>-->
   <table class="table" st-table="$carData" st-safe-src="$carData1">
     <thead>
-    <tr class="sortable ">
+    <tr class="sortable modal-buttons">
       <th class="table-id" st-sort="id" st-sort-default="true">#</th>
-      <th st-sort="title">PCar</th>
-      <th st-sort="mileage">Mileage</th>
-      <th st-sort="price">Price</th>
-      <th st-sort="location">Location</th>
-      <th st-sort="buildsheet">BuildSheet</th>
+      <th ng-if="colums.title" st-sort="title">PCar</th>
+      <th ng-if="colums.mileage" st-sort="mileage">Mileage</th>
+      <th ng-if="colums.price" st-sort="price">Price</th>
+      <th ng-if="colums.location" st-sort="location">Location</th>
+      <th ng-if="colums.vin" st-sort="buildsheet">BuildSheet</th>
+      <th ng-if="colums.make" st-sort="buildsheet">Make</th>
+      <th ng-if="colums.model" st-sort="buildsheet">Model</th>
+      <th ng-if="colums.trim" st-sort="buildsheet">Trim</th>
+      <th ng-if="colums.date" st-sort="buildsheet">Date</th>
+      <th ng-if="colums.condition" st-sort="buildsheet">Condition</th>
       <th st-sort="detaillink">Detail Link</th>
+      <th>
+        <button type="button" class="setting_btn" data-toggle="modal" ng-click="open('app/pages/search/widgets/infoModal.html')">
+          <i class="ion-gear-a"></i>
+        </button>
+      </th>
     </tr>
 
     </thead>
     <tbody>
     <tr ng-repeat="item in $carData" ng-link="/basic">
       <td class="table-id">{{item.id}}</td>
-      <td>{{item.listing_title}}</td>
-      <td>{{item.mileage}}</td>
-      <td>{{item.price}}</td>
-      <td>{{item.city}} {{item.state}}</td>
-      <td>{{item.vin_code}}</td>
-      <td><a class="email-link" ng-href="/#/normal/detail/{{item.pcf.vid}}">Detail View</a></td>
+      <td ng-if="colums.title">{{item.listing_title}}</td>
+      <td ng-if="colums.mileage">{{item.mileage}}</td>
+      <td ng-if="colums.price">{{item.price}}</td>
+      <td ng-if="colums.location">{{item.city}} {{item.state}}</td>
+      <td ng-if="colums.vin">{{item.vin_code}}</td>
+      <td ng-if="colums.make">{{item.listing_make}}</td>
+      <td ng-if="colums.model">{{item.listing_model}}</td>
+      <td ng-if="colums.trim">{{item.listing_trim}}</td>
+      <td ng-if="colums.date">{{item.listing_date}}</td>
+      <td ng-if="colums.condition" >{{item.cond}}</td>
+      <td ><a class="email-link" ng-href="/#/normal/detail/{{item.pcf.vid}}">Detail View</a></td>
+      <td></td>
     </tr>
     </tbody>
     <tfoot>
     <tr>
       <td colspan="7" class="text-center">
-        <!--<div st-pagination="" st-items-by-page="smartTablePageSize" st-displayed-pages="5"></div>-->
         <a ng-if="$prev != null" href="#" ng-click="prevPage()">Previous</a>
         <a ng-if="$next != null" href="#" ng-click="nextPage()">Next</a>
       </td>

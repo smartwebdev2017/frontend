@@ -20,7 +20,7 @@
         </div>
 
         <div class="col-md-12 detail_pcfid">
-          <label ng-bind-html="$detailData.pcf.vid | highlight: keyword"></label>
+          <label>{{$detailData.pcf.vid | highlight: keyword | slice:0:3}}&nbsp;{{$detailData.pcf.vid | highlight: keyword | slice:3:6}}</label>
         </div>
       </div>
     </div>

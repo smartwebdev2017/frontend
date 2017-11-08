@@ -8,7 +8,7 @@
     angular.module('BlurAdmin.pages.search')
         .controller('SearchPageCtrl', SearchPageCtrl);
 
-    function SearchPageCtrl($scope, $window, $rootScope, $filter, $location, $timeout, $interval, $http, $state, $stateParams, CFG, Offer, Cities, States, Vins, SearchOptions){
+    function SearchPageCtrl($scope, $window, $rootScope, $filter, $location, $timeout, $interval, $http, $state, $stateParams, CFG, Offer, Cities, States, Vins, SearchOptions,$uibModal, baProgressModal){
         $scope.offer = {};
         $scope.filter = SearchOptions.filter;
         $scope.filterOptions = SearchOptions.options;
@@ -16,7 +16,18 @@
         var off=[];
 
         $scope.load = loadOffers;
-
+        $scope.colums = {
+          title: true,
+          mileage: true,
+          price: true,
+          location: true,
+          vin: true,
+          make: false,
+          model: false,
+          trim: false,
+          date: false,
+          condition: false,
+        };
         off.push($scope.$watchGroup([
             'filter.keyword'
         ], doSearch));
@@ -56,6 +67,14 @@
                 loadOffers()
             }
         }
+        $scope.open = function (page, size) {
+          $uibModal.open({
+            animation: true,
+            templateUrl: page,
+            scope: $scope
+          });
+        };
+
         $rootScope.extractURL = function(url){
             var a = document.createElement('a');
             a.href = url;
@@ -81,6 +100,7 @@
                     $rootScope.$carData1 =  offers.results;
                     $rootScope.$next = offers.next;
                     $rootScope.$prev = offers.previous;
+                    console.log($rootScope.$next_list);
                 })
                 .error(function(offers){
 

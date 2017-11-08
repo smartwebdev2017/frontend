@@ -14,8 +14,8 @@
         .state('normal.detail', {
           views: {
               'baSidebar':{
-                controller: 'BaSidebarCtrl',
-                templateUrl: 'app/theme/components/baSidebar/ba-sidebar_listing.html',
+                controller: 'ProfilePageCtrl',
+                templateUrl: 'app/pages/profile/ba-sidebar_listing.html',
               },
               'content':{
                 controller: 'ProfilePageCtrl',

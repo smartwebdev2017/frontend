@@ -1,23 +1,3 @@
-<script>
-    function onChangedYear(data){
-        var scope = angular.element("#year_value").scope();
-        console.log(scope);
-        scope.year_value = (data.value).replace(';','-');
-        scope.filter_car();
-        //scope.filter_car(scope.model,scope.title, scope.city_selected, scope.state_selected, scope.price_value, scope.mileage_value, scope.year_value, scope.description);
-    };
-    function onChangedMileage(data){
-        var scope = angular.element("#mileage_value").scope();
-        scope.mileage_value = (data.value).replace(';','-');
-        console.log(scope);
-        scope.filter_car();
-    };
-    function onChangedPrice(data){
-        var scope = angular.element("#price_value").scope();
-        scope.price_value = (data.value).replace(';','-');
-        scope.filter_car();
-    };
-</script>
 <aside ng-if="!$isLogged" class="al-sidebar">
 
     <div class="row">
@@ -49,7 +29,7 @@
             <div class="form-group">
                 <label>Year</label>
                 <div class="slider">
-                    <div nouislider ng-from="filter.year_from" ng-to="filter.year_to" start='{{filterOptions.year.start}}' end='{{filterOptions.year.end}}' step='{{filterOptions.year.step}}'></div>
+                    <div slider ng-from="filter.year_from" ng-to="filter.year_to" start='{{filterOptions.year.start}}' end='{{filterOptions.year.end}}' step='{{filterOptions.year.step}}'></div>
                 </div>
                 <span class="year-from ">{{filter.year_from}}</span>
                 <span class="year-to">{{filter.year_to}}</span>
@@ -61,7 +41,7 @@
             <div class="form-group">
                 <label>Mileage</label>
                 <div class="slider">
-                    <div nouislider ng-from="filter.mileage_from" ng-to="filter.mileage_to" start='{{filterOptions.mileage.start}}' end='{{filterOptions.mileage.end}}' step='{{filterOptions.mileage.step}}'></div>
+                    <div slider ng-from="filter.mileage_from" ng-to="filter.mileage_to" start='{{filterOptions.mileage.start}}' end='{{filterOptions.mileage.end}}' step='{{filterOptions.mileage.step}}'></div>
                 </div>
                 <span class="mileage-from">{{filter.mileage_from | number}}</span>
                 <span class="mileage-to">{{filter.mileage_to | number}}</span>
@@ -74,7 +54,7 @@
             <div class="form-group">
                 <label>Price</label>
                 <div class="slider">
-                    <div nouislider ng-from="filter.price_from" ng-to="filter.price_to" start='{{filterOptions.price.start}}' end='{{filterOptions.price.end}}' step='{{filterOptions.price.step}}'></div>
+                    <div slider ng-from="filter.price_from" ng-to="filter.price_to" start='{{filterOptions.price.start}}' end='{{filterOptions.price.end}}' step='{{filterOptions.price.step}}'></div>
                 </div>
                 <span class="year-from">${{filter.price_from | number}}</span>
                 <span class="year-to">${{filter.price_to | number}}</span>
@@ -204,6 +184,4 @@
             </ui-select>
           </div>
       </div>
-
-
 </aside>

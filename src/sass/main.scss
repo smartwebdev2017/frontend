@@ -95,3 +95,22 @@
   list-style-type:none;
   margin:20px 0px;
 }
+.colums-content {
+  .bg-info {
+    background-color:black;
+  }
+  .btn-info {
+    background-color:red !important;
+    border: none !important;
+  }
+  .checkbox {
+    text-align: left;
+  }
+}
+.setting_btn {
+  background: none;
+  border: none;
+  .ion-gear-a {
+    /*font-size: 20px;*/
+  }
+}

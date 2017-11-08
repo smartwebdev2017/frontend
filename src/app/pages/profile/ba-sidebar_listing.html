@@ -7,7 +7,7 @@
                 <h3>Active</h3>
                 <ul>
                     <li class="history-items" ng-repeat="item in $active track by $index">
-                      <a class="email-link" ng-click="getActiveListingByIndex($index)">{{item.listing_date}}</a>
+                      <a ng-if="$detailData.pcf.vid != item.pcf.vid" class="email-link" ng-click="getActiveListingByIndex($index)">{{item.listing_date | limitTo: 10}}</a>
                     </li>
                 </ul>
             </div>
@@ -15,7 +15,7 @@
                 <h3>Inactive</h3>
                 <ul>
                     <li class="history-items" ng-repeat="item in $inactive">
-                      <a class="email-link" ng-click="getInactiveListingByIndex($index)">{{item.listing_date}}</a>
+                      <a class="email-link" ng-click="getInactiveListingByIndex($index)">{{item.listing_date | limitTo: 10}}</a>
                     </li>
                 </ul>
             </div>
