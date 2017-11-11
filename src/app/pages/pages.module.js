@@ -3,10 +3,15 @@
 
   angular.module('BlurAdmin.pages', [
     'ui.router',
-
+    'ngTouch',
+    'ui.grid',
+    'ui.grid.moveColumns',
+    'ui.grid.cellNav',
+     'ui.grid.pinning',
     //'BlurAdmin.pages.dashboard',
     'ngResource',
     'ngStorage',
+
     'BlurAdmin.pages._common',
     'BlurAdmin.pages.ui',
     //'BlurAdmin.pages.components',

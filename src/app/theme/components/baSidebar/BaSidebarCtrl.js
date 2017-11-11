@@ -100,16 +100,36 @@
 
             Offer.query(filter, {}, function (offers) {
                 $rootScope.isLoading = false;
-
+                var data = [];
                 $rootScope.$next_list = {};
-                for ( var i = 0;  i< offers.results.length - 1; i++){
-                    $rootScope.$next_list[offers.results[i].pcf.vid] = offers.results[i+1].pcf.vid;
+
+                for ( var i = 0;  i< offers.results.length; i++){
+                    var record = {};
+                    if ( i< offers.results.length - 1 )
+                        $rootScope.$next_list[offers.results[i].pcf.vid] = offers.results[i+1].pcf.vid;
+
+                    data.push({
+                        'ID': offers.results[i].id,
+                        'Title': offers.results[i].listing_title,
+                        'Mileage': offers.results[i].mileage,
+                        'Price': offers.results[i].price,
+                        'Location': offers.results[i].city + ' ' + offers.results[i].state,
+                        'BuildSheet': offers.results[i].vin_code,
+                        'Make': offers.results[i].listing_make,
+                        'Model': offers.results[i].listing_model,
+                        'Trim': offers.results[i].listing_trim,
+                        'Date': offers.results[i].listing_date,
+                        'PCF': offers.results[i].pcf.vid,
+                        'Condition': offers.results[i].cond,
+                    });
                 }
 
-                $rootScope.$carData = offers.results;
-                $rootScope.$carData1 = offers.results;
+                //$rootScope.$carData = offers.results;
+                //$rootScope.$carData1 = offers.results;
                 $rootScope.$next = offers.next;
                 $rootScope.$prev = offers.previous;
+
+                $rootScope.$dataSource = data;
             }, function(err){
                 $rootScope.isLoading = false;
                 $rootScope.handleErrors($scope,err);

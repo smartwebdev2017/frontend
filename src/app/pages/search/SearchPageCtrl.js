@@ -8,11 +8,48 @@
     angular.module('BlurAdmin.pages.search')
         .controller('SearchPageCtrl', SearchPageCtrl);
 
-    function SearchPageCtrl($scope, $window, $rootScope, $filter, $location, $timeout, $interval, $http, $state, $stateParams, CFG, Offer, Cities, States, Vins, SearchOptions,$uibModal, baProgressModal){
+    function SearchPageCtrl($scope, $window, $rootScope, $filter, $location, $timeout, $interval, $http, $state, $stateParams, CFG, Offer, Cities, States, Vins, SearchOptions,$uibModal, baProgressModal, uiGridConstants){
         $scope.offer = {};
         $scope.filter = SearchOptions.filter;
         $scope.filterOptions = SearchOptions.options;
+        $scope.data = [];
+        var settingTemplate = '<button type="button" class="setting_btn" data-toggle="modal" ng-click="grid.appScope.open()"><i class="ion-gear-a"></i></button>';
+        var selectedRow = null;
+        function getCellClass(grid, row){
+            return row.uid === selectedRow ? 'highlight' : '';
+        }
+        $scope.gridOptions = {
+            onRegisterApi: function(gridApi){
+                $rootScope.$gridApi = gridApi;
+                gridApi.cellNav.on.navigate($scope, function(selected){
+                   if ('.ui-grid-cell-focus ') {
+                       selectedRow = selected.row.uid;
+                       gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+                   }
+                });
 
+            },
+            data: '$dataSource',
+            enableRowSelection: true
+        };
+
+        $scope.gridOptions.columnDefs = [
+            {name: 'ID', cellClass: getCellClass},
+            {name: 'Title', cellClass: getCellClass},
+            {name: 'Mileage', cellClass: getCellClass},
+            {name: 'Price', cellClass: getCellClass},
+            {name: 'Location', cellClass: getCellClass},
+            {name: 'BuildSheet', cellClass: getCellClass},
+            {name: 'Make', cellClass: getCellClass},
+            {name: 'Model', cellClass: getCellClass},
+            {name: 'Trim', cellClass: getCellClass},
+            {name: 'Date', cellClass: getCellClass},
+            {name: 'Condition', cellClass: getCellClass},
+            {name: 'PCF'},
+            {name: 'Detail Link', cellClass: getCellClass, cellTemplate:'<a class="email-link" ng-href="/#/normal/detail/{{row.entity.PCF}}">Detail View</a>'},
+            {field: 'setting', width:40, headerCellTemplate: settingTemplate, cellClass: getCellClass}
+        ];
+        //$scope.gridOptions.data = [{"id":1, "name":"test"},{"id":2, "name":"test"}];
         var off=[];
 
         $scope.load = loadOffers;
@@ -28,9 +65,48 @@
           date: false,
           condition: false,
         };
+
+        $scope.gridOptions.columnDefs[1].visible = $scope.colums['title'];
+        $scope.gridOptions.columnDefs[2].visible = $scope.colums['mileage'];
+        $scope.gridOptions.columnDefs[3].visible = $scope.colums['price'];
+        $scope.gridOptions.columnDefs[4].visible = $scope.colums['location'];
+        $scope.gridOptions.columnDefs[5].visible = $scope.colums['vin'];
+        $scope.gridOptions.columnDefs[6].visible = $scope.colums['make'];
+        $scope.gridOptions.columnDefs[7].visible = $scope.colums['model'];
+        $scope.gridOptions.columnDefs[8].visible = $scope.colums['trim'];
+        $scope.gridOptions.columnDefs[9].visible = $scope.colums['date'];
+        $scope.gridOptions.columnDefs[10].visible = $scope.colums['condition'];
+        $scope.gridOptions.columnDefs[11].visible = false;
         off.push($scope.$watchGroup([
             'filter.keyword'
         ], doSearch));
+
+        off.push($scope.$watchGroup([
+            'colums.title',
+            'colums.mileage',
+            'colums.price',
+            'colums.location',
+            'colums.vin',
+            'colums.make',
+            'colums.model',
+            'colums.trim',
+            'colums.date',
+            'colums.condition',
+        ], doUpdateCols));
+        function doUpdateCols(){
+            $scope.gridOptions.columnDefs[1].visible = $scope.colums['title'];
+            $scope.gridOptions.columnDefs[2].visible = $scope.colums['mileage'];
+            $scope.gridOptions.columnDefs[3].visible = $scope.colums['price'];
+            $scope.gridOptions.columnDefs[4].visible = $scope.colums['location'];
+            $scope.gridOptions.columnDefs[5].visible = $scope.colums['vin'];
+            $scope.gridOptions.columnDefs[6].visible = $scope.colums['make'];
+            $scope.gridOptions.columnDefs[7].visible = $scope.colums['model'];
+            $scope.gridOptions.columnDefs[8].visible = $scope.colums['trim'];
+            $scope.gridOptions.columnDefs[9].visible = $scope.colums['date'];
+            $scope.gridOptions.columnDefs[10].visible = $scope.colums['condition'];
+            $scope.gridOptions.columnDefs[11].visible = false;
+            $rootScope.$gridApi.grid.refresh();
+        }
 
         function loadOffers(){
             $rootScope.isLoading = true;
@@ -42,14 +118,34 @@
                 $rootScope.isLoading = false;
 
                 $rootScope.$next_list = {};
-                for ( var i = 0;  i< offers.results.length - 1; i++){
-                    $rootScope.$next_list[offers.results[i].pcf.vid] = offers.results[i+1].pcf.vid;
+                var data = [];
+                for ( var i = 0;  i< offers.results.length; i++){
+                    var record = {};
+                    if ( i< offers.results.length - 1 )
+                        $rootScope.$next_list[offers.results[i].pcf.vid] = offers.results[i+1].pcf.vid;
+                    data.push({
+                        'ID': offers.results[i].id,
+                        'Title': offers.results[i].listing_title,
+                        'Mileage': offers.results[i].mileage,
+                        'Price': offers.results[i].price,
+                        'Location': offers.results[i].city + ' ' + offers.results[i].state,
+                        'BuildSheet': offers.results[i].vin_code,
+                        'Make': offers.results[i].listing_make,
+                        'Model': offers.results[i].listing_model,
+                        'Trim': offers.results[i].listing_trim,
+                        'Date': offers.results[i].listing_date,
+                        'PCF': offers.results[i].pcf.vid,
+                        'Condition': offers.results[i].cond
+                    });
                 }
 
-                $rootScope.$carData = offers.results;
-                $rootScope.$carData1 = offers.results;
+                //$rootScope.$carData = offers.results;
+                //$rootScope.$carData1 = offers.results;
                 $rootScope.$next = offers.next;
                 $rootScope.$prev = offers.previous;
+                $rootScope.$dataSource = data;
+                //$rootScope.$gridApi.grid.refresh();
+
             }, function(err){
                 $rootScope.isLoading = false;
                 $rootScope.handleErrors($scope,err);
@@ -67,7 +163,8 @@
                 loadOffers()
             }
         }
-        $scope.open = function (page, size) {
+        $scope.open = function () {
+          var page = 'app/pages/search/widgets/infoModal.html';
           $uibModal.open({
             animation: true,
             templateUrl: page,
@@ -92,15 +189,33 @@
                     $rootScope.isLoading = false;
 
                     $rootScope.$next_list = {};
-                    for ( var i = 0;  i< offers.results.length - 1; i++){
-                        $rootScope.$next_list[offers.results[i].pcf.vid] = offers.results[i+1].pcf.vid;
+                    var data = [];
+                    for ( var i = 0;  i< offers.results.length; i++){
+                        var record = {};
+                        if ( i< offers.results.length - 1 )
+                            $rootScope.$next_list[offers.results[i].pcf.vid] = offers.results[i+1].pcf.vid;
+                        data.push({
+                            'ID': offers.results[i].id,
+                            'Title': offers.results[i].listing_title,
+                            'Mileage': offers.results[i].mileage,
+                            'Price': offers.results[i].price,
+                            'Location': offers.results[i].city + ' ' + offers.results[i].state,
+                            'BuildSheet': offers.results[i].vin_code,
+                            'Make': offers.results[i].listing_make,
+                            'Model': offers.results[i].listing_model,
+                            'Trim': offers.results[i].listing_trim,
+                            'Date': offers.results[i].listing_date,
+                            'PCF': offers.results[i].pcf.vid,
+                            'Condition': offers.results[i].cond
+                        });
                     }
 
-                    $rootScope.$carData =  offers.results;
-                    $rootScope.$carData1 =  offers.results;
+                    //$rootScope.$carData = offers.results;
+                    //$rootScope.$carData1 = offers.results;
                     $rootScope.$next = offers.next;
                     $rootScope.$prev = offers.previous;
-                    console.log($rootScope.$next_list);
+                    $rootScope.$dataSource = data;
+                    //$rootScope.$gridApi.grid.refresh();
                 })
                 .error(function(offers){
 
@@ -115,11 +230,37 @@
                 url: newURL,
                 headers: {'Authorization':'Token' + $window.sessionStorage.user_token}
             })
-                .success(function(response){
-                    $rootScope.$carData =  response.results;
-                    $rootScope.$carData1 =  response.results;
-                    $rootScope.$next = response.next;
-                    $rootScope.$prev = response.previous;
+                .success(function(offers){
+                    $rootScope.isLoading = false;
+
+                    $rootScope.$next_list = {};
+                    var data = [];
+                    for ( var i = 0;  i< offers.results.length; i++){
+                        var record = {};
+                        if ( i< offers.results.length - 1 )
+                            $rootScope.$next_list[offers.results[i].pcf.vid] = offers.results[i+1].pcf.vid;
+                        data.push({
+                            'ID': offers.results[i].id,
+                            'Title': offers.results[i].listing_title,
+                            'Mileage': offers.results[i].mileage,
+                            'Price': offers.results[i].price,
+                            'Location': offers.results[i].city + ' ' + offers.results[i].state,
+                            'BuildSheet': offers.results[i].vin_code,
+                            'Make': offers.results[i].listing_make,
+                            'Model': offers.results[i].listing_model,
+                            'Trim': offers.results[i].listing_trim,
+                            'Date': offers.results[i].listing_date,
+                            'PCF': offers.results[i].pcf.vid,
+                            'Condition': offers.results[i].cond
+                        });
+                    }
+
+                    //$rootScope.$carData = offers.results;
+                    //$rootScope.$carData1 = offers.results;
+                    $rootScope.$next = offers.next;
+                    $rootScope.$prev = offers.previous;
+                    $rootScope.$dataSource = data;
+                    //$rootScope.$gridApi.grid.refresh();
                 })
                 .error(function(response){
 

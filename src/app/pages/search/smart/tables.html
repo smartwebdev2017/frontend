@@ -2,14 +2,27 @@
   <div class="row">
     <div class="col-md-8">
         <div class="form-group">
-          <input placeholder="Enter keyword" class="input-lg form-control" type="search" ng-model="filter.keyword" ng-model-options="{debounce: 1000}" ng-change="search_car()"/>
+          <input placeholder="Enter keyword" class="input-lg form-control" type="search" ng-model="filter.keyword" ng-model-options="{debounce: 1000}"/>
         </div>
     </div>
   </div>
+  <div class="grid" ui-grid="gridOptions" ui-grid-cellnav="" ui-grid-pinning="" ui-grid-move-columns></div>
+  <!--<div class="row">-->
+    <!--<div class="col-md-12">-->
+      <!--<div class="with-scroll search-results">-->
+        <!--<div include-with-scope="app/pages/search/widgets/smartTable.html"></div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
   <div class="row">
-    <div class="col-md-12">
-      <div class="with-scroll search-results">
-        <div include-with-scope="app/pages/search/widgets/smartTable.html"></div>
+    <div class="col-md-6">
+      <div class="from-group">
+        <button class="btn btn-info prev-btn" ng-if="$prev != null" ng-click="prevPage()">&nbsp;<&nbsp;</button>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="from-group">
+        <button class="btn btn-info next-btn" ng-if="$next != null" ng-click="nextPage()">&nbsp;>&nbsp;</button>
       </div>
     </div>
   </div>
