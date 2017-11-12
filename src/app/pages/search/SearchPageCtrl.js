@@ -13,41 +13,46 @@
         $scope.filter = SearchOptions.filter;
         $scope.filterOptions = SearchOptions.options;
         $scope.data = [];
-        var settingTemplate = '<button type="button" class="setting_btn" data-toggle="modal" ng-click="grid.appScope.open()"><i class="ion-gear-a"></i></button>';
+        var settingTemplate = '<div>Detail Link<button type="button" class="setting_btn" data-toggle="modal" ng-click="grid.appScope.open()"><i class="ion-gear-a"></i></button></div>';
         var selectedRow = null;
         function getCellClass(grid, row){
-            return row.uid === selectedRow ? 'highlight' : '';
+            //return row.uid === selectedRow ? 'highlight' : '';
         }
         $scope.gridOptions = {
             onRegisterApi: function(gridApi){
                 $rootScope.$gridApi = gridApi;
-                gridApi.cellNav.on.navigate($scope, function(selected){
-                   if ('.ui-grid-cell-focus ') {
-                       selectedRow = selected.row.uid;
-                       gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
-                   }
+                //gridApi.cellNav.on.navigate($scope, function(selected){
+                //   if ('.ui-grid-cell-focus ') {
+                //       selectedRow = selected.row.uid;
+                //       gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+                //   }
+                //});
+
+                gridApi.selection.on.rowSelectionChanged($scope, function(row){
+                    $state.go("normal.detail", {vin:row.entity.PCF})
                 });
 
             },
             data: '$dataSource',
-            enableRowSelection: true
+            enableRowSelection: true,
+            enableColumnResizing: true,
+            enableRowHeaderSelection: false
         };
 
         $scope.gridOptions.columnDefs = [
-            {name: 'ID', cellClass: getCellClass},
-            {name: 'Title', cellClass: getCellClass},
-            {name: 'Mileage', cellClass: getCellClass},
-            {name: 'Price', cellClass: getCellClass},
-            {name: 'Location', cellClass: getCellClass},
-            {name: 'BuildSheet', cellClass: getCellClass},
-            {name: 'Make', cellClass: getCellClass},
-            {name: 'Model', cellClass: getCellClass},
-            {name: 'Trim', cellClass: getCellClass},
-            {name: 'Date', cellClass: getCellClass},
-            {name: 'Condition', cellClass: getCellClass},
+            {name: 'ID', width:60},
+            {name: 'Title'},
+            {name: 'Mileage', width:100},
+            {name: 'Price', width:80},
+            {name: 'Location'},
+            {name: 'BuildSheet'},
+            {name: 'Make'},
+            {name: 'Model'},
+            {name: 'Trim'},
+            {name: 'Date', width:100},
+            {name: 'Condition', width:60},
             {name: 'PCF'},
-            {name: 'Detail Link', cellClass: getCellClass, cellTemplate:'<a class="email-link" ng-href="/#/normal/detail/{{row.entity.PCF}}">Detail View</a>'},
-            {field: 'setting', width:40, headerCellTemplate: settingTemplate, cellClass: getCellClass}
+            {name: 'Detail Link', width: 100, headerCellTemplate: settingTemplate, cellTemplate:'<a class="email-link" ng-href="/#/normal/detail/{{row.entity.PCF}}">Detail View</a>'}
         ];
         //$scope.gridOptions.data = [{"id":1, "name":"test"},{"id":2, "name":"test"}];
         var off=[];
