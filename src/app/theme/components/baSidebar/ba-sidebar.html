@@ -1,4 +1,9 @@
-<aside ng-if="!$isLogged" class="al-sidebar">
+<div class="mini-menu" ng-click="setCollaspe()">
+    <div class="filter-symbol" ng-show="bShowMenu" >&nbsp;<&nbsp;</div>
+    <div class="filter-symbol" ng-show="!bShowMenu">&nbsp;>&nbsp;</div>
+    <div class="filter">FILTER</div>
+</div>
+<aside ng-show="bShowMenu" ng-if="!$isLogged" style='width:300px;float:left;padding:20px;'>
 
     <div class="row">
         <div class="col-sm-12">

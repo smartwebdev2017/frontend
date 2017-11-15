@@ -15,6 +15,9 @@
         $scope.data = [];
         var settingTemplate = '<div>Detail Link<button type="button" class="setting_btn" data-toggle="modal" ng-click="open()"><i class="ion-gear-a"></i></button></div>';
         var selectedRow = null;
+        $scope.chkCounts = 0;
+        $scope.chkAvailable = false;
+
         function getCellClass(grid, row){
             //return row.uid === selectedRow ? 'highlight' : '';
         }
@@ -29,7 +32,7 @@
                 //});
 
                 gridApi.selection.on.rowSelectionChanged($scope, function(row){
-                    $state.go("normal.detail", {vin:row.entity.PCF})
+                    $state.go("normal.detail", {vin:row.entity.PCF});
                 });
 
             },
@@ -46,21 +49,21 @@
             {name: 'Mileage', width:100},
             {name: 'Price', width:80},
             {name: 'Location'},
-            {name: 'BuildSheet'},
+            {name: 'BuildSheet', displayName:'VIN'},
             {name: 'Make'},
             {name: 'Model', displayName:'(L) Model'},
             {name: 'Trim'},
             {name: 'Date', width:100},
             {name: 'Condition', width:60},
 
-            {name: 'PCF'},
+            {name: 'PCF', displayName:'PCF'},
             {name: 'listing_year', displayName:'(L) Year'},
             {name: 'listing_exterior', displayName:'(L) Exterior'},
             {name: 'listing_interior', displayName:'(L) Interior'},
             {name: 'Transmission'},
             {name: 'Engine'},
             {name: 'Drivetrain'},
-            {name: 'MSRP'},
+            {name: 'MSRP', displayName:'MSRP'},
             {name: 'bs_year', displayName:'(BS) Year'},
             {name: 'bs_model', displayName:'(BS) Model'},
             {name: 'bs_exterior', displayName:'(BS) Exterior'},
@@ -70,7 +73,7 @@
 
             {name: 'model_number', displayName:'Model Number'},
             {name: 'price_msrp', displayName:'Price % of MSRP'},
-            {name: 'PTS'},
+            {name: 'PTS', displayName:'PTS'},
             {name: 'lwb', displayName:'LWB Seats'},
             {name: 'Longhood'},
             {name: 'Widebody'},
@@ -97,7 +100,8 @@
             'colums.title',
             'colums.mileage',
             'colums.price',
-            'colums.location',
+            'colums.city',
+            'colums.state',
             'colums.vin',
             'colums.make',
             'colums.model',
@@ -129,12 +133,35 @@
             'colums.listing_age',
             'colums.body_type',
             'colums.auto_trans'
-        ], doUpdateCols));
+        ], function (val){
+            doUpdateCols(val);
+        }));
 
         setDisplayOptions();
 
-        function doUpdateCols(){
-            setDisplayOptions();
+        $scope.changeStatus = function(name){
+            if ( !$scope.chkAvailable) {
+                $scope.colums[name] = false;
+            }
+
+        };
+        function doUpdateCols(val){
+            $scope.chkCounts = 0;
+
+            for( var index = 0; index < val.length; index++){
+                if (val[index] &&  $scope.chkCounts <= 9) {
+                    $scope.chkCounts++;
+                }
+            }
+
+            if ( $scope.chkCounts <= 9){
+                $scope.chkAvailable = true;
+                setDisplayOptions();
+            } else {
+                $scope.chkAvailable = false;
+            }
+
+
 
             $rootScope.$gridApi.grid.refresh();
         }
@@ -146,12 +173,12 @@
                 'Title': obj.listing_title,
                 'Mileage':obj.mileage,
                 'Price': obj.price,
-                'Location': obj.city + ' ' + obj.state,
+                'Location': $scope.colums['city']?obj.city:'' + ' ' + $scope.colums['state']?obj.state:'',
                 'BuildSheet': obj.vin_code,
                 'Make': obj.listing_make,
                 'Model': obj.listing_model,
                 'Trim': obj.listing_trim,
-                'Date': obj.listing_date,
+                'Date': obj.listing_date.slice(0,10),
                 'PCF': obj.pcf.vid,
                 'Condition': obj.cond,
                 'listing_year': obj.listing_year,
@@ -162,7 +189,7 @@
                 'Drivetrain': obj.listing_drivetrain,
                 'MSRP': obj.vin != null?obj.vin.msrp:'',
                 'bs_year': obj.vin !=null?obj.vin.model_year:'',
-                'bs_model': obj.vin !=null?obj.vin.model:'',
+                'bs_model': obj.vin !=null?obj.vin.model_detail:'',
                 'bs_exterior': obj.vin !=null?obj.vin.color:'',
                 'bs_interior': obj.vin !=null?obj.vin.interior:'',
                 'production_month': obj.vin !=null?obj.vin.production_month:'',
@@ -177,7 +204,7 @@
                 'aircooled': obj.pcf.air_cooled == 0?'No':'Yes',
                 'listing_age': obj.pcf.listing_age,
                 'body_type': obj.pcf.body_type,
-                'auto_trans': obj.pcf.autto_trans
+                'auto_trans': obj.pcf.auto_trans
             });
         }
         function loadOffers(){
@@ -307,7 +334,7 @@
             $scope.gridOptions.columnDefs[3].visible = $scope.colums['price'];
             $scope.gridOptions.columnDefs[4].visible = $scope.colums['location'];
             $scope.gridOptions.columnDefs[5].visible = $scope.colums['vin'];
-            $scope.gridOptions.columnDefs[6].visible = $scope.colums['make'];
+            $scope.gridOptions.columnDefs[6].visible = false;
             $scope.gridOptions.columnDefs[7].visible = $scope.colums['model'];
             $scope.gridOptions.columnDefs[8].visible = $scope.colums['trim'];
             $scope.gridOptions.columnDefs[9].visible = $scope.colums['date'];

@@ -17,7 +17,7 @@
         var off=[];
 
         $scope.load = loadOffers;
-
+        $scope.bShowMenu = false;
         off.push($scope.$watchGroup([
             'filter.model',
             'filter.title',
@@ -111,14 +111,14 @@
                     data.push({
                         'ID': offers.results[i].id,
                         'Title': offers.results[i].listing_title,
-                        'Mileage': offers.results[i].mileage,
-                        'Price': offers.results[i].price,
+                        'Mileage': offers.results[i].mileage.toLocaleString(),
+                        'Price': '$'+ offers.results[i].price,
                         'Location': offers.results[i].city + ' ' + offers.results[i].state,
                         'BuildSheet': offers.results[i].vin_code,
                         'Make': offers.results[i].listing_make,
                         'Model': offers.results[i].listing_model,
                         'Trim': offers.results[i].listing_trim,
-                        'Date': offers.results[i].listing_date,
+                        'Date': offers.results[i].listing_date.slice(0,10),
                         'PCF': offers.results[i].pcf.vid,
                         'Condition': offers.results[i].cond,
                         'listing_year': offers.results[i].listing_year,
@@ -129,7 +129,7 @@
                         'Drivetrain': offers.results[i].listing_drivetrain,
                         'MSRP': offers.results[i].vin != null && offers.results[i].vin.msrp != null?offers.results[i].vin.msrp:'',
                         'bs_year': offers.results[i].vin != null?offers.results[i].vin.model_year:'',
-                        'bs_model': offers.results[i].vin != null?offers.results[i].vin.model:'',
+                        'bs_model': offers.results[i].vin != null?offers.results[i].vin.model_detail:'',
                         'bs_exterior': offers.results[i].vin != null?offers.results[i].vin.color:'',
                         'bs_interior': offers.results[i].vin != null?offers.results[i].vin.interior:'',
                         'production_month': offers.results[i].vin != null?offers.results[i].vin.production_month:'',
@@ -144,7 +144,7 @@
                         'aircooled': offers.results[i].pcf.air_cooled == 0?'No':'Yes',
                         'listing_age': offers.results[i].pcf.listing_age,
                         'body_type': offers.results[i].pcf.body_type,
-                        'auto_trans': offers.results[i].pcf.autto_trans
+                        'auto_trans': offers.results[i].pcf.auto_trans
                     });
                 }
 
@@ -176,6 +176,9 @@
         };
         $scope.getInactiveListingByIndex = function(index){
           $rootScope.$detailData = $rootScope.$inactive[index];
+        };
+        $scope.setCollaspe = function(){
+            $scope.bShowMenu = !$scope.bShowMenu;
         };
         loadCities();
         loadStates();

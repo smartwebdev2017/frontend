@@ -212,8 +212,8 @@
 
     </div>
 
-    <h3 class="with-line">Build Sheet</h3>
-    <div class="row">
+    <h3 ng-if="$detailData.vin" class="with-line">Build Sheet</h3>
+    <div ng-if="$detailData.vin" class="row">
       <div class="col-md-6">
         <div class="form-group row clearfix">
           <div class="col-sm-9">

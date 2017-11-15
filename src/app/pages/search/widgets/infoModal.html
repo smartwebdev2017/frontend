@@ -3,13 +3,14 @@
     <i class="ion-information-circled modal-icon"></i><span> Columns (Choose up to 9)</span>
   </div>
   <div class="modal-body text-center">
-    <h3>Listing</h3>
+
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-4">
+        <h3>Listing</h3>
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.title">
+              <input ng-change="changeStatus('title')" type="checkbox" ng-model="colums.title">
               <span>(L) Title</span>
             </label>
           </div>
@@ -17,7 +18,7 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.mileage">
+              <input ng-change="changeStatus('mileage')"  type="checkbox" ng-model="colums.mileage">
               <span>Mileage</span>
             </label>
           </div>
@@ -25,7 +26,7 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.price">
+              <input ng-change="changeStatus('price')"  type="checkbox" ng-model="colums.price">
               <span>Price</span>
             </label>
           </div>
@@ -33,15 +34,24 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.location">
-              <span>Location</span>
+              <input ng-change="changeStatus('city')"  type="checkbox" ng-model="colums.city">
+              <span>City</span>
             </label>
           </div>
         </div>
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.vin">
+              <input ng-change="changeStatus('state')"  type="checkbox" ng-model="colums.state">
+              <span>State</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="">
+          <div class="checkbox">
+            <label class="custom-checkbox">
+              <input ng-change="changeStatus('vin')"  type="checkbox" ng-model="colums.vin">
               <span>VIN</span>
             </label>
           </div>
@@ -50,15 +60,7 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.make">
-              <span>Make</span>
-            </label>
-          </div>
-        </div>
-        <div class="">
-          <div class="checkbox">
-            <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.model">
+              <input ng-change="changeStatus('model')"  type="checkbox" ng-model="colums.model">
               <span>(L) Model</span>
             </label>
           </div>
@@ -66,7 +68,7 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.trim">
+              <input ng-change="changeStatus('trim')"  type="checkbox" ng-model="colums.trim">
               <span>Trim</span>
             </label>
           </div>
@@ -74,7 +76,7 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.date">
+              <input ng-change="changeStatus('date')"  type="checkbox" ng-model="colums.date">
               <span>Date</span>
             </label>
           </div>
@@ -82,7 +84,7 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.condition">
+              <input ng-change="changeStatus('condition')"  type="checkbox" ng-model="colums.condition">
               <span>Condition</span>
             </label>
           </div>
@@ -91,7 +93,7 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.listing_year">
+              <input ng-change="changeStatus('listing_year')"  type="checkbox" ng-model="colums.listing_year">
               <span>(L) Year</span>
             </label>
           </div>
@@ -100,7 +102,7 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.listing_exterior">
+              <input ng-change="changeStatus('listing_exterior')"  type="checkbox" ng-model="colums.listing_exterior">
               <span>(L) Exterior</span>
             </label>
           </div>
@@ -109,7 +111,7 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.listing_interior">
+              <input ng-change="changeStatus('listing_interior')"  type="checkbox" ng-model="colums.listing_interior">
               <span>(L) Interior</span>
             </label>
           </div>
@@ -118,7 +120,7 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.transmission">
+              <input ng-change="changeStatus('transmission')"  type="checkbox" ng-model="colums.transmission">
               <span>Transmission</span>
             </label>
           </div>
@@ -127,7 +129,7 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.engine">
+              <input ng-change="changeStatus('engine')"  type="checkbox" ng-model="colums.engine">
               <span>Engine</span>
             </label>
           </div>
@@ -136,7 +138,7 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.drivetrain">
+              <input ng-change="changeStatus('drivetrain')"  type="checkbox" ng-model="colums.drivetrain">
               <span>Drivetrain</span>
             </label>
           </div>
@@ -144,12 +146,12 @@
 
       </div>
 
-      <div class="col-md-6">
-
+      <div class="col-md-4">
+        <h3>BuildSheet</h3>
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.msrp">
+              <input ng-change="changeStatus('msrp')"  type="checkbox" ng-model="colums.msrp">
               <span>MSRP</span>
             </label>
           </div>
@@ -158,7 +160,7 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.bs_year">
+              <input ng-change="changeStatus('bs_year')"  type="checkbox" ng-model="colums.bs_year">
               <span>(BS) Year</span>
             </label>
           </div>
@@ -167,7 +169,7 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.bs_model">
+              <input ng-change="changeStatus('bs_model')"  type="checkbox" ng-model="colums.bs_model">
               <span>(BS) Model</span>
             </label>
           </div>
@@ -176,7 +178,7 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.bs_exterior">
+              <input ng-change="changeStatus('bs_exterior')"  type="checkbox" ng-model="colums.bs_exterior">
               <span>(BS) Exterior</span>
             </label>
           </div>
@@ -185,7 +187,7 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.bs_interior">
+              <input ng-change="changeStatus('bs_interior')"  type="checkbox" ng-model="colums.bs_interior">
               <span>(BS) Interior</span>
             </label>
           </div>
@@ -194,7 +196,7 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.production_month">
+              <input ng-change="changeStatus('production_month')"  type="checkbox" ng-model="colums.production_month">
               <span>Production Month</span>
             </label>
           </div>
@@ -203,16 +205,19 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.warranty_start">
+              <input ng-change="changeStatus('warranty_start')"  type="checkbox" ng-model="colums.warranty_start">
               <span>Warranty Start</span>
             </label>
           </div>
         </div>
+      </div>
 
+      <div class="col-md-4">
+        <h3>PCF</h3>
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.model_number">
+              <input ng-change="changeStatus('model_number')"  type="checkbox" ng-model="colums.model_number">
               <span>Model Number</span>
             </label>
           </div>
@@ -221,7 +226,7 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.price_msrp">
+              <input ng-change="changeStatus('price_msrp')"  type="checkbox" ng-model="colums.price_msrp">
               <span>Price % of MSRP</span>
             </label>
           </div>
@@ -230,7 +235,7 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.pts">
+              <input ng-change="changeStatus('pts')"  type="checkbox" ng-model="colums.pts">
               <span>PTS</span>
             </label>
           </div>
@@ -239,7 +244,7 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.lwb">
+              <input ng-change="changeStatus('lwb')"  type="checkbox" ng-model="colums.lwb">
               <span>LWB Seats</span>
             </label>
           </div>
@@ -248,7 +253,7 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.longhood">
+              <input ng-change="changeStatus('longhood')"  type="checkbox" ng-model="colums.longhood">
               <span>Longhood</span>
             </label>
           </div>
@@ -257,7 +262,7 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.widebody">
+              <input ng-change="changeStatus('widebody')"  type="checkbox" ng-model="colums.widebody">
               <span>Widebody</span>
             </label>
           </div>
@@ -266,7 +271,7 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.pccb">
+              <input ng-change="changeStatus('pccb')"  type="checkbox" ng-model="colums.pccb">
               <span>PCCB</span>
             </label>
           </div>
@@ -275,7 +280,7 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.aircooled">
+              <input ng-change="changeStatus('aircooled')"  type="checkbox" ng-model="colums.aircooled">
               <span>Air-cooled</span>
             </label>
           </div>
@@ -284,7 +289,7 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.listing_age">
+              <input ng-change="changeStatus('listing_age')"  type="checkbox" ng-model="colums.listing_age">
               <span>Listing Age</span>
             </label>
           </div>
@@ -293,7 +298,7 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.body_type">
+              <input ng-change="changeStatus('body_type')"  type="checkbox" ng-model="colums.body_type">
               <span>Bodty Type</span>
             </label>
           </div>
@@ -302,7 +307,7 @@
         <div class="">
           <div class="checkbox">
             <label class="custom-checkbox">
-              <input type="checkbox" ng-model="colums.auto_trans">
+              <input ng-change="changeStatus('auto_trans')"  type="checkbox" ng-model="colums.auto_trans">
               <span>Auto Trans Type</span>
             </label>
           </div>
