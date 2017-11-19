@@ -10,6 +10,7 @@
     'ui.grid.pinning',
     'ui.grid.resizeColumns',
     'ui.grid.selection',
+    'ui.grid.autoResize',
     //'BlurAdmin.pages.dashboard',
     'ngResource',
     'ngStorage',

@@ -10,6 +10,7 @@
 
   /** @ngInject */
   function BaSidebarCtrl($scope, $rootScope, $filter, $location, $timeout, $interval, $http, $state, $stateParams, CFG, Offer, ActiveOfferDetail, Cities, States, Vins, SearchOptions){
+        $scope.main_width = 40;
         $scope.offer = {};
         $scope.filter = SearchOptions.filter;
         $scope.filterOptions = SearchOptions.options;
@@ -112,8 +113,9 @@
                         'ID': offers.results[i].id,
                         'Title': offers.results[i].listing_title,
                         'Mileage': offers.results[i].mileage.toLocaleString(),
-                        'Price': '$'+ offers.results[i].price,
-                        'Location': offers.results[i].city + ' ' + offers.results[i].state,
+                        'Price': '$'+ (offers.results[i].price.toLocaleString()),
+                        'City': offers.results[i].city,
+                        'State': offers.results[i].state,
                         'BuildSheet': offers.results[i].vin_code,
                         'Make': offers.results[i].listing_make,
                         'Model': offers.results[i].listing_model,
@@ -127,7 +129,7 @@
                         'Transmission': offers.results[i].listing_transmission,
                         'Engine': offers.results[i].listing_engine_size,
                         'Drivetrain': offers.results[i].listing_drivetrain,
-                        'MSRP': offers.results[i].vin != null && offers.results[i].vin.msrp != null?offers.results[i].vin.msrp:'',
+                        'MSRP': offers.results[i].vin != null && offers.results[i].vin.msrp != null?'$' + (offers.results[i].vin.msrp.toLocaleString()):'',
                         'bs_year': offers.results[i].vin != null?offers.results[i].vin.model_year:'',
                         'bs_model': offers.results[i].vin != null?offers.results[i].vin.model_detail:'',
                         'bs_exterior': offers.results[i].vin != null?offers.results[i].vin.color:'',
@@ -135,14 +137,14 @@
                         'production_month': offers.results[i].vin != null?offers.results[i].vin.production_month:'',
                         'warranty_start':offers.results[i].vin != null?offers.results[i].vin.warranty_start:'',
                         'model_number': offers.results[i].pcf.model_number,
-                        'price_msrp': offers.results[i].pcf.gap_to_msrp,
+                        'price_msrp': offers.results[i].pcf.gap_to_msrp + '%',
                         'PTS': offers.results[i].pcf.pts == 0?'No':'Yes',
                         'lwb': offers.results[i].pcf.lwb_seats == 0?'No':'Yes',
                         'Longhood': offers.results[i].pcf.longhood == 0?'No':'Yes',
                         'Widebody': offers.results[i].pcf.widebody == 0?'No':'Yes',
                         'pccb': offers.results[i].pcf.pccb == 0?'No':'Yes',
                         'aircooled': offers.results[i].pcf.air_cooled == 0?'No':'Yes',
-                        'listing_age': offers.results[i].pcf.listing_age,
+                        'listing_age': offers.results[i].pcf.listing_age + 'days',
                         'body_type': offers.results[i].pcf.body_type,
                         'auto_trans': offers.results[i].pcf.auto_trans
                     });
@@ -179,6 +181,11 @@
         };
         $scope.setCollaspe = function(){
             $scope.bShowMenu = !$scope.bShowMenu;
+            if ($scope.bShowMenu) {
+                $('.al-main').css('padding-left', '300px');
+            } else {
+                $('.al-main').css('padding-left', '0px');
+            }
         };
         loadCities();
         loadStates();

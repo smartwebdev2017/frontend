@@ -48,7 +48,8 @@
             {name: 'Title', displayName:'(L) Title'},
             {name: 'Mileage', width:100},
             {name: 'Price', width:80},
-            {name: 'Location'},
+            {name: 'City'},
+            {name: 'State'},
             {name: 'BuildSheet', displayName:'VIN'},
             {name: 'Make'},
             {name: 'Model', displayName:'(L) Model'},
@@ -140,7 +141,8 @@
         setDisplayOptions();
 
         $scope.changeStatus = function(name){
-            if ( !$scope.chkAvailable) {
+            if ( $scope.chkCounts < 9){
+            } else {
                 $scope.colums[name] = false;
             }
 
@@ -149,16 +151,16 @@
             $scope.chkCounts = 0;
 
             for( var index = 0; index < val.length; index++){
-                if (val[index] &&  $scope.chkCounts <= 9) {
+                if (val[index] ) {
                     $scope.chkCounts++;
                 }
             }
 
             if ( $scope.chkCounts <= 9){
-                $scope.chkAvailable = true;
+                //$scope.chkAvailable = true;
                 setDisplayOptions();
             } else {
-                $scope.chkAvailable = false;
+                //$scope.chkAvailable = false;
             }
 
 
@@ -171,9 +173,10 @@
             data.push({
                 'ID': obj.id,
                 'Title': obj.listing_title,
-                'Mileage':obj.mileage,
-                'Price': obj.price,
-                'Location': $scope.colums['city']?obj.city:'' + ' ' + $scope.colums['state']?obj.state:'',
+                'Mileage':obj.mileage.toLocaleString(),
+                'Price': '$' + (obj.price.toLocaleString()),
+                'City': $scope.colums['city']?obj.city:'' ,
+                'State': $scope.colums['state']?obj.state:'',
                 'BuildSheet': obj.vin_code,
                 'Make': obj.listing_make,
                 'Model': obj.listing_model,
@@ -187,7 +190,7 @@
                 'Transmission': obj.listing_transmission,
                 'Engine': obj.listing_engine_size,
                 'Drivetrain': obj.listing_drivetrain,
-                'MSRP': obj.vin != null?obj.vin.msrp:'',
+                'MSRP': (obj.vin != null?'$' + (obj.vin.msrp.toLocaleString()):''),
                 'bs_year': obj.vin !=null?obj.vin.model_year:'',
                 'bs_model': obj.vin !=null?obj.vin.model_detail:'',
                 'bs_exterior': obj.vin !=null?obj.vin.color:'',
@@ -195,14 +198,14 @@
                 'production_month': obj.vin !=null?obj.vin.production_month:'',
                 'warranty_start': obj.vin !=null?obj.vin.warranty_start:'',
                 'model_number': obj.pcf.model_number,
-                'price_msrp': obj.pcf.gap_to_msrp,
+                'price_msrp': obj.pcf.gap_to_msrp + '%',
                 'PTS': obj.pcf.pts == 0?'No':'Yes',
                 'lwb': obj.pcf.lwb_seats == 0?'No':'Yes',
                 'Longhood': obj.pcf.longhood == 0?'No':'Yes',
                 'Widebody': obj.pcf.widebody == 0?'No':'Yes',
                 'pccb': obj.pcf.pccb == 0?'No':'Yes',
                 'aircooled': obj.pcf.air_cooled == 0?'No':'Yes',
-                'listing_age': obj.pcf.listing_age,
+                'listing_age': obj.pcf.listing_age + 'days',
                 'body_type': obj.pcf.body_type,
                 'auto_trans': obj.pcf.auto_trans
             });
@@ -327,43 +330,45 @@
 
                 })
         };
+
         function setDisplayOptions() {
             $scope.gridOptions.columnDefs[0].visible = false;
             $scope.gridOptions.columnDefs[1].visible = $scope.colums['title'];
             $scope.gridOptions.columnDefs[2].visible = $scope.colums['mileage'];
             $scope.gridOptions.columnDefs[3].visible = $scope.colums['price'];
-            $scope.gridOptions.columnDefs[4].visible = $scope.colums['location'];
-            $scope.gridOptions.columnDefs[5].visible = $scope.colums['vin'];
-            $scope.gridOptions.columnDefs[6].visible = false;
-            $scope.gridOptions.columnDefs[7].visible = $scope.colums['model'];
-            $scope.gridOptions.columnDefs[8].visible = $scope.colums['trim'];
-            $scope.gridOptions.columnDefs[9].visible = $scope.colums['date'];
-            $scope.gridOptions.columnDefs[10].visible = $scope.colums['condition'];
-            $scope.gridOptions.columnDefs[11].visible = false;
-            $scope.gridOptions.columnDefs[12].visible = $scope.colums['listing_year'];
-            $scope.gridOptions.columnDefs[13].visible = $scope.colums['listing_exterior'];
-            $scope.gridOptions.columnDefs[14].visible = $scope.colums['listing_interior'];
-            $scope.gridOptions.columnDefs[15].visible = $scope.colums['transmission'];
-            $scope.gridOptions.columnDefs[16].visible = $scope.colums['engine'];
-            $scope.gridOptions.columnDefs[17].visible = $scope.colums['drivetrain'];
-            $scope.gridOptions.columnDefs[18].visible = $scope.colums['msrp'];
-            $scope.gridOptions.columnDefs[19].visible = $scope.colums['bs_year'];
-            $scope.gridOptions.columnDefs[20].visible = $scope.colums['bs_model'];
-            $scope.gridOptions.columnDefs[21].visible = $scope.colums['bs_exterior'];
-            $scope.gridOptions.columnDefs[22].visible = $scope.colums['bs_interior'];
-            $scope.gridOptions.columnDefs[23].visible = $scope.colums['production_month'];
-            $scope.gridOptions.columnDefs[24].visible = $scope.colums['warranty_start'];
-            $scope.gridOptions.columnDefs[25].visible = $scope.colums['model_number'];
-            $scope.gridOptions.columnDefs[26].visible = $scope.colums['price_msrp'];
-            $scope.gridOptions.columnDefs[27].visible = $scope.colums['pts'];
-            $scope.gridOptions.columnDefs[28].visible = $scope.colums['lwb'];
-            $scope.gridOptions.columnDefs[29].visible = $scope.colums['longhood'];
-            $scope.gridOptions.columnDefs[30].visible = $scope.colums['widebody'];
-            $scope.gridOptions.columnDefs[31].visible = $scope.colums['pccb'];
-            $scope.gridOptions.columnDefs[32].visible = $scope.colums['aircooled'];
-            $scope.gridOptions.columnDefs[33].visible = $scope.colums['listing_age'];
-            $scope.gridOptions.columnDefs[34].visible = $scope.colums['body_type'];
-            $scope.gridOptions.columnDefs[35].visible = $scope.colums['auto_trans'];
+            $scope.gridOptions.columnDefs[4].visible = $scope.colums['city'];
+            $scope.gridOptions.columnDefs[5].visible = $scope.colums['state'];
+            $scope.gridOptions.columnDefs[6].visible = $scope.colums['vin'];
+            $scope.gridOptions.columnDefs[7].visible = false;
+            $scope.gridOptions.columnDefs[8].visible = $scope.colums['model'];
+            $scope.gridOptions.columnDefs[9].visible = $scope.colums['trim'];
+            $scope.gridOptions.columnDefs[10].visible = $scope.colums['date'];
+            $scope.gridOptions.columnDefs[11].visible = $scope.colums['condition'];
+            $scope.gridOptions.columnDefs[12].visible = false;
+            $scope.gridOptions.columnDefs[13].visible = $scope.colums['listing_year'];
+            $scope.gridOptions.columnDefs[14].visible = $scope.colums['listing_exterior'];
+            $scope.gridOptions.columnDefs[15].visible = $scope.colums['listing_interior'];
+            $scope.gridOptions.columnDefs[16].visible = $scope.colums['transmission'];
+            $scope.gridOptions.columnDefs[17].visible = $scope.colums['engine'];
+            $scope.gridOptions.columnDefs[18].visible = $scope.colums['drivetrain'];
+            $scope.gridOptions.columnDefs[19].visible = $scope.colums['msrp'];
+            $scope.gridOptions.columnDefs[20].visible = $scope.colums['bs_year'];
+            $scope.gridOptions.columnDefs[21].visible = $scope.colums['bs_model'];
+            $scope.gridOptions.columnDefs[22].visible = $scope.colums['bs_exterior'];
+            $scope.gridOptions.columnDefs[23].visible = $scope.colums['bs_interior'];
+            $scope.gridOptions.columnDefs[24].visible = $scope.colums['production_month'];
+            $scope.gridOptions.columnDefs[25].visible = $scope.colums['warranty_start'];
+            $scope.gridOptions.columnDefs[26].visible = $scope.colums['model_number'];
+            $scope.gridOptions.columnDefs[27].visible = $scope.colums['price_msrp'];
+            $scope.gridOptions.columnDefs[28].visible = $scope.colums['pts'];
+            $scope.gridOptions.columnDefs[29].visible = $scope.colums['lwb'];
+            $scope.gridOptions.columnDefs[30].visible = $scope.colums['longhood'];
+            $scope.gridOptions.columnDefs[31].visible = $scope.colums['widebody'];
+            $scope.gridOptions.columnDefs[32].visible = $scope.colums['pccb'];
+            $scope.gridOptions.columnDefs[33].visible = $scope.colums['aircooled'];
+            $scope.gridOptions.columnDefs[34].visible = $scope.colums['listing_age'];
+            $scope.gridOptions.columnDefs[35].visible = $scope.colums['body_type'];
+            $scope.gridOptions.columnDefs[36].visible = $scope.colums['auto_trans'];
         }
 
     }
