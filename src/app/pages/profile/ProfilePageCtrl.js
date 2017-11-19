@@ -11,6 +11,7 @@
     $scope.filter = SearchOptions.filter;
     $scope.numLimit = 150;
     $scope.bShowMenu = false;
+    $('.al-main').css('padding-left', '0px');
 
     $scope.readMore = function(){
       $scope.numLimit = 100000;
@@ -76,7 +77,7 @@
     $scope.setCollaspe = function(){
         $scope.bShowMenu = !$scope.bShowMenu;
         if ($scope.bShowMenu) {
-            $('.al-main').css('padding-left', '300px');
+            $('.al-main').css('padding-left', '150px');
         } else {
             $('.al-main').css('padding-left', '0px');
         }

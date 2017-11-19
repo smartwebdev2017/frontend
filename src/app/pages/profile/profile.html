@@ -15,12 +15,12 @@
     </div>-->
     <div class="row">
       <div class="from-group row clearfix col-md-1 detail_title_content">
-        <div class="col-md-12 detail_title">
+        <div class="detail_title">
           <label>PCF ID</label>
         </div>
 
-        <div class="col-md-12 detail_pcfid">
-          <label>{{$detailData.pcf.vid | highlight: keyword | slice:0:3}}&nbsp;{{$detailData.pcf.vid | highlight: keyword | slice:3:6}}</label>
+        <div class="detail_pcfid">
+          <label>{{$detailData.pcf.vid | highlight: filter.keyword | slice:0:3}}&nbsp;{{$detailData.pcf.vid | highlight: filter.keyword | slice:3:6}}</label>
         </div>
       </div>
     </div>
@@ -30,22 +30,22 @@
       <div class="col-md-6">
         <div class="form-group row clearfix" ng-if="$detailData.listing_title">
           <div class="col-sm-9">
-            <a class="detail_link" target="_blank" href={{$detailData.listing_url}}><span ng-bind-html="$detailData.listing_title | highlight: keyword"></span></a>
+            <a class="detail_link" target="_blank" href={{$detailData.listing_url}}><span ng-bind-html="$detailData.listing_title | highlight: filter.keyword"></span></a>
           </div>
         </div>
 
         <div class="form-group row clearfix"  ng-if="$detailData.vin_code">
           <div class="col-sm-9">
-            <label ng-bind-html="$detailData.vin_code | highlight: keyword"></label>
+            <label ng-bind-html="$detailData.vin_code | highlight: filter.keyword"></label>
           </div>
         </div>
         <div class="form-group row clearfix">
           <div class="col-sm-9">
-            <div class="left" ng-if="$detailData.listing_year"><label ng-bind-html="$detailData.listing_year | highlight: keyword"></label>&nbsp;</div>
-            <div class="left" ng-if="$detailData.listing_model"><label ng-bind-html="$detailData.listing_model | highlight: keyword"></label>&nbsp;</div>
-            <div class="left" ng-if="$detailData.listing_trim"><label ng-bind-html="$detailData.listing_trim | highlight: keyword"></label>&nbsp;</div>
-            <div class="left" ng-if="$detailData.listing_body_type"><label ng-bind-html="carData.listing_body_type | highlight: keyword"></label>&nbsp;</div>
-            <div class="left" ng-if="$detailData.cond">(<label ng-bind-html="$detailData.cond | highlight: keyword"></label>)</div>
+            <div class="left" ng-if="$detailData.listing_year"><label ng-bind-html="$detailData.listing_year | highlight: filter.keyword"></label>&nbsp;</div>
+            <div class="left" ng-if="$detailData.listing_model"><label ng-bind-html="$detailData.listing_model | highlight: filter.keyword"></label>&nbsp;</div>
+            <div class="left" ng-if="$detailData.listing_trim"><label ng-bind-html="$detailData.listing_trim | highlight: filter.keyword"></label>&nbsp;</div>
+            <div class="left" ng-if="$detailData.listing_body_type"><label ng-bind-html="carData.listing_body_type | highlight: filter.keyword"></label>&nbsp;</div>
+            <div class="left" ng-if="$detailData.cond">(<label ng-bind-html="$detailData.cond | highlight: filter.keyword"></label>)</div>
           </div>
         </div>
 
@@ -92,12 +92,12 @@
 
         <div class="form-group row clearfix"  ng-if="$detailData.price">
           <div class="col-sm-9">
-            $<label ng-bind-html="$detailData.price | highlight: keyword | number"></label>
+            $<label ng-bind-html="$detailData.price | highlight: filter.keyword | number"></label>
           </div>
         </div>
         <div class="form-group row clearfix"   ng-if="$detailData.mileage">
           <div class="col-sm-9">
-            <label ng-bind-html="$detailData.mileage | highlight: keyword | number"></label>mi
+            <label ng-bind-html="$detailData.mileage | highlight: filter.keyword | number"></label>mi
           </div>
         </div>
 
@@ -105,36 +105,36 @@
           <label class="col-sm-1 control-label">Exterior:</label>
 
           <div class="col-sm-9">
-            <label ng-bind-html="$detailData.listing_exterior_color | highlight: keyword"></label>
+            <label ng-bind-html="$detailData.listing_exterior_color | highlight: filter.keyword"></label>
           </div>
         </div>
         <div class="form-group row clearfix" ng-if="$detailData.interior_color">
           <label class="col-sm-1 control-label">Interior:</label>
 
           <div class="col-sm-9">
-            <label ng-bind-html="$detailData.listing_interior_color | highlight: keyword"></label>
+            <label ng-bind-html="$detailData.listing_interior_color | highlight: filter.keyword"></label>
           </div>
         </div>
 
         <div class="form-group row clearfix">
           <div class="col-sm-9">
-            <label ng-if="$detailData.listing_transmission"  ng-bind-html="$detailData.listing_transmission | highlight: keyword">,&nbsp;</label>
-            <label ng-if="$detailData.listing_engine_size"  ng-bind-html="$detailData.listing_engine_size | highlight: keyword">,&nbsp;</label>
-            <label ng-if="$detailData.listing_drivetrain" ng-bind-html="$detailData.listing_drivetrain | highlight: keyword"></label>
+            <label ng-if="$detailData.listing_transmission"  ng-bind-html="$detailData.listing_transmission | highlight: filter.keyword">,&nbsp;</label>
+            <label ng-if="$detailData.listing_engine_size"  ng-bind-html="$detailData.listing_engine_size | highlight: filter.keyword">,&nbsp;</label>
+            <label ng-if="$detailData.listing_drivetrain" ng-bind-html="$detailData.listing_drivetrain | highlight: filter.keyword"></label>
             <a class="detail_link" target="_blank" ng-if="$detailData.vhr_link !='' " href={{$detailData.vhr_link}}>&nbsp;VHR</a>
           </div>
         </div>
 
         <div class="form-group row clearfix" ng-if="$detailData.seller_type" >
           <div class="col-sm-9">
-            <label ng-bind-html="$detailData.seller_type | highlight: keyword"></label>
+            <label ng-bind-html="$detailData.seller_type | highlight: filter.keyword"></label>
           </div>
         </div>
 
         <div class="form-group row clearfix">
           <div class="col-sm-9">
-            <div class="left" ng-if="$detailData.city"><label ng-bind-html="$detailData.city | highlight: keyword"></label>,&nbsp;</div>
-            <div class="left" ng-if="$detailData.state"><label ng-if="$detailData.state" ng-bind-html="$detailData.state | highlight: keyword"></label></div>
+            <div class="left" ng-if="$detailData.city"><label ng-bind-html="$detailData.city | highlight: filter.keyword"></label>,&nbsp;</div>
+            <div class="left" ng-if="$detailData.state"><label ng-if="$detailData.state" ng-bind-html="$detailData.state | highlight: filter.keyword"></label></div>
           </div>
         </div>
 
@@ -203,7 +203,7 @@
 
           <div class="" style="height:auto!important;" ng-if="$detailData.listing_description">
             <div class="panel-body">
-              <p class="p-with-code" ng-bind-html="$detailData.listing_description | highlight: keyword | limitTo:numLimit"></p>
+              <p class="p-with-code" ng-bind-html="$detailData.listing_description | highlight: filter.keyword | limitTo:numLimit"></p>
               <button ng-if="numLimit == 150" type='button' ng-click="readMore()">read more</button>
               <button ng-if="numLimit > 150" type='button' ng-click="readLess()">read less</button>
             </div>
@@ -217,8 +217,8 @@
       <div class="col-md-6">
         <div class="form-group row clearfix">
           <div class="col-sm-9">
-            <div class="left" ng-if="$detailData.vin.model_year"><label ng-if="$detailData.vin.model_year" ng-bind-html="$detailData.vin.model_year | highlight: keyword"></label>&nbsp;</div>
-            <div class="left" ng-if="$detailData.vin.model_detail"><label ng-if="$detailData.vin.model_detail" ng-bind-html="$detailData.vin.model_detail | highlight: keyword"></label></div>
+            <div class="left" ng-if="$detailData.vin.model_year"><label ng-if="$detailData.vin.model_year" ng-bind-html="$detailData.vin.model_year | highlight: filter.keyword"></label>&nbsp;</div>
+            <div class="left" ng-if="$detailData.vin.model_detail"><label ng-if="$detailData.vin.model_detail" ng-bind-html="$detailData.vin.model_detail | highlight: filter.keyword"></label></div>
           </div>
         </div>
 
@@ -226,7 +226,7 @@
           <label class="col-sm-1 control-label">MSRP:</label>
 
           <div class="col-sm-9">
-            $<label ng-bind-html="$detailData.vin.msrp | highlight: keyword | number"></label>
+            $<label ng-bind-html="$detailData.vin.msrp | highlight: filter.keyword | number"></label>
           </div>
         </div>
 
@@ -242,7 +242,7 @@
           <label class="col-sm-1 control-label">Exterior:</label>
 
           <div class="col-sm-9">
-            <label ng-bind-html="$detailData.vin.color | highlight: keyword"></label>
+            <label ng-bind-html="$detailData.vin.color | highlight: filter.keyword"></label>
           </div>
         </div>
 
@@ -250,16 +250,16 @@
           <label class="col-sm-1 control-label">Interior:</label>
 
           <div class="col-sm-9">
-            <label ng-bind-html="$detailData.vin.interior | highlight: keyword"></label>
+            <label ng-bind-html="$detailData.vin.interior | highlight: filter.keyword"></label>
           </div>
         </div>
 
         <div ng-if="$detailData.vin.warranty_start" class="form-group row clearfix small_info">
-          <label class="col-sm-2 control-label">Warranty Start</label>&nbsp;<label ng-bind-html="$detailData.vin.warranty_start | highlight: keyword"></label>
+          <label class="col-sm-2 control-label">Warranty Start</label>&nbsp;<label ng-bind-html="$detailData.vin.warranty_start | highlight: filter.keyword"></label>
         </div>
 
         <div ng-if="$detailData.vin.production_month" class="form-group row clearfix small_info">
-          <label class="col-sm-2 control-label">Production Month</label>&nbsp;<label ng-bind-html="$detailData.vin.production_month | highlight: keyword"></label>
+          <label class="col-sm-2 control-label">Production Month</label>&nbsp;<label ng-bind-html="$detailData.vin.production_month | highlight: filter.keyword"></label>
         </div>
       </div>
 
@@ -268,7 +268,7 @@
             <div class="panel-heading">Options</div>
             <div class="panel-body">
               <ul ng-repeat="item in $detailData.vin.options">
-                <li><span ng-bind-html="item.code | highlight: keyword"></span>&nbsp;:&nbsp;<span ng-bind-html="item.value | highlight: keyword"></span></li>
+                <li><span ng-bind-html="item.code | highlight: filter.keyword"></span>&nbsp;:&nbsp;<span ng-bind-html="item.value | highlight: filter.keyword"></span></li>
               </ul>
             </div>
           </div>
@@ -292,7 +292,7 @@
           <label class="col-sm-2 control-label">Model Number</label>
 
           <div class="col-sm-9">
-            <label ng-bind-html="$detailData.pcf.model_number | highlight: keyword"></label>
+            <label ng-bind-html="$detailData.pcf.model_number | highlight: filter.keyword"></label>
           </div>
         </div>
       </div>
@@ -352,7 +352,7 @@
           <label class="col-sm-2 control-label">% of MSRP</label>
 
           <div class="col-sm-9">
-            <label ng-bind-html="$detailData.pcf.gap_to_msrp | highlight: keyword"></label>
+            <label ng-bind-html="$detailData.pcf.gap_to_msrp | highlight: filter.keyword"></label>
           </div>
         </div>
       </div>
@@ -362,7 +362,7 @@
           <label class="col-sm-2 control-label">Body Type</label>
 
           <div class="col-sm-9">
-            <label ng-bind-html="$detailData.pcf.body_type | highlight: keyword"></label>
+            <label ng-bind-html="$detailData.pcf.body_type | highlight: filter.keyword"></label>
           </div>
         </div>
       </div>

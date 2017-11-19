@@ -19,6 +19,8 @@
 
         $scope.load = loadOffers;
         $scope.bShowMenu = false;
+        $('.al-main').css('padding-left', '0px');
+
         off.push($scope.$watchGroup([
             'filter.model',
             'filter.title',
@@ -47,6 +49,7 @@
             {label: 'Tiptronic', value: 'tiptronic'},
             {label: 'PDK', value: 'pdk'}
         ];
+
         function loadCities() {
 
             Cities.query({}, function(cities){
@@ -137,14 +140,14 @@
                         'production_month': offers.results[i].vin != null?offers.results[i].vin.production_month:'',
                         'warranty_start':offers.results[i].vin != null?offers.results[i].vin.warranty_start:'',
                         'model_number': offers.results[i].pcf.model_number,
-                        'price_msrp': offers.results[i].pcf.gap_to_msrp + '%',
+                        'price_msrp': offers.results[i].pcf.gap_to_msrp !=0?offers.results[i].pcf.gap_to_msrp + '%':'',
                         'PTS': offers.results[i].pcf.pts == 0?'No':'Yes',
                         'lwb': offers.results[i].pcf.lwb_seats == 0?'No':'Yes',
                         'Longhood': offers.results[i].pcf.longhood == 0?'No':'Yes',
                         'Widebody': offers.results[i].pcf.widebody == 0?'No':'Yes',
                         'pccb': offers.results[i].pcf.pccb == 0?'No':'Yes',
                         'aircooled': offers.results[i].pcf.air_cooled == 0?'No':'Yes',
-                        'listing_age': offers.results[i].pcf.listing_age + 'days',
+                        'listing_age': offers.results[i].pcf.listing_age + ' days',
                         'body_type': offers.results[i].pcf.body_type,
                         'auto_trans': offers.results[i].pcf.auto_trans
                     });
