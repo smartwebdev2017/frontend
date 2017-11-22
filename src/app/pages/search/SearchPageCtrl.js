@@ -35,8 +35,19 @@
                     $state.go("normal.detail", {vin:row.entity.PCF});
                 });
 
+                $rootScope.$gridApi.core.on.sortChanged($scope, function(grid, sortColumns){
+                   if (sortColumns.length == 0){
+                        $scope.filter['sort'] = '';
+                   } else {
+                       $scope.filter['sort'] = sortColumns[0].name;
+                       $scope.filter['direction'] = sortColumns[0].sort.direction;
+                       doSearch();
+                   }
+                });
+
             },
             data: '$dataSource',
+            useExternalSorting: true,
             enableRowSelection: true,
             enableColumnResizing: true,
             enableHiding: false,
@@ -46,44 +57,44 @@
 
         $scope.gridOptions.columnDefs = [
             {name: 'ID', width:60},
-            {name: 'Title', displayName:'(L) Title', enableHiding: false},
-            {name: 'Mileage', width:100, enableHiding: false},
-            {name: 'Price', width:80, enableHiding: false},
-            {name: 'City', enableHiding: false},
-            {name: 'State', enableHiding: false},
-            {name: 'BuildSheet', displayName:'VIN', enableHiding: false},
-            {name: 'Make', enableHiding: false},
-            {name: 'Model', displayName:'(L) Model', enableHiding: false},
-            {name: 'Trim', enableHiding: false},
-            {name: 'Date', width:100, enableHiding: false},
-            {name: 'Condition', width:60, enableHiding: false},
+            {name: 'listing_title', displayName:'(L) Title', enableHiding: false},
+            {name: 'mileage', displayName:'Mileage', width:100, enableHiding: false},
+            {name: 'price', displayName:'Price',width:80, enableHiding: false},
+            {name: 'city', displayName:'City',enableHiding: false},
+            {name: 'state', displayName:'State',enableHiding: false},
+            {name: 'vin_code', displayName:'VIN', enableHiding: false},
+            {name: 'listing_make', displayName:'Make', enableHiding: false},
+            {name: 'listing_model', displayName:'(L) Model', enableHiding: false},
+            {name: 'listing_trim', displayName:'Trim', enableHiding: false},
+            {name: 'listing_date', displayName:'Date', width:100, enableHiding: false},
+            {name: 'cond', displayName:'Condition', width:60, enableHiding: false},
 
-            {name: 'PCF', displayName:'PCF', enableHiding: false},
+            {name: 'pcf__vid', displayName:'PCF', enableHiding: false},
             {name: 'listing_year', displayName:'(L) Year', enableHiding: false},
-            {name: 'listing_exterior', displayName:'(L) Exterior', enableHiding: false},
-            {name: 'listing_interior', displayName:'(L) Interior', enableHiding: false},
-            {name: 'Transmission', enableHiding: false},
-            {name: 'Engine', enableHiding: false},
-            {name: 'Drivetrain'},
-            {name: 'MSRP', displayName:'MSRP', enableHiding: false},
-            {name: 'bs_year', displayName:'(BS) Year', enableHiding: false},
-            {name: 'bs_model', displayName:'(BS) Model', enableHiding: false},
-            {name: 'bs_exterior', displayName:'(BS) Exterior', enableHiding: false},
-            {name: 'bs_interior', displayName:'(BS) Interior', enableHiding: false},
-            {name: 'production_month', displayName:'Production Month', enableHiding: false},
-            {name: 'warranty_start', displayName:'Warranty Start', enableHiding: false},
+            {name: 'listing_exterior_color', displayName:'(L) Exterior', enableHiding: false},
+            {name: 'listing_interior_color', displayName:'(L) Interior', enableHiding: false},
+            {name: 'listing_transmission', displayName:'', enableHiding: false},
+            {name: 'listing_engine_size', displayName:'Engine', enableHiding: false},
+            {name: 'listing_drivetrain', displayName:'Drivetrain', enableHiding: false},
+            {name: 'vin__msrp', displayName:'MSRP', enableHiding: false},
+            {name: 'vin__model_year', displayName:'(BS) Year', enableHiding: false},
+            {name: 'vin__model_detail', displayName:'(BS) Model', enableHiding: false},
+            {name: 'vin__color', displayName:'(BS) Exterior', enableHiding: false},
+            {name: 'vin__interior', displayName:'(BS) Interior', enableHiding: false},
+            {name: 'vin__production_month', displayName:'Production Month', enableHiding: false},
+            {name: 'vin__warranty_start', displayName:'Warranty Start', enableHiding: false},
 
-            {name: 'model_number', displayName:'Model Number', enableHiding: false},
-            {name: 'price_msrp', displayName:'Price % of MSRP', enableHiding: false},
-            {name: 'PTS', displayName:'PTS', enableHiding: false},
-            {name: 'lwb', displayName:'LWB Seats', enableHiding: false},
-            {name: 'Longhood', enableHiding: false},
-            {name: 'Widebody', enableHiding: false},
-            {name: 'pccb', displayName:'PCCB', enableHiding: false},
-            {name: 'aircooled', displayName:'Air-cooled', enableHiding: false},
-            {name: 'listing_age', displayName:'Listing Age', enableHiding: false},
-            {name: 'body_type', displayName:'Body Type', enableHiding: false},
-            {name: 'auto_trans', displayName:'Auto Trans Type', enableHiding: false},
+            {name: 'pcf__model_number', displayName:'Model Number', enableHiding: false},
+            {name: 'pcf__gap_to_msrp', displayName:'Price % of MSRP', enableHiding: false},
+            {name: 'pcf__pts', displayName:'PTS', enableHiding: false},
+            {name: 'pcf__lwb_seats', displayName:'LWB Seats', enableHiding: false},
+            {name: 'pcf__longhood', displayName:'Longhood', enableHiding: false},
+            {name: 'pcf__widebody', displayName:'Widebody', enableHiding: false},
+            {name: 'pcf__pccb', displayName:'PCCB', enableHiding: false},
+            {name: 'pcf__air_cooled', displayName:'Air-cooled', enableHiding: false},
+            {name: 'pcf__listing_age', displayName:'Listing Age', enableHiding: false},
+            {name: 'pcf__body_type', displayName:'Body Type', enableHiding: false},
+            {name: 'pcf__auto_trans', displayName:'Auto Trans Type', enableHiding: false},
 
 
             //{name: 'Detail Link', width: 100, headerCellTemplate: settingTemplate, cellTemplate:'<a class="email-link" ng-href="/#/normal/detail/{{row.entity.PCF}}">Detail View</a>'}
@@ -95,7 +106,8 @@
         $scope.colums = DisplayOptions.colums;
 
         off.push($scope.$watchGroup([
-            'filter.keyword'
+            'filter.keyword',
+            'filter.sort'
         ], doSearch));
 
         off.push($scope.$watchGroup([
@@ -173,42 +185,42 @@
 
             data.push({
                 'ID': obj.id,
-                'Title': obj.listing_title,
-                'Mileage':obj.mileage.toLocaleString(),
-                'Price': '$' + (obj.price.toLocaleString()),
-                'City': $scope.colums['city']?obj.city:'' ,
-                'State': $scope.colums['state']?obj.state:'',
-                'BuildSheet': obj.vin_code,
-                'Make': obj.listing_make,
-                'Model': obj.listing_model,
-                'Trim': obj.listing_trim,
-                'Date': obj.listing_date.slice(0,10),
-                'PCF': obj.pcf.vid,
-                'Condition': obj.cond,
+                'listing_title': obj.listing_title,
+                'mileage':obj.mileage.toLocaleString(),
+                'price': '$' + (obj.price.toLocaleString()),
+                'city': $scope.colums['city']?obj.city:'' ,
+                'state': $scope.colums['state']?obj.state:'',
+                'vin_code': obj.vin_code,
+                'listing_make': obj.listing_make,
+                'listing_model': obj.listing_model,
+                'listing_trim': obj.listing_trim,
+                'listing_date': obj.listing_date.slice(0,10),
+                'pcf__vid': obj.pcf.vid,
+                'cond': obj.cond,
                 'listing_year': obj.listing_year,
-                'listing_exterior': obj.listing_exterior_color,
-                'listing_interior': obj.listing_interior_color,
-                'Transmission': obj.listing_transmission,
-                'Engine': obj.listing_engine_size,
-                'Drivetrain': obj.listing_drivetrain,
-                'MSRP': (obj.vin != null?'$' + (obj.vin.msrp.toLocaleString()):''),
-                'bs_year': obj.vin !=null?obj.vin.model_year:'',
-                'bs_model': obj.vin !=null?obj.vin.model_detail:'',
-                'bs_exterior': obj.vin !=null?obj.vin.color:'',
-                'bs_interior': obj.vin !=null?obj.vin.interior:'',
-                'production_month': obj.vin !=null?obj.vin.production_month:'',
-                'warranty_start': obj.vin !=null?obj.vin.warranty_start:'',
-                'model_number': obj.pcf.model_number,
-                'price_msrp': obj.pcf.gap_to_msrp != 0?obj.pcf.gap_to_msrp + '%':'',
-                'PTS': obj.pcf.pts == 0?'No':'Yes',
-                'lwb': obj.pcf.lwb_seats == 0?'No':'Yes',
-                'Longhood': obj.pcf.longhood == 0?'No':'Yes',
-                'Widebody': obj.pcf.widebody == 0?'No':'Yes',
-                'pccb': obj.pcf.pccb == 0?'No':'Yes',
-                'aircooled': obj.pcf.air_cooled == 0?'No':'Yes',
-                'listing_age': obj.pcf.listing_age + ' days',
-                'body_type': obj.pcf.body_type,
-                'auto_trans': obj.pcf.auto_trans
+                'listing_exterior_color': obj.listing_exterior_color,
+                'listing_interior_color': obj.listing_interior_color,
+                'listing_transmission': obj.listing_transmission,
+                'listing_engine_size': obj.listing_engine_size,
+                'listing_drivetrain': obj.listing_drivetrain,
+                'vin__msrp': (obj.vin != null?'$' + (obj.vin.msrp.toLocaleString()):''),
+                'vin__model_year': obj.vin !=null?obj.vin.model_year:'',
+                'vin__model_detail': obj.vin !=null?obj.vin.model_detail:'',
+                'vin__color': obj.vin !=null?obj.vin.color:'',
+                'vin__interior': obj.vin !=null?obj.vin.interior:'',
+                'vin__production_month': obj.vin !=null?obj.vin.production_month:'',
+                'vin__warranty_start': obj.vin !=null?obj.vin.warranty_start:'',
+                'pcf__model_number': obj.pcf.model_number,
+                'pcf__gap_to_msrp': obj.pcf.gap_to_msrp != 0?obj.pcf.gap_to_msrp + '%':'',
+                'pcf__pts': obj.pcf.pts == 0?'No':'Yes',
+                'pcf__lwb_seats': obj.pcf.lwb_seats == 0?'No':'Yes',
+                'pcf__longhood': obj.pcf.longhood == 0?'No':'Yes',
+                'pcf__widebody': obj.pcf.widebody == 0?'No':'Yes',
+                'pcf__pccb': obj.pcf.pccb == 0?'No':'Yes',
+                'pcf__air_cooled': obj.pcf.air_cooled == 0?'No':'Yes',
+                'pcf__listing_age': obj.pcf.listing_age + ' days',
+                'pcf__body_type': obj.pcf.body_type,
+                'pcf__auto_trans': obj.pcf.auto_trans
             });
         }
         function loadOffers(){

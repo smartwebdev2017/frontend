@@ -41,7 +41,9 @@ angular.module('BlurAdmin.pages.services')
             aircooled:'',
             auto_trans:'',
             model_number:'',
-            keyword:''
+            keyword:'',
+            sort:'',
+            direction:''
         };
 
         var self = this;
