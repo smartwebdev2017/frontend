@@ -1,7 +1,3 @@
-/**
- * @author v.lugovsky
- * created on 16.12.2015
- */
 (function () {
     'use strict';
 
@@ -32,7 +28,7 @@
                 //});
 
                 gridApi.selection.on.rowSelectionChanged($scope, function(row){
-                    $state.go("normal.detail", {vin:row.entity.PCF});
+                    $state.go("normal.detail", {vin:row.entity.pcf__vid});
                 });
 
                 $rootScope.$gridApi.core.on.sortChanged($scope, function(grid, sortColumns){
@@ -73,7 +69,7 @@
             {name: 'listing_year', displayName:'(L) Year', enableHiding: false},
             {name: 'listing_exterior_color', displayName:'(L) Exterior', enableHiding: false},
             {name: 'listing_interior_color', displayName:'(L) Interior', enableHiding: false},
-            {name: 'listing_transmission', displayName:'', enableHiding: false},
+            {name: 'listing_transmission', displayName:'Transmission', enableHiding: false},
             {name: 'listing_engine_size', displayName:'Engine', enableHiding: false},
             {name: 'listing_drivetrain', displayName:'Drivetrain', enableHiding: false},
             {name: 'vin__msrp', displayName:'MSRP', enableHiding: false},
@@ -238,7 +234,7 @@
                 for ( var i = 0;  i< offers.results.length; i++){
                     var record = {};
                     if ( i< offers.results.length - 1 )
-                        $rootScope.$next_list[offers.results[i].pcf.vid] = offers.results[i+1].pcf.vid;
+                        if (offers.results[i+1].pcf != null ) $rootScope.$next_list[offers.results[i].pcf.vid] = offers.results[i+1].pcf.vid;
                     pushData(data, offers.results[i]);
                 }
 
