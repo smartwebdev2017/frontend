@@ -82,6 +82,12 @@
             $('.al-main').css('padding-left', '0px');
         }
     };
+    $scope.setActiveCollapse = function(){
+        $scope.bShowActive = !$scope.bShowActive;
+    };
+    $scope.setInactiveCollapse = function(){
+        $scope.bShowInactive = !$scope.bShowInactive;
+    };
 
     $scope.getCarDetail($stateParams.vin);
     getActiveListings($stateParams.vin);

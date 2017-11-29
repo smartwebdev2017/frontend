@@ -2,12 +2,12 @@
   <div class="row">
     <div class="col-md-8">
         <div class="form-group">
-          <input placeholder='"Try “997.1” or “Cayman” or “PTS” or a VIN"' class="input-lg form-control" type="search" ng-model="filter.keyword" ng-model-options="{debounce: 1000}"/>
+          <input placeholder='Try “997.1” or “Cayman” or “PTS” or a VIN' class="input-lg form-control" type="search" ng-model="filter.keyword" ng-model-options="{debounce: 1000}"/>
         </div>
     </div>
   </div>
   <div class="setting">
-    <a href="#" ng-click="open()" class="logo"><img src="../assets/img/slider.png"></a>
+    <a href="#" ng-click="openSettingDlg()" class="logo"><img src="../assets/img/slider.png"></a>
   </div>
   <div class="grid" ui-grid="gridOptions" ui-grid-selection ui-grid-resize-columns ui-grid-move-columns ui-grid-auto-resize></div>
   <!--<div class="row">-->

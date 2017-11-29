@@ -19,6 +19,9 @@
 
         $scope.load = loadOffers;
         $scope.bShowMenu = false;
+        $scope.bShowListing = false;
+        $scope.bShowPCF = false;
+        $scope.bShowBSF = false;
         $('.al-main').css('padding-left', '0px');
 
         off.push($scope.$watchGroup([
@@ -42,12 +45,45 @@
             'filter.auto_trans',
             'filter.model_number',
             'filter.transmission',
-            'filter.keyword'
+            'filter.keyword',
+            'filter.listing_year',
+            'filter.listing_exterior_color',
+            'filter.listing_interior_color',
+            'filter.vin',
+            'filter.listing_transmission',
+            'filter.listing_engine_size',
+            'filter.listing_body_type',
+            'filter.listing_drivetrain',
+            'filter.cond',
+            'filter.seller_type',
+            'filter.listing_age_from',
+            'filter.listing_age_to',
+            'filter.pcf_msrp_from',
+            'filter.pcf_msrp_to',
+            'filter.pcf_id',
+            'filter.pcf_body_type',
+            'filter.pcf_listing_age_from',
+            'filter.pcf_listing_age_to',
+            'filter.bsf_msrp_from',
+            'filter.bsf_msrp_to',
+            'filter.bsf_model_year',
+            'filter.bsf_model_detail',
+            'filter.bsf_exterior',
+            'filter.bsf_interior',
+            'filter.bsf_production_month',
         ], doSearch));
         $scope.auto_trans = [
             {label: 'Sportomatic', value: 'Sportomatic'},
             {label: 'Tiptronic', value: 'tiptronic'},
             {label: 'PDK', value: 'pdk'}
+        ];
+        $scope.cond = [
+            {label: 'New', value: 'New'},
+            {label: 'Used', value: 'Used'}
+        ];
+        $scope.seller_type = [
+            {label: 'Private Party', value: 'Private Party'},
+            {label: 'Dealer Inventor', value: 'Dealer Inventor'}
         ];
 
         function loadCities() {
@@ -101,6 +137,8 @@
             if ( typeof(filter.city) === 'object' ) filter.city = filter.city.value;
             if ( typeof(filter.state) === 'object' ) filter.state = filter.state.value;
             if ( typeof(filter.auto_trans) === 'object' ) filter.auto_trans = filter.auto_trans.value;
+            if ( typeof(filter.cond) === 'object' ) filter.cond = filter.cond.value;
+            if ( typeof(filter.seller_type) === 'object' ) filter.seller_type = filter.seller_type.value;
 
             Offer.query(filter, {}, function (offers) {
                 $rootScope.isLoading = false;
@@ -189,6 +227,15 @@
             } else {
                 $('.al-main').css('padding-left', '0px');
             }
+        };
+        $scope.setListingCollapse = function(){
+            $scope.bShowListing = !$scope.bShowListing;
+        };
+        $scope.setPCFCollapse = function(){
+            $scope.bShowPCF = !$scope.bShowPCF;
+        };
+        $scope.setBSFCollapse = function(){
+            $scope.bShowBSF = !$scope.bShowBSF;
         };
         loadCities();
         loadStates();

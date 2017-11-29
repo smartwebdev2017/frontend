@@ -1,27 +1,43 @@
 <div class="mini-menu" ng-click="setCollaspe()">
-    <div class="filter-symbol" ng-show="bShowMenu" >&nbsp;<&nbsp;</div>
-    <div class="filter-symbol" ng-show="!bShowMenu">&nbsp;>&nbsp;</div>
+    <div class="filter-symbol" ng-show="bShowMenu" ><i class="ion-chevron-left"></i></div>
+    <div class="filter-symbol" ng-show="!bShowMenu"><i class="ion-chevron-right"></i></div>
     <div class="filter">LISTINGS</div>
 </div>
 <aside ng-show="bShowMenu" ng-if="!$isLogged" class="al-detail-sidebar">
 
     <div class="row">
         <div class="col-sm-12">
-            <div class="active_listings">
-                <h3>Active</h3>
-                <ul>
-                    <li class="history-items" ng-repeat="item in $active track by $index">
-                      <a class="email-link" ng-click="getActiveListingByIndex($index)">{{item.listing_date | limitTo: 10}}</a>
-                    </li>
-                </ul>
+            <div class="active_container">
+                <div class="title" ng-click="setActiveCollapse()">
+                    <div class="arrow_title"><span>ACTIVE</span></div>
+                    <div class="arrow">
+                        <i ng-show="bShowActive" class="ion-chevron-up"></i>
+                        <i ng-show="!bShowActive" class="ion-chevron-down"></i>
+                    </div>
+                </div>
+                <div ng-show="bShowActive" class="content">
+                    <ul style="margin:0 0 0 -20px;">
+                        <li  class="history-items" ng-repeat="item in $active track by $index">
+                          <a class="email-link" ng-click="getActiveListingByIndex($index)">{{item.listing_date | limitTo: 10}}</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="inactive_listings">
-                <h3>Inactive</h3>
-                <ul>
-                    <li class="history-items" ng-repeat="item in $inactive">
-                      <a class="email-link" ng-click="getInactiveListingByIndex($index)">{{item.listing_date | limitTo: 10}}</a>
-                    </li>
-                </ul>
+            <div class="inactive_container">
+                <div class="title" ng-click="setInactiveCollapse()">
+                    <div class="arrow_title"><span>INACTIVE</span></div>
+                    <div class="arrow">
+                        <i ng-show="bShowInactive" class="ion-chevron-up"></i>
+                        <i ng-show="!bShowInactive" class="ion-chevron-down"></i>
+                    </div>
+                </div>
+                <div ng-show="bShowInactive" class="content">
+                    <ul>
+                        <li class="history-items" ng-repeat="item in $inactive">
+                          <a class="email-link" ng-click="getInactiveListingByIndex($index)">{{item.listing_date | limitTo: 10}}</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
         </div>

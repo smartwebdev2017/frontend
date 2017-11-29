@@ -1,23 +1,5 @@
 <div class="contact_container">
-  <div class="contact_title" ng-click="showContact()">
-    <span>Contact Us</span>
-    <div class="contact_close">
-      <span ng-show="bShowContact">X</span>
-      <span ng-show="!bShowContact">^</span>
-    </div>
-  </div>
-  <div ng-show="bShowContact" class="contact_content">
-    <form class="contact_form">
-      <div class="form-group">
-        <input ng-model="email" type="text" class="form-control" placeholder="Your email address">
-      </div>
-      <div class="form-group">
-        <input ng-model="subject" type="text" class="form-control" placeholder="Subject">
-      </div>
-      <div class="form-group">
-        <textarea ng-model="content" class="form-control" placeholder="Message"></textarea>
-      </div>
-      <button ng-click="sendEmail()" class="btn btn-success">Send</button>
-    </form>
+  <div class="contact_title" ng-click="openFeedbackDlg()">
+    <span>FEEDBACK</span>
   </div>
  </div>

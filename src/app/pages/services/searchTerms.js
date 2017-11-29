@@ -18,6 +18,16 @@ angular.module('BlurAdmin.pages.services')
                 start: 0,
                 end:200000,
                 step:1000
+            },
+            listing_age:{
+                start:-1,
+                end:31,
+                step:1
+            },
+            pcf_msrp: {
+                start:0,
+                end:100,
+                step:1
             }
         };
 
@@ -43,7 +53,16 @@ angular.module('BlurAdmin.pages.services')
             model_number:'',
             keyword:'',
             sort:'',
-            direction:''
+            direction:'',
+            listing_year:'',
+            listing_age_from:options.listing_age.start,
+            listing_age_to:options.listing_age.end,
+            pcf_msrp_from:options.pcf_msrp.start,
+            pcf_msrp_to:options.pcf_msrp.end,
+            pcf_listing_age_from:options.listing_age.start,
+            pcf_listing_age_to:options.listing_age.end,
+            bsf_msrp_from:options.price.start,
+            bsf_msrp_to:options.price.end,
         };
 
         var self = this;

@@ -262,7 +262,7 @@
                 loadOffers()
             }
         }
-        $scope.open = function () {
+        $scope.openSettingDlg = function () {
           var page = 'app/pages/search/widgets/infoModal.html';
           $uibModal.open({
             animation: true,
