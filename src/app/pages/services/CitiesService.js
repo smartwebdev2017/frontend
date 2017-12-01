@@ -4,7 +4,9 @@
     angular.module('BlurAdmin.pages.services')
         .factory('Cities', CityService)
         .factory('States', StateService)
-        .factory('Vins', VinsService);
+        .factory('Vins', VinsService)
+        .factory('Engines', EngineService)
+        .factory('Pcfbodies', PcfbodyService);
 
     function CityService($resource, CFG){
 
@@ -49,6 +51,36 @@
             });
 
         return Vins;
+    }
+
+    function EngineService($resource, CFG) {
+
+        var Engines = $resource(CFG.rest.baseURI + '/api/engine',
+            {},
+            {
+                'get': {method: 'GET'},
+                'create': {method: 'POST'},
+                'save': {method: 'PUT'},
+                'query': {method: 'GET', isArray: true},
+                'remove': {method: 'DELETE'}
+            });
+
+        return Engines;
+    }
+
+    function PcfbodyService($resource, CFG) {
+
+        var Pcfbodies = $resource(CFG.rest.baseURI + '/api/pcfbody',
+            {},
+            {
+                'get': {method: 'GET'},
+                'create': {method: 'POST'},
+                'save': {method: 'PUT'},
+                'query': {method: 'GET', isArray: true},
+                'remove': {method: 'DELETE'}
+            });
+
+        return Pcfbodies;
     }
 })(angular);
 

@@ -14,5 +14,6 @@ angular.module('BlurAdmin', [
   "nouislider",
   'BlurAdmin.theme',
   'BlurAdmin.pages',
-   "ui.grid"
+   "ui.grid",
+  'daterangepicker'
 ]);

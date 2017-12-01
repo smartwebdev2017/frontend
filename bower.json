@@ -60,7 +60,8 @@
     "ng-js-tree": "~0.0.7",
     "angular-ui-select": "^0.19.6",
     "nouislider": "~9.2.0",
-    "async": "^2.5.0"
+    "async": "^2.5.0",
+    "angular-daterangepicker": "^0.2.2"
   },
   "resolutions": {
     "angular": "~1.5.9",

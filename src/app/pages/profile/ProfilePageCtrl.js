@@ -11,6 +11,9 @@
     $scope.filter = SearchOptions.filter;
     $scope.numLimit = 150;
     $scope.bShowMenu = false;
+    $scope.bShowActive = true;
+    $scope.bShowInactive = true;
+
     $('.al-main').css('padding-left', '0px');
 
     $scope.readMore = function(){
@@ -92,6 +95,7 @@
     $scope.getCarDetail($stateParams.vin);
     getActiveListings($stateParams.vin);
     getInactiveListings($stateParams.vin);
+    $scope.setCollaspe();
   }
 
 })();

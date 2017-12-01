@@ -35,7 +35,7 @@
     float:right;
   }
   .logo {
-    display: inline-block;
+    /*display: inline-block;*/
 
     img {
       width: 50%;
@@ -189,11 +189,11 @@
 .contact_container {
   position: fixed;
   right: 0px;
-  bottom: 10px;
-  margin-right: 20px;
-  width: 200px;
+  bottom: 0px;
+  margin-right: 0px;
+  width: 100px;
   .contact_title {
-    background:black;
+    background: black;
     position: relative;
     line-height: 40px;
     color: white;
@@ -241,5 +241,15 @@
   }
   .content {
     padding:20px;
+  }
+}
+.inactive_container, .active_container {
+  .title {
+    .arrow_title {
+      width: 80%;
+    }
+    .arrow {
+      width: 20%;
+    }
   }
 }

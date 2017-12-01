@@ -223,7 +223,23 @@
             $rootScope.isLoading = true;
 
             var filter = angular.copy($scope.filter);
-            //filter.page = $scope.page;
+
+            if ( $scope.filter.listing_date.format == null ){
+                filter.listing_date = '';
+            }else{
+                filter.listing_date = $scope.filter.listing_date.format('YYYY-MM-DD');
+            }
+
+            if ( typeof(filter.city) === 'object' ) filter.city = filter.city.value;
+            if ( typeof(filter.state) === 'object' ) filter.state = filter.state.value;
+            if ( typeof(filter.auto_trans) === 'object' ) filter.auto_trans = filter.auto_trans.value;
+            if ( typeof(filter.cond) === 'object' ) filter.cond = filter.cond.value;
+            if ( typeof(filter.seller_type) === 'object' ) filter.seller_type = filter.seller_type.value;
+            if ( typeof(filter.listing_transmission) === 'object' ) filter.listing_transmission = filter.listing_transmission.value;
+            if ( typeof(filter.listing_drivetrain) === 'object' ) filter.listing_drivetrain = filter.listing_drivetrain.value;
+            if ( typeof(filter.listing_engine_size) === 'object' ) filter.listing_engine_size = filter.listing_engine_size.value;
+            if ( typeof(filter.pcf_body_type) === 'object' ) filter.pcf_body_type = filter.pcf_body_type.value;
+            if ( typeof(filter.model_number) === 'object' ) filter.model_number = filter.model_number.value;
 
             Offer.query(filter, {}, function (offers) {
                 $rootScope.isLoading = false;
