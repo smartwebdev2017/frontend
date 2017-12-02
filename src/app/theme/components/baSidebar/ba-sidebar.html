@@ -19,7 +19,7 @@
                     <div class="form-group">
                         <label>Year</label>
                         <div class="slider">
-                            <div slider ng-from="filter.year_from" ng-to="filter.year_to" start='{{filterOptions.year.start}}' end='{{filterOptions.year.end}}' step='{{filterOptions.year.step}}'></div>
+                            <div class="listing_year_slider" slider ng-from="filter.year_from" ng-to="filter.year_to" start='{{filterOptions.year.start}}' end='{{filterOptions.year.end}}' step='{{filterOptions.year.step}}' on-set="change()"></div>
                         </div>
                         <span class="year-from ">{{filter.year_from}}</span>
                         <span class="year-to">{{filter.year_to}}</span>
@@ -36,27 +36,27 @@
             </div>
 
             <!--<div class="row">-->
-                <!--<div class="col-sm-12">-->
-                    <!--<div class="form-group">-->
-                        <!--<label>Mileage</label>-->
-                        <!--<div class="slider">-->
-                            <!--<div slider ng-from="filter.mileage_from" ng-to="filter.mileage_to" start='{{filterOptions.mileage.start}}' end='{{filterOptions.mileage.end}}' step='{{filterOptions.mileage.step}}'></div>-->
-                        <!--</div>-->
-                        <!--<span class="mileage-from">{{filter.mileage_from | number}}</span>-->
-                        <!--<span class="mileage-to">{{filter.mileage_to | number}}</span>-->
-                    <!--</div>-->
-                <!--</div>-->
+            <!--<div class="col-sm-12">-->
+            <!--<div class="form-group">-->
+            <!--<label>Mileage</label>-->
+            <!--<div class="slider">-->
+            <!--<div slider ng-from="filter.mileage_from" ng-to="filter.mileage_to" start='{{filterOptions.mileage.start}}' end='{{filterOptions.mileage.end}}' step='{{filterOptions.mileage.step}}'></div>-->
+            <!--</div>-->
+            <!--<span class="mileage-from">{{filter.mileage_from | number}}</span>-->
+            <!--<span class="mileage-to">{{filter.mileage_to | number}}</span>-->
+            <!--</div>-->
+            <!--</div>-->
             <!--</div>-->
             <div class="row">
-                <div class="col-sm-5">
+                <div class="from">
                     <div class="form-group">
                         <input  ng-model="filter.mileage_from"  placeholder="Mileage Min" class="form-control" type="search"/>
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <div class="range">
                     <span>~</span>
                 </div>
-                <div class="col-sm-5">
+                <div class="to">
                     <div class="form-group">
                         <input  ng-model="filter.mileage_to"  placeholder="Mileage Max" class="form-control" type="search"/>
                     </div>
@@ -64,27 +64,27 @@
             </div>
 
             <!--<div class="row">-->
-                <!--<div class="col-sm-12">-->
-                    <!--<div class="form-group">-->
-                        <!--<label>Price</label>-->
-                        <!--<div class="slider">-->
-                            <!--<div slider ng-from="filter.price_from" ng-to="filter.price_to" start='{{filterOptions.price.start}}' end='{{filterOptions.price.end}}' step='{{filterOptions.price.step}}'></div>-->
-                        <!--</div>-->
-                        <!--<span class="year-from">${{filter.price_from | number}}</span>-->
-                        <!--<span class="year-to">${{filter.price_to | number}}</span>-->
-                    <!--</div>-->
-                <!--</div>-->
+            <!--<div class="col-sm-12">-->
+            <!--<div class="form-group">-->
+            <!--<label>Price</label>-->
+            <!--<div class="slider">-->
+            <!--<div slider ng-from="filter.price_from" ng-to="filter.price_to" start='{{filterOptions.price.start}}' end='{{filterOptions.price.end}}' step='{{filterOptions.price.step}}'></div>-->
+            <!--</div>-->
+            <!--<span class="year-from">${{filter.price_from | number}}</span>-->
+            <!--<span class="year-to">${{filter.price_to | number}}</span>-->
+            <!--</div>-->
+            <!--</div>-->
             <!--</div>-->
             <div class="row">
-                <div class="col-sm-5">
+                <div class="from">
                     <div class="form-group">
                         <input  ng-model="filter.price_from"  placeholder="Price Min" class="form-control" type="search"/>
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <div class="range">
                     <span>~</span>
                 </div>
-                <div class="col-sm-5">
+                <div class="to">
                     <div class="form-group">
                         <input  ng-model="filter.price_to"  placeholder="Price Max" class="form-control" type="search"/>
                     </div>
@@ -99,17 +99,18 @@
                                    ng-disabled="false"
                                    append-to-body="true"
                                    search-enabled="false">
-                          <ui-select-match placeholder="City">
-                            <span> {{$select.selected.label}}</span>
-                          </ui-select-match>
-                          <ui-select-choices repeat="city in cities">
-                            <span ng-bind-html="city.label"></span>
-                          </ui-select-choices>
+                            <ui-select-match placeholder="City">
+                                <span> {{$select.selected.label}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="city in cities">
+                                <span ng-bind-html="city.label"></span>
+                            </ui-select-choices>
                         </ui-select>
                     </div>
                 </div>
+            </div>
 
-
+            <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
                         <ui-select ng-model="filter.state"
@@ -117,12 +118,12 @@
                                    ng-disabled="false"
                                    append-to-body="true"
                                    search-enabled="false">
-                          <ui-select-match placeholder="State">
-                            <span> {{$select.selected.label}}</span>
-                          </ui-select-match>
-                          <ui-select-choices repeat="state in states">
-                            <span ng-bind-html="state.label"></span>
-                          </ui-select-choices>
+                            <ui-select-match placeholder="State">
+                                <span> {{$select.selected.label}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="state in states">
+                                <span ng-bind-html="state.label"></span>
+                            </ui-select-choices>
                         </ui-select>
                     </div>
                 </div>
@@ -156,43 +157,43 @@
             </div>
 
             <div class="row">
-              <div class="col-sm-12">
-                  <div class="form-group">
-                    <ui-select ng-model="filter.cond"
-                               class="btn-group bootstrap-select form-control"
-                               ng-disabled="false"
-                               append-to-body="true"
-                               search-enabled="false">
-                      <ui-select-match placeholder="Condition">
-                        <span> {{$select.selected.label}}</span>
-                      </ui-select-match>
-                      <ui-select-choices repeat="item in cond">
-                        <span ng-bind-html="item.label"></span>
-                      </ui-select-choices>
-                    </ui-select>
-                  </div>
-              </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <ui-select ng-model="filter.cond"
+                                   class="btn-group bootstrap-select form-control"
+                                   ng-disabled="false"
+                                   append-to-body="true"
+                                   search-enabled="false">
+                            <ui-select-match placeholder="Condition">
+                                <span> {{$select.selected.label}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in cond">
+                                <span ng-bind-html="item.label"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
             </div>
 
             <div class="row">
-              <div class="col-sm-12">
-                  <div class="form-group">
-                    <ui-select ng-model="filter.seller_type"
-                               class="btn-group bootstrap-select form-control"
-                               ng-disabled="false"
-                               append-to-body="true"
-                               search-enabled="false">
-                      <ui-select-match placeholder="Seller">
-                        <span> {{$select.selected.label}}</span>
-                      </ui-select-match>
-                      <ui-select-choices repeat="item in seller_type">
-                        <span ng-bind-html="item.label"></span>
-                      </ui-select-choices>
-                    </ui-select>
-                  </div>
-              </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <ui-select ng-model="filter.seller_type"
+                                   class="btn-group bootstrap-select form-control"
+                                   ng-disabled="false"
+                                   append-to-body="true"
+                                   search-enabled="false">
+                            <ui-select-match placeholder="Seller">
+                                <span> {{$select.selected.label}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in seller_type">
+                                <span ng-bind-html="item.label"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
@@ -218,108 +219,100 @@
             </div>
 
             <div class="row">
-              <div class="col-sm-12">
-                  <div class="form-group">
-                    <ui-select ng-model="filter.listing_transmission"
-                               class="btn-group bootstrap-select form-control"
-                               ng-disabled="false"
-                               append-to-body="true"
-                               search-enabled="false">
-                      <ui-select-match placeholder="Transmssion">
-                        <span> {{$select.selected.label}}</span>
-                      </ui-select-match>
-                      <ui-select-choices repeat="item in transmissions">
-                        <span ng-bind-html="item.label"></span>
-                      </ui-select-choices>
-                    </ui-select>
-                  </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-sm-12">
-                  <div class="form-group">
-                    <ui-select ng-model="filter.listing_engine_size"
-                               class="btn-group bootstrap-select form-control"
-                               ng-disabled="false"
-                               append-to-body="true"
-                               search-enabled="false">
-                      <ui-select-match placeholder="Engine">
-                        <span> {{$select.selected.label}}</span>
-                      </ui-select-match>
-                      <ui-select-choices repeat="item in engines">
-                        <span ng-bind-html="item.label"></span>
-                      </ui-select-choices>
-                    </ui-select>
-                  </div>
-              </div>
-            </div>
-
-            <!--<div class="row">-->
-                <!--<div class="col-sm-12">-->
-                    <!--<div class="form-group">-->
-                        <!--<input  ng-model="filter.listing_body_type"  placeholder="Body Type" class="form-control" type="search"/>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <div class="row">
-              <div class="col-sm-12">
-                  <div class="form-group">
-                    <ui-select ng-model="filter.listing_body_type"
-                               class="btn-group bootstrap-select form-control"
-                               ng-disabled="false"
-                               append-to-body="true"
-                               search-enabled="false">
-                      <ui-select-match placeholder="Body Type">
-                        <span> {{$select.selected.label}}</span>
-                      </ui-select-match>
-                      <ui-select-choices repeat="item in pcfbodies">
-                        <span ng-bind-html="item.label"></span>
-                      </ui-select-choices>
-                    </ui-select>
-                  </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-sm-12">
-                  <div class="form-group">
-                    <ui-select ng-model="filter.listing_drivetrain"
-                               class="btn-group bootstrap-select form-control"
-                               ng-disabled="false"
-                               append-to-body="true"
-                               search-enabled="false">
-                      <ui-select-match placeholder="Drivetrain">
-                        <span> {{$select.selected.label}}</span>
-                      </ui-select-match>
-                      <ui-select-choices repeat="item in drivetrain">
-                        <span ng-bind-html="item.label"></span>
-                      </ui-select-choices>
-                    </ui-select>
-                  </div>
-              </div>
-            </div>
-
-
-
-            <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <label>Listing Age</label>
-                        <div class="slider">
-                            <div slider ng-from="filter.listing_age_from" ng-to="filter.listing_age_to" start='{{filterOptions.listing_age.start}}' end='{{filterOptions.listing_age.end}}' step='{{filterOptions.listing_age.step}}'></div>
-                        </div>
-                        <span class="year-from ">{{filter.listing_age_from}}</span>
-                        <span class="year-to">{{filter.listing_age_to}}</span>
+                        <ui-select ng-model="filter.listing_transmission"
+                                   class="btn-group bootstrap-select form-control"
+                                   ng-disabled="false"
+                                   append-to-body="true"
+                                   search-enabled="false">
+                            <ui-select-match placeholder="Transmssion">
+                                <span> {{$select.selected.label}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in transmissions">
+                                <span ng-bind-html="item.label"></span>
+                            </ui-select-choices>
+                        </ui-select>
                     </div>
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <ui-select ng-model="filter.listing_engine_size"
+                                   class="btn-group bootstrap-select form-control"
+                                   ng-disabled="false"
+                                   append-to-body="true"
+                                   search-enabled="false">
+                            <ui-select-match placeholder="Engine">
+                                <span> {{$select.selected.label}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in engines">
+                                <span ng-bind-html="item.label"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+            </div>
 
+            <!--<div class="row">-->
+            <!--<div class="col-sm-12">-->
+            <!--<div class="form-group">-->
+            <!--<input  ng-model="filter.listing_body_type"  placeholder="Body Type" class="form-control" type="search"/>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <ui-select ng-model="filter.listing_body_type"
+                                   class="btn-group bootstrap-select form-control"
+                                   ng-disabled="false"
+                                   append-to-body="true"
+                                   search-enabled="false">
+                            <ui-select-match placeholder="Body Type">
+                                <span> {{$select.selected.label}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in pcfbodies">
+                                <span ng-bind-html="item.label"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+            </div>
 
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <ui-select ng-model="filter.listing_drivetrain"
+                                   class="btn-group bootstrap-select form-control"
+                                   ng-disabled="false"
+                                   append-to-body="true"
+                                   search-enabled="false">
+                            <ui-select-match placeholder="Drivetrain">
+                                <span> {{$select.selected.label}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in drivetrain">
+                                <span ng-bind-html="item.label"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+            </div>
 
-
-
+            <!--<div class="row">-->
+            <!--<div class="col-sm-12">-->
+            <!--<div class="form-group">-->
+            <!--<label>Listing Age</label>-->
+            <!--<div class="slider">-->
+            <!--<div slider ng-from="filter.listing_age_from" ng-to="filter.listing_age_to" start='{{filterOptions.listing_age.start}}' end='{{filterOptions.listing_age.end}}' step='{{filterOptions.listing_age.step}}'></div>-->
+            <!--</div>-->
+            <!--<span class="year-from ">{{filter.listing_age_from}}</span>-->
+            <!--<span class="year-to">{{filter.listing_age_to}}</span>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
         </div>
     </div>
 
@@ -333,28 +326,28 @@
         </div>
         <div ng-show="bShowBSF" class="content">
             <!--<div class="row">-->
-                <!--<div class="col-sm-12">-->
-                    <!--<div class="form-group">-->
-                        <!--<label>MSRP</label>-->
-                        <!--<div class="slider">-->
-                            <!--<div slider ng-from="filter.bsf_msrp_from" ng-to="filter.bsf_msrp_to" start='{{filterOptions.price.start}}' end='{{filterOptions.price.end}}' step='{{filterOptions.price.step}}'></div>-->
-                        <!--</div>-->
-                        <!--<span class="year-from ">${{filter.bsf_msrp_from | number}}</span>-->
-                        <!--<span class="year-to">${{filter.bsf_msrp_to | number}}</span>-->
-                    <!--</div>-->
-                <!--</div>-->
+            <!--<div class="col-sm-12">-->
+            <!--<div class="form-group">-->
+            <!--<label>MSRP</label>-->
+            <!--<div class="slider">-->
+            <!--<div slider ng-from="filter.bsf_msrp_from" ng-to="filter.bsf_msrp_to" start='{{filterOptions.price.start}}' end='{{filterOptions.price.end}}' step='{{filterOptions.price.step}}'></div>-->
+            <!--</div>-->
+            <!--<span class="year-from ">${{filter.bsf_msrp_from | number}}</span>-->
+            <!--<span class="year-to">${{filter.bsf_msrp_to | number}}</span>-->
+            <!--</div>-->
+            <!--</div>-->
             <!--</div>-->
 
             <div class="row">
-                <div class="col-sm-5">
+                <div class="from">
                     <div class="form-group">
                         <input  ng-model="filter.bsf_msrp_from"  placeholder="MSRP Min" class="form-control" type="search" />
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <div class="range">
                     <span>~</span>
                 </div>
-                <div class="col-sm-5">
+                <div class="to">
                     <div class="form-group">
                         <input  ng-model="filter.bsf_msrp_to"  placeholder="MSRP Max" class="form-control" type="search"/>
                     </div>
@@ -368,8 +361,8 @@
                         <div class="slider">
                             <div slider ng-from="filter.bsf_model_year_from" ng-to="filter.bsf_model_year_to" start='{{filterOptions.year.start}}' end='{{filterOptions.year.end}}' step='{{filterOptions.year.step}}'></div>
                         </div>
-                        <span class="year-from ">{{filter.year_from}}</span>
-                        <span class="year-to">{{filter.year_to}}</span>
+                        <span class="year-from ">{{filter.bsf_model_year_from}}</span>
+                        <span class="year-to">{{filter.bsf_model_year_to}}</span>
                     </div>
                 </div>
             </div>
@@ -397,25 +390,25 @@
                 </div>
             </div>
             <!--<div class="row">-->
-                <!--<div class="col-sm-12">-->
-                    <!--<div class="form-group">-->
-                        <!--<input  ng-model="filter.bsf_production_month"  placeholder="Production Month" class="form-control" type="search"/>-->
-                    <!--</div>-->
-                <!--</div>-->
+            <!--<div class="col-sm-12">-->
+            <!--<div class="form-group">-->
+            <!--<input  ng-model="filter.bsf_production_month"  placeholder="Production Month" class="form-control" type="search"/>-->
+            <!--</div>-->
+            <!--</div>-->
             <!--</div>-->
 
             <div class="row">
-                <div class="col-sm-5">
+                <div class="from">
                     <div class="form-group">
-                        <input  ng-model="filter.bsf_production_month_from"  placeholder="Month Min" class="form-control" type="search"/>
+                        <input  ng-model="filter.bsf_production_month_from"  placeholder="Prod Year Min" class="form-control" type="search"/>
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <div class="range">
                     <span>~</span>
                 </div>
-                <div class="col-sm-5">
+                <div class="to">
                     <div class="form-group">
-                        <input  ng-model="filter.bsf_production_month_to"  placeholder="Month Max" class="form-control" type="search"/>
+                        <input  ng-model="filter.bsf_production_month_to"  placeholder="Prod Year Max" class="form-control" type="search"/>
                     </div>
                 </div>
             </div>
@@ -433,27 +426,27 @@
         <div ng-show="bShowPCF" class="content">
 
             <!--<div class="row">-->
-                <!--<div class="col-sm-12">-->
-                    <!--<div class="form-group">-->
-                        <!--<label>Price % of MSRP</label>-->
-                        <!--<div class="slider">-->
-                            <!--<div slider ng-from="filter.pcf_msrp_from" ng-to="filter.pcf_msrp_to" start='{{filterOptions.pcf_msrp.start}}' end='{{filterOptions.pcf_msrp.end}}' step='{{filterOptions.pcf_msrp.step}}'></div>-->
-                        <!--</div>-->
-                        <!--<span class="year-from ">{{filter.pcf_msrp_from}}</span>-->
-                        <!--<span class="year-to">{{filter.pcf_msrp_to}}</span>-->
-                    <!--</div>-->
-                <!--</div>-->
+            <!--<div class="col-sm-12">-->
+            <!--<div class="form-group">-->
+            <!--<label>Price % of MSRP</label>-->
+            <!--<div class="slider">-->
+            <!--<div slider ng-from="filter.pcf_msrp_from" ng-to="filter.pcf_msrp_to" start='{{filterOptions.pcf_msrp.start}}' end='{{filterOptions.pcf_msrp.end}}' step='{{filterOptions.pcf_msrp.step}}'></div>-->
+            <!--</div>-->
+            <!--<span class="year-from ">{{filter.pcf_msrp_from}}</span>-->
+            <!--<span class="year-to">{{filter.pcf_msrp_to}}</span>-->
+            <!--</div>-->
+            <!--</div>-->
             <!--</div>-->
             <div class="row">
-                <div class="col-sm-5">
+                <div class="from">
                     <div class="form-group">
                         <input  ng-model="filter.pcf_msrp_from"  placeholder="MSRP Min" class="form-control" type="search"/>
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <div class="range">
                     <span>~</span>
                 </div>
-                <div class="col-sm-5">
+                <div class="to">
                     <div class="form-group">
                         <input  ng-model="filter.pcf_msrp_to"  placeholder="MSRP Max" class="form-control" type="search"/>
                     </div>
@@ -461,22 +454,22 @@
             </div>
 
             <div class="row">
-              <div class="col-sm-12">
-                  <div class="form-group">
-                    <ui-select ng-model="filter.model_number"
-                               class="btn-group bootstrap-select form-control"
-                               ng-disabled="false"
-                               append-to-body="true"
-                               search-enabled="false">
-                      <ui-select-match placeholder="Model Number">
-                        <span> {{$select.selected.label}}</span>
-                      </ui-select-match>
-                      <ui-select-choices repeat="m in model_numbers">
-                        <span ng-bind-html="m.label"></span>
-                      </ui-select-choices>
-                    </ui-select>
-                  </div>
-              </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <ui-select ng-model="filter.model_number"
+                                   class="btn-group bootstrap-select form-control"
+                                   ng-disabled="false"
+                                   append-to-body="true"
+                                   search-enabled="false">
+                            <ui-select-match placeholder="Model Number">
+                                <span> {{$select.selected.label}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="m in model_numbers">
+                                <span ng-bind-html="m.label"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
             </div>
 
             <div class="row">
@@ -488,108 +481,108 @@
             </div>
 
             <div class="">
-              <div class="checkbox">
-                <label class="custom-checkbox">
-                  <input type="checkbox" ng-model="filter.pts">
-                  <span>PTS</span>
-                </label>
-              </div>
+                <div class="checkbox">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" ng-model="filter.pts">
+                        <span>PTS</span>
+                    </label>
+                </div>
             </div>
 
             <div class="">
-              <div class="checkbox">
-                <label class="custom-checkbox">
-                  <input type="checkbox" ng-model="filter.lwb">
-                  <span>LWB Seats</span>
-                </label>
-              </div>
+                <div class="checkbox">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" ng-model="filter.lwb">
+                        <span>LWB Seats</span>
+                    </label>
+                </div>
             </div>
 
             <div class="">
-              <div class="checkbox">
-                <label class="custom-checkbox">
-                  <input type="checkbox" ng-model="filter.longhood">
-                  <span>Longhood</span>
-                </label>
-              </div>
+                <div class="checkbox">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" ng-model="filter.longhood">
+                        <span>Longhood</span>
+                    </label>
+                </div>
             </div>
 
             <div class="">
-              <div class="checkbox">
-                <label class="custom-checkbox">
-                  <input type="checkbox" ng-model="filter.widebody">
-                  <span>Widebody</span>
-                </label>
-              </div>
+                <div class="checkbox">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" ng-model="filter.widebody">
+                        <span>Widebody</span>
+                    </label>
+                </div>
             </div>
 
             <div class="">
-              <div class="checkbox">
-                <label class="custom-checkbox">
-                  <input type="checkbox" ng-model="filter.pccb">
-                  <span>PCCB</span>
-                </label>
-              </div>
+                <div class="checkbox">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" ng-model="filter.pccb">
+                        <span>PCCB</span>
+                    </label>
+                </div>
             </div>
 
             <div class="">
-              <div class="checkbox">
-                <label class="custom-checkbox">
-                  <input type="checkbox" ng-model="filter.aircooled">
-                  <span>Air-Cooled</span>
-                </label>
-              </div>
+                <div class="checkbox">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" ng-model="filter.aircooled">
+                        <span>Air-Cooled</span>
+                    </label>
+                </div>
             </div>
 
             <!--<div class="row">-->
-                <!--<div class="col-sm-12">-->
-                    <!--<div class="form-group">-->
-                        <!--<label>Listing Age</label>-->
-                        <!--<div class="slider">-->
-                            <!--<div slider ng-from="filter.pcf_listing_age_from" ng-to="filter.pcf_listing_age_to" start='{{filterOptions.listing_age.start}}' end='{{filterOptions.listing_age.end}}' step='{{filterOptions.year.step}}'></div>-->
-                        <!--</div>-->
-                        <!--<span class="year-from ">{{filter.pcf_listing_age_from}}</span>-->
-                        <!--<span class="year-to">{{filter.pcf_listing_age_to}}</span>-->
-                    <!--</div>-->
-                <!--</div>-->
+            <!--<div class="col-sm-12">-->
+            <!--<div class="form-group">-->
+            <!--<label>Listing Age</label>-->
+            <!--<div class="slider">-->
+            <!--<div slider ng-from="filter.pcf_listing_age_from" ng-to="filter.pcf_listing_age_to" start='{{filterOptions.listing_age.start}}' end='{{filterOptions.listing_age.end}}' step='{{filterOptions.year.step}}'></div>-->
+            <!--</div>-->
+            <!--<span class="year-from ">{{filter.pcf_listing_age_from}}</span>-->
+            <!--<span class="year-to">{{filter.pcf_listing_age_to}}</span>-->
+            <!--</div>-->
+            <!--</div>-->
             <!--</div>-->
 
             <div class="row">
-              <div class="col-sm-12">
-                  <div class="form-group">
-                    <ui-select ng-model="filter.pcf_body_type"
-                               class="btn-group bootstrap-select form-control"
-                               ng-disabled="false"
-                               append-to-body="true"
-                               search-enabled="false">
-                      <ui-select-match placeholder="Body Type">
-                        <span> {{$select.selected.label}}</span>
-                      </ui-select-match>
-                      <ui-select-choices repeat="item in pcfbodies">
-                        <span ng-bind-html="item.label"></span>
-                      </ui-select-choices>
-                    </ui-select>
-                  </div>
-              </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <ui-select ng-model="filter.pcf_body_type"
+                                   class="btn-group bootstrap-select form-control"
+                                   ng-disabled="false"
+                                   append-to-body="true"
+                                   search-enabled="false">
+                            <ui-select-match placeholder="Body Type">
+                                <span> {{$select.selected.label}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in pcfbodies">
+                                <span ng-bind-html="item.label"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
             </div>
 
             <div class="row">
-              <div class="col-sm-12">
-                  <div class="form-group">
-                    <ui-select ng-model="filter.auto_trans"
-                               class="btn-group bootstrap-select form-control"
-                               ng-disabled="false"
-                               append-to-body="true"
-                               search-enabled="false">
-                      <ui-select-match placeholder="Auto Trans Type">
-                        <span> {{$select.selected.label}}</span>
-                      </ui-select-match>
-                      <ui-select-choices repeat="transmission in auto_trans">
-                        <span ng-bind-html="transmission.label"></span>
-                      </ui-select-choices>
-                    </ui-select>
-                  </div>
-              </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <ui-select ng-model="filter.auto_trans"
+                                   class="btn-group bootstrap-select form-control"
+                                   ng-disabled="false"
+                                   append-to-body="true"
+                                   search-enabled="false">
+                            <ui-select-match placeholder="Auto Trans Type">
+                                <span> {{$select.selected.label}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="transmission in auto_trans">
+                                <span ng-bind-html="transmission.label"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

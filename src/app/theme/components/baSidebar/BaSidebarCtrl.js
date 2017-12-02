@@ -3,19 +3,25 @@
  * created on 16.12.2015
  */
 (function () {
-  'use strict';
+    'use strict';
 
-  angular.module('BlurAdmin.theme.components')
-    .controller('BaSidebarCtrl', BaSidebarCtrl);
+    angular.module('BlurAdmin.theme.components')
+        .controller('BaSidebarCtrl', BaSidebarCtrl);
 
-  /** @ngInject */
-  function BaSidebarCtrl($scope, $rootScope, $filter, $location, $timeout, $interval, $http, $state, $stateParams, CFG, Offer, ActiveOfferDetail, Cities, States, Vins, Engines, Pcfbodies, SearchOptions){
+    /** @ngInject */
+    function BaSidebarCtrl($scope, $rootScope, $filter, $location, $timeout, $interval, $http, $state, $stateParams, CFG, Offer, ActiveOfferDetail, Cities, States, Vins, Engines, Pcfbodies, SearchOptions){
         $scope.main_width = 40;
         $scope.offer = {};
         $scope.filter = SearchOptions.filter;
         $scope.filterOptions = SearchOptions.options;
-        //$scope.filter.listing_date = moment();
-
+        var listing_year_slider = $('.listing_year_slider');
+        //noUiSlider.create(listing_year_slider, {
+        //    start: [1000],
+        //    range: {
+        //        'min':[1],
+        //        'max':[2000]
+        //    }
+        //});
         var off=[];
 
         $scope.load = loadOffers;
@@ -39,8 +45,8 @@
             'filter.price_to',
             'filter.mileage_from',
             'filter.mileage_to',
-            'filter.year_from',
-            'filter.year_to',
+            //'filter.year_from',
+            //'filter.year_to',
             'filter.description',
             'filter.listing_date',
             'filter.longhood',
@@ -73,8 +79,8 @@
             'filter.pcf_listing_age_to',
             'filter.bsf_msrp_from',
             'filter.bsf_msrp_to',
-            'filter.bsf_model_year_from',
-            'filter.bsf_model_year_to',
+            //'filter.bsf_model_year_from',
+            //'filter.bsf_model_year_to',
             'filter.bsf_model_detail',
             'filter.bsf_exterior',
             'filter.bsf_interior',
@@ -82,23 +88,28 @@
             'filter.bsf_production_month_to',
         ], doSearch));
         $scope.auto_trans = [
+            {label: 'All', value: ''},
             {label: 'Sportomatic', value: 'Sportomatic'},
             {label: 'Tiptronic', value: 'tiptronic'},
             {label: 'PDK', value: 'pdk'}
         ];
         $scope.transmissions = [
+            {label: 'All', value: ''},
             {label: 'Auto', value: 'Auto'},
             {label: 'Manual', value: 'Manual'}
         ];
         $scope.cond = [
+            {label: 'All', value: ''},
             {label: 'New', value: 'New'},
             {label: 'Used', value: 'Used'}
         ];
         $scope.seller_type = [
+            {label: 'All', value: ''},
             {label: 'Private Party', value: 'Private Party'},
             {label: 'Dealer Inventor', value: 'Dealership'}
         ];
         $scope.drivetrain = [
+            {label: 'All', value: ''},
             {label: '2WD', value: '2WD'},
             {label: '4WD', value: '4WD'}
         ];
@@ -146,7 +157,7 @@
             });
         }
 
-      function loadPcfbodies() {
+        function loadPcfbodies() {
             Pcfbodies.query({}, function(pcfbodies){
                 $scope.pcfbodies = [];
                 for ( var index = 0; index<pcfbodies.length; index++){
@@ -195,7 +206,10 @@
             if ( typeof(filter.listing_engine_size) === 'object' ) filter.listing_engine_size = filter.listing_engine_size.value;
             if ( typeof(filter.pcf_body_type) === 'object' ) filter.pcf_body_type = filter.pcf_body_type.value;
             if ( typeof(filter.model_number) === 'object' ) filter.model_number = filter.model_number.value;
-
+            if ( filter.bsf_model_year_from = 1955 & filter.bsf_model_year_to == 2019 ){
+                filter.bsf_model_year_from = '';
+                filter.bsf_model_year_to = '';
+            }
             Offer.query(filter, {}, function (offers) {
                 $rootScope.isLoading = false;
                 var data = [];
@@ -261,6 +275,7 @@
         function getFilterDate(){
 
         }
+
         function doSearch(){
             getFilterDate();
             if (!$rootScope.isLoading) {
@@ -269,12 +284,15 @@
 
                 loadOffers()
             }
-        }
+        };
+        $scope.doSearch = function(){
+            doSearch();
+        };
         $scope.getActiveListingByIndex = function(index){
-          $rootScope.$detailData = $rootScope.$active[index];
+            $rootScope.$detailData = $rootScope.$active[index];
         };
         $scope.getInactiveListingByIndex = function(index){
-          $rootScope.$detailData = $rootScope.$inactive[index];
+            $rootScope.$detailData = $rootScope.$inactive[index];
         };
         $scope.setCollaspe = function(){
             $scope.bShowMenu = !$scope.bShowMenu;
@@ -293,11 +311,20 @@
         $scope.setBSFCollapse = function(){
             $scope.bShowBSF = !$scope.bShowBSF;
         };
+        $scope.update = function(){
+            console.log('test');
+        }
+        //slider.on('change', function(obj){
+        //   console.log(obj);
+        //});
+        $scope.$watch('filter.year_from', function (newValue1, oldValue1){
+            console.log('1');
+        });
         loadCities();
         loadStates();
         loadModelNumbers();
         loadOffers();
         loadEngines();
         loadPcfbodies();
-  }
+    }
 })();
