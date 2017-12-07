@@ -116,10 +116,12 @@
             {label: '4WD', value: '4WD'}
         ];
         $scope.sold_status = [
-            {label: 'All', value: ''},
-            {label: 'Yes', value:'1'},
-            {label: 'No', value:'0'},
+            {label: 'All Vehicles', value: ''},
+            {label: 'Currently For Sale', value:'0'},
+            {label: 'Not Currently for Sale', value:'1'},
         ];
+
+        $scope.filter.listing_sold_status= $scope.sold_status[1]
 
         $scope.states = [
             {label: 'All', value: ''},
@@ -262,7 +264,12 @@
             }
 
             //filter.page = $scope.page;
-            if ( typeof(filter.listing_sold_status) === 'object' ) filter.listing_sold_status = filter.listing_sold_status.value;
+            if ( typeof(filter.listing_sold_status) === 'object' ) {
+                filter.listing_sold_status = filter.listing_sold_status.value;
+            }else{
+                //filter.listing_sold_status = $scope.sold_status[1];
+                //filter.listing_sold_status = filter.listing_sold_status.value;
+            }
             if ( typeof(filter.state) === 'object' ) filter.state = filter.state.value;
             if ( typeof(filter.auto_trans) === 'object' ) filter.auto_trans = filter.auto_trans.value;
             if ( typeof(filter.cond) === 'object' ) filter.cond = filter.cond.value;
