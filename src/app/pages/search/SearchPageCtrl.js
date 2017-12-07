@@ -223,23 +223,33 @@
             $rootScope.isLoading = true;
 
             var filter = angular.copy($scope.filter);
-
-            if ( $scope.filter.listing_date.format == null ){
-                filter.listing_date = '';
+            if ( filter.listing_date.startDate.format == null ){
+                filter.listing_date_start = '';
             }else{
-                filter.listing_date = $scope.filter.listing_date.format('YYYY-MM-DD');
+                filter.listing_date_start = filter.listing_date.startDate.format($scope.opts.locale.format);
             }
 
-            if ( typeof(filter.city) === 'object' ) filter.city = filter.city.value;
+            if ( filter.listing_date.endDate.format == null ){
+                filter.listing_date_end = '';
+            }else{
+                filter.listing_date_end = filter.listing_date.endDate.format($scope.opts.locale.format);
+            }
+
+            //filter.page = $scope.page;
+            if ( typeof(filter.listing_sold_status) === 'object' ) filter.listing_sold_status = filter.listing_sold_status.value;
             if ( typeof(filter.state) === 'object' ) filter.state = filter.state.value;
             if ( typeof(filter.auto_trans) === 'object' ) filter.auto_trans = filter.auto_trans.value;
             if ( typeof(filter.cond) === 'object' ) filter.cond = filter.cond.value;
             if ( typeof(filter.seller_type) === 'object' ) filter.seller_type = filter.seller_type.value;
             if ( typeof(filter.listing_transmission) === 'object' ) filter.listing_transmission = filter.listing_transmission.value;
             if ( typeof(filter.listing_drivetrain) === 'object' ) filter.listing_drivetrain = filter.listing_drivetrain.value;
-            if ( typeof(filter.listing_engine_size) === 'object' ) filter.listing_engine_size = filter.listing_engine_size.value;
-            if ( typeof(filter.pcf_body_type) === 'object' ) filter.pcf_body_type = filter.pcf_body_type.value;
+            //if ( typeof(filter.listing_engine_size) === 'object' ) filter.listing_engine_size = filter.listing_engine_size.value;
+            //if ( typeof(filter.pcf_body_type) === 'object' ) filter.pcf_body_type = filter.pcf_body_type.value;
             if ( typeof(filter.model_number) === 'object' ) filter.model_number = filter.model_number.value;
+            if ( filter.bsf_model_year_from = 1955 & filter.bsf_model_year_to == 2019 ){
+                filter.bsf_model_year_from = '';
+                filter.bsf_model_year_to = '';
+            }
 
             Offer.query(filter, {}, function (offers) {
                 $rootScope.isLoading = false;

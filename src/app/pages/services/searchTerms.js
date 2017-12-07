@@ -67,7 +67,14 @@ angular.module('BlurAdmin.pages.services')
             bsf_model_year_to:options.year.end,
             bsf_production_month_from:'',
             bsf_production_month_to:'',
-            listing_date : '',
+            listing_date : {
+                startDate:  '',
+                endDate:''
+            },
+            listing_date_start: '',
+            listing_date_end:'',
+            listing_sold_status:''
+
         };
 
         var self = this;

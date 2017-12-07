@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="detail_pcfid">
-                    <label>{{$detailData.pcf.vid | highlight: filter.keyword | slice:0:3}}&nbsp;{{$detailData.pcf.vid | highlight: filter.keyword | slice:3:6}}</label>
+                    <label>{{$detailData.pcf.vid | highlight: filter.keyword | slice:0:3}}/{{$detailData.pcf.vid | highlight: filter.keyword | slice:3:6}}</label>
                 </div>
             </div>
         </div>
@@ -149,31 +149,61 @@
         <div class="row">
 
             <div class="col-md-6" ng-if="$detailData.pcf.model_number">
-                <div class="form-group row clearfix col-sm-9">
+                <div class="form-group row clearfix">
                     <label>Model Number:</label>&nbsp;
                     <label ng-bind-html="$detailData.pcf.model_number | highlight: filter.keyword"></label>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <div class="form-group row clearfix" ng-if="$detailData.pcf.pccb == 1">
-                    <label>PCCB: Yes</label>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="form-group row clearfix col-sm-9" ng-if="$detailData.pcf.gap_to_msrp">
+                <div class="form-group row clearfix" ng-if="$detailData.pcf.gap_to_msrp">
                     <label>% of MSRP:</label>&nbsp;
                     <label ng-bind-html="$detailData.pcf.gap_to_msrp | highlight: filter.keyword"></label>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <div class="form-group row clearfix col-sm-9" ng-if="$detailData.pcf.body_type">
+                <div class="form-group row clearfix" ng-if="$detailData.pcf.pts">
+                    <label ng-bind-html="'PTS: Yes' | highlight: filter.keyword"></label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group row clearfix" ng-if="$detailData.pcf.lwb_seats">
+                    <label ng-bind-html="'LWB Seats: Yes' | highlight: filter.keyword"></label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group row clearfix" ng-if="$detailData.pcf.longhoood">
+                    <label ng-bind-html="'Longhood: Yes' | highlight: filter.keyword"></label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group row clearfix" ng-if="$detailData.pcf.widebody">
+                    <label ng-bind-html="'Widebody: Yes' | highlight: filter.keyword"></label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group row clearfix" ng-if="$detailData.pcf.pccb == 1">
+                    <label ng-bind-html="'PCCB: Yes' | highlight: filter.keyword"></label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group row clearfix" ng-if="$detailData.pcf.air_cooled == 1">
+                    <label ng-bind-html="'Air-Cooled: Yes' | highlight: filter.keyword"></label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row clearfix" ng-if="$detailData.pcf.body_type">
                     <label>Body Type:</label>&nbsp;
                     <label ng-bind-html="$detailData.pcf.body_type | highlight: filter.keyword"></label>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

@@ -30,8 +30,9 @@
         $scope.bShowPCF = false;
         $scope.bShowBSF = false;
         $('.al-main').css('padding-left', '0px');
+
         $scope.opts = {
-            singleDatePicker: true,
+            //singleDatePicker: true,
             locale: {
                 format: 'YYYY-MM-DD'
             }
@@ -86,6 +87,7 @@
             'filter.bsf_interior',
             'filter.bsf_production_month_from',
             'filter.bsf_production_month_to',
+            'filter.listing_sold_status',
         ], doSearch));
         $scope.auto_trans = [
             {label: 'All', value: ''},
@@ -106,14 +108,71 @@
         $scope.seller_type = [
             {label: 'All', value: ''},
             {label: 'Private Party', value: 'Private Party'},
-            {label: 'Dealer Inventor', value: 'Dealership'}
+            {label: 'Dealership', value: 'Dealership'}
         ];
         $scope.drivetrain = [
             {label: 'All', value: ''},
             {label: '2WD', value: '2WD'},
             {label: '4WD', value: '4WD'}
         ];
+        $scope.sold_status = [
+            {label: 'Yes', value:'1'},
+            {label: 'No', value:'0'},
+        ];
 
+        $scope.states = [
+            {label: 'All', value: ''},
+            {label: 'Alabama' , value: 'AL'},
+            {label: 'Alaska'	, value: 'AK'},
+            {label: 'Arizona'	, value: 'AZ'},
+            {label: 'Arkansas'	, value: 'AR'},
+            {label: 'California'	, value: 'CA'},
+            {label: 'Colorado'	, value: 'CO'},
+            {label: 'Connecticut'	, value: 'CT'},
+            {label: 'Delaware'	, value: 'DE'},
+            {label: 'Florida'	, value: 'FL'},
+            {label: 'Georgia'	, value: 'GA'},
+            {label: 'Hawaii'	, value: 'HI'},
+            {label: 'Idaho'	, value: 'ID'},
+            {label: 'Illinois'	, value: 'IL'},
+            {label: 'Indiana'	, value: 'IN'},
+            {label: 'Iowa'	, value: 'IA'},
+            {label: 'Kansas'	, value: 'KS'},
+            {label: 'Kentucky'	, value: 'KY'},
+            {label: 'Louisiana'	, value: 'LA'},
+            {label: 'Maine'	, value: 'ME'},
+            {label: 'Maryland'	, value: 'MD'},
+            {label: 'Massachusetts'	, value: 'MA'},
+            {label: 'Michigan'	, value: 'MI'},
+            {label: 'Minnesota'	, value: 'MN'},
+            {label: 'Mississippi'	, value: 'MS'},
+            {label: 'Missouri'	, value: 'MO'},
+            {label: 'Montana'	, value: 'MT'},
+            {label: 'Nebraska'	, value: 'NE'},
+            {label: 'Nevada'	, value: 'NV'},
+            {label: 'New Hampshire'	, value: 'NH'},
+            {label: 'New Jersey'	, value: 'NJ'},
+            {label: 'New Mexico'	, value: 'NM'},
+            {label: 'New York'	, value: 'NY'},
+            {label: 'North Carolina'	, value: 'NC'},
+            {label: 'North Dakota'	, value: 'ND'},
+            {label: 'Ohio'	, value: 'OH'},
+            {label: 'Oklahoma'	, value: 'OK'},
+            {label: 'Oregon'	, value: 'OR'},
+            {label: 'Pennsylvania'	, value: 'PA'},
+            {label: 'Rhode Island'	, value: 'RI'},
+            {label: 'South Carolina'	, value: 'SC'},
+            {label: 'South Dakota'	, value: 'SD'},
+            {label: 'Tennessee'	, value: 'TN'},
+            {label: 'Texas'	, value: 'TX'},
+            {label: 'Utah'	, value: 'UT'},
+            {label: 'Vermont'	, value: 'VT'},
+            {label: 'Virginia'	, value: 'VA'},
+            {label: 'Washington'	, value: 'WA'},
+            {label: 'West Virginia'	, value: 'WV'},
+            {label: 'Wisconsin'	, value: 'WI'},
+            {label: 'Wyoming'	, value: 'WY'},
+        ];
         function loadCities() {
 
             Cities.query({}, function(cities){
@@ -189,22 +248,28 @@
             $rootScope.isLoading = true;
 
             var filter = angular.copy($scope.filter);
-            if ( $scope.filter.listing_date.format == null ){
-                filter.listing_date = '';
+            if ( filter.listing_date.startDate.format == null ){
+                filter.listing_date_start = '';
             }else{
-                filter.listing_date = $scope.filter.listing_date.format($scope.opts.locale.format);
+                filter.listing_date_start = filter.listing_date.startDate.format($scope.opts.locale.format);
+            }
+
+            if ( filter.listing_date.endDate.format == null ){
+                filter.listing_date_end = '';
+            }else{
+                filter.listing_date_end = filter.listing_date.endDate.format($scope.opts.locale.format);
             }
 
             //filter.page = $scope.page;
-            if ( typeof(filter.city) === 'object' ) filter.city = filter.city.value;
+            if ( typeof(filter.listing_sold_status) === 'object' ) filter.listing_sold_status = filter.listing_sold_status.value;
             if ( typeof(filter.state) === 'object' ) filter.state = filter.state.value;
             if ( typeof(filter.auto_trans) === 'object' ) filter.auto_trans = filter.auto_trans.value;
             if ( typeof(filter.cond) === 'object' ) filter.cond = filter.cond.value;
             if ( typeof(filter.seller_type) === 'object' ) filter.seller_type = filter.seller_type.value;
             if ( typeof(filter.listing_transmission) === 'object' ) filter.listing_transmission = filter.listing_transmission.value;
             if ( typeof(filter.listing_drivetrain) === 'object' ) filter.listing_drivetrain = filter.listing_drivetrain.value;
-            if ( typeof(filter.listing_engine_size) === 'object' ) filter.listing_engine_size = filter.listing_engine_size.value;
-            if ( typeof(filter.pcf_body_type) === 'object' ) filter.pcf_body_type = filter.pcf_body_type.value;
+            //if ( typeof(filter.listing_engine_size) === 'object' ) filter.listing_engine_size = filter.listing_engine_size.value;
+            //if ( typeof(filter.pcf_body_type) === 'object' ) filter.pcf_body_type = filter.pcf_body_type.value;
             if ( typeof(filter.model_number) === 'object' ) filter.model_number = filter.model_number.value;
             if ( filter.bsf_model_year_from = 1955 & filter.bsf_model_year_to == 2019 ){
                 filter.bsf_model_year_from = '';
@@ -320,8 +385,8 @@
         $scope.$watch('filter.year_from', function (newValue1, oldValue1){
             console.log('1');
         });
-        loadCities();
-        loadStates();
+        //loadCities();
+        //loadStates();
         loadModelNumbers();
         loadOffers();
         loadEngines();
