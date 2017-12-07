@@ -116,6 +116,7 @@
             {label: '4WD', value: '4WD'}
         ];
         $scope.sold_status = [
+            {label: 'All', value: ''},
             {label: 'Yes', value:'1'},
             {label: 'No', value:'0'},
         ];
