@@ -13,6 +13,7 @@
     $scope.bShowMenu = false;
     $scope.bShowActive = true;
     $scope.bShowInactive = true;
+    $scope.keywords = $scope.filter.keyword.split(" ");
 
     $('.al-main').css('padding-left', '0px');
 
@@ -98,4 +99,32 @@
     $scope.setCollaspe();
   }
 
+  angular.module('BlurAdmin.pages.profile')
+    .filter('highlightWord', function() {
+        return function(text, selectedWords) {
+          if(selectedWords.length>0) {
+
+            for (var i = 0; i < selectedWords.length; i++){
+              if (selectedWords[i] == "" ) continue;
+              console.log(text);
+              var regStr = '(?!<span[^>]*>)(' + selectedWords[i] +')(?![^<]*<\/span>)';
+              var pattern = new RegExp(regStr, "gi");
+              text = '' + text;
+              var matches = pattern.exec(text);
+              //text = text.replace(pattern, '<span class="ui-select-highlight">' + selectedWords[i] + '</span>');
+              if(matches != null) {
+                  for (i = 1; i < matches.length; i++) {
+                      text = text.replace(matches[i], '<span class="ui-select-highlight">' + matches[i] + '</span>');
+                  }
+              }
+            }
+
+            return text;
+          }
+          else {
+            return text;
+          }
+        };
+    });
 })();
+
