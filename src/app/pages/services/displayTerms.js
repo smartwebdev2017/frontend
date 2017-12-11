@@ -8,7 +8,7 @@ angular.module('BlurAdmin.pages.services')
             price: true,
             city: false,
             state: false,
-            vin: true,
+            vin: false,
             make: false,
             model: false,
             trim: false,
