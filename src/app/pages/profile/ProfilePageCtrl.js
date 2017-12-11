@@ -108,13 +108,13 @@
               if (selectedWords[i] == "" ) continue;
               console.log(text);
               var regStr = '(?!<span[^>]*>)(' + selectedWords[i] +')(?![^<]*<\/span>)';
-              var pattern = new RegExp(regStr, "gi");
+              var pattern = new RegExp(regStr, "gim");
               text = '' + text;
               var matches = pattern.exec(text);
               //text = text.replace(pattern, '<span class="ui-select-highlight">' + selectedWords[i] + '</span>');
               if(matches != null) {
-                  for (i = 1; i < matches.length; i++) {
-                      text = text.replace(matches[i], '<span class="ui-select-highlight">' + matches[i] + '</span>');
+                  for (var j = 1; j < matches.length; j++) {
+                      text = text.replace(matches[j], '<span class="ui-select-highlight">' + matches[j] + '</span>');
                   }
               }
             }

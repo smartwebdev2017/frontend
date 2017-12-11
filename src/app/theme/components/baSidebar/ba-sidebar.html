@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <input ng-model="filter.title" placeholder="Title" class="form-control" type="text"/>
+                        <input ng-model="filter.title" placeholder="Title" class="form-control" type="text" ng-model-options="{debounce: 1000}"/>
                     </div>
                     <input id="year_value" type="hidden" ng-model="year_value" />
                     <input id="mileage_value" type="hidden" ng-model="mileage_value"  />
@@ -41,7 +41,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <input  ng-model="filter.model"  placeholder="Model" class="form-control" type="search"/>
+                        <input  ng-model="filter.model"  placeholder="Model" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <input  ng-model="filter.description"  ng-change="filter_car()"  placeholder="Description" class="form-control" type="search"/>
+                        <input  ng-model="filter.description"  ng-change="filter_car()"  placeholder="Description" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
                     </div>
                 </div>
             </div>
@@ -70,7 +70,7 @@
             <div class="row">
                 <div class="from">
                     <div class="form-group">
-                        <input  ng-model="filter.mileage_from"  placeholder="Mileage Min" class="form-control" type="search"/>
+                        <input  ng-model="filter.mileage_from"  placeholder="Mileage Min" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
                     </div>
                 </div>
                 <div class="range">
@@ -78,7 +78,7 @@
                 </div>
                 <div class="to">
                     <div class="form-group">
-                        <input  ng-model="filter.mileage_to"  placeholder="Mileage Max" class="form-control" type="search"/>
+                        <input  ng-model="filter.mileage_to"  placeholder="Mileage Max" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
                     </div>
                 </div>
             </div>
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="from">
                     <div class="form-group">
-                        <input  ng-model="filter.price_from"  placeholder="Price Min" class="form-control" type="search"/>
+                        <input  ng-model="filter.price_from"  placeholder="Price Min" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
                     </div>
                 </div>
                 <div class="range">
@@ -106,7 +106,7 @@
                 </div>
                 <div class="to">
                     <div class="form-group">
-                        <input  ng-model="filter.price_to"  placeholder="Price Max" class="form-control" type="search"/>
+                        <input  ng-model="filter.price_to"  placeholder="Price Max" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
                     </div>
                 </div>
             </div>
@@ -122,7 +122,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <input  ng-model="filter.listing_interior_color"  placeholder="Interior" class="form-control" type="search"/>
+                        <input  ng-model="filter.listing_interior_color"  placeholder="Interior" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
                     </div>
                 </div>
             </div>
@@ -130,7 +130,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <input  ng-model="filter.city"  placeholder="City" class="form-control" type="search"/>
+                        <input  ng-model="filter.city"  placeholder="City" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
                     </div>
                 </div>
             </div>
@@ -222,7 +222,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <input  ng-model="filter.vin"  placeholder="VIN" class="form-control" type="search"/>
+                        <input  ng-model="filter.vin"  placeholder="VIN" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
                     </div>
                 </div>
             </div>
@@ -249,7 +249,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <input  ng-model="filter.listing_engine_size"  placeholder="Engine" class="form-control" type="search"/>
+                        <input  ng-model="filter.listing_engine_size"  placeholder="Engine" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
                     </div>
                 </div>
             </div>
@@ -301,7 +301,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <input  ng-model="filter.listing_body_type"  placeholder="Body Type" class="form-control" type="search"/>
+                        <input  ng-model="filter.listing_body_type"  placeholder="Body Type" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
                     </div>
                 </div>
             </div>
@@ -383,7 +383,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <input  ng-model="filter.bsf_model_detail"  placeholder="Model" class="form-control" type="search"/>
+                        <input  ng-model="filter.bsf_model_detail"  placeholder="Model" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
                     </div>
                 </div>
             </div>
@@ -391,7 +391,7 @@
             <div class="row">
                 <div class="from">
                     <div class="form-group">
-                        <input  ng-model="filter.bsf_msrp_from"  placeholder="MSRP Min" class="form-control" type="search" />
+                        <input  ng-model="filter.bsf_msrp_from"  placeholder="MSRP Min" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
                     </div>
                 </div>
                 <div class="range">
@@ -399,7 +399,7 @@
                 </div>
                 <div class="to">
                     <div class="form-group">
-                        <input  ng-model="filter.bsf_msrp_to"  placeholder="MSRP Max" class="form-control" type="search"/>
+                        <input  ng-model="filter.bsf_msrp_to"  placeholder="MSRP Max" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
                     </div>
                 </div>
             </div>
@@ -407,7 +407,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <input  ng-model="filter.bsf_exterior"  placeholder="Exterior" class="form-control" type="search"/>
+                        <input  ng-model="filter.bsf_exterior"  placeholder="Exterior" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
                     </div>
                 </div>
             </div>
@@ -415,7 +415,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <input  ng-model="filter.bsf_interior"  placeholder="Interior" class="form-control" type="search"/>
+                        <input  ng-model="filter.bsf_interior"  placeholder="Interior" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
                     </div>
                 </div>
             </div>
@@ -423,7 +423,7 @@
             <div class="row">
                 <div class="from">
                     <div class="form-group">
-                        <input  ng-model="filter.bsf_production_month_from"  placeholder="Prod Yr Min" class="form-control" type="search"/>
+                        <input  ng-model="filter.bsf_production_month_from"  placeholder="Prod Yr Min" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
                     </div>
                 </div>
                 <div class="range">
@@ -431,7 +431,7 @@
                 </div>
                 <div class="to">
                     <div class="form-group">
-                        <input  ng-model="filter.bsf_production_month_to"  placeholder="Prod Yr Max" class="form-control" type="search"/>
+                        <input  ng-model="filter.bsf_production_month_to"  placeholder="Prod Yr Max" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
                     </div>
                 </div>
             </div>
@@ -470,7 +470,7 @@
             <div class="row">
                 <div class="from">
                     <div class="form-group">
-                        <input  ng-model="filter.pcf_msrp_from"  placeholder="%MSRP Min" class="form-control" type="search"/>
+                        <input  ng-model="filter.pcf_msrp_from"  placeholder="%MSRP Min" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
                     </div>
                 </div>
                 <div class="range">
@@ -478,7 +478,7 @@
                 </div>
                 <div class="to">
                     <div class="form-group">
-                        <input  ng-model="filter.pcf_msrp_to"  placeholder="%MSRP Max" class="form-control" type="search"/>
+                        <input  ng-model="filter.pcf_msrp_to"  placeholder="%MSRP Max" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
                     </div>
                 </div>
             </div>
@@ -597,7 +597,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <input  ng-model="filter.pcf_id"  placeholder="PCF ID" class="form-control" type="search"/>
+                        <input  ng-model="filter.pcf_id"  placeholder="PCF ID" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
                     </div>
                 </div>
             </div>
