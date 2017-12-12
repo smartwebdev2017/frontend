@@ -19,9 +19,11 @@
 
     $scope.readMore = function(){
       $scope.numLimit = 100000;
+      $('.panel-body-description').css('height', '');
     };
     $scope.readLess = function(){
       $scope.numLimit = 150;
+      $('.panel-body-description').css('height', '212px');
     };
     $scope.showModal = function (item) {
       $uibModal.open({
@@ -32,7 +34,11 @@
             item.href = link;
           });
     };
-
+    function addCommas(x) {
+        var parts = x.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
+    }
     $scope.getCarDetail = function(vin) {
         $rootScope.isLoading = true;
 
@@ -42,7 +48,10 @@
         OfferDetail.get({id:vin}, function (offers) {
             $rootScope.isLoading = false;
 
-            $rootScope.$detailData = offers[0]
+            $rootScope.$detailData = offers[0];
+            $rootScope.$detailData.price = addCommas($rootScope.$detailData.price);
+            $rootScope.$detailData.mileage = addCommas($rootScope.$detailData.mileage);
+            $('.panel-body-description').css('height', '212px');
         }, function(err){
             $rootScope.isLoading = false;
             $rootScope.handleErrors($scope,err);
@@ -106,17 +115,11 @@
 
             for (var i = 0; i < selectedWords.length; i++){
               if (selectedWords[i] == "" ) continue;
-              console.log(text);
-              var regStr = '(?!<span[^>]*>)(' + selectedWords[i] +')(?![^<]*<\/span>)';
-              var pattern = new RegExp(regStr, "gim");
+              var regStr = '(?!(?:[^<]+>|[^>]+<\/.*?>))(' + selectedWords[i] + ')';
+              var pattern = new RegExp(regStr, "gi");
               text = '' + text;
-              var matches = pattern.exec(text);
-              //text = text.replace(pattern, '<span class="ui-select-highlight">' + selectedWords[i] + '</span>');
-              if(matches != null) {
-                  for (var j = 1; j < matches.length; j++) {
-                      text = text.replace(matches[j], '<span class="ui-select-highlight">' + matches[j] + '</span>');
-                  }
-              }
+              var matches = text.match(pattern);
+              text = text.replace(pattern, '<span class="ui-select-highlight">' + selectedWords[i] + '</span>');
             }
 
             return text;
