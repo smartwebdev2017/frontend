@@ -51,6 +51,7 @@
             $rootScope.$detailData = offers[0];
             $rootScope.$detailData.price = addCommas($rootScope.$detailData.price);
             $rootScope.$detailData.mileage = addCommas($rootScope.$detailData.mileage);
+            $rootScope.$detailData.vin.msrp = addCommas($rootScope.$detailData.vin.msrp);
             $('.panel-body-description').css('height', '212px');
         }, function(err){
             $rootScope.isLoading = false;
@@ -120,6 +121,12 @@
               text = '' + text;
               var matches = text.match(pattern);
               text = text.replace(pattern, '<span class="ui-select-highlight">' + selectedWords[i] + '</span>');
+
+              //if (matches != null) {
+              //    for (var j = 0; j < matches.length; j++) {
+              //        text = text.substring(0, matches[j] - 1) + '<span class="ui-select-highlight">' + matches[j] + '</span>' + text.substring(matches[j] + matches[j].length, text.length);
+              //    }
+              //}
             }
 
             return text;

@@ -272,12 +272,9 @@
                     pushData(data, offers.results[i]);
                 }
 
-                //$rootScope.$carData = offers.results;
-                //$rootScope.$carData1 = offers.results;
                 $rootScope.$next = offers.next;
                 $rootScope.$prev = offers.previous;
                 $rootScope.$dataSource = data;
-                //$rootScope.$gridApi.grid.refresh();
 
             }, function(err){
                 $rootScope.isLoading = false;
@@ -330,12 +327,9 @@
                         pushData(data, offers.results[i]);
                     }
 
-                    //$rootScope.$carData = offers.results;
-                    //$rootScope.$carData1 = offers.results;
                     $rootScope.$next = offers.next;
                     $rootScope.$prev = offers.previous;
                     $rootScope.$dataSource = data;
-                    //$rootScope.$gridApi.grid.refresh();
                 })
                 .error(function(offers){
 
@@ -362,12 +356,9 @@
                         pushData(data, offers.results[i]);
                     }
 
-                    //$rootScope.$carData = offers.results;
-                    //$rootScope.$carData1 = offers.results;
                     $rootScope.$next = offers.next;
                     $rootScope.$prev = offers.previous;
                     $rootScope.$dataSource = data;
-                    //$rootScope.$gridApi.grid.refresh();
                 })
                 .error(function(response){
 
