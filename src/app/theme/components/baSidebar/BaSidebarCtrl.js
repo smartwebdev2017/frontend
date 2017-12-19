@@ -1,7 +1,3 @@
-/**
- * @author v.lugovksy
- * created on 16.12.2015
- */
 (function () {
     'use strict';
 
@@ -15,13 +11,6 @@
         $scope.filter = SearchOptions.filter;
         $scope.filterOptions = SearchOptions.options;
         var listing_year_slider = $('.listing_year_slider');
-        //noUiSlider.create(listing_year_slider, {
-        //    start: [1000],
-        //    range: {
-        //        'min':[1],
-        //        'max':[2000]
-        //    }
-        //});
         var off=[];
 
         $scope.load = loadOffers;
@@ -119,10 +108,10 @@
         $scope.sold_status = [
             {label: 'All Vehicles', value: ''},
             {label: 'Currently For Sale', value:'0'},
-            {label: 'Not Currently for Sale', value:'1'},
+            {label: 'Not Currently for Sale', value:'1'}
         ];
 
-        $scope.filter.listing_sold_status= $scope.sold_status[1]
+        $scope.filter.listing_sold_status= $scope.sold_status[1];
 
         $scope.states = [
             {label: 'All', value: ''},
@@ -175,7 +164,7 @@
             {label: 'Washington'	, value: 'WA'},
             {label: 'West Virginia'	, value: 'WV'},
             {label: 'Wisconsin'	, value: 'WI'},
-            {label: 'Wyoming'	, value: 'WY'},
+            {label: 'Wyoming'	, value: 'WY'}
         ];
         function loadCities() {
 
@@ -250,8 +239,8 @@
 
         function loadOffers(){
             $rootScope.isLoading = true;
-
             var filter = angular.copy($scope.filter);
+
             if ( filter.listing_date.startDate.format == null ){
                 filter.listing_date_start = '';
             }else{
@@ -264,12 +253,8 @@
                 filter.listing_date_end = filter.listing_date.endDate.format($scope.opts.locale.format);
             }
 
-            //filter.page = $scope.page;
             if ( typeof(filter.listing_sold_status) === 'object' ) {
                 filter.listing_sold_status = filter.listing_sold_status.value;
-            }else{
-                //filter.listing_sold_status = $scope.sold_status[1];
-                //filter.listing_sold_status = filter.listing_sold_status.value;
             }
             if ( typeof(filter.state) === 'object' ) filter.state = filter.state.value;
             if ( typeof(filter.auto_trans) === 'object' ) filter.auto_trans = filter.auto_trans.value;
@@ -277,8 +262,6 @@
             if ( typeof(filter.seller_type) === 'object' ) filter.seller_type = filter.seller_type.value;
             if ( typeof(filter.listing_transmission) === 'object' ) filter.listing_transmission = filter.listing_transmission.value;
             if ( typeof(filter.listing_drivetrain) === 'object' ) filter.listing_drivetrain = filter.listing_drivetrain.value;
-            //if ( typeof(filter.listing_engine_size) === 'object' ) filter.listing_engine_size = filter.listing_engine_size.value;
-            //if ( typeof(filter.pcf_body_type) === 'object' ) filter.pcf_body_type = filter.pcf_body_type.value;
             if ( typeof(filter.model_number) === 'object' ) filter.model_number = filter.model_number.value;
             if ( filter.bsf_model_year_from = 1955 & filter.bsf_model_year_to == 2019 ){
                 filter.bsf_model_year_from = '';
@@ -335,30 +318,22 @@
                     });
                 }
 
-                //$rootScope.$carData = offers.results;
-                //$rootScope.$carData1 = offers.results;
                 $rootScope.$next = offers.next;
                 $rootScope.$prev = offers.previous;
-
                 $rootScope.$dataSource = data;
             }, function(err){
                 $rootScope.isLoading = false;
                 $rootScope.handleErrors($scope,err);
             });
         }
-        function getFilterDate(){
-
-        }
-
         function doSearch(){
-            getFilterDate();
             if (!$rootScope.isLoading) {
                 $scope.page = 0;
                 $scope.offers = [];
 
                 loadOffers()
             }
-        };
+        }
         $scope.doSearch = function(){
             doSearch();
         };
@@ -385,17 +360,9 @@
         $scope.setBSFCollapse = function(){
             $scope.bShowBSF = !$scope.bShowBSF;
         };
-        $scope.update = function(){
-            console.log('test');
-        }
-        //slider.on('change', function(obj){
-        //   console.log(obj);
-        //});
         $scope.$watch('filter.year_from', function (newValue1, oldValue1){
             console.log('1');
         });
-        //loadCities();
-        //loadStates();
         loadModelNumbers();
         loadOffers();
         loadEngines();

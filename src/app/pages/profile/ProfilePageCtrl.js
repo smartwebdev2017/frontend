@@ -100,7 +100,6 @@
         $rootScope.isLoading = true;
 
         var filter = angular.copy($scope.filter);
-        //filter.page = $scope.page;
 
         ActiveOfferDetail.get({id:vin}, function (offers) {
             $rootScope.isLoading = false;
@@ -115,7 +114,6 @@
         $rootScope.isLoading = true;
 
         var filter = angular.copy($scope.filter);
-        //filter.page = $scope.page;
 
         InactiveOfferDetail.get({id:vin}, function (offers) {
             $rootScope.isLoading = false;
@@ -159,13 +157,7 @@
               text = '' + text;
               var matches = text.match(pattern);
               text = text.replace(pattern, '<span class="ui-select-highlight">' + selectedWords[i] + '</span>');
-
-              //if (matches != null) {
-              //    for (var j = 0; j < matches.length; j++) {
-              //        text = text.substring(0, matches[j] - 1) + '<span class="ui-select-highlight">' + matches[j] + '</span>' + text.substring(matches[j] + matches[j].length, text.length);
-              //    }
-              //}
-            }
+           }
 
             return text;
           }
