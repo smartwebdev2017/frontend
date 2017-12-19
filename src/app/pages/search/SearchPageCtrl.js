@@ -20,12 +20,6 @@
         $scope.gridOptions = {
             onRegisterApi: function(gridApi){
                 $rootScope.$gridApi = gridApi;
-                //gridApi.cellNav.on.navigate($scope, function(selected){
-                //   if ('.ui-grid-cell-focus ') {
-                //       selectedRow = selected.row.uid;
-                //       gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
-                //   }
-                //});
 
                 gridApi.selection.on.rowSelectionChanged($scope, function(row){
                     $state.go("normal.detail", {vin:row.entity.pcf__vid});
@@ -92,13 +86,9 @@
             {name: 'pcf__listing_age', displayName:'Listing Age', enableHiding: false},
             {name: 'pcf__body_type', displayName:'Body Type', enableHiding: false},
             {name: 'pcf__auto_trans', displayName:'Auto Trans Type', enableHiding: false},
-
-
-            //{name: 'Detail Link', width: 100, headerCellTemplate: settingTemplate, cellTemplate:'<a class="email-link" ng-href="/#/normal/detail/{{row.entity.PCF}}">Detail View</a>'}
         ];
-        //$scope.gridOptions.data = [{"id":1, "name":"test"},{"id":2, "name":"test"}];
-        var off=[];
 
+        var off=[];
         $scope.load = loadOffers;
         $scope.colums = DisplayOptions.colums;
 
@@ -167,13 +157,8 @@
             }
 
             if ( $scope.chkCounts <= 9){
-                //$scope.chkAvailable = true;
                 setDisplayOptions();
-            } else {
-                //$scope.chkAvailable = false;
             }
-
-
 
             $rootScope.$gridApi.grid.refresh();
         }
@@ -183,8 +168,8 @@
             data.push({
                 'ID': obj.id,
                 'listing_title': obj.listing_title,
-                'mileage':obj.mileage.toLocaleString(),
-                'price': '$' + (obj.price.toLocaleString()),
+                'mileage':obj.mileage !=0?obj.mileage.toLocaleString():'',
+                'price': obj.price != 0?'$' + (obj.price.toLocaleString()):'',
                 'city': $scope.colums['city']?obj.city:'' ,
                 'state': $scope.colums['state']?obj.state:'',
                 'vin_code': obj.vin_code,

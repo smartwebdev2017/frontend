@@ -297,8 +297,8 @@
                     data.push({
                         'ID': offers.results[i].id,
                         'listing_title': offers.results[i].listing_title,
-                        'mileage': offers.results[i].mileage.toLocaleString(),
-                        'price': '$'+ (offers.results[i].price.toLocaleString()),
+                        'mileage': offers.results[i].mileage!=0?offers.results[i].mileage.toLocaleString():'',
+                        'price': offers.results[i].price!=0?'$'+ (offers.results[i].price.toLocaleString()):'',
                         'city': offers.results[i].city,
                         'state': offers.results[i].state,
                         'vin_code': offers.results[i].vin_code,

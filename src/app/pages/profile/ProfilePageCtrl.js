@@ -49,11 +49,19 @@
             $rootScope.isLoading = false;
 
             $rootScope.$detailData = offers[0];
+
+            if ($rootScope.$detailData.price == 0 ) {
+                $rootScope.$detailData.price = '';
+            }
+
             if ( $rootScope.$detailData.price != null) {
                 $rootScope.$detailData.price = addCommas($rootScope.$detailData.price);
             }
 
-            if ($rootScope.$detailData.mileage != null) {
+            if ($rootScope.$detailData.mileage == 0 ) {
+                $rootScope.$detailData.mileage = '';
+            }
+            if ($rootScope.$detailData.mileage != null ) {
                 $rootScope.$detailData.mileage = addCommas($rootScope.$detailData.mileage);
             }
 
