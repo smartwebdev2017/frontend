@@ -93,8 +93,8 @@
                     <div class="panel-body-description">
                         <p class="p-with-code" ng-bind-html="$detailData.listing_description | highlightWord: keywords"></p>
                     </div>
-                    <button ng-if="numLimit == 150" type='button' ng-click="readMore()">read more</button>
-                    <button ng-if="numLimit > 150" type='button' ng-click="readLess()">read less</button>
+                    <button ng-if="numLimit == 150" id="btn_more" type='button' ng-click="readMore()">read more</button>
+                    <button ng-if="numLimit > 150" id="btn_less" type='button' ng-click="readLess()">read less</button>
                 </div>
             </div>
 

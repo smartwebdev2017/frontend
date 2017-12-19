@@ -49,10 +49,31 @@
             $rootScope.isLoading = false;
 
             $rootScope.$detailData = offers[0];
-            $rootScope.$detailData.price = addCommas($rootScope.$detailData.price);
-            $rootScope.$detailData.mileage = addCommas($rootScope.$detailData.mileage);
-            $rootScope.$detailData.vin.msrp = addCommas($rootScope.$detailData.vin.msrp);
-            $('.panel-body-description').css('height', '212px');
+            if ( $rootScope.$detailData.price != null) {
+                $rootScope.$detailData.price = addCommas($rootScope.$detailData.price);
+            }
+
+            if ($rootScope.$detailData.mileage != null) {
+                $rootScope.$detailData.mileage = addCommas($rootScope.$detailData.mileage);
+            }
+
+            if ($rootScope.$detailData.vin != null) {
+                $rootScope.$detailData.vin.msrp = addCommas($rootScope.$detailData.vin.msrp);
+            }
+
+            if ($('.panel-body-description').length == 1 ) {
+                $('.panel-body-description').css('height', '');
+                var original_height = $('.panel-body-description')[0].offsetHeight;
+                if (original_height < 212) {
+                    $('#btn_more').css('display', 'none');
+                    $('#btn_less').css('display', 'none');
+                } else {
+                    $('#btn_more').css('display', 'block');
+                    $('#btn_less').css('display', 'block');
+                    $('.panel-body-description').css('height', '212px');
+                }
+            }
+
         }, function(err){
             $rootScope.isLoading = false;
             $rootScope.handleErrors($scope,err);
