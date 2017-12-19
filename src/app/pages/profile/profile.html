@@ -55,11 +55,11 @@
                     </div>
                 </div>
 
-                <div class="form-group row clearfix col-sm-9" ng-if="$detailData.exterior_color">
+                <div class="form-group row clearfix col-sm-9" ng-if="$detailData.listing_exterior_color">
                     <label>Exterior:</label>
                     <label ng-bind-html="$detailData.listing_exterior_color | highlightWord: keywords"></label>
                 </div>
-                <div class="form-group row clearfix col-sm-9" ng-if="$detailData.interior_color">
+                <div class="form-group row clearfix col-sm-9" ng-if="$detailData.listing_interior_color">
                     <label>Interior:</label>
                     <label ng-bind-html="$detailData.listing_interior_color | highlightWord: keywords"></label>
                 </div>
