@@ -66,10 +66,13 @@
 
                 <div class="form-group row clearfix">
                     <div class="col-sm-9">
-                        <div class="left" ng-if="$detailData.listing_transmission"><label ng-bind-html="$detailData.listing_transmission | highlightWord: keywords"></label>,&nbsp;</div>
-                        <div class="left" ng-if="$detailData.listing_engine_size"><label ng-bind-html="$detailData.listing_engine_size | highlightWord: keywords"></label>,&nbsp;</div>
-                        <div class="left" ng-if="$detailData.listing_drivetrain"><label ng-bind-html="$detailData.listing_drivetrain | highlightWord: keywords"></label>,&nbsp;</div>
-                        <div class="left" ng-if="$detailData.vhr_link !='' "><a class="detail_link" target="_blank" href={{$detailData.vhr_link}}>&nbsp;VHR</a></div>
+                        <div class="left" ng-if="$detailData.listing_transmission"><label ng-bind-html="$detailData.listing_transmission | highlightWord: keywords"></label></div>
+                        <div class="left" ng-if="$detailData.listing_engine_size && $detailData.listing_transmission">,&nbsp;<label ng-bind-html="$detailData.listing_engine_size | highlightWord: keywords"></label></div>
+                        <div class="left" ng-if="$detailData.listing_engine_size && !$detailData.listing_transmission"><label ng-bind-html="$detailData.listing_engine_size | highlightWord: keywords"></label></div>
+                        <div class="left" ng-if="$detailData.listing_drivetrain && !$detailData.listing_transmission && !$detailData.listing_engine_size"><label ng-bind-html="$detailData.listing_drivetrain | highlightWord: keywords"></label></div>
+                        <div class="left" ng-if="$detailData.listing_drivetrain && ($detailData.listing_transmission || $detailData.listing_engine_size)">,&nbsp;<label ng-bind-html="$detailData.listing_drivetrain | highlightWord: keywords"></label></div>
+                        <div class="left" ng-if="$detailData.vhr_link !='' && ($detailData.listing_transmission || $detailData.listing_engine_size || $detailData.listing_drivetrain)">,&nbsp;<a class="detail_link" target="_blank" href={{$detailData.vhr_link}}>VHR</a></div>
+                        <div class="left" ng-if="$detailData.vhr_link !='' && !$detailData.listing_transmission && !$detailData.listing_engine_size && !$detailData.listing_drivetrain"><a class="detail_link" target="_blank" href={{$detailData.vhr_link}}>VHR</a></div>
                     </div>
                 </div>
 
