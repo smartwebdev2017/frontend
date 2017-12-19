@@ -147,8 +147,8 @@
             </div>
         </div>
 
-        <h3 ng-if="$detailData.pcf" class="with-line">PCF Data</h3>
-        <div ng-if="$detailData.pcf" class="row">
+        <h3 ng-if="!pcf_is_empty" class="with-line">PCF Data</h3>
+        <div ng-if="!pcf_is_empty" class="row">
 
             <div class="col-md-6" ng-if="$detailData.pcf.model_number">
                 <div class="form-group row clearfix">
