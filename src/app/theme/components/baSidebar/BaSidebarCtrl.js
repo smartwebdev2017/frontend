@@ -88,6 +88,7 @@
             'filter.bsf_production_month_from',
             'filter.bsf_production_month_to',
             'filter.listing_sold_status',
+            'filter.bsf_options',
         ], doSearch));
         $scope.auto_trans = [
             {label: 'All', value: ''},
