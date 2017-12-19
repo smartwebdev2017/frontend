@@ -66,9 +66,9 @@
 
                 <div class="form-group row clearfix">
                     <div class="col-sm-9">
-                        <label ng-if="$detailData.listing_transmission"  ng-bind-html="$detailData.listing_transmission | highlightWord: keywords">,&nbsp;</label>
-                        <label ng-if="$detailData.listing_engine_size"  ng-bind-html="$detailData.listing_engine_size | highlightWord: keywords">,&nbsp;</label>
-                        <label ng-if="$detailData.listing_drivetrain" ng-bind-html="$detailData.listing_drivetrain | highlightWord: keywords"></label>
+                        <div ng-if="$detailData.listing_transmission"><label ng-bind-html="$detailData.listing_transmission | highlightWord: keywords"></label>,&nbsp;</div>
+                        <div ng-if="$detailData.listing_engine_size"><label ng-bind-html="$detailData.listing_engine_size | highlightWord: keywords"></label>,&nbsp;</div>
+                        <div ng-if="$detailData.listing_drivetrain"><label ng-bind-html="$detailData.listing_drivetrain | highlightWord: keywords"></label></div>
                         <a class="detail_link" target="_blank" ng-if="$detailData.vhr_link !='' " href={{$detailData.vhr_link}}>&nbsp;VHR</a>
                     </div>
                 </div>
