@@ -19,9 +19,8 @@
                 </div>
             </div>
         </div>
-        <h3 class="with-line">Listing</h3>
-
-        <div class="row">
+        <h3 ng-if="$detailData" class="with-line">Listing</h3>
+        <div ng-if="$detailData" class="row">
             <div class="col-md-6">
                 <div class="form-group row clearfix" ng-if="$detailData.listing_title">
                     <div class="col-sm-9">
@@ -148,8 +147,8 @@
             </div>
         </div>
 
-        <h3 class="with-line">PCF Data</h3>
-        <div class="row">
+        <h3 ng-if="$detailData.pcf" class="with-line">PCF Data</h3>
+        <div ng-if="$detailData.pcf" class="row">
 
             <div class="col-md-6" ng-if="$detailData.pcf.model_number">
                 <div class="form-group row clearfix">
