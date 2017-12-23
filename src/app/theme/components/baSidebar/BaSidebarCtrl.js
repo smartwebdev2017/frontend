@@ -212,6 +212,8 @@
         function loadPcfbodies() {
             Pcfbodies.query({}, function(pcfbodies){
                 $scope.pcfbodies = [];
+                $scope.pcfbodies.push({'label':'All','value':''});
+
                 for ( var index = 0; index<pcfbodies.length; index++){
                     var temp= {};
                     temp['label'] = pcfbodies[index]['body_type'];
@@ -226,6 +228,8 @@
         function loadModelNumbers() {
             Vins.query({}, function(vins){
                 $scope.model_numbers = [];
+                $scope.model_numbers.push({'label':'All','value':''});
+
                 for ( var index = 0; index<vins.length; index++){
                     var temp= {};
                     temp['label'] = vins[index]['model_number'];
@@ -263,6 +267,7 @@
             if ( typeof(filter.listing_transmission) === 'object' ) filter.listing_transmission = filter.listing_transmission.value;
             if ( typeof(filter.listing_drivetrain) === 'object' ) filter.listing_drivetrain = filter.listing_drivetrain.value;
             if ( typeof(filter.model_number) === 'object' ) filter.model_number = filter.model_number.value;
+            if ( typeof(filter.pcf_body_type) === 'object' ) filter.pcf_body_type = filter.pcf_body_type.value;
             if ( filter.bsf_model_year_from = 1955 & filter.bsf_model_year_to == 2019 ){
                 filter.bsf_model_year_from = '';
                 filter.bsf_model_year_to = '';
@@ -288,7 +293,7 @@
                         'listing_make': offers.results[i].listing_make,
                         'listing_model': offers.results[i].listing_model,
                         'listing_trim': offers.results[i].listing_trim,
-                        'listing_date': offers.results[i].listing_date.slice(0,10),
+                        //'listing_date': offers.results[i].listing_date.slice(0,10),
                         'pcf__vid': offers.results[i].pcf.vid,
                         'cond': offers.results[i].cond,
                         'listing_year': offers.results[i].listing_year,

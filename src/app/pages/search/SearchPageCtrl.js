@@ -234,6 +234,7 @@
             if ( typeof(filter.listing_transmission) === 'object' ) filter.listing_transmission = filter.listing_transmission.value;
             if ( typeof(filter.listing_drivetrain) === 'object' ) filter.listing_drivetrain = filter.listing_drivetrain.value;
             if ( typeof(filter.model_number) === 'object' ) filter.model_number = filter.model_number.value;
+            if ( typeof(filter.pcf_body_type) === 'object' ) filter.pcf_body_type = filter.pcf_body_type.value;
             if ( filter.bsf_model_year_from = 1955 & filter.bsf_model_year_to == 2019 ){
                 filter.bsf_model_year_from = '';
                 filter.bsf_model_year_to = '';
