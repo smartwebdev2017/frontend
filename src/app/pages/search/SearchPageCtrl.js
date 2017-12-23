@@ -57,7 +57,7 @@
             {name: 'state', displayName:'State',enableHiding: false},
             {name: 'vin_code', displayName:'VIN', enableHiding: false},
             {name: 'listing_make', displayName:'Make', enableHiding: false},
-            {name: 'listing_model', displayName:'(L) Model', enableHiding: false},
+            {name: 'listing_model', displayName:'(L) Model Detail', enableHiding: false},
             {name: 'listing_trim', displayName:'Trim', enableHiding: false},
             {name: 'listing_date', displayName:'Date', width:100, enableHiding: false},
             {name: 'cond', displayName:'Condition', width:60, enableHiding: false},

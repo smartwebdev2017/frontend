@@ -214,8 +214,8 @@
                 $scope.pcfbodies = [];
                 for ( var index = 0; index<pcfbodies.length; index++){
                     var temp= {};
-                    temp['label'] = pcfbodies[index]['name'];
-                    temp['value'] = pcfbodies[index]['name'];
+                    temp['label'] = pcfbodies[index]['body_type'];
+                    temp['value'] = pcfbodies[index]['body_type'];
                     $scope.pcfbodies.push(temp);
                 }
             }, function(err){
