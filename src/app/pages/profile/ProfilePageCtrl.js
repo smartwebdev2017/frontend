@@ -11,8 +11,8 @@
     $scope.filter = SearchOptions.filter;
     $scope.numLimit = 150;
     $scope.bShowMenu = false;
-    $scope.bShowActive = true;
-    $scope.bShowInactive = true;
+    $scope.bShowActive = false;
+    $scope.bShowInactive = false;
     $scope.keywords = $scope.filter.keyword.split(" ");
 
     $('.al-main').css('padding-left', '0px');
@@ -105,6 +105,12 @@
             $rootScope.isLoading = false;
 
             $rootScope.$active = offers;
+            if (offers.length>0) {
+                $scope.bShowActive = true;
+            } else {
+                $scope.bShowActive = false;
+            }
+
         }, function(err){
             $rootScope.isLoading = false;
             $rootScope.handleErrors($scope,err);
@@ -119,6 +125,11 @@
             $rootScope.isLoading = false;
 
             $rootScope.$inactive = offers;
+            if (offers.length>0) {
+                $scope.bShowInactive = true;
+            } else {
+                $scope.bShowInactive = false;
+            }
         }, function(err){
             $rootScope.isLoading = false;
             $rootScope.handleErrors($scope,err);
