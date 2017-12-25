@@ -293,7 +293,7 @@
                         'listing_make': offers.results[i].listing_make,
                         'listing_model': offers.results[i].listing_model,
                         'listing_trim': offers.results[i].listing_trim,
-                        //'listing_date': offers.results[i].listing_date.slice(0,10),
+                        'listing_date': offers.results[i].listing_date.slice(0,10),
                         'pcf__vid': offers.results[i].pcf.vid,
                         'cond': offers.results[i].cond,
                         'listing_year': offers.results[i].listing_year,

@@ -138,7 +138,12 @@
     $scope.setInactiveCollapse = function(){
         $scope.bShowInactive = !$scope.bShowInactive;
     };
-
+    $scope.getActiveListingByIndex = function(index){
+        $rootScope.$detailData = $rootScope.$active[index];
+    };
+    $scope.getInactiveListingByIndex = function(index){
+        $rootScope.$detailData = $rootScope.$inactive[index];
+    };
     $scope.getCarDetail($stateParams.vin);
     getActiveListings($stateParams.vin);
     getInactiveListings($stateParams.vin);

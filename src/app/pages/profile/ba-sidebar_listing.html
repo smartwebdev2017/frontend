@@ -32,7 +32,7 @@
         </div>
         <div ng-show="bShowInactive" class="content">
             <div class="row">
-                <ul>
+                <ul style="margin:0 0 0 -20px;">
                     <li class="history-items" ng-repeat="item in $inactive">
                         <a class="email-link" ng-click="getInactiveListingByIndex($index)">{{item.listing_date | limitTo: 10}}</a>
                     </li>

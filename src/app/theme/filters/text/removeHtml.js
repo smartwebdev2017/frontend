@@ -17,8 +17,20 @@
   }
 
   function slice(){
-    return function(str, start, end){
-      return str?str.slice(start, end):'';
+    return function(str){
+        if (str != undefined) {
+          var regStr = '\<span .*>(.*)\<\/span>';
+          var pattern = new RegExp(regStr, "gi");
+          str = '' + str;
+          var value = pattern.exec(str);
+          if (value != null) {
+            var h_value = value[1].slice(0, 3) + "-" + value[1].slice(3, 6);
+            str = str.replace(value[1], h_value);
+            return str;
+          }
+
+          return str.slice(0, 3) + "-" + str.slice(3, 6);
+        }
     }
   }
 

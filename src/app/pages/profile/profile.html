@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="detail_pcfid">
-                    <label>{{$detailData.pcf.vid | highlight: filter.keyword | slice:0:3}}-{{$detailData.pcf.vid | highlight: filter.keyword | slice:3:6}}</label>
+                    <label ng-bind-html="$detailData.pcf.vid | highlight: filter.keyword | slice"></label>
                 </div>
             </div>
         </div>
