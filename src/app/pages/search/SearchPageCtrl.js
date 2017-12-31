@@ -4,9 +4,11 @@
     angular.module('BlurAdmin.pages.search')
         .controller('SearchPageCtrl', SearchPageCtrl);
 
-    function SearchPageCtrl($scope, $window, $rootScope, $filter, $location, $timeout, $interval, $http, $state, $stateParams, CFG, Offer, Cities, States, Vins, SearchOptions, DisplayOptions, $uibModal, baProgressModal, uiGridConstants){
+    function SearchPageCtrl($scope, $window, $rootScope, $filter, $location, $timeout, BSLookup, $http, $state, $stateParams, CFG, Offer, Cities, States, Vins, SearchOptions, DisplayOptions, $uibModal, baProgressModal, uiGridConstants){
         $scope.offer = {};
         $scope.filter = SearchOptions.filter;
+        $scope.resetFacets = SearchOptions.resetFacets;
+        $scope.resetDisplayColumns = DisplayOptions.resetDisplayColumns;
         $scope.filterOptions = SearchOptions.options;
         $scope.data = [];
         var settingTemplate = '<div>Detail Link<button type="button" class="setting_btn" data-toggle="modal" ng-click="open()"><i class="ion-gear-a"></i></button></div>';
@@ -147,6 +149,14 @@
             }
 
         };
+        $scope.reset = function(){
+            //$scope.resetFacets();
+            $scope.resetDisplayColumns();
+            //$scope.filter = SearchOptions.filter;
+            $scope.colums = DisplayOptions.colums;
+            setDisplayOptions();
+            //$window.location.reload();
+        };
         function doUpdateCols(val){
             $scope.chkCounts = 0;
 
@@ -246,11 +256,29 @@
                 $rootScope.$next_list = {};
                 var data = [];
 
-                for ( var i = 0;  i< offers.results.length; i++){
-                    var record = {};
-                    if ( i< offers.results.length - 1 )
-                        if (offers.results[i+1].pcf != null ) $rootScope.$next_list[offers.results[i].pcf.vid] = offers.results[i+1].pcf.vid;
-                    pushData(data, offers.results[i]);
+                if (offers.results.length == 0){
+                    if (filter.keyword.length != 17) return;
+
+                    BSLookup.get({id:filter.keyword}, function (offers) {
+                        $rootScope.isLoading = false;
+
+                        $rootScope.$active = offers;
+                        if (offers.length>0) {
+                            $scope.bShowActive = true;
+                        } else {
+                            $scope.bShowActive = false;
+                        }
+                    }, function(err){
+                        $rootScope.isLoading = false;
+                        $rootScope.handleErrors($scope,err);
+                    });
+                }else {
+                    for (var i = 0; i < offers.results.length; i++) {
+                        var record = {};
+                        if (i < offers.results.length - 1)
+                            if (offers.results[i + 1].pcf != null) $rootScope.$next_list[offers.results[i].pcf.vid] = offers.results[i + 1].pcf.vid;
+                        pushData(data, offers.results[i]);
+                    }
                 }
 
                 $rootScope.$next = offers.next;

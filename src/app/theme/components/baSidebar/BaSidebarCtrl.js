@@ -5,7 +5,7 @@
         .controller('BaSidebarCtrl', BaSidebarCtrl);
 
     /** @ngInject */
-    function BaSidebarCtrl($scope, $rootScope, $filter, $location, $timeout, $interval, $http, $state, $stateParams, CFG, Offer, ActiveOfferDetail, Cities, States, Vins, Engines, Pcfbodies, SearchOptions){
+    function BaSidebarCtrl($scope, $rootScope, $filter, $location, $timeout, $interval, $http, $state, $stateParams, CFG, BSLookup, Offer, ActiveOfferDetail, Cities, States, Vins, Engines, Pcfbodies, SearchOptions){
         $scope.main_width = 40;
         $scope.offer = {};
         $scope.filter = SearchOptions.filter;
@@ -164,7 +164,8 @@
             {label: 'Washington'	, value: 'WA'},
             {label: 'West Virginia'	, value: 'WV'},
             {label: 'Wisconsin'	, value: 'WI'},
-            {label: 'Wyoming'	, value: 'WY'}
+            {label: 'Wyoming'	, value: 'WY'},
+            {label: 'District of Columbia', value: 'DC'}
         ];
         function loadCities() {
 
@@ -268,64 +269,124 @@
             if ( typeof(filter.listing_drivetrain) === 'object' ) filter.listing_drivetrain = filter.listing_drivetrain.value;
             if ( typeof(filter.model_number) === 'object' ) filter.model_number = filter.model_number.value;
             if ( typeof(filter.pcf_body_type) === 'object' ) filter.pcf_body_type = filter.pcf_body_type.value;
-            if ( filter.bsf_model_year_from = 1955 & filter.bsf_model_year_to == 2019 ){
+            if (filter.year_from == 1955 && filter.year_to == 2019){
+                filter.year_from = '';
+                filter.year_to = '';
+            }
+            if ( filter.bsf_model_year_from = 1955 && filter.bsf_model_year_to == 2019 ){
                 filter.bsf_model_year_from = '';
                 filter.bsf_model_year_to = '';
             }
+
             Offer.query(filter, {}, function (offers) {
                 $rootScope.isLoading = false;
                 var data = [];
                 $rootScope.$next_list = {};
 
-                for ( var i = 0;  i< offers.results.length; i++){
-                    var record = {};
-                    if ( i< offers.results.length - 1 )
-                        $rootScope.$next_list[offers.results[i].pcf.vid] = offers.results[i+1].pcf.vid;
+                if (offers.results.length == 0){
+                    if (filter.keyword.length != 17) return;
 
-                    data.push({
-                        'ID': offers.results[i].id,
-                        'listing_title': offers.results[i].listing_title,
-                        'mileage': offers.results[i].mileage!=0?offers.results[i].mileage.toLocaleString():'',
-                        'price': offers.results[i].price!=0?'$'+ (offers.results[i].price.toLocaleString()):'',
-                        'city': offers.results[i].city,
-                        'state': offers.results[i].state,
-                        'vin_code': offers.results[i].vin_code,
-                        'listing_make': offers.results[i].listing_make,
-                        'listing_model': offers.results[i].listing_model,
-                        'listing_trim': offers.results[i].listing_trim,
-                        'listing_date': offers.results[i].listing_date.slice(0,10),
-                        'pcf__vid': offers.results[i].pcf.vid,
-                        'cond': offers.results[i].cond,
-                        'listing_year': offers.results[i].listing_year,
-                        'listing_exterior_color': offers.results[i].listing_exterior_color,
-                        'listing_interior_color': offers.results[i].listing_interior_color,
-                        'listing_transmission': offers.results[i].listing_transmission,
-                        'listing_engine_size': offers.results[i].listing_engine_size,
-                        'listing_drivetrain': offers.results[i].listing_drivetrain,
-                        'vin__msrp': offers.results[i].vin != null && offers.results[i].vin.msrp != null?'$' + (offers.results[i].vin.msrp.toLocaleString()):'',
-                        'vin__model_year': offers.results[i].vin != null?offers.results[i].vin.model_year:'',
-                        'vin__model_detail': offers.results[i].vin != null?offers.results[i].vin.model_detail:'',
-                        'vin__color': offers.results[i].vin != null?offers.results[i].vin.color:'',
-                        'vin__interior': offers.results[i].vin != null?offers.results[i].vin.interior:'',
-                        'vin__production_month': offers.results[i].vin != null?offers.results[i].vin.production_month:'',
-                        'vin__warranty_start':offers.results[i].vin != null?offers.results[i].vin.warranty_start:'',
-                        'pcf__model_number': offers.results[i].pcf.model_number,
-                        'pcf__gap_to_msrp': offers.results[i].pcf.gap_to_msrp !=0?offers.results[i].pcf.gap_to_msrp + '%':'',
-                        'pcf__pts': offers.results[i].pcf.pts == 0?'No':'Yes',
-                        'pcf__lwb_seats': offers.results[i].pcf.lwb_seats == 0?'No':'Yes',
-                        'pcf__longhood': offers.results[i].pcf.longhood == 0?'No':'Yes',
-                        'pcf__widebody': offers.results[i].pcf.widebody == 0?'No':'Yes',
-                        'pcf__pccb': offers.results[i].pcf.pccb == 0?'No':'Yes',
-                        'pcf__air_cooled': offers.results[i].pcf.air_cooled == 0?'No':'Yes',
-                        'pcf__listing_age': offers.results[i].pcf.listing_age + ' days',
-                        'pcf__body_type': offers.results[i].pcf.body_type,
-                        'pcf__auto_trans': offers.results[i].pcf.auto_trans
+                    BSLookup.save({}, {id:filter.keyword}, function (offers) {
+                        $rootScope.isLoading = false;
+                        $scope.bShowActive = false;
+                        $scope.bShowInactive = false;
+                        if ( offers.data == null ) return;
+                        data.push({
+                            'ID': offers['data'][0].id,
+                            'listing_title': offers['data'][0].listing_title,
+                            'mileage': offers['data'][0].mileage != null ?offers['data'][0].mileage.toLocaleString() : '',
+                            'price': offers['data'][0].price != 0 && offers['data'][0].price != null ? '$' + (offers['data'][0].price.toLocaleString()) : '',
+                            'city': offers['data'][0].city,
+                            'state': offers['data'][0].state,
+                            'vin_code': offers['data'][0].vin_code,
+                            'listing_make': offers['data'][0].listing_make,
+                            'listing_model': offers['data'][0].listing_model,
+                            'listing_trim': offers['data'][0].listing_trim,
+                            'listing_date': offers['data'][0].listing_date != null? offers['data'][0].listing_date.slice(0, 10):'',
+                            'pcf__vid': offers['data'][0].pcf.vid,
+                            'cond': offers['data'][0].cond,
+                            'listing_year': offers['data'][0].listing_year,
+                            'listing_exterior_color': offers['data'][0].listing_exterior_color,
+                            'listing_interior_color': offers['data'][0].listing_interior_color,
+                            'listing_transmission': offers['data'][0].listing_transmission,
+                            'listing_engine_size': offers['data'][0].listing_engine_size,
+                            'listing_drivetrain': offers['data'][0].listing_drivetrain,
+                            'vin__msrp': offers['data'][0].vin != null && offers['data'][0].vin.msrp != null ? '$' + (offers['data'][0].vin.msrp.toLocaleString()) : '',
+                            'vin__model_year': offers['data'][0].vin != null ? offers['data'][0].vin.model_year : '',
+                            'vin__model_detail': offers['data'][0].vin != null ? offers['data'][0].vin.model_detail : '',
+                            'vin__color': offers['data'][0].vin != null ? offers['data'][0].vin.color : '',
+                            'vin__interior': offers['data'][0].vin != null ? offers['data'][0].vin.interior : '',
+                            'vin__production_month': offers['data'][0].vin != null ? offers['data'][0].vin.production_month : '',
+                            'vin__warranty_start': offers['data'][0].vin != null ? offers['data'][0].vin.warranty_start : '',
+                            'pcf__model_number': offers['data'][0].pcf.model_number,
+                            'pcf__gap_to_msrp': offers['data'][0].pcf.gap_to_msrp != null && offers['data'][0].pcf.gap_to_msrp != 0 ? offers['data'][0].pcf.gap_to_msrp + '%' : '',
+                            'pcf__pts': offers['data'][0].pcf.pts == 0 ? 'No' : 'Yes',
+                            'pcf__lwb_seats': offers['data'][0].pcf.lwb_seats == 0 ? 'No' : 'Yes',
+                            'pcf__longhood': offers['data'][0].pcf.longhood == 0 ? 'No' : 'Yes',
+                            'pcf__widebody': offers['data'][0].pcf.widebody == 0 ? 'No' : 'Yes',
+                            'pcf__pccb': offers['data'][0].pcf.pccb == 0 ? 'No' : 'Yes',
+                            'pcf__air_cooled': offers['data'][0].pcf.air_cooled == 0 ? 'No' : 'Yes',
+                            'pcf__listing_age': offers['data'][0].pcf.listing_age + ' days',
+                            'pcf__body_type': offers['data'][0].pcf.body_type,
+                            'pcf__auto_trans': offers['data'][0].pcf.auto_trans
+                        });
+
+                        $rootScope.$dataSource = data;
+                    }, function(err){
+                        $rootScope.isLoading = false;
+                        $rootScope.handleErrors($scope,err);
                     });
-                }
+                }else {
+                    for (var i = 0; i < offers.results.length; i++) {
+                        var record = {};
+                        if (i < offers.results.length - 1)
+                            $rootScope.$next_list[offers.results[i].pcf.vid] = offers.results[i + 1].pcf.vid;
 
-                $rootScope.$next = offers.next;
-                $rootScope.$prev = offers.previous;
-                $rootScope.$dataSource = data;
+                        data.push({
+                            'ID': offers.results[i].id,
+                            'listing_title': offers.results[i].listing_title,
+                            'mileage': offers.results[i].mileage != null ? offers.results[i].mileage.toLocaleString() : '',
+                            'price': offers.results[i].price != 0 && offers.results[i].price != null ? '$' + (offers.results[i].price.toLocaleString()) : '',
+                            'city': offers.results[i].city,
+                            'state': offers.results[i].state,
+                            'vin_code': offers.results[i].vin_code,
+                            'listing_make': offers.results[i].listing_make,
+                            'listing_model': offers.results[i].listing_model,
+                            'listing_trim': offers.results[i].listing_trim,
+                            'listing_date': offers.results[i].listing_date != null? offers.results[i].listing_date.slice(0, 10):'',
+                            'pcf__vid': offers.results[i].pcf.vid,
+                            'cond': offers.results[i].cond,
+                            'listing_year': offers.results[i].listing_year,
+                            'listing_exterior_color': offers.results[i].listing_exterior_color,
+                            'listing_interior_color': offers.results[i].listing_interior_color,
+                            'listing_transmission': offers.results[i].listing_transmission,
+                            'listing_engine_size': offers.results[i].listing_engine_size,
+                            'listing_drivetrain': offers.results[i].listing_drivetrain,
+                            'vin__msrp': offers.results[i].vin != null && offers.results[i].vin.msrp != null ? '$' + (offers.results[i].vin.msrp.toLocaleString()) : '',
+                            'vin__model_year': offers.results[i].vin != null ? offers.results[i].vin.model_year : '',
+                            'vin__model_detail': offers.results[i].vin != null ? offers.results[i].vin.model_detail : '',
+                            'vin__color': offers.results[i].vin != null ? offers.results[i].vin.color : '',
+                            'vin__interior': offers.results[i].vin != null ? offers.results[i].vin.interior : '',
+                            'vin__production_month': offers.results[i].vin != null ? offers.results[i].vin.production_month : '',
+                            'vin__warranty_start': offers.results[i].vin != null ? offers.results[i].vin.warranty_start : '',
+                            'pcf__model_number': offers.results[i].pcf.model_number,
+                            'pcf__gap_to_msrp': offers.results[i].pcf.gap_to_msrp != null &&  offers.results[i].pcf.gap_to_msrp != 0? offers.results[i].pcf.gap_to_msrp + '%' : '',
+                            'pcf__pts': offers.results[i].pcf.pts == 0 ? 'No' : 'Yes',
+                            'pcf__lwb_seats': offers.results[i].pcf.lwb_seats == 0 ? 'No' : 'Yes',
+                            'pcf__longhood': offers.results[i].pcf.longhood == 0 ? 'No' : 'Yes',
+                            'pcf__widebody': offers.results[i].pcf.widebody == 0 ? 'No' : 'Yes',
+                            'pcf__pccb': offers.results[i].pcf.pccb == 0 ? 'No' : 'Yes',
+                            'pcf__air_cooled': offers.results[i].pcf.air_cooled == 0 ? 'No' : 'Yes',
+                            'pcf__listing_age': offers.results[i].pcf.listing_age + ' days',
+                            'pcf__body_type': offers.results[i].pcf.body_type,
+                            'pcf__auto_trans': offers.results[i].pcf.auto_trans
+                        });
+                    }
+
+                    $rootScope.$next = offers.next;
+                    $rootScope.$prev = offers.previous;
+                    $rootScope.$dataSource = data;
+                }
             }, function(err){
                 $rootScope.isLoading = false;
                 $rootScope.handleErrors($scope,err);

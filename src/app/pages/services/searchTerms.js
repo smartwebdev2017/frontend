@@ -80,21 +80,22 @@ angular.module('BlurAdmin.pages.services')
         var self = this;
         self.filter = persist();
         self.options = options;
-        self.reset = reset;
+        self.resetFacets = resetFacets;
 
         return self;
 
         function persist(){
-            //var searchInfo = $localStorage.filter;
-            //if (searchInfo){
-            //    return searchInfo;
-            //} else {
+            var searchInfo = $localStorage.filter;
+            if (searchInfo){
+                return searchInfo;
+            } else {
                 $localStorage.filter = angular.copy(defaults);
                 return $localStorage.filter;
-            //}
+            }
         }
 
-        function reset() {
-            self.filter = angular.copy(defaults)
+        function resetFacets() {
+            self.filter = angular.copy(defaults);
+            $localStorage.filter = angular.copy(defaults);
         }
     }]);

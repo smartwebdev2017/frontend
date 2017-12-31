@@ -40,12 +40,15 @@
     $rootScope.$baSidebarService = baSidebarService;
   }
 
-  function runBlock($location, $rootScope, $document, $timeout, $state, toastr, CFG, $localStorage){
+  function runBlock($location, $rootScope, $document, $timeout, $state, toastr, CFG, $localStorage, SearchOptions){
 
     $rootScope.isLogined = function(){
       return !!localStorage.getItem(CFG.auth.localStorageName);
     };
+    $rootScope.reset = function(){
 
+        SearchOptions.resetFacets();
+    };
     $rootScope.showNotify = function(title, msg, type){
 
       var settings = {};

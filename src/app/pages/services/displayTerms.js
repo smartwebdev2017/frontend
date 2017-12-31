@@ -2,7 +2,7 @@ angular.module('BlurAdmin.pages.services')
     .factory('DisplayOptions', ['$localStorage', function($localStorage){
         'use strict';
 
-        var colums = {
+        var defaults = {
             title: true,
             mileage: true,
             price: true,
@@ -44,7 +44,7 @@ angular.module('BlurAdmin.pages.services')
         var self = this;
         self.colums = persist();
 
-        self.reset = reset;
+        self.resetDisplayColumns = resetDisplayColumns;
 
         return self;
 
@@ -53,12 +53,13 @@ angular.module('BlurAdmin.pages.services')
             if (displayColums){
                 return displayColums;
             } else {
-                $localStorage.colums = angular.copy(colums);
+                $localStorage.colums = angular.copy(defaults);
                 return $localStorage.colums;
             }
         }
 
-        function reset() {
-            self.filter = angular.copy(colums)
+        function resetDisplayColumns() {
+            self.colums = angular.copy(defaults);
+            $localStorage.colums = angular.copy(defaults);
         }
     }]);

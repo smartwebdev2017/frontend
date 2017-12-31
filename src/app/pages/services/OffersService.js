@@ -4,6 +4,7 @@
     angular.module('BlurAdmin.pages.services')
         .factory('Offer', OfferService)
         .factory('OfferDetail', OfferDetailService)
+        .factory('BSLookup', BSLookupService)
         .factory('ActiveOfferDetail', ActiveOfferDetailService)
         .factory('InactiveOfferDetail', InactiveOfferDetailService)
         .factory('OfferModal', OfferModalService);
@@ -60,6 +61,14 @@
         return OfferDetail;
     }
 
+    function BSLookupService($resource, CFG){
+
+        var BSLookup = $resource(CFG.rest.baseURI + '/api/bsf/', {}, {
+            'send': {method: 'POST'}, isArray:false
+        });
+
+        return BSLookup;
+    }
     function OfferModalService($uibModal){
 
     }

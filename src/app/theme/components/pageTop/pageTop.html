@@ -1,5 +1,5 @@
 <div ng-if="$isLogged"  class="page-top clearfix" scroll-position="scrolled" max-height="50" ng-class="{'scrolled': scrolled}">
-  <a href="#" class="logo"><img src="../assets/img/logo.png"></a>
+  <a href="#" class="logo" ng-click="$reset()"><img src="../assets/img/logo.png"></a>
   <a href class="collapse-menu-link ion-navicon" ba-sidebar-toggle-menu></a>
 
   <div class="search">
@@ -23,6 +23,6 @@
   </div>
 </div>
 <div ng-if="!$isLogged"  class="page-top clearfix" scroll-position="scrolled" max-height="50" ng-class="{'scrolled': scrolled}">
-    <a href="#" class="logo"><img src="../assets/img/logo.png"></a>
+    <a href="#" class="logo" ng-click="reset()"><img src="../assets/img/logo.png"></a>
     <a href="/#/login" class="signin"><i class="fa fa-power-off"></i>Sign In</a>
 </div>

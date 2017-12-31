@@ -5,7 +5,7 @@
       .controller('ProfilePageCtrl', ProfilePageCtrl);
 
   /** @ngInject */
-  function ProfilePageCtrl($http, $window, $scope, fileReader, $rootScope, $filter, $uibModal, $stateParams, OfferDetail, ActiveOfferDetail, InactiveOfferDetail, SearchOptions) {
+  function ProfilePageCtrl($http, $document, $scope, fileReader, $rootScope, $filter, $uibModal, $stateParams, OfferDetail, ActiveOfferDetail, InactiveOfferDetail, SearchOptions) {
     $scope.carData = {};
     $scope.offer = {};
     $scope.filter = SearchOptions.filter;
@@ -61,11 +61,17 @@
             if ($rootScope.$detailData.mileage == 0 ) {
                 $rootScope.$detailData.mileage = '';
             }
+
             if ($rootScope.$detailData.mileage != null ) {
                 $rootScope.$detailData.mileage = addCommas($rootScope.$detailData.mileage);
             }
 
             if ($rootScope.$detailData.vin != null) {
+                if ($rootScope.$detailData.vin.production_month !=''){
+                    var prod_month = new Date($rootScope.$detailData.vin.production_month);
+                    $rootScope.$detailData.vin.production_month = prod_month.getMonth() ?'0' + prod_month.getMonth()+'-'+prod_month.getFullYear():prod_month.getMonth()+'-'+prod_month.getFullYear();
+                }
+
                 $rootScope.$detailData.vin.msrp = addCommas($rootScope.$detailData.vin.msrp);
             }
 
@@ -91,6 +97,23 @@
                 $scope.pcf_is_empty = false;
             }
 
+            var active_elems = document.getElementsByClassName('history-active-items');
+            var inactive_elems = document.getElementsByClassName('history-inactive-items');
+
+            for ( var index = 0; index < active_elems.length; index++){
+                var id = active_elems[index].id;
+                if ( id == $rootScope.$detailData.id ){
+                    active_elems[index].className += ' active';
+                }
+            }
+
+            for ( var index = 0; index < inactive_elems.length; index++){
+                var id = inactive_elems[index].id;
+                if ( id == $rootScope.$detailData.id ){
+                    inactive_elems[index].className += ' active';
+                }
+            }
+
         }, function(err){
             $rootScope.isLoading = false;
             $rootScope.handleErrors($scope,err);
@@ -98,7 +121,6 @@
     };
     function getActiveListings(vin) {
         $rootScope.isLoading = true;
-
         var filter = angular.copy($scope.filter);
 
         ActiveOfferDetail.get({id:vin}, function (offers) {
@@ -110,7 +132,6 @@
             } else {
                 $scope.bShowActive = false;
             }
-
         }, function(err){
             $rootScope.isLoading = false;
             $rootScope.handleErrors($scope,err);
@@ -150,9 +171,19 @@
         $scope.bShowInactive = !$scope.bShowInactive;
     };
     $scope.getActiveListingByIndex = function(index){
+        $('.history-active-items').removeClass('active');
+        $('.history-inactive-items').removeClass('active');
+        var elems = document.getElementsByClassName('history-active-items');
+        elems[index].className += " active";
+
         $rootScope.$detailData = $rootScope.$active[index];
     };
     $scope.getInactiveListingByIndex = function(index){
+        $('.history-active-items').removeClass('active');
+        $('.history-inactive-items').removeClass('active');
+        var elems = document.getElementsByClassName('history-inactive-items');
+        elems[index].className += " active";
+
         $rootScope.$detailData = $rootScope.$inactive[index];
     };
     $scope.getCarDetail($stateParams.vin);

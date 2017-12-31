@@ -15,7 +15,7 @@
         <div ng-show="bShowActive" class="content">
             <div class="row">
                 <ul style="margin:0 0 0 -20px;">
-                    <li  class="history-items" ng-repeat="item in $active track by $index">
+                    <li id="{{item.id}}" class="history-active-items" ng-repeat="item in $active track by $index">
                         <a class="email-link" ng-click="getActiveListingByIndex($index)">{{item.listing_date | limitTo: 10}}</a>
                     </li>
                 </ul>
@@ -33,7 +33,7 @@
         <div ng-show="bShowInactive" class="content">
             <div class="row">
                 <ul style="margin:0 0 0 -20px;">
-                    <li class="history-items" ng-repeat="item in $inactive">
+                    <li id="{{item.id}}" class="history-inactive-items" ng-repeat="item in $inactive">
                         <a class="email-link" ng-click="getInactiveListingByIndex($index)">{{item.listing_date | limitTo: 10}}</a>
                     </li>
                 </ul>
