@@ -69,7 +69,7 @@
             if ($rootScope.$detailData.vin != null) {
                 if ($rootScope.$detailData.vin.production_month !=''){
                     var prod_month = new Date($rootScope.$detailData.vin.production_month);
-                    $rootScope.$detailData.vin.production_month = prod_month.getMonth() ?'0' + prod_month.getMonth()+'-'+prod_month.getFullYear():prod_month.getMonth()+'-'+prod_month.getFullYear();
+                    $rootScope.$detailData.vin.production_month = prod_month.getMonth() < 10?'0' + prod_month.getMonth()+'-'+prod_month.getFullYear():prod_month.getMonth()+'-'+prod_month.getFullYear();
                 }
 
                 $rootScope.$detailData.vin.msrp = addCommas($rootScope.$detailData.vin.msrp);
@@ -176,7 +176,13 @@
         var elems = document.getElementsByClassName('history-active-items');
         elems[index].className += " active";
 
-        $rootScope.$detailData = $rootScope.$active[index];
+        $rootScope.$detailData = angular.copy($rootScope.$active[index]);
+        if ($rootScope.$detailData.vin != null) {
+            if ($rootScope.$detailData.vin.production_month !=''){
+                var prod_month = new Date($rootScope.$detailData.vin.production_month);
+                $rootScope.$detailData.vin.production_month = prod_month.getMonth() < 10 ?'0' + prod_month.getMonth()+'-'+prod_month.getFullYear():prod_month.getMonth()+'-'+prod_month.getFullYear();
+            }
+        }
     };
     $scope.getInactiveListingByIndex = function(index){
         $('.history-active-items').removeClass('active');
@@ -184,7 +190,13 @@
         var elems = document.getElementsByClassName('history-inactive-items');
         elems[index].className += " active";
 
-        $rootScope.$detailData = $rootScope.$inactive[index];
+        $rootScope.$detailData = angular.copy($rootScope.$inactive[index]);
+        if ($rootScope.$detailData.vin != null) {
+            if ($rootScope.$detailData.vin.production_month !=''){
+                var prod_month = new Date($rootScope.$detailData.vin.production_month);
+                $rootScope.$detailData.vin.production_month = prod_month.getMonth() < 10 ?'0' + prod_month.getMonth()+'-'+prod_month.getFullYear():prod_month.getMonth()+'-'+prod_month.getFullYear();
+            }
+        }
     };
     $scope.getCarDetail($stateParams.vin);
     getActiveListings($stateParams.vin);
