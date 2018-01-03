@@ -5,7 +5,7 @@
         .controller('BaSidebarCtrl', BaSidebarCtrl);
 
     /** @ngInject */
-    function BaSidebarCtrl($scope, $rootScope, $filter, $location, $timeout, $interval, $http, $state, $stateParams, CFG, BSLookup, Offer, ActiveOfferDetail, Cities, States, Vins, Engines, Pcfbodies, SearchOptions){
+    function BaSidebarCtrl($scope, $rootScope, $filter, $location, $timeout, $state, $stateParams, CFG, BSLookup, Offer, ActiveOfferDetail, Cities, States, Vins, Engines, Pcfbodies, SearchOptions){
         $scope.main_width = 40;
         $scope.offer = {};
         $scope.filter = SearchOptions.filter;
@@ -332,6 +332,11 @@
                         });
 
                         $rootScope.$dataSource = data;
+                        if (data.length == 1){
+                            $timeout(function(){
+                               $state.go("normal.detail", {vin:data[0].pcf__vid});
+                            }, 2000);
+                        }
                     }, function(err){
                         $rootScope.isLoading = false;
                         $rootScope.handleErrors($scope,err);
@@ -386,7 +391,14 @@
                     $rootScope.$next = offers.next;
                     $rootScope.$prev = offers.previous;
                     $rootScope.$dataSource = data;
+
+                    if (data.length == 1){
+                        $timeout(function(){
+                           $state.go("normal.detail", {vin:data[0].pcf__vid});
+                        }, 2000);
+                    }
                 }
+
             }, function(err){
                 $rootScope.isLoading = false;
                 $rootScope.handleErrors($scope,err);

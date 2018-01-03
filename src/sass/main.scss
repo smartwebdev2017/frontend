@@ -125,6 +125,9 @@
 .history-active-items, .history-inactive-items {
   list-style-type:none;
   /*margin:20px 0px;*/
+  a {
+    color: blue;
+  }
 }
 .colums-content {
   .bg-info {
@@ -251,7 +254,7 @@
   }
 }
 .inactive_container, .active_container {
-  .title:hover {
+  .title:hover, a:hover {
     cursor: pointer;
   }
   .title {
@@ -284,5 +287,5 @@
   margin-bottom: 20px;
 }
 .active a{
-  color: blue;
+  color: black;
 }
