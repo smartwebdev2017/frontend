@@ -167,7 +167,11 @@
                         }
                     }
                     $rootScope.$inactive = offers;
-                    if ($rootScope.$active == null) $rootScope.$detailData = angular.copy(offers[0]);
+                    if ($rootScope.$active == null) {
+                        $rootScope.$detailData = angular.copy(offers[0]);
+                    } else {
+                        $rootScope.$detailData = angular.copy($rootScope.$active[0]);
+                    }
                     setFormat();
                 } else {
                     $scope.bShowInactive = false;
