@@ -132,7 +132,7 @@
                         }
                     }
                     $rootScope.$active = offers;
-                    $rootScope.$detailData = offers[0];
+                    $rootScope.$detailData = angular.copy(offers[0]);
                     setFormat();
                 } else {
                     $scope.bShowActive = false;
@@ -167,7 +167,7 @@
                         }
                     }
                     $rootScope.$inactive = offers;
-                    if ($rootScope.$active == null) $rootScope.$detailData = offers[0];
+                    if ($rootScope.$active == null) $rootScope.$detailData = angular.copy(offers[0]);
                     setFormat();
                 } else {
                     $scope.bShowInactive = false;
