@@ -283,8 +283,7 @@
                 var data = [];
                 $rootScope.$next_list = {};
 
-                if (offers.results.length == 0){
-                    if (filter.keyword.length != 17) return;
+                if (offers.results.length == 0 && filter.keyword.length == 17){
 
                     BSLookup.save({}, {id:filter.keyword}, function (offers) {
                         $rootScope.isLoading = false;
