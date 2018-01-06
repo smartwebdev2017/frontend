@@ -1,7 +1,3 @@
-/**
- * Created by k.danovsky on 13.05.2016.
- */
-
 (function () {
   'use strict';
 
@@ -30,7 +26,7 @@
     white: '#10c4b5',
   };
 
-  angular.module('BlurAdmin.theme')
+  angular.module('pcarfinder.theme')
     .provider('baConfig', configProvider);
 
   /** @ngInject */

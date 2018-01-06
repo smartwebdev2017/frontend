@@ -1,11 +1,7 @@
-/**
- * @author a.demeshko
- * created on 23.12.2015
- */
 (function () {
   'use strict';
 
-  angular.module('BlurAdmin.theme')
+  angular.module('pcarfinder.theme')
     .filter('plainText', plainText)
     .filter('slice', slice)  ;
 

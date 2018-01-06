@@ -1,10 +1,10 @@
 (function () {
     'use strict';
 
-    angular.module('BlurAdmin.pages.search')
+    angular.module('pcarfinder.pages.search')
         .controller('SearchPageCtrl', SearchPageCtrl);
 
-    function SearchPageCtrl($scope, $window, $rootScope, $filter, $location, $timeout, BSLookup, $http, $state, $stateParams, CFG, Offer, Cities, States, Vins, SearchOptions, DisplayOptions, $uibModal, baProgressModal, uiGridConstants){
+    function SearchPageCtrl($scope, $window, $rootScope, $filter, $location, $timeout, BSLookup, $http, $state, $stateParams, CFG, Offer, Cities, States, Vins, SearchOptions, DisplayOptions, $uibModal, uiGridConstants){
         $scope.offer = {};
         $scope.filter = SearchOptions.filter;
         $scope.resetFacets = SearchOptions.resetFacets;

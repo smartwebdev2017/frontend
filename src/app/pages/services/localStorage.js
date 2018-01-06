@@ -1,14 +1,7 @@
-/**
- * Created by root on 9/20/17.
- */
-/**
- * @author l.azevedo
- * created on 29/06/2017
- */
 (function() {
     'use strict';
 
-    angular.module('BlurAdmin.pages.services')
+    angular.module('pcarfinder.pages.services')
         .service('localStorage', localStorage);
 
     /** @ngInject */

@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('BlurAdmin.theme.components')
+    angular.module('pcarfinder.theme.components')
         .controller('ContactPageCtrl', ContactPageCtrl);
 
     function ContactPageCtrl($scope, $window, $location, $timeout, $http, $state, $stateParams, Email, $uibModal){

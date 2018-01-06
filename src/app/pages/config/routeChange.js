@@ -4,7 +4,7 @@
 (function() {
     'use strict';
 
-    angular.module('BlurAdmin'.pages.config)
+    angular.module('pcarfinder'.pages.config)
         .run(stateChangeStart);
 
     /** @ngInject */

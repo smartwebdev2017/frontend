@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('BlurAdmin', [
+angular.module('pcarfinder', [
   'ngAnimate',
   'ui.bootstrap',
   'ui.sortable',
@@ -12,8 +12,8 @@ angular.module('BlurAdmin', [
   'ngJsTree',
   'angular-progress-button-styles',
   "nouislider",
-  'BlurAdmin.theme',
-  'BlurAdmin.pages',
+  'pcarfinder.theme',
+  'pcarfinder.pages',
    "ui.grid",
   'daterangepicker'
 ]);

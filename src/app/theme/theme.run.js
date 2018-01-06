@@ -1,11 +1,7 @@
-/**
- * @author v.lugovksy
- * created on 15.12.2015
- */
 (function () {
   'use strict';
 
-  angular.module('BlurAdmin.theme')
+  angular.module('pcarfinder.theme')
       .constant("moment", moment)
       .constant("_", _)
       .run(runBlock);
@@ -40,7 +36,7 @@
     $rootScope.$baSidebarService = baSidebarService;
   }
 
-  function runBlock($location, $rootScope, $document, $timeout, $state, toastr, CFG, $localStorage, SearchOptions){
+  function runBlock($location, $rootScope, $window, $document, $timeout, $state, toastr, CFG, $localStorage, SearchOptions){
 
     $rootScope.isLogined = function(){
       return !!localStorage.getItem(CFG.auth.localStorageName);
@@ -48,6 +44,7 @@
     $rootScope.reset = function(){
 
         SearchOptions.resetFacets();
+        $window.location.reload();
     };
     $rootScope.showNotify = function(title, msg, type){
 

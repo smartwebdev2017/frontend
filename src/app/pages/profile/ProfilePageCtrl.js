@@ -1,11 +1,11 @@
 (function () {
     'use strict';
 
-    angular.module('BlurAdmin.pages.profile')
+    angular.module('pcarfinder.pages.profile')
         .controller('ProfilePageCtrl', ProfilePageCtrl);
 
     /** @ngInject */
-    function ProfilePageCtrl($http, $document, $scope, fileReader, $rootScope, $filter, $uibModal, $stateParams, OfferDetail, ActiveOfferDetail, InactiveOfferDetail, SearchOptions) {
+    function ProfilePageCtrl($http, $document, $scope, $rootScope, $filter, $uibModal, $stateParams, OfferDetail, ActiveOfferDetail, InactiveOfferDetail, SearchOptions) {
         $scope.carData = {};
         $scope.offer = {};
         $scope.filter = SearchOptions.filter;
@@ -255,7 +255,7 @@
             }
         }
     }
-    angular.module('BlurAdmin.pages.profile')
+    angular.module('pcarfinder.pages.profile')
         .filter('highlightWord', function() {
             return function(text, selectedWords) {
                 if(selectedWords.length>0) {

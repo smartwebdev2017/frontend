@@ -1,4 +1,4 @@
-angular.module('BlurAdmin.pages.services')
+angular.module('pcarfinder.pages.services')
     .factory('DisplayOptions', ['$localStorage', function($localStorage){
         'use strict';
 

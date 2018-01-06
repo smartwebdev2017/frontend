@@ -1,11 +1,7 @@
-/**
- * Created by k.danovsky on 12.05.2016.
- */
-
 (function () {
   'use strict';
 
-  angular.module('BlurAdmin.theme')
+  angular.module('pcarfinder.theme')
     .service('themeLayoutSettings', themeLayoutSettings);
 
   /** @ngInject */

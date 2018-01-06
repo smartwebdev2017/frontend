@@ -4,7 +4,7 @@
 (function() {
     'use strict';
 
-    angular.module('BlurAdmin.pages.normal', [])
+    angular.module('pcarfinder.pages.normal', [])
         .config(routeConfig);
 
     /** @ngInject */

@@ -1,7 +1,7 @@
 (function(angular){
     'use strict';
 
-    angular.module('BlurAdmin.pages.services')
+    angular.module('pcarfinder.pages.services')
         .factory('Cities', CityService)
         .factory('States', StateService)
         .factory('Vins', VinsService)

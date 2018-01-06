@@ -1,7 +1,7 @@
 (function(angular){
     'use strict';
 
-    angular.module('BlurAdmin.pages.services')
+    angular.module('pcarfinder.pages.services')
         .factory('Email', EmailService);
 
     function EmailService($resource, CFG){

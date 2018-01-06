@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  angular.module('BlurAdmin.pages', [
+  angular.module('pcarfinder.pages', [
     'ui.router',
     'ngTouch',
     'ui.grid',
@@ -11,22 +11,22 @@
     'ui.grid.resizeColumns',
     'ui.grid.selection',
     'ui.grid.autoResize',
-    //'BlurAdmin.pages.dashboard',
+    //'pcarfinder.pages.dashboard',
     'ngResource',
     'ngStorage',
 
-    'BlurAdmin.pages._common',
-    'BlurAdmin.pages.ui',
-    //'BlurAdmin.pages.components',
-    'BlurAdmin.pages.form',
-    'BlurAdmin.pages.normal',
-    'BlurAdmin.pages.profile',
-    'BlurAdmin.pages.search',
-    'BlurAdmin.pages.services',
-    'BlurAdmin.pages.config',
-    'BlurAdmin.pages.main',
+    'pcarfinder.pages._common',
+    //'pcarfinder.pages.ui',
+    //'pcarfinder.pages.components',
+    'pcarfinder.pages.form',
+    'pcarfinder.pages.normal',
+    'pcarfinder.pages.profile',
+    'pcarfinder.pages.search',
+    'pcarfinder.pages.services',
+    'pcarfinder.pages.config',
+    'pcarfinder.pages.main',
 
-    'BlurAdmin.pages.authSignIn'
+    'pcarfinder.pages.authSignIn'
   ])
       .config(routeConfig);
 

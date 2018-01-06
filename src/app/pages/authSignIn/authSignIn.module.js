@@ -4,7 +4,7 @@
 (function() {
     'use strict';
 
-    angular.module('BlurAdmin.pages.authSignIn', [])
+    angular.module('pcarfinder.pages.authSignIn', [])
         .config(routeConfig);
 
     /** @ngInject */
