@@ -273,7 +273,7 @@
                 filter.year_from = '';
                 filter.year_to = '';
             }
-            if ( filter.bsf_model_year_from = 1955 && filter.bsf_model_year_to == 2019 ){
+            if ( filter.bsf_model_year_from == 1955 && filter.bsf_model_year_to == 2019 ){
                 filter.bsf_model_year_from = '';
                 filter.bsf_model_year_to = '';
             }
