@@ -49,7 +49,7 @@
 
         $scope.gridOptions.columnDefs = [
             {name: 'ID', width:60},
-            {name: 'listing_title', displayName:'(L) Title', enableHiding: false},
+            {name: 'listing_title', width:400, displayName:'(L) Title', enableHiding: false},
             {name: 'pcf__model_number', displayName:'Model Number', width:120, enableHiding: false},
             {name: 'mileage', displayName:'Mileage', width:100, enableHiding: false},
             {name: 'price', displayName:'Price',width:80, enableHiding: false},
