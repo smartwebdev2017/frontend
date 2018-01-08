@@ -53,8 +53,8 @@
             {name: 'pcf__model_number', displayName:'Model Number', width:120, enableHiding: false},
             {name: 'mileage', displayName:'Mileage', width:100, enableHiding: false},
             {name: 'price', displayName:'Price',width:80, enableHiding: false},
-            {name: 'vin__msrp', displayName:'MSRP', enableHiding: false},
-            {name: 'pcf__gap_to_msrp', displayName:'Price % of MSRP', width:150, enableHiding: false},
+            {name: 'vin__msrp', displayName:'MSRP', width:100, enableHiding: false},
+            {name: 'pcf__gap_to_msrp', displayName:'% of MSRP', width:100, enableHiding: false},
             {name: 'city', displayName:'City',enableHiding: false},
             {name: 'state', displayName:'State',enableHiding: false},
             {name: 'vin_code', displayName:'VIN', enableHiding: false},
@@ -84,7 +84,7 @@
             {name: 'pcf__longhood', displayName:'Longhood', enableHiding: false},
             {name: 'pcf__widebody', displayName:'Widebody', enableHiding: false},
             {name: 'pcf__pccb', displayName:'PCCB', enableHiding: false},
-            {name: 'pcf__air_cooled', displayName:'Air-cooled', enableHiding: false},
+            {name: 'pcf__air_cooled', displayName:'Air-Cooled', enableHiding: false},
             {name: 'pcf__listing_age', displayName:'Listing Age', enableHiding: false},
             {name: 'pcf__body_type', displayName:'Body Type', enableHiding: false},
             {name: 'pcf__auto_trans', displayName:'Auto Trans Type', enableHiding: false},
@@ -220,7 +220,6 @@
 
             var filter = angular.copy($scope.filter);
 
-            var filter = angular.copy($scope.filter);
             if ( filter.listing_date.startDate.format == null ){
                 filter.listing_date_start = '';
             }else{

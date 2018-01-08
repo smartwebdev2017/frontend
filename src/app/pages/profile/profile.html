@@ -205,7 +205,12 @@
                     <label ng-bind-html="$detailData.pcf.body_type | highlightWord: keywords"></label>
                 </div>
             </div>
-
+            <div class="col-md-6">
+                <div class="form-group row clearfix" ng-if="$detailData.pcf.auto_trans">
+                    <label>Auto Trans:</label>&nbsp;
+                    <label ng-bind-html="$detailData.pcf.auto_trans | highlightWord: keywords"></label>
+                </div>
+            </div>
         </div>
     </div>
 </div>

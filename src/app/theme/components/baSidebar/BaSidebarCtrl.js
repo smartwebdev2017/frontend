@@ -111,7 +111,7 @@
             {label: 'Not Currently for Sale', value:'1'}
         ];
 
-        $scope.filter.listing_sold_status= $scope.sold_status[1];
+        //$scope.filter.listing_sold_status= $scope.sold_status[1];
 
         $scope.states = [
             {label: 'All', value: ''},
