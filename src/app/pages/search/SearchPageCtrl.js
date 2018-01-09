@@ -59,7 +59,7 @@
             {name: 'state', displayName:'State',enableHiding: false},
             {name: 'vin_code', displayName:'VIN', enableHiding: false},
             {name: 'listing_make', displayName:'Make', enableHiding: false},
-            {name: 'listing_model', displayName:'(L) Model Detail', enableHiding: false},
+            {name: 'listing_model', displayName:'Model', enableHiding: false},
             {name: 'listing_trim', displayName:'Trim', enableHiding: false},
             {name: 'listing_date', displayName:'Date', width:100, enableHiding: false},
             {name: 'cond', displayName:'Condition', width:60, enableHiding: false},
@@ -178,8 +178,8 @@
             data.push({
                 'ID': obj.id,
                 'listing_title': obj.listing_title,
-                'mileage':obj.mileage !=0?obj.mileage.toLocaleString():'',
-                'price': obj.price != 0?'$' + (obj.price.toLocaleString()):'',
+                'mileage':obj.mileage != null && obj.mileage !=0?obj.mileage.toLocaleString():'',
+                'price': obj.price != null && obj.price != 0?'$' + (obj.price.toLocaleString()):'',
                 'city': $scope.colums['city']?obj.city:'' ,
                 'state': $scope.colums['state']?obj.state:'',
                 'vin_code': obj.vin_code,
@@ -317,6 +317,7 @@
         };
         $rootScope.nextPage = function(){
             var newURL = $rootScope.extractURL($rootScope.$next);
+            $scope.filter.page += 1;
 
             $http({
                 method: 'GET',
@@ -346,7 +347,7 @@
 
         $rootScope.prevPage = function(){
             var newURL = $rootScope.extractURL($rootScope.$prev);
-
+            if ($scope.filter.page > 1) $scope.filter.page -= 1;
             $http({
                 method: 'GET',
                 url: newURL,
