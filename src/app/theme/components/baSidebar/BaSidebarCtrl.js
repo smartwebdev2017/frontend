@@ -405,7 +405,7 @@
         }
         function doSearch(){
             if (!$rootScope.isLoading) {
-                $scope.page = 0;
+                $scope.filter.page = 1;
                 $scope.offers = [];
 
                 loadOffers()
