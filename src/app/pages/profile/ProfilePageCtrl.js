@@ -245,7 +245,7 @@
                 }
             }
             if ($rootScope.$detailData.pcf.air_cooled == 0 && $rootScope.$detailData.pcf.auto_trans == "" && $rootScope.$detailData.pcf.body_type == "" &&
-                $rootScope.$detailData.pcf.gap_to_msrp == 0 && $rootScope.$detailData.pcf.listing_age == 0 && $rootScope.$detailData.pcf.longhood == 0 &&
+                $rootScope.$detailData.pcf.gap_to_msrp == 0 && $rootScope.$detailData.pcf.longhood == 0 &&
                 $rootScope.$detailData.pcf.lwb_seats == 0 && $rootScope.$detailData.pcf.model_number == "" && $rootScope.$detailData.pcf.option_code == "" &&
                 $rootScope.$detailData.pcf.option_description == "" && $rootScope.$detailData.pcf.pccb == 0 && $rootScope.$detailData.pcf.placeholder == 0 && $rootScope.$detailData.pcf.produced_globally == 0 &&
                 $rootScope.$detailData.pcf.produced_usa == 0 && $rootScope.$detailData.pcf.pts == 0 && $rootScope.$detailData.pcf.same_counts == 0) {

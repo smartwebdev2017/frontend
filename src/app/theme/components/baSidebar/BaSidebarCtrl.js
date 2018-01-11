@@ -293,7 +293,7 @@
                         data.push({
                             'ID': offers['data'][0].id,
                             'listing_title': offers['data'][0].listing_title,
-                            'mileage': offers['data'][0].mileage != null ?offers['data'][0].mileage.toLocaleString() : '',
+                            'mileage': offers['data'][0].mileage != null?offers['data'][0].mileage.toLocaleString() : '',
                             'price': offers['data'][0].price != 0 && offers['data'][0].price != null ? '$' + (offers['data'][0].price.toLocaleString()) : '',
                             'city': offers['data'][0].city,
                             'state': offers['data'][0].state,
@@ -349,8 +349,8 @@
                         data.push({
                             'ID': offers.results[i].id,
                             'listing_title': offers.results[i].listing_title,
-                            'mileage': offers.results[i].mileage != null ? offers.results[i].mileage.toLocaleString() : '',
-                            'price': offers.results[i].price != 0 && offers.results[i].price != null ? '$' + (offers.results[i].price.toLocaleString()) : '',
+                            'mileage': offers.results[i].mileage != null && offers.results[i].mileage != 0 ? offers.results[i].mileage.toLocaleString() : '',
+                            'price': offers.results[i].price != 0 && offers.results[i].price != null  ? '$' + (offers.results[i].price.toLocaleString()) : '',
                             'city': offers.results[i].city,
                             'state': offers.results[i].state,
                             'vin_code': offers.results[i].vin_code,
