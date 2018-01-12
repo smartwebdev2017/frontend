@@ -49,14 +49,13 @@
 
         $scope.gridOptions.columnDefs = [
             {name: 'ID', width:60},
-            {name: 'listing_title', width:400, displayName:'(L) Title', enableHiding: false},
+            {name: 'listing_title',  displayName:'(L) Title', enableHiding: false},
             {name: 'pcf__model_number', displayName:'Model Number', width:120, enableHiding: false},
             {name: 'mileage', displayName:'Mileage', width:100, enableHiding: false},
-            {name: 'price', displayName:'Price',width:80, enableHiding: false},
-            {name: 'vin__msrp', displayName:'MSRP', width:100, enableHiding: false},
-            {name: 'pcf__gap_to_msrp', displayName:'% of MSRP', width:100, enableHiding: false},
-            {name: 'city', displayName:'City',enableHiding: false},
-            {name: 'state', displayName:'State',enableHiding: false},
+            {name: 'price', displayName:'Price',width:100, enableHiding: false},
+
+            {name: 'city', displayName:'City',width:100, enableHiding: false},
+            {name: 'state', displayName:'State', width:100, enableHiding: false},
             {name: 'vin_code', displayName:'VIN', enableHiding: false},
             {name: 'listing_make', displayName:'Make', enableHiding: false},
             {name: 'listing_model', displayName:'Model', enableHiding: false},
@@ -68,7 +67,9 @@
             {name: 'listing_year', displayName:'(L) Year', enableHiding: false},
             {name: 'listing_exterior_color', displayName:'(L) Exterior', enableHiding: false},
             {name: 'listing_interior_color', displayName:'(L) Interior', enableHiding: false},
-            {name: 'listing_transmission', displayName:'Transmission', enableHiding: false},
+            {name: 'listing_transmission', displayName:'Transmission', width:150, enableHiding: false},
+            {name: 'vin__msrp', displayName:'MSRP', width:150, enableHiding: false},
+            {name: 'pcf__gap_to_msrp', displayName:'% of MSRP', width:150, enableHiding: false},
             {name: 'listing_engine_size', displayName:'Engine', enableHiding: false},
             {name: 'listing_drivetrain', displayName:'Drivetrain', enableHiding: false},
 
@@ -380,21 +381,22 @@
             $scope.gridOptions.columnDefs[2].visible = $scope.colums['model_number'];
             $scope.gridOptions.columnDefs[3].visible = $scope.colums['mileage'];
             $scope.gridOptions.columnDefs[4].visible = $scope.colums['price'];
-            $scope.gridOptions.columnDefs[5].visible = $scope.colums['msrp'];
-            $scope.gridOptions.columnDefs[6].visible = $scope.colums['price_msrp'];
-            $scope.gridOptions.columnDefs[7].visible = $scope.colums['city'];
-            $scope.gridOptions.columnDefs[8].visible = $scope.colums['state'];
-            $scope.gridOptions.columnDefs[9].visible = $scope.colums['vin'];
-            $scope.gridOptions.columnDefs[10].visible = false;
-            $scope.gridOptions.columnDefs[11].visible = $scope.colums['model'];
-            $scope.gridOptions.columnDefs[12].visible = $scope.colums['trim'];
-            $scope.gridOptions.columnDefs[13].visible = $scope.colums['date'];
-            $scope.gridOptions.columnDefs[14].visible = $scope.colums['condition'];
-            $scope.gridOptions.columnDefs[15].visible = false;
-            $scope.gridOptions.columnDefs[16].visible = $scope.colums['listing_year'];
-            $scope.gridOptions.columnDefs[17].visible = $scope.colums['listing_exterior'];
-            $scope.gridOptions.columnDefs[18].visible = $scope.colums['listing_interior'];
-            $scope.gridOptions.columnDefs[19].visible = $scope.colums['transmission'];
+
+            $scope.gridOptions.columnDefs[5].visible = $scope.colums['city'];
+            $scope.gridOptions.columnDefs[6].visible = $scope.colums['state'];
+            $scope.gridOptions.columnDefs[7].visible = $scope.colums['vin'];
+            $scope.gridOptions.columnDefs[8].visible = false;
+            $scope.gridOptions.columnDefs[9].visible = $scope.colums['model'];
+            $scope.gridOptions.columnDefs[10].visible = $scope.colums['trim'];
+            $scope.gridOptions.columnDefs[11].visible = $scope.colums['date'];
+            $scope.gridOptions.columnDefs[12].visible = $scope.colums['condition'];
+            $scope.gridOptions.columnDefs[13].visible = false;
+            $scope.gridOptions.columnDefs[14].visible = $scope.colums['listing_year'];
+            $scope.gridOptions.columnDefs[15].visible = $scope.colums['listing_exterior'];
+            $scope.gridOptions.columnDefs[16].visible = $scope.colums['listing_interior'];
+            $scope.gridOptions.columnDefs[17].visible = $scope.colums['transmission'];
+            $scope.gridOptions.columnDefs[18].visible = $scope.colums['msrp'];
+            $scope.gridOptions.columnDefs[19].visible = $scope.colums['price_msrp'];
             $scope.gridOptions.columnDefs[20].visible = $scope.colums['engine'];
             $scope.gridOptions.columnDefs[21].visible = $scope.colums['drivetrain'];
             $scope.gridOptions.columnDefs[22].visible = $scope.colums['bs_year'];
