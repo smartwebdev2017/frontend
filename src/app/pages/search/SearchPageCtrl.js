@@ -68,8 +68,8 @@
             {name: 'listing_exterior_color', displayName:'(L) Exterior', enableHiding: false},
             {name: 'listing_interior_color', displayName:'(L) Interior', enableHiding: false},
             {name: 'listing_transmission', displayName:'Transmission', width:150, enableHiding: false},
-            {name: 'vin__msrp', displayName:'MSRP', width:150, enableHiding: false},
-            {name: 'pcf__gap_to_msrp', displayName:'% of MSRP', width:150, enableHiding: false},
+            {name: 'vin__msrp', displayName:'MSRP', width:100, enableHiding: false},
+            {name: 'pcf__gap_to_msrp', displayName:'% of MSRP', width:100, enableHiding: false},
             {name: 'listing_engine_size', displayName:'Engine', enableHiding: false},
             {name: 'listing_drivetrain', displayName:'Drivetrain', enableHiding: false},
 
