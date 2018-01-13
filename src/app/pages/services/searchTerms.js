@@ -73,7 +73,7 @@ angular.module('pcarfinder.pages.services')
             },
             listing_date_start: '',
             listing_date_end:'',
-            listing_sold_status:'0',
+            listing_sold_status:'',
             page:1
 
         };
