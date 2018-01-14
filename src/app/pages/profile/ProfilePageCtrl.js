@@ -120,17 +120,17 @@
                 if (offers.length > 0) {
                     $scope.bShowActive = true;
 
-                    for (var index = 0; index < offers.length; index++) {
-                        var i_date = new Date(offers[index]['listing_date']);
-                        for (var j = index + 1; j < offers.length; j++) {
-                            var j_date = new Date(offers[j]['listing_date']);
-                            if (i_date < j_date) {
-                                var temp = offers[index];
-                                offers[index] = offers[j];
-                                offers[j] = temp;
-                            }
-                        }
-                    }
+                    //for (var index = 0; index < offers.length; index++) {
+                    //    var i_date = new Date(offers[index]['listing_date']);
+                    //    for (var j = index + 1; j < offers.length; j++) {
+                    //        var j_date = new Date(offers[j]['listing_date']);
+                    //        if (i_date < j_date) {
+                    //            var temp = offers[index];
+                    //            offers[index] = offers[j];
+                    //            offers[j] = temp;
+                    //        }
+                    //    }
+                    //}
                     $rootScope.$active = offers;
                     $rootScope.$detailData = angular.copy(offers[0]);
                     setFormat();
@@ -155,17 +155,17 @@
                 if (offers.length > 0) {
                     $scope.bShowInactive = true;
 
-                    for (var index = 0; index < offers.length; index++) {
-                        var i_date = new Date(offers[index]['listing_date']);
-                        for (var j = index + 1; j < offers.length; j++) {
-                            var j_date = new Date(offers[j]['listing_date']);
-                            if (i_date < j_date) {
-                                var temp = offers[index];
-                                offers[index] = offers[j];
-                                offers[j] = temp;
-                            }
-                        }
-                    }
+                    //for (var index = 0; index < offers.length; index++) {
+                    //    var i_date = new Date(offers[index]['listing_date']);
+                    //    for (var j = index + 1; j < offers.length; j++) {
+                    //        var j_date = new Date(offers[j]['listing_date']);
+                    //        if (i_date < j_date) {
+                    //            var temp = offers[index];
+                    //            offers[index] = offers[j];
+                    //            offers[j] = temp;
+                    //        }
+                    //    }
+                    //}
                     $rootScope.$inactive = offers;
                     if ($rootScope.$active == null) {
                         $rootScope.$detailData = angular.copy(offers[0]);
@@ -226,7 +226,12 @@
             if ($rootScope.$detailData.vin != null) {
                 if ($rootScope.$detailData.vin.production_month != '') {
                     var prod_month = new Date($rootScope.$detailData.vin.production_month);
-                    $rootScope.$detailData.vin.production_month = prod_month.getMonth() < 9 ? '0' + (prod_month.getMonth() + 1) + '-' + prod_month.getFullYear() : (prod_month.getMonth() + 1) + '-' + prod_month.getFullYear();
+                    $rootScope.$detailData.vin.production_month = prod_month.getMonth() < 9 ? prod_month.getFullYear() + '-' + '0' + (prod_month.getMonth() + 1) : prod_month.getFullYear() + '-' + (prod_month.getMonth() + 1);
+                }
+
+                if ($rootScope.$detailData.vin.warranty_start != '') {
+                    var warranty_start = new Date($rootScope.$detailData.vin.warranty_start);
+                    $rootScope.$detailData.vin.warranty_start = warranty_start.getMonth() < 9 ? warranty_start.getFullYear() + '-' + '0' + (warranty_start.getMonth() + 1) + '-' + (warranty_start.getDate()) : warranty_start.getFullYear() + '-' + (warranty_start.getMonth() + 1) + '-' + (warranty_start.getDate());
                 }
 
                 $rootScope.$detailData.vin.msrp = addCommas($rootScope.$detailData.vin.msrp);

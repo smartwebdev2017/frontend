@@ -201,7 +201,7 @@
                 'vin__model_detail': obj.vin !=null?obj.vin.model_detail:'',
                 'vin__color': obj.vin !=null?obj.vin.color:'',
                 'vin__interior': obj.vin !=null?obj.vin.interior:'',
-                'vin__production_month': obj.vin !=null?obj.vin.production_month:'',
+                'vin__production_month': obj.vin !=null?obj.vin.production_month.slice(0, 7):'',
                 'vin__warranty_start': obj.vin !=null?obj.vin.warranty_start:'',
                 'pcf__model_number': obj.pcf.model_number,
                 'pcf__gap_to_msrp': obj.pcf.gap_to_msrp != 0?obj.pcf.gap_to_msrp + '%':'',
