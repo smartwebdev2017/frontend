@@ -222,15 +222,15 @@
             var filter = angular.copy($scope.filter);
 
             if ( filter.listing_date.startDate.format == null ){
-                filter.listing_date_start = '';
+                filter.listing_date.start = filter.listing_date.startDate.slice(0,10);
             }else{
-                filter.listing_date_start = filter.listing_date.startDate.format($scope.opts.locale.format);
+                filter.listing_date_start = filter.listing_date.startDate.format('YYYY-MM-DD');
             }
 
             if ( filter.listing_date.endDate.format == null ){
-                filter.listing_date_end = '';
+                filter.listing_date_end = filter.listing_date.endDate(0, 10);
             }else{
-                filter.listing_date_end = filter.listing_date.endDate.format($scope.opts.locale.format);
+                filter.listing_date_end = filter.listing_date.endDate.format('YYYY-MM-DD');
             }
 
             if ( typeof(filter.listing_sold_status) === 'object' ) {
