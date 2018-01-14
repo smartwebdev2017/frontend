@@ -228,7 +228,7 @@
             }
 
             if ( filter.listing_date.endDate.format == null ){
-                filter.listing_date_end = filter.listing_date.endDate(0, 10);
+                filter.listing_date_end = filter.listing_date.endDate.slice(0, 10);
             }else{
                 filter.listing_date_end = filter.listing_date.endDate.format('YYYY-MM-DD');
             }
