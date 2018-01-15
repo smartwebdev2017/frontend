@@ -92,13 +92,7 @@
         ];
 
         var off=[];
-        $scope.load = loadOffers;
         $scope.colums = DisplayOptions.colums;
-
-        off.push($scope.$watchGroup([
-            'filter.keyword',
-            'filter.sort'
-        ], doSearch));
 
         off.push($scope.$watchGroup([
             'colums.title',
@@ -151,12 +145,11 @@
 
         };
         $scope.reset = function(){
-            //$scope.resetFacets();
             $scope.resetDisplayColumns();
             //$scope.filter = SearchOptions.filter;
             $scope.colums = DisplayOptions.colums;
             setDisplayOptions();
-            //$window.location.reload();
+
         };
         function doUpdateCols(val){
             $scope.chkCounts = 0;
@@ -221,16 +214,29 @@
 
             var filter = angular.copy($scope.filter);
 
-            if ( filter.listing_date.startDate.format == null ){
-                filter.listing_date.start = filter.listing_date.startDate.slice(0,10);
-            }else{
-                filter.listing_date_start = filter.listing_date.startDate.format('YYYY-MM-DD');
-            }
+            if ( filter.listing_date == null ){
+                filter.listing_date_start = '';
+                filter.listing_date_end = '';
+            } else {
+                if (filter.listing_date.startDate == null){
+                    filter.listing_date_start = '';
+                }else {
+                    if (filter.listing_date.startDate.format == null) {
+                        filter.listing_date_start = filter.listing_date.startDate.slice(0, 10);
+                    } else {
+                        filter.listing_date_start = filter.listing_date.startDate.format('YYYY-MM-DD');
+                    }
+                }
 
-            if ( filter.listing_date.endDate.format == null ){
-                filter.listing_date_end = filter.listing_date.endDate.slice(0, 10);
-            }else{
-                filter.listing_date_end = filter.listing_date.endDate.format('YYYY-MM-DD');
+                if (filter.listing_date.endDate == null) {
+                    filter.listing_date_end = '';
+                } else {
+                    if (filter.listing_date.endDate.format == null) {
+                        filter.listing_date_end = filter.listing_date.endDate.slice(0, 10);
+                    } else {
+                        filter.listing_date_end = filter.listing_date.endDate.format('YYYY-MM-DD');
+                    }
+                }
             }
 
             if ( typeof(filter.listing_sold_status) === 'object' ) {
@@ -290,11 +296,9 @@
                 $rootScope.handleErrors($scope,err);
             });
         }
-        function getFilterDate(){
 
-        }
         function doSearch(){
-            getFilterDate();
+
             if (!$rootScope.isLoading) {
                 $scope.page = 0;
                 $scope.offers = [];

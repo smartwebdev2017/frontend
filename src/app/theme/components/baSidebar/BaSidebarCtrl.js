@@ -246,16 +246,29 @@
             $rootScope.isLoading = true;
             var filter = angular.copy($scope.filter);
 
-            if ( filter.listing_date.startDate.format == null ){
-                filter.listing_date_start = filter.listing_date.startDate.slice(0,10);
-            }else{
-                filter.listing_date_start = filter.listing_date.startDate.format('YYYY-MM-DD');
-            }
+            if ( filter.listing_date == null ){
+                filter.listing_date_start = '';
+                filter.listing_date_end = '';
+            } else {
+                if (filter.listing_date.startDate == null){
+                    filter.listing_date_start = '';
+                }else {
+                    if (filter.listing_date.startDate.format == null) {
+                        filter.listing_date_start = filter.listing_date.startDate.slice(0, 10);
+                    } else {
+                        filter.listing_date_start = filter.listing_date.startDate.format('YYYY-MM-DD');
+                    }
+                }
 
-            if ( filter.listing_date.endDate.format == null ){
-                filter.listing_date_end = filter.listing_date.endDate.slice(0,10);
-            }else{
-                filter.listing_date_end = filter.listing_date.endDate.format('YYYY-MM-DD');
+                if (filter.listing_date.endDate == null) {
+                    filter.listing_date_end = '';
+                } else {
+                    if (filter.listing_date.endDate.format == null) {
+                        filter.listing_date_end = filter.listing_date.endDate.slice(0, 10);
+                    } else {
+                        filter.listing_date_end = filter.listing_date.endDate.format('YYYY-MM-DD');
+                    }
+                }
             }
 
             if ( typeof(filter.listing_sold_status) === 'object' ) {
