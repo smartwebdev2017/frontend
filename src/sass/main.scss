@@ -9,12 +9,12 @@
   background: url(../assets/img/scroll_bar.png) no-repeat !important;
 }
 .noUi-horizontal .noUi-handle {
-    width: 22px !important;
-    height: 18px !important;
-    top: -8px;
-    -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.75);
-    /* box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.75); */
+  width: 22px !important;
+  height: 18px !important;
+  top: -8px;
+  -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  /* box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.75); */
   left: -10px !important;
 }
 .noUi-target {
@@ -84,44 +84,6 @@
   background-color: #636363 !important;
 }
 
-.al-sidebar {
-  .mini-menu {
-    width: 50px !important;
-    background-color: black;
-    height: 100%;
-    float: left;
-    font-size: 20px;
-    color: white;
-    position: fixed;
-    &:hover {
-      cursor: pointer;
-    }
-    .filter {
-      transform: rotate(-90deg);
-      margin-top: 100px;
-    }
-
-    .filter-symbol {
-      width: 20px;
-      margin: 20px auto;
-    }
-
-    & + * {
-      margin-left: 50px;
-      padding-bottom: 100px;
-    }
-  }
-  .form-group {
-
-    margin-bottom: 0px;
-    //.ui-select-container {
-    //  margin-bottom: 15px;
-    //}
-    .noUi-background {
-      background-color: #ddd !important;
-    }
-  }
-}
 .history-active-items, .history-inactive-items {
   list-style-type:none;
   /*margin:20px 0px;*/
@@ -266,21 +228,22 @@
     }
   }
 }
+
 .from {
-    padding-left: 15px;
-    float: left;
-    width: 45%;
+  padding-left: 15px;
+  float: left;
+  width: 45%;
 }
 .to {
-    width: 45%;
-    float: left;
-    padding-right: 15px;
+  width: 45%;
+  float: left;
+  padding-right: 15px;
 }
 .range {
-    width: 10%;
-    float: left;
-    text-align: center;
-    line-height: 30px;
+  width: 10%;
+  float: left;
+  text-align: center;
+  line-height: 30px;
 }
 .panel-body-description {
   overflow: hidden;
@@ -288,4 +251,140 @@
 }
 .active a{
   color: black;
+}
+.checkbox span {
+  color: #1b1d1f;
+}
+.al-sidebar .row {
+  margin-top: 20px;
+}
+@media screen and (max-width:480px) {
+  .al-main {
+    margin-left: 0px;
+  }
+  .al-sidebar {
+    height: 40px;
+    width: 100px;
+    background-color: #000;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    color: white;
+
+    .mini-menu {
+      line-height: 40px;
+    }
+
+    .form-group {
+      margin-bottom: 0px;
+    }
+
+    .filter {
+      float: left;
+    }
+    .filter-symbol {
+      float: left;
+      margin: 0px 10px;
+    }
+
+    .active_container .content, .inactive_container .content {
+      background: #fff;
+      max-height: 200px;
+      overflow:scroll
+    }
+    .listing_container, .pcf_container, .bsf_container, .inactive_container, .active_container {
+      padding: 0px 0 1px 0;
+    }
+    .al-detail-sidebar {
+      position: fixed;
+      width: 150px;
+      bottom: 40px;
+      left: 0px;
+    }
+  }
+  .next-btn {
+    position: fixed;
+    right: calc(50vw - 50px);
+    bottom:0;
+    height: 40px;
+    border: none;
+    border-radius: 0;
+    float: right;
+  }
+  .prev-btn {
+    position: fixed;
+    left: calc(50vw - 50px);
+    bottom:0;
+    height: 40px;
+    border: none;
+    border-radius: 0;
+    float: right;
+  }
+}
+@media screen and (min-width:480px) {
+  .al-sidebar {
+    /*width: $sidebar-width;*/
+    top: $top-height;
+    left: 0;
+    z-index: 904;
+    display: block;
+    min-height: 100%;
+    min-width: 50px;
+    /*background-color: $sidebar;*/
+    /*background: rgba(0, 0, 0, 0.75);*/
+    height: 100%;
+    position: fixed;
+    overflow: auto;
+    /*padding:20px;*/
+    .row {
+      margin-top:20px;
+    }
+    input.search-input {
+      margin:0;
+      padding:0;
+    }
+    .mini-menu {
+      width: 50px !important;
+      background-color: black;
+      height: 100%;
+      float: left;
+      font-size: 20px;
+      color: white;
+      position: fixed;
+      &:hover {
+        cursor: pointer;
+      }
+
+      .filter {
+        transform: rotate(-90deg);
+        margin-top: 100px;
+      }
+
+      .filter-symbol {
+        width: 20px;
+        margin: 20px auto;
+      }
+
+      & + * {
+        margin-left: 50px;
+        padding-bottom: 100px;
+      }
+    }
+    .form-group {
+
+      margin-bottom: 0px;
+      //.ui-select-container {
+      //  margin-bottom: 15px;
+      //}
+      .noUi-background {
+        background-color: #ddd !important;
+      }
+    }
+  }
+}
+
+html,
+body {
+  overflow: auto;
 }

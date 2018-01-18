@@ -6,6 +6,7 @@
 
     function SearchPageCtrl($scope, $window, $rootScope, $filter, $location, $timeout, BSLookup, $http, $state, $stateParams, CFG, Offer, Cities, States, Vins, SearchOptions, DisplayOptions, $uibModal, uiGridConstants){
         $scope.offer = {};
+        if ($window.innerWidth < 480) $rootScope.is_mobile = true;
         $scope.filter = SearchOptions.filter;
         $scope.resetFacets = SearchOptions.resetFacets;
         $scope.resetDisplayColumns = DisplayOptions.resetDisplayColumns;
@@ -15,7 +16,11 @@
         var selectedRow = null;
         $scope.chkCounts = 0;
         $scope.chkAvailable = false;
+        $rootScope.is_mobile = false;
 
+        angular.element($window).bind('resize', function(){
+            $scope.$apply();
+        });
         function getCellClass(grid, row){
             //return row.uid === selectedRow ? 'highlight' : '';
         }
@@ -135,6 +140,14 @@
             doUpdateCols(val);
         }));
 
+        $scope.$watch(function () {
+            return $window.innerWidth;
+        }, function (innerWidth){
+            //$rootScope.safeApply(function(){
+                $rootScope.is_mobile = false;
+                if (innerWidth < 480) $rootScope.is_mobile = true;
+            //});
+        });
         setDisplayOptions();
 
         $scope.changeStatus = function(name){
@@ -382,42 +395,42 @@
         function setDisplayOptions() {
             $scope.gridOptions.columnDefs[0].visible = false;
             $scope.gridOptions.columnDefs[1].visible = $scope.colums['title'];
-            $scope.gridOptions.columnDefs[2].visible = $scope.colums['model_number'];
-            $scope.gridOptions.columnDefs[3].visible = $scope.colums['mileage'];
+            $scope.gridOptions.columnDefs[2].visible = $rootScope.is_mobile?false:$scope.colums['model_number'];
+            $scope.gridOptions.columnDefs[3].visible = $rootScope.is_mobile?false:$scope.colums['mileage'];
             $scope.gridOptions.columnDefs[4].visible = $scope.colums['price'];
 
-            $scope.gridOptions.columnDefs[5].visible = $scope.colums['city'];
-            $scope.gridOptions.columnDefs[6].visible = $scope.colums['state'];
-            $scope.gridOptions.columnDefs[7].visible = $scope.colums['vin'];
+            $scope.gridOptions.columnDefs[5].visible = $rootScope.is_mobile?false:$scope.colums['city'];
+            $scope.gridOptions.columnDefs[6].visible = $rootScope.is_mobile?false:$scope.colums['state'];
+            $scope.gridOptions.columnDefs[7].visible = $rootScope.is_mobile?false:$scope.colums['vin'];
             $scope.gridOptions.columnDefs[8].visible = false;
-            $scope.gridOptions.columnDefs[9].visible = $scope.colums['model'];
-            $scope.gridOptions.columnDefs[10].visible = $scope.colums['trim'];
-            $scope.gridOptions.columnDefs[11].visible = $scope.colums['date'];
-            $scope.gridOptions.columnDefs[12].visible = $scope.colums['condition'];
+            $scope.gridOptions.columnDefs[9].visible = $rootScope.is_mobile?false:$scope.colums['model'];
+            $scope.gridOptions.columnDefs[10].visible = $rootScope.is_mobile?false:$scope.colums['trim'];
+            $scope.gridOptions.columnDefs[11].visible = $rootScope.is_mobile?false:$scope.colums['date'];
+            $scope.gridOptions.columnDefs[12].visible = $rootScope.is_mobile?false:$scope.colums['condition'];
             $scope.gridOptions.columnDefs[13].visible = false;
-            $scope.gridOptions.columnDefs[14].visible = $scope.colums['listing_year'];
-            $scope.gridOptions.columnDefs[15].visible = $scope.colums['listing_exterior'];
-            $scope.gridOptions.columnDefs[16].visible = $scope.colums['listing_interior'];
-            $scope.gridOptions.columnDefs[17].visible = $scope.colums['transmission'];
-            $scope.gridOptions.columnDefs[18].visible = $scope.colums['msrp'];
-            $scope.gridOptions.columnDefs[19].visible = $scope.colums['price_msrp'];
-            $scope.gridOptions.columnDefs[20].visible = $scope.colums['engine'];
-            $scope.gridOptions.columnDefs[21].visible = $scope.colums['drivetrain'];
-            $scope.gridOptions.columnDefs[22].visible = $scope.colums['bs_year'];
-            $scope.gridOptions.columnDefs[23].visible = $scope.colums['bs_model'];
-            $scope.gridOptions.columnDefs[24].visible = $scope.colums['bs_exterior'];
-            $scope.gridOptions.columnDefs[25].visible = $scope.colums['bs_interior'];
-            $scope.gridOptions.columnDefs[26].visible = $scope.colums['production_month'];
-            $scope.gridOptions.columnDefs[27].visible = $scope.colums['warranty_start'];
-            $scope.gridOptions.columnDefs[28].visible = $scope.colums['pts'];
-            $scope.gridOptions.columnDefs[29].visible = $scope.colums['lwb'];
-            $scope.gridOptions.columnDefs[30].visible = $scope.colums['longhood'];
-            $scope.gridOptions.columnDefs[31].visible = $scope.colums['widebody'];
-            $scope.gridOptions.columnDefs[32].visible = $scope.colums['pccb'];
-            $scope.gridOptions.columnDefs[33].visible = $scope.colums['aircooled'];
-            $scope.gridOptions.columnDefs[34].visible = $scope.colums['listing_age'];
-            $scope.gridOptions.columnDefs[35].visible = $scope.colums['body_type'];
-            $scope.gridOptions.columnDefs[36].visible = $scope.colums['auto_trans'];
+            $scope.gridOptions.columnDefs[14].visible = $rootScope.is_mobile?false:$scope.colums['listing_year'];
+            $scope.gridOptions.columnDefs[15].visible = $rootScope.is_mobile?false:$scope.colums['listing_exterior'];
+            $scope.gridOptions.columnDefs[16].visible = $rootScope.is_mobile?false:$scope.colums['listing_interior'];
+            $scope.gridOptions.columnDefs[17].visible = $rootScope.is_mobile?false:$scope.colums['transmission'];
+            $scope.gridOptions.columnDefs[18].visible = $rootScope.is_mobile?false:$scope.colums['msrp'];
+            $scope.gridOptions.columnDefs[19].visible = $rootScope.is_mobile?false:$scope.colums['price_msrp'];
+            $scope.gridOptions.columnDefs[20].visible = $rootScope.is_mobile?false:$scope.colums['engine'];
+            $scope.gridOptions.columnDefs[21].visible = $rootScope.is_mobile?false:$scope.colums['drivetrain'];
+            $scope.gridOptions.columnDefs[22].visible = $rootScope.is_mobile?false:$scope.colums['bs_year'];
+            $scope.gridOptions.columnDefs[23].visible = $rootScope.is_mobile?false:$scope.colums['bs_model'];
+            $scope.gridOptions.columnDefs[24].visible = $rootScope.is_mobile?false:$scope.colums['bs_exterior'];
+            $scope.gridOptions.columnDefs[25].visible = $rootScope.is_mobile?false:$scope.colums['bs_interior'];
+            $scope.gridOptions.columnDefs[26].visible = $rootScope.is_mobile?false:$scope.colums['production_month'];
+            $scope.gridOptions.columnDefs[27].visible = $rootScope.is_mobile?false:$scope.colums['warranty_start'];
+            $scope.gridOptions.columnDefs[28].visible = $rootScope.is_mobile?false:$scope.colums['pts'];
+            $scope.gridOptions.columnDefs[29].visible = $rootScope.is_mobile?false:$scope.colums['lwb'];
+            $scope.gridOptions.columnDefs[30].visible = $rootScope.is_mobile?false:$scope.colums['longhood'];
+            $scope.gridOptions.columnDefs[31].visible = $rootScope.is_mobile?false:$scope.colums['widebody'];
+            $scope.gridOptions.columnDefs[32].visible = $rootScope.is_mobile?false:$scope.colums['pccb'];
+            $scope.gridOptions.columnDefs[33].visible = $rootScope.is_mobile?false:$scope.colums['aircooled'];
+            $scope.gridOptions.columnDefs[34].visible = $rootScope.is_mobile?false:$scope.colums['listing_age'];
+            $scope.gridOptions.columnDefs[35].visible = $rootScope.is_mobile?false:$scope.colums['body_type'];
+            $scope.gridOptions.columnDefs[36].visible = $rootScope.is_mobile?false:$scope.colums['auto_trans'];
         }
 
     }

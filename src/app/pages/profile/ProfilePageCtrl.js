@@ -5,7 +5,7 @@
         .controller('ProfilePageCtrl', ProfilePageCtrl);
 
     /** @ngInject */
-    function ProfilePageCtrl($http, $document, $scope, $rootScope, $filter, $uibModal, $stateParams, OfferDetail, ActiveOfferDetail, InactiveOfferDetail, SearchOptions) {
+    function ProfilePageCtrl($http, $document, $window, $scope, $rootScope, $filter, $uibModal, $stateParams, OfferDetail, ActiveOfferDetail, InactiveOfferDetail, SearchOptions) {
         $scope.carData = {};
         $scope.offer = {};
         $scope.filter = SearchOptions.filter;
@@ -14,6 +14,9 @@
         $scope.bShowActive = false;
         $scope.bShowInactive = false;
         $scope.keywords = $scope.filter.keyword.split(" ");
+        $rootScope.is_mobile = false;
+        $rootScope.isShowPrevNext = false;
+        if ($window.innerWidth < 480) $rootScope.is_mobile = true;
 
         $('.al-main').css('padding-left', '0px');
 
@@ -184,12 +187,24 @@
 
         $scope.setCollaspe = function () {
             $scope.bShowMenu = !$scope.bShowMenu;
-            if ($scope.bShowMenu) {
-                $('.al-main').css('padding-left', '150px');
+            if ($rootScope.is_mobile) {
+                if ($scope.bShowMenu) {
+                    //$('.al-detail-sidebar').css('position', 'fixed');
+                    //$('.al-detail-sidebar').css('width', '150px');
+                    //$('.al-detail-sidebar').css('bottom', '40px');
+                    //$('.al-detail-sidebar').css('left', '0px');
+                } else {
+                    $('.al-main').css('padding-left', '0px');
+                }
             } else {
-                $('.al-main').css('padding-left', '0px');
+                if ($scope.bShowMenu) {
+                    $('.al-main').css('padding-left', '150px');
+                } else {
+                    $('.al-main').css('padding-left', '0px');
+                }
             }
         };
+
         $scope.setActiveCollapse = function () {
             $scope.bShowActive = !$scope.bShowActive;
         };

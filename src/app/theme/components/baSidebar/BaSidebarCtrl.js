@@ -18,6 +18,7 @@
         $scope.bShowListing = false;
         $scope.bShowPCF = false;
         $scope.bShowBSF = false;
+        $rootScope.isShowPrevNext = true;
         $('.al-main').css('padding-left', '0px');
 
         $scope.opts = {
@@ -435,22 +436,57 @@
         $scope.getInactiveListingByIndex = function(index){
             $rootScope.$detailData = $rootScope.$inactive[index];
         };
+        if ($rootScope.is_mobile){
+
+        }
         $scope.setCollaspe = function(){
             $scope.bShowMenu = !$scope.bShowMenu;
-            if ($scope.bShowMenu) {
-                $('.al-main').css('padding-left', '300px');
+            if ($rootScope.is_mobile) {
+                if ($scope.bShowMenu) {
+                    $('.aside_content').css('position', 'fixed');
+                    $('.aside_content').css('width', '300px');
+                    $('.aside_content').css('bottom', '40px');
+                    $('.aside_content').css('left', '0px');
+                } else {
+                    $('.al-main').css('padding-left', '0px');
+                }
             } else {
-                $('.al-main').css('padding-left', '0px');
+
+                if ($scope.bShowMenu) {
+                    $('.aside_content').css('width', '300px');
+                    $('.al-main').css('padding-left', '300px');
+                    $('.btn_container').css('width', 'calc(100vw - 300px)');
+                    $('.btn_container').css('margin-left', '300px');
+                } else {
+                    $('.btn_container').css('width', '100%');
+                    $('.btn_container').css('margin-left', '0px');
+                    $('.al-main').css('padding-left', '0px');
+                }
             }
         };
         $scope.setListingCollapse = function(){
             $scope.bShowListing = !$scope.bShowListing;
+            if ($scope.bShowListing && $rootScope.is_mobile){
+                $('.listing_container .content').css('height', '200px');
+                $('.listing_container .content').css('overflow', 'scroll');
+                $('.listing_container .content').css('background', '#fff');
+            }
         };
         $scope.setPCFCollapse = function(){
             $scope.bShowPCF = !$scope.bShowPCF;
+            if ($scope.bShowPCF && $rootScope.is_mobile){
+                $('.pcf_container .content').css('height', '200px');
+                $('.pcf_container .content').css('overflow', 'scroll');
+                $('.pcf_container .content').css('background', '#fff');
+            }
         };
         $scope.setBSFCollapse = function(){
             $scope.bShowBSF = !$scope.bShowBSF;
+            if ($scope.bShowBSF && $rootScope.is_mobile){
+                $('.bsf_container .content').css('height', '200px');
+                $('.bsf_container .content').css('overflow', 'scroll');
+                $('.bsf_container .content').css('background', '#fff');
+            }
         };
         $scope.$watch('filter.year_from', function (newValue1, oldValue1){
             console.log('1');

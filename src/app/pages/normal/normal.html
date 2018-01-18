@@ -17,4 +17,12 @@
     <back-top></back-top>
     <contact></contact>
     <msgCenter></msgCenter>
+    <div class="btn_container">
+        <div class="col-xs-6">
+            <button class="btn btn-info prev-btn" ng-if="$prev != null && isShowPrevNext" ng-click="prevPage()">&nbsp;<&nbsp;</button>
+        </div>
+        <div class="col-xs-6">
+            <button class="btn btn-info next-btn" ng-if="$next != null && isShowPrevNext" ng-click="nextPage()">&nbsp;>&nbsp;</button>
+        </div>
+    </div>
 </main>
