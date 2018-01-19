@@ -10,7 +10,7 @@
         .state('normal.detail', {
           views: {
               'baSidebar':{
-                controller: 'ProfilePageCtrl',
+                controller: 'BarSidebarCtrl',
                 templateUrl: 'app/pages/profile/ba-sidebar_listing.html',
               },
               'content':{

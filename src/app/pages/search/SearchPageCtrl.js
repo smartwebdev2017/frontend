@@ -6,7 +6,7 @@
 
     function SearchPageCtrl($scope, $window, $rootScope, $filter, $location, $timeout, BSLookup, $http, $state, $stateParams, CFG, Offer, Cities, States, Vins, SearchOptions, DisplayOptions, $uibModal, uiGridConstants){
         $scope.offer = {};
-        if ($window.innerWidth < 480) $rootScope.is_mobile = true;
+
         $scope.filter = SearchOptions.filter;
         $scope.resetFacets = SearchOptions.resetFacets;
         $scope.resetDisplayColumns = DisplayOptions.resetDisplayColumns;
@@ -16,11 +16,7 @@
         var selectedRow = null;
         $scope.chkCounts = 0;
         $scope.chkAvailable = false;
-        $rootScope.is_mobile = false;
 
-        angular.element($window).bind('resize', function(){
-            $scope.$apply();
-        });
         function getCellClass(grid, row){
             //return row.uid === selectedRow ? 'highlight' : '';
         }
@@ -140,14 +136,14 @@
             doUpdateCols(val);
         }));
 
-        $scope.$watch(function () {
-            return $window.innerWidth;
-        }, function (innerWidth){
-            //$rootScope.safeApply(function(){
-                $rootScope.is_mobile = false;
-                if (innerWidth < 480) $rootScope.is_mobile = true;
-            //});
-        });
+        //$scope.$watch(function () {
+        //    return $window.innerWidth;
+        //}, function (innerWidth){
+        //    //$rootScope.safeApply(function(){
+        //        $rootScope.is_mobile = false;
+        //        if (innerWidth < 480) $rootScope.is_mobile = true;
+        //    //});
+        //});
         setDisplayOptions();
 
         $scope.changeStatus = function(name){

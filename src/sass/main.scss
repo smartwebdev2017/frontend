@@ -248,6 +248,7 @@
 .panel-body-description {
   overflow: hidden;
   margin-bottom: 20px;
+  height: 212px;
 }
 .active a{
   color: black;
@@ -257,6 +258,27 @@
 }
 .al-sidebar .row {
   margin-top: 20px;
+}
+.al-detail-sidebar {
+  width: 150px;
+  bottom: 40px;
+  left: 0px;
+  position:fixed;
+}
+.active_container .content, .inactive_container .content {
+  background: #fff;
+}
+.default_position {
+  position:initial;
+}
+.default_padding {
+  padding-left:150px;
+}
+.read_more {
+  height:auto;
+}
+.read_less {
+  height:212px;
 }
 @media screen and (max-width:480px) {
   .al-main {
@@ -289,19 +311,17 @@
     }
 
     .active_container .content, .inactive_container .content {
-      background: #fff;
       max-height: 200px;
       overflow:scroll
     }
     .listing_container, .pcf_container, .bsf_container, .inactive_container, .active_container {
       padding: 0px 0 1px 0;
     }
-    .al-detail-sidebar {
-      position: fixed;
-      width: 150px;
-      bottom: 40px;
-      left: 0px;
-    }
+    //.al-detail-sidebar {
+    //  width: 150px;
+    //  bottom: 40px;
+    //  left: 0px;
+    //}
   }
   .next-btn {
     position: fixed;
@@ -380,6 +400,11 @@
       .noUi-background {
         background-color: #ddd !important;
       }
+    }
+    .al-detail-sidebar {
+      width: 150px;
+      bottom: 40px;
+      left: 0px;
     }
   }
 }

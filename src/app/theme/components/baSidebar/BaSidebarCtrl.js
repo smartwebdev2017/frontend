@@ -5,7 +5,7 @@
         .controller('BaSidebarCtrl', BaSidebarCtrl);
 
     /** @ngInject */
-    function BaSidebarCtrl($scope, $rootScope, $filter, $location, $timeout, $state, $stateParams, CFG, BSLookup, Offer, ActiveOfferDetail, Cities, States, Vins, Engines, Pcfbodies, SearchOptions){
+    function BaSidebarCtrl($scope, $rootScope, $filter, $window, $location, $timeout, $state, $stateParams, CFG, BSLookup, Offer, ActiveOfferDetail, Cities, States, Vins, Engines, Pcfbodies, SearchOptions){
         $scope.main_width = 40;
         $scope.offer = {};
         $scope.filter = SearchOptions.filter;
@@ -19,7 +19,23 @@
         $scope.bShowPCF = false;
         $scope.bShowBSF = false;
         $rootScope.isShowPrevNext = true;
-        $('.al-main').css('padding-left', '0px');
+
+        $rootScope.is_mobile = false;
+        if ($window.innerWidth < 480) $rootScope.is_mobile = true;
+
+        $(window).resize(function() {
+            $scope.windowWidth = $(window).width();
+            if ($scope.windowWidth < 480) {
+                $rootScope.is_mobile = true;
+            } else {
+                $rootScope.is_mobile = false;
+            }
+            updateBar();
+        });
+
+        angular.element(function(){
+            $('.al-main').css('padding-left', '0px')
+        });
 
         $scope.opts = {
             //singleDatePicker: true,
@@ -436,21 +452,20 @@
         $scope.getInactiveListingByIndex = function(index){
             $rootScope.$detailData = $rootScope.$inactive[index];
         };
-        if ($rootScope.is_mobile){
 
-        }
-        $scope.setCollaspe = function(){
-            $scope.bShowMenu = !$scope.bShowMenu;
+        function updateBar(){
             if ($rootScope.is_mobile) {
+                $('.al-main').css('padding-left', '0px');
                 if ($scope.bShowMenu) {
                     $('.aside_content').css('position', 'fixed');
                     $('.aside_content').css('width', '300px');
                     $('.aside_content').css('bottom', '40px');
                     $('.aside_content').css('left', '0px');
                 } else {
-                    $('.al-main').css('padding-left', '0px');
+
                 }
             } else {
+                $('.aside_content').css('position', 'relative');
 
                 if ($scope.bShowMenu) {
                     $('.aside_content').css('width', '300px');
@@ -463,6 +478,10 @@
                     $('.al-main').css('padding-left', '0px');
                 }
             }
+        }
+        $scope.setCollaspe = function(){
+            $scope.bShowMenu = !$scope.bShowMenu;
+            updateBar();
         };
         $scope.setListingCollapse = function(){
             $scope.bShowListing = !$scope.bShowListing;
