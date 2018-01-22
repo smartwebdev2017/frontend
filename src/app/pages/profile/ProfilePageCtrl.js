@@ -26,8 +26,14 @@
         });
 
         $scope.nextListing = function(){
-            if ($rootScope.$next_list[$rootScope.$detailData.pcf.vid]) {
-                $window.location = '/#/normal/detail/' + $rootScope.$next_list[$rootScope.$detailData.pcf.vid];
+            if ($rootScope.$next_list) {
+                if ($rootScope.$next_list[$rootScope.$detailData.pcf.vid]) {
+                    $rootScope.isLastListing = false;
+                    $window.location = '/#/normal/detail/' + $rootScope.$next_list[$rootScope.$detailData.pcf.vid];
+                }else {
+                    $rootScope.isLastListing = true;
+                    $rootScope.nextPage();
+                }
             }
         }
     }

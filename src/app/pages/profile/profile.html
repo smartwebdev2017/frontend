@@ -4,7 +4,8 @@
         <div class="row">
             <div class="col-md-12">
                 <a class="back_link" href="#">BACK TO RESULTS</a>
-                <a ng-if="$next_list[$detailData.pcf.vid]" class="next_link" href='/#/normal/detail/{{$next_list[$detailData.pcf.vid]}}'>NEXT LISTING</a>
+                <!--<a class="next_link" ng-click='nextListing()'>NEXT LISTING</a>-->
+                <a ng-if="$next_list[$detailData.pcf.vid] || $next != null" class="next_link" ng-click='nextListing()'>NEXT LISTING</a>
             </div>
         </div>
 

@@ -8,6 +8,7 @@
     function BaSidebarCtrl($scope, $rootScope, $filter, $window, $location, $timeout, $state, $stateParams, CFG, BSLookup, Offer, ActiveOfferDetail, Cities, States, Vins, Engines, Pcfbodies, SearchOptions){
         $scope.main_width = 40;
         $scope.offer = {};
+        $scope.oldFilter = null;
         $scope.filter = SearchOptions.filter;
         $scope.filterOptions = SearchOptions.options;
         var listing_year_slider = $('.listing_year_slider');
@@ -41,7 +42,7 @@
             $('.al-main').css('padding-left', '0px');
 
             loadModelNumbers();
-            loadOffers();
+            //loadOffers();
             loadEngines();
             loadPcfbodies();
 
@@ -270,6 +271,7 @@
         }
 
         function loadOffers(){
+            $scope.filter = SearchOptions.filter;
             $rootScope.isLoading = true;
             var filter = angular.copy($scope.filter);
 
@@ -447,8 +449,13 @@
         }
         function doSearch(){
             if (!$rootScope.isLoading) {
-                $scope.filter.page = 1;
                 $scope.offers = [];
+
+                if ($scope.oldFilter == null){
+                    $scope.oldFilter = $scope.filter;
+                } else {
+                    $scope.filter.page = 1;
+                }
 
                 loadOffers()
             }

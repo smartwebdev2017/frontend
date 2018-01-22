@@ -20,6 +20,7 @@
         var off=[];
         $scope.colums = DisplayOptions.persist(DesktopDisplayOptions);
         $rootScope.is_mobile = false;
+        $rootScope.isLastListing = false;
 
         if ($window.innerWidth < 480) {
             $rootScope.is_mobile = true;
@@ -351,6 +352,8 @@
             return a.pathname + a.search;
         };
         $rootScope.nextPage = function(){
+            if (!$rootScope.$next) return;
+
             var newURL = $rootScope.extractURL($rootScope.$next);
             $scope.filter.page += 1;
 
@@ -374,6 +377,10 @@
                     $rootScope.$next = offers.next;
                     $rootScope.$prev = offers.previous;
                     $rootScope.$dataSource = data;
+
+                    if ($rootScope.isLastListing){
+                        if ( offers.results.length > 0) $window.location = '/#/normal/detail/' + offers.results[0].pcf.vid;
+                    }
                 })
                 .error(function(offers){
 
