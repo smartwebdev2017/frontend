@@ -44,7 +44,7 @@
     $rootScope.reset = function(){
 
         SearchOptions.resetFacets();
-        $window.location.reload();
+        $window.location = '/#/normal/search';
     };
     $rootScope.showNotify = function(title, msg, type){
 
