@@ -2,97 +2,15 @@ angular.module('pcarfinder.pages.services')
     .factory('DisplayOptions', ['$localStorage', '$window',function($localStorage, $window){
         'use strict';
 
-        var defaults = {};
-        var is_mobile = false;
-        if ($window.innerWidth < 480) is_mobile = true;
-        if (!is_mobile){
-            defaults = {
-                title: true,
-                mileage: true,
-                price: true,
-                city: false,
-                state: true,
-                vin: false,
-                make: false,
-                model: false,
-                trim: false,
-                date: false,
-                condition: false,
-                pcf: false,
-                listing_year: false,
-                listing_exterior: false,
-                listing_interior: false,
-                transmission: true,
-                engine: false,
-                drivetrain: false,
-                msrp: true,
-                bs_year: false,
-                bs_model: false,
-                bs_exterior: false,
-                bs_interior: false,
-                production_month: false,
-                warranty_start: false,
-                model_number: true,
-                price_msrp: true,
-                pts: false,
-                lwb: false,
-                longhood: false,
-                widebody: false,
-                pccb: false,
-                aircooled: false,
-                listing_age: false,
-                body_type: false,
-                auto_trans: false
-            };
-        }else{
-            defaults = {
-                title: true,
-                mileage: false,
-                price: true,
-                city: false,
-                state: false,
-                vin: false,
-                make: false,
-                model: false,
-                trim: false,
-                date: false,
-                condition: false,
-                pcf: false,
-                listing_year: false,
-                listing_exterior: false,
-                listing_interior: false,
-                transmission: false,
-                engine: false,
-                drivetrain: false,
-                msrp: false,
-                bs_year: false,
-                bs_model: false,
-                bs_exterior: false,
-                bs_interior: false,
-                production_month: false,
-                warranty_start: false,
-                model_number: false,
-                price_msrp: false,
-                pts: false,
-                lwb: false,
-                longhood: false,
-                widebody: false,
-                pccb: false,
-                aircooled: false,
-                listing_age: false,
-                body_type: false,
-                auto_trans: false
-            };
-        }
-
         var self = this;
-        self.colums = persist();
+        //self.colums = persist();
+        self.persist = persist;
 
         self.resetDisplayColumns = resetDisplayColumns;
 
         return self;
 
-        function persist(){
+        function persist(defaults){
             var displayColums = $localStorage.colums;
             if (displayColums){
                 return displayColums;
@@ -102,8 +20,8 @@ angular.module('pcarfinder.pages.services')
             }
         }
 
-        function resetDisplayColumns() {
-            self.colums = angular.copy(defaults);
+        function resetDisplayColumns(defaults) {
+            //self.colums = angular.copy(defaults);
             $localStorage.colums = angular.copy(defaults);
         }
     }]);

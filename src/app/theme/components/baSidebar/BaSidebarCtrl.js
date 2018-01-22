@@ -19,22 +19,32 @@
         $scope.bShowPCF = false;
         $scope.bShowBSF = false;
         $rootScope.isShowPrevNext = true;
+        $rootScope.isGridPageLoaded = true;
+        $rootScope.isProfilePageLoaded = false;
 
         $rootScope.is_mobile = false;
         if ($window.innerWidth < 480) $rootScope.is_mobile = true;
 
         $(window).resize(function() {
-            $scope.windowWidth = $(window).width();
-            if ($scope.windowWidth < 480) {
-                $rootScope.is_mobile = true;
-            } else {
-                $rootScope.is_mobile = false;
+            if ($rootScope.isGridPageLoaded) {
+                $scope.windowWidth = $(window).width();
+                if ($scope.windowWidth < 480) {
+                    $rootScope.is_mobile = true;
+                } else {
+                    $rootScope.is_mobile = false;
+                }
+                updateBar();
             }
-            updateBar();
         });
 
         angular.element(function(){
-            $('.al-main').css('padding-left', '0px')
+            $('.al-main').css('padding-left', '0px');
+
+            loadModelNumbers();
+            loadOffers();
+            loadEngines();
+            loadPcfbodies();
+
         });
 
         $scope.opts = {
@@ -446,19 +456,13 @@
         $scope.doSearch = function(){
             doSearch();
         };
-        $scope.getActiveListingByIndex = function(index){
-            $rootScope.$detailData = $rootScope.$active[index];
-        };
-        $scope.getInactiveListingByIndex = function(index){
-            $rootScope.$detailData = $rootScope.$inactive[index];
-        };
 
         function updateBar(){
             if ($rootScope.is_mobile) {
                 $('.al-main').css('padding-left', '0px');
                 if ($scope.bShowMenu) {
                     $('.aside_content').css('position', 'fixed');
-                    $('.aside_content').css('width', '300px');
+                    $('.aside_content').css('width', '100%');
                     $('.aside_content').css('bottom', '40px');
                     $('.aside_content').css('left', '0px');
                 } else {
@@ -466,7 +470,7 @@
                 }
             } else {
                 $('.aside_content').css('position', 'relative');
-
+                $('.aside_content').css('bottom', '0px');
                 if ($scope.bShowMenu) {
                     $('.aside_content').css('width', '300px');
                     $('.al-main').css('padding-left', '300px');
@@ -507,12 +511,5 @@
                 $('.bsf_container .content').css('background', '#fff');
             }
         };
-        $scope.$watch('filter.year_from', function (newValue1, oldValue1){
-            console.log('1');
-        });
-        loadModelNumbers();
-        loadOffers();
-        loadEngines();
-        loadPcfbodies();
     }
 })();
