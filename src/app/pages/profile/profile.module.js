@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  angular.module('pcarfinder.pages.profile', [])
+  angular.module('pcarfinder.pages.profile', ['ngTouch'])
       .config(routeConfig);
 
   /** @ngInject */

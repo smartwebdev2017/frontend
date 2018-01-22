@@ -5,7 +5,7 @@
         .controller('ProfilePageCtrl', ProfilePageCtrl);
 
     /** @ngInject */
-    function ProfilePageCtrl($scope, $rootScope, SearchOptions) {
+    function ProfilePageCtrl($scope, $rootScope, $window, SearchOptions) {
         $scope.filter = SearchOptions.filter;
         $rootScope.$numLimit = 150;
 
@@ -24,6 +24,10 @@
         angular.element(function(){
             $('.panel-body-description').css('height', '212px');
         });
+
+        $scope.nextListing = function(next_url){
+            $window.location.href = next_url;
+        }
 
     }
     angular.module('pcarfinder.pages.profile')
