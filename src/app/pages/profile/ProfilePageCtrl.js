@@ -25,10 +25,11 @@
             $('.panel-body-description').css('height', '212px');
         });
 
-        $scope.nextListing = function(next_url){
-            $window.location.href = next_url;
+        $scope.nextListing = function(){
+            if ($rootScope.$next_list[$rootScope.$detailData.pcf.vid]) {
+                $window.location = '/#/normal/detail/' + $rootScope.$next_list[$rootScope.$detailData.pcf.vid];
+            }
         }
-
     }
     angular.module('pcarfinder.pages.profile')
         .filter('highlightWord', function() {
