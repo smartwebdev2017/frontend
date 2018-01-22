@@ -45,7 +45,7 @@
 }
 .detail-page {
   .back_link { float:left;}
-  .next_link { float:right;}
+  .next_link { float:right;cursor: pointer;}
   .detail_link {text-decoration: underline !important; color:blue;}
   .small_info label{font-size: 10px !important; color: gray;}
   .left {float:left;}

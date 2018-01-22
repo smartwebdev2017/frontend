@@ -46,6 +46,11 @@
             loadEngines();
             loadPcfbodies();
 
+            $scope.setCollaspe();
+            $scope.setListingCollapse();
+            $scope.setPCFCollapse();
+            $scope.setBSFCollapse();
+
         });
 
         $scope.opts = {
