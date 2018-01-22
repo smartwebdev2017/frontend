@@ -502,7 +502,7 @@
         $scope.setListingCollapse = function(){
             $scope.bShowListing = !$scope.bShowListing;
             if ($scope.bShowListing && $rootScope.is_mobile){
-                //$('.listing_container .content').css('height', '200px');
+                $('.listing_container .content').css('height', 'calc(100vh - 230px)');
                 $('.listing_container .content').css('overflow', 'scroll');
                 $('.listing_container .content').css('background', '#fff');
             }
@@ -510,7 +510,7 @@
         $scope.setPCFCollapse = function(){
             $scope.bShowPCF = !$scope.bShowPCF;
             if ($scope.bShowPCF && $rootScope.is_mobile){
-                //$('.pcf_container .content').css('height', '200px');
+                $('.pcf_container .content').css('height', 'calc(100vh - 230px)');
                 $('.pcf_container .content').css('overflow', 'scroll');
                 $('.pcf_container .content').css('background', '#fff');
             }
@@ -518,7 +518,7 @@
         $scope.setBSFCollapse = function(){
             $scope.bShowBSF = !$scope.bShowBSF;
             if ($scope.bShowBSF && $rootScope.is_mobile){
-                //$('.bsf_container .content').css('height', '200px');
+                $('.bsf_container .content').css('height', 'calc(100vh - 230px)');
                 $('.bsf_container .content').css('overflow', 'scroll');
                 $('.bsf_container .content').css('background', '#fff');
             }
