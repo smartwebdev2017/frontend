@@ -292,7 +292,10 @@
     bottom: 0;
     left: 0;
     z-index: 100;
-    color: white;
+
+    .filter {
+      color: white;
+    }
 
     .mini-menu {
       line-height: 40px;
@@ -308,6 +311,7 @@
     .filter-symbol {
       float: left;
       margin: 0px 10px;
+      color: white;
     }
 
     .active_container .content, .inactive_container .content {
@@ -317,6 +321,7 @@
     .listing_container, .pcf_container, .bsf_container, .inactive_container, .active_container {
       padding: 0px 0 1px 0;
     }
+
     //.al-detail-sidebar {
     //  width: 150px;
     //  bottom: 40px;
