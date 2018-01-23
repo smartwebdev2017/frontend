@@ -332,9 +332,11 @@
                 var data = [];
                 $rootScope.$next_list = {};
 
-                if (offers.results.length == 0 && filter.keyword.length == 17){
+                if (offers.results.length == 0 && (filter.keyword.length == 17 || filter.vin.length == 17)){
+                    var keyword = filter.keyword;
+                    if (filter.keyword == '') keyword = filter.vin;
 
-                    BSLookup.save({}, {id:filter.keyword}, function (offers) {
+                    BSLookup.save({}, {id:keyword}, function (offers) {
                         $rootScope.isLoading = false;
                         $scope.bShowActive = false;
                         $scope.bShowInactive = false;
