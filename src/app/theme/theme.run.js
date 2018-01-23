@@ -36,15 +36,20 @@
     $rootScope.$baSidebarService = baSidebarService;
   }
 
-  function runBlock($location, $rootScope, $window, $document, $timeout, $state, toastr, CFG, $localStorage, SearchOptions){
+  function runBlock($location, $rootScope, $window, $document, $timeout, $state, toastr, CFG, $localStorage, SearchOptions, MobileDisplayOptions, DesktopDisplayOptions){
 
     $rootScope.isLogined = function(){
       return !!localStorage.getItem(CFG.auth.localStorageName);
     };
     $rootScope.reset = function(){
+        if ($window.innerWidth < 480) {
+          SearchOptions.resetFacets(MobileDisplayOptions);
+        }else{
+          SearchOptions.resetFacets(DesktopDisplayOptions);
+        }
 
-        SearchOptions.resetFacets();
         $window.location = '/#/normal/search';
+        $window.location.reload();
     };
     $rootScope.showNotify = function(title, msg, type){
 
