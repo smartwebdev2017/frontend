@@ -330,9 +330,15 @@
             Offer.query(filter, {}, function (offers) {
                 $rootScope.isLoading = false;
                 var data = [];
-                $rootScope.$next_list = {};
+                var keyword_length = 0;
+                var vin_length = 0;
 
-                if (offers.results.length == 0 && (filter.keyword.length == 17 || filter.vin.length == 17)){
+                if (filter.keyword == undefined) keyword_length = 0;
+                if (filter.vin == undefined) vin_length = 0;
+
+                $rootScope.$next_list = {};
+                
+                if (offers.results.length == 0 && (keyword_length == 17 || vin_length == 17)){
                     var keyword = filter.keyword;
                     if (filter.keyword == '') keyword = filter.vin;
 
