@@ -8,8 +8,10 @@
     </div>
   </div>
   <div class="setting">
-    <a href="#" ng-click="openSettingDlg()" class="logo"><img src="../assets/img/slider.png"></a>
+    <div><a href="#" ng-click="openSettingDlg()" class="logo"><img src="../assets/img/slider.png"></a></div>
+    <div><span ng-if="$totalLength != '0'">{{$totalLength}}</span></div>
   </div>
+
   <div class="grid" ui-grid="gridOptions" ui-grid-selection ui-grid-resize-columns ui-grid-move-columns ui-grid-auto-resize></div>
   <!--<div class="row">-->
     <!--<div class="col-md-12">-->

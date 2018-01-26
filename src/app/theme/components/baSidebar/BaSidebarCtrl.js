@@ -22,8 +22,9 @@
         $rootScope.isShowPrevNext = true;
         $rootScope.isGridPageLoaded = true;
         $rootScope.isProfilePageLoaded = false;
-
+        $rootScope.$totalLength = 0;
         $rootScope.is_mobile = false;
+
         if ($window.innerWidth < 480) $rootScope.is_mobile = true;
 
         $(window).resize(function() {
@@ -337,6 +338,7 @@
                 if ((filter.vin == undefined) || (filter.vin == '')) vin_length = 0;
 
                 $rootScope.$next_list = {};
+                $rootScope.$totalLength = offers.results.length.toLocaleString();
 
                 if (offers.results.length == 0 && (keyword_length == 17 || vin_length == 17)){
                     var keyword = filter.keyword;

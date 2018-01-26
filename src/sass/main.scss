@@ -144,6 +144,15 @@
     width:20px;
     height: 20px;
   }
+
+  > div:nth-of-type(1) {
+    margin-right: 5px;
+    display: inline-block;
+  }
+
+  > div:nth-of-type(2) {
+    display: inline-block;
+  }
 }
 .modal-dialog {
   h3 {
