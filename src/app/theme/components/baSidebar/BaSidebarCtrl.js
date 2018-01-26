@@ -338,7 +338,7 @@
                 if ((filter.vin == undefined) || (filter.vin == '')) vin_length = 0;
 
                 $rootScope.$next_list = {};
-                $rootScope.$totalLength = offers.results.length.toLocaleString();
+                $rootScope.$totalLength = offers.count.toLocaleString();
 
                 if (offers.results.length == 0 && (keyword_length == 17 || vin_length == 17)){
                     var keyword = filter.keyword;

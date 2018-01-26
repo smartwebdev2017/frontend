@@ -289,7 +289,7 @@
 
             Offer.query(filter, {}, function (offers) {
                 $rootScope.isLoading = false;
-                $rootScope.$totalLength = offers.results.length.toLocaleString();
+                $rootScope.$totalLength = offers.count.toLocaleString();
                 $rootScope.$next_list = {};
                 var data = [];
 
