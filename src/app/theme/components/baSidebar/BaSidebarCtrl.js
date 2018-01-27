@@ -334,8 +334,16 @@
                 var keyword_length = 0;
                 var vin_length = 0;
 
-                if ((filter.keyword == undefined) || (filter.keyword == '')) keyword_length = 0;
-                if ((filter.vin == undefined) || (filter.vin == '')) vin_length = 0;
+                if ((filter.keyword == undefined) || (filter.keyword == '')) {
+                    keyword_length = 0;
+                } else {
+                    keyword_length = filter.keyword.length;
+                }
+                if ((filter.vin == undefined) || (filter.vin == '')) {
+                    vin_length = 0;
+                } else {
+                    vin_length = filter.vin.length;
+                }
 
                 $rootScope.$next_list = {};
                 $rootScope.$totalLength = offers.count.toLocaleString();
