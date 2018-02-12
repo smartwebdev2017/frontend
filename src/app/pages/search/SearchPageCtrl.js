@@ -385,7 +385,7 @@
                     }
                 })
                 .error(function(offers){
-
+                    $rootScope.isLoading = false;
                 })
         };
 
@@ -414,7 +414,7 @@
                     $rootScope.$dataSource = data;
                 })
                 .error(function(response){
-
+                    $rootScope.isLoading = false;
                 })
         };
 
