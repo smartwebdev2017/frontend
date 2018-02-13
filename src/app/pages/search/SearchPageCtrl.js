@@ -28,7 +28,19 @@
         }
 
         $(window).resize(function() {
-            $scope.reset();
+            $scope.windowWidth = $(window).width();
+
+            if ($scope.windowWidth < 480) {
+                $rootScope.is_mobile = true;
+                $scope.resetDisplayColumns(MobileDisplayOptions);
+                $scope.colums = DisplayOptions.persist(MobileDisplayOptions);
+            } else {
+                $rootScope.is_mobile = false;
+                //$scope.resetDisplayColumns(DesktopDisplayOptions);
+                //$scope.colums = DisplayOptions.persist(DesktopDisplayOptions);
+            }
+
+            setDisplayOptions();
         });
 
         function getCellClass(grid, row){
@@ -175,13 +187,14 @@
                 $scope.colums = DisplayOptions.persist(MobileDisplayOptions);
             } else {
                 $rootScope.is_mobile = false;
-                //$scope.resetDisplayColumns(DesktopDisplayOptions);
-                //$scope.colums = DisplayOptions.persist(DesktopDisplayOptions);
+                $scope.resetDisplayColumns(DesktopDisplayOptions);
+                $scope.colums = DisplayOptions.persist(DesktopDisplayOptions);
             }
 
             setDisplayOptions();
 
         };
+
         function doUpdateCols(val){
             $scope.chkCounts = 0;
 

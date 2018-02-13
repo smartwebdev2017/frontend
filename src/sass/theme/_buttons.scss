@@ -1,7 +1,7 @@
 $hover: 24;
 .btn:focus, .btn:active:focus, .btn.active:focus,
 .btn.focus, .btn:active.focus, .btn.active.focus {
-  outline: none;
+  outline: none !important;
 }
 
 .btn {
@@ -86,10 +86,8 @@ button.btn.btn-success {
 }
 
 button.btn.btn-info {
-  @include buttonColor($info, $info);
-  &:active, &:target {
-    background-color: $info-dark;
-  }
+  border: none;
+  border-radius: 0;
 }
 
 button.btn.btn-warning {
