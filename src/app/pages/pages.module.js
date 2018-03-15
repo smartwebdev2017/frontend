@@ -31,9 +31,12 @@
       .config(routeConfig);
 
   /** @ngInject */
-  function routeConfig($urlRouterProvider) {
+  function routeConfig($urlRouterProvider, $locationProvider) {
+
+    $locationProvider.html5Mode(true);
+
     $urlRouterProvider
-      .when('', '/normal/search');
+      .when('', '/');
   }
 
 })();

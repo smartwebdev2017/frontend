@@ -21,11 +21,25 @@
         $scope.colums = DisplayOptions.persist(DesktopDisplayOptions);
         $rootScope.is_mobile = false;
         $rootScope.isLastListing = false;
+        $scope.keywordClear = false;
 
         if ($window.innerWidth < 480) {
             $rootScope.is_mobile = true;
             $scope.colums = DisplayOptions.persist(MobileDisplayOptions);
         }
+
+        $scope.clearIconToggle = function(param){
+            if($scope.filter[param].length)
+                $scope[param+'Clear'] = true;
+            else
+                $scope[param+'Clear'] = false;
+        };
+        $scope.clearText = function(param){
+            $scope.filter[param] = '';
+            $scope.clearIconToggle(param);
+        };
+
+        $scope.clearIconToggle("keyword");
 
         $(window).resize(function() {
             $scope.windowWidth = $(window).width();
@@ -50,8 +64,57 @@
             onRegisterApi: function(gridApi){
                 $rootScope.$gridApi = gridApi;
 
+
                 gridApi.selection.on.rowSelectionChanged($scope, function(row){
-                    $state.go("normal.detail", {vin:row.entity.pcf__vid});
+                    $state.go("normal.detail", {
+                    vin:row.entity.pcf__vid,
+                    model:$scope.filter['model'],
+                    title:$scope.filter['title'],
+                    city:$scope.filter['city'],
+                    state:typeof($scope.filter.state) === 'object'?$scope.filter.state.value:'',
+                    year_from:$scope.filter['year_from']==1955?'':$scope.filter['year_from'],
+                    year_to:$scope.filter['year_to']==2019?'':$scope.filter['year_to'],
+                    description:$scope.filter['description'],
+                    cond:typeof($scope.filter.cond) === 'object'?$scope.filter.cond.value:'',
+                    seller_type:typeof($scope.filter.seller_type) === 'object'?$scope.filter.seller_type.value:'',
+                    longhood:$scope.filter['longhood'],
+                    widebody:$scope.filter['widebody'],
+                    pts:$scope.filter['pts'],
+                    pccb:$scope.filter['pccb'],
+                    lwb:$scope.filter['lwb'],
+                    aircooled:$scope.filter['aircooled'],
+                    auto_trans:typeof($scope.filter.auto_trans) === 'object'?$scope.filter.auto_trans.value:'',
+                    listing_transmission:typeof($scope.filter.listing_transmission) === 'object'?$scope.filter.listing_transmission.value:'',
+                    listing_drivetrain:typeof($scope.filter.listing_drivetrain) === 'object'?$scope.filter.listing_drivetrain.value:'',
+                    listing_sold_status:typeof($scope.filter.listing_sold_status) === 'object'?$scope.filter.listing_sold_status.value:'',
+                    listing_exterior_color:$scope.filter['listing_exterior_color'],
+                    listing_interior_color:$scope.filter['listing_interior_color'],
+                    listing_engine_size:$scope.filter['listing_engine_size'],
+                    mileage_from:$scope.filter['mileage_from'],
+                    mileage_to:$scope.filter['mileage_to'],
+                    price_from:$scope.filter['price_from'],
+                    price_to:$scope.filter['price_to'],
+                    model_number:typeof($scope.filter.model_number) === 'object'?$scope.filter.model_number.value:'',
+                    listing_year:$scope.filter['listing_year'],
+                    listing_age_from:$scope.filter['listing_age_from']==-1?'':$scope.filter['listing_age_from'],
+                    listing_age_to:$scope.filter['listing_age_to']==31?'':$scope.filter['listing_age_to'],
+                    pcf_listing_age_from:$scope.filter['pcf_listing_age_from']==-1?'':$scope.filter['pcf_listing_age_from'],
+                    pcf_listing_age_to:$scope.filter['pcf_listing_age_to']==31?'':$scope.filter['pcf_listing_age_to'],
+                    pcf_msrp_from:$scope.filter['pcf_msrp_from'],
+                    pcf_msrp_to:$scope.filter['pcf_msrp_to'],
+                    bs_model_detail:$scope.filter['bsf_model_detail'],
+                    bs_msrp_from:$scope.filter['bsf_msrp_from'],
+                    bs_msrp_to:$scope.filter['bsf_msrp_to'],
+                    bs_interior:$scope.filter['bsf_interior'],
+                    bs_exterior:$scope.filter['bsf_exterior'],
+                    bs_model_year_from:$scope.filter['bsf_model_year_from']==1955?'':$scope.filter['bsf_model_year_from'],
+                    bs_model_year_to:$scope.filter['bsf_model_year_to']==2019?'':$scope.filter['bsf_model_year_to'],
+                    bs_production_month_from:$scope.filter['bsf_production_month_from'],
+                    bs_production_month_to:$scope.filter['bsf_production_month_to'],
+                    listing_date_start:$scope.filter['listing_date_start'],
+                    listing_date_end:$scope.filter['listing_date_end'],
+                    pcf_body_type:typeof($scope.filter.pcf_body_type) === 'object'?$scope.filter.pcf_body_type.value:'',
+                    keyword:$scope.filter['keyword']});
                 });
 
                 $rootScope.$gridApi.core.on.sortChanged($scope, function(grid, sortColumns){
@@ -71,7 +134,9 @@
             enableColumnResizing: true,
             enableHiding: false,
             minRowsToShow: 11,
-            enableRowHeaderSelection: false
+            enableRowHeaderSelection: false,
+            enableHorizontalScrollbar: 0,
+            enableVerticalScrollbar: 0
         };
 
         $scope.gridOptions.columnDefs = [
@@ -370,6 +435,7 @@
             if (!$rootScope.$next) return;
 
             var newURL = $rootScope.extractURL($rootScope.$next);
+            $rootScope.isLoading = true;
             $scope.filter.page += 1;
 
             $http({
@@ -394,7 +460,7 @@
                     $rootScope.$dataSource = data;
 
                     if ($rootScope.isLastListing){
-                        if ( offers.results.length > 0) $window.location = '/#/normal/detail/' + offers.results[0].pcf.vid;
+                        if ( offers.results.length > 0) $window.location = '/ID/' + offers.results[0].pcf.vid;
                     }
                 })
                 .error(function(offers){
@@ -403,8 +469,10 @@
         };
 
         $rootScope.prevPage = function(){
+
             var newURL = $rootScope.extractURL($rootScope.$prev);
             if ($scope.filter.page > 1) $scope.filter.page -= 1;
+            $rootScope.isLoading = true;
             $http({
                 method: 'GET',
                 url: newURL,

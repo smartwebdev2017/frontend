@@ -3,7 +3,7 @@
     <div class="panel-content" ng-swipe-right="prev" ng-swipe-left="nextListing()">
         <div class="row">
             <div class="col-md-12">
-                <a class="back_link" href="#">BACK TO RESULTS</a>
+                <a class="back_link" href="/">BACK TO RESULTS</a>
                 <!--<a class="next_link" ng-click='nextListing()'>NEXT LISTING</a>-->
                 <a ng-if="$next_list[$detailData.pcf.vid] || $next != null" class="next_link" ng-click='nextListing()'>NEXT LISTING</a>
             </div>
@@ -173,7 +173,7 @@
                 <div class="form-group row clearfix" ng-if="$detailData.pcf.pts">
                     <div class="col-sm-9">
                         <label ng-bind-html="'PTS: Yes' | highlightWord: keywords"></label>
-                    </div>/
+                    </div>
                 </div>
             </div>
 

@@ -5,7 +5,7 @@
     .config(config);
 
   /** @ngInject */
-  function config(baConfigProvider, colorHelper, $provide) {
+  function config(baConfigProvider, colorHelper, $provide, $locationProvider) {
     //$provide.decorator('$uiViewScroll', uiViewScrollDecorator);
     baConfigProvider.changeTheme({blur: true});
 

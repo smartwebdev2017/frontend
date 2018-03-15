@@ -30,7 +30,8 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <input ng-model="filter.title" placeholder="Title" class="form-control" type="text" ng-model-options="{debounce: 1000}"/>
+                        <input ng-model="filter.title" placeholder="Title" class="form-control" type="text" ng-model-options="{debounce: 1000}" ng-change="clearIconToggle('title')"/>
+                        <i class="ion-close-circled smcloseicon" ng-show="titleClear" ng-click="clearText('title')"></i>
                     </div>
                     <input id="year_value" type="hidden" ng-model="year_value" />
                     <input id="mileage_value" type="hidden" ng-model="mileage_value"  />
@@ -41,7 +42,8 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <input  ng-model="filter.model"  placeholder="Model" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
+                        <input  ng-model="filter.model"  placeholder="Model" class="form-control" type="search" ng-model-options="{debounce: 1000}" ng-change="clearIconToggle('model')"/>
+                        <i class="ion-close-circled smcloseicon" ng-show="modelClear" ng-click="clearText('model')"></i>
                     </div>
                 </div>
             </div>
@@ -49,7 +51,8 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <input  ng-model="filter.description"  ng-change="filter_car()"  placeholder="Description" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
+                        <input  ng-model="filter.description" placeholder="Description" class="form-control" type="search" ng-model-options="{debounce: 1000}" ng-change="clearIconToggle('description')"/>
+                        <i class="ion-close-circled smcloseicon" ng-show="descriptionClear" ng-click="clearText('description')"></i>
                     </div>
                 </div>
             </div>
@@ -70,7 +73,8 @@
             <div class="row">
                 <div class="from">
                     <div class="form-group">
-                        <input  ng-model="filter.mileage_from"  placeholder="Mileage Min" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
+                        <input  ng-model="filter.mileage_from"  placeholder="Mileage Min" class="form-control" type="search" ng-model-options="{debounce: 1000}" ng-change="clearIconToggle('mileage_from')"/>
+                        <i class="ion-close-circled spcloseicon" ng-show="mileage_fromClear" ng-click="clearText('mileage_from')"></i>
                     </div>
                 </div>
                 <div class="range">
@@ -78,7 +82,8 @@
                 </div>
                 <div class="to">
                     <div class="form-group">
-                        <input  ng-model="filter.mileage_to"  placeholder="Mileage Max" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
+                        <input  ng-model="filter.mileage_to"  placeholder="Mileage Max" class="form-control" type="search" ng-model-options="{debounce: 1000}" ng-change="clearIconToggle('mileage_to')"/>
+                        <i class="ion-close-circled sprcloseicon" ng-show="mileage_toClear" ng-click="clearText('mileage_to')"></i>
                     </div>
                 </div>
             </div>
@@ -98,7 +103,8 @@
             <div class="row">
                 <div class="from">
                     <div class="form-group">
-                        <input  ng-model="filter.price_from"  placeholder="Price Min" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
+                        <input  ng-model="filter.price_from"  placeholder="Price Min" class="form-control" type="search" ng-model-options="{debounce: 1000}" ng-change="clearIconToggle('price_from')"/>
+                        <i class="ion-close-circled spcloseicon" ng-show="price_fromClear" ng-click="clearText('price_from')"></i>
                     </div>
                 </div>
                 <div class="range">
@@ -106,7 +112,8 @@
                 </div>
                 <div class="to">
                     <div class="form-group">
-                        <input  ng-model="filter.price_to"  placeholder="Price Max" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
+                        <input  ng-model="filter.price_to"  placeholder="Price Max" class="form-control" type="search" ng-model-options="{debounce: 1000}" ng-change="clearIconToggle('price_to')"/>
+                        <i class="ion-close-circled sprcloseicon" ng-show="price_toClear" ng-click="clearText('price_to')"></i>
                     </div>
                 </div>
             </div>
@@ -114,7 +121,8 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <input  ng-model="filter.listing_exterior_color"  placeholder="Exterior" class="form-control" type="search"/>
+                        <input  ng-model="filter.listing_exterior_color"  placeholder="Exterior" class="form-control" type="search" ng-change="clearIconToggle('listing_exterior_color')"/>
+                        <i class="ion-close-circled smcloseicon" ng-show="listing_exterior_colorClear" ng-click="clearText('listing_exterior_color')"></i>
                     </div>
                 </div>
             </div>
@@ -122,7 +130,8 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <input  ng-model="filter.listing_interior_color"  placeholder="Interior" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
+                        <input  ng-model="filter.listing_interior_color"  placeholder="Interior" class="form-control" type="search" ng-model-options="{debounce: 1000}" ng-change="clearIconToggle('listing_interior_color')"/>
+                        <i class="ion-close-circled smcloseicon" ng-show="listing_interior_colorClear" ng-click="clearText('listing_interior_color')"></i>
                     </div>
                 </div>
             </div>
@@ -130,7 +139,8 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <input  ng-model="filter.city"  placeholder="City" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
+                        <input  ng-model="filter.city"  placeholder="City" class="form-control" type="search" ng-model-options="{debounce: 1000}" ng-change="clearIconToggle('city')"/>
+                        <i class="ion-close-circled smcloseicon" ng-show="cityClear" ng-click="clearText('city')"></i>
                     </div>
                 </div>
             </div>
@@ -176,7 +186,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <input  date-range-picker class="form-control date-picker" type="text" ng-model="filter.listing_date" placeholder="Date" options="opts" min="'2016-01-01'" max="'2018-12-31'"//>
+                        <input  date-range-picker class="form-control date-picker" type="text" ng-model="filter.listing_date" placeholder="Date" options="opts" min="'2016-01-01'" max="'2018-12-31'"/>
                     </div>
                 </div>
             </div>
@@ -222,7 +232,8 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <input  ng-model="filter.vin"  placeholder="VIN" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
+                        <input  ng-model="filter.vin"  placeholder="VIN" class="form-control" type="search" ng-model-options="{debounce: 1000}" ng-change="clearIconToggle('vin')"/>
+                        <i class="ion-close-circled smcloseicon" ng-show="vinClear" ng-click="clearText('vin')"></i>
                     </div>
                 </div>
             </div>
@@ -249,7 +260,8 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <input  ng-model="filter.listing_engine_size"  placeholder="Engine" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
+                        <input  ng-model="filter.listing_engine_size"  placeholder="Engine" class="form-control" type="search" ng-model-options="{debounce: 1000}" ng-change="clearIconToggle('listing_engine_size')"/>
+                        <i class="ion-close-circled smcloseicon" ng-show="listing_engine_sizeClear" ng-click="clearText('listing_engine_size')"></i>
                     </div>
                 </div>
             </div>
@@ -383,7 +395,8 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <input  ng-model="filter.bsf_model_detail"  placeholder="Model" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
+                        <input  ng-model="filter.bsf_model_detail"  placeholder="Model" class="form-control" type="search" ng-model-options="{debounce: 1000}" ng-change="clearIconToggle('bsf_model_detail')"/>
+                        <i class="ion-close-circled smcloseicon" ng-show="bsf_model_detailClear" ng-click="clearText('bsf_model_detail')"></i>
                     </div>
                 </div>
             </div>
@@ -391,7 +404,8 @@
             <div class="row">
                 <div class="from">
                     <div class="form-group">
-                        <input  ng-model="filter.bsf_msrp_from"  placeholder="MSRP Min" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
+                        <input  ng-model="filter.bsf_msrp_from"  placeholder="MSRP Min" class="form-control" type="search" ng-model-options="{debounce: 1000}" ng-change="clearIconToggle('bsf_msrp_from')"/>
+                        <i class="ion-close-circled spcloseicon" ng-show="bsf_msrp_fromClear" ng-click="clearText('bsf_msrp_from')"></i>
                     </div>
                 </div>
                 <div class="range">
@@ -399,7 +413,8 @@
                 </div>
                 <div class="to">
                     <div class="form-group">
-                        <input  ng-model="filter.bsf_msrp_to"  placeholder="MSRP Max" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
+                        <input  ng-model="filter.bsf_msrp_to"  placeholder="MSRP Max" class="form-control" type="search" ng-model-options="{debounce: 1000}" ng-change="clearIconToggle('bsf_msrp_to')"/>
+                        <i class="ion-close-circled sprcloseicon" ng-show="bsf_msrp_toClear" ng-click="clearText('bsf_msrp_to')"></i>
                     </div>
                 </div>
             </div>
@@ -407,7 +422,8 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <input  ng-model="filter.bsf_exterior"  placeholder="Exterior" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
+                        <input  ng-model="filter.bsf_exterior"  placeholder="Exterior" class="form-control" type="search" ng-model-options="{debounce: 1000}" ng-change="clearIconToggle('bsf_exterior')"/>
+                        <i class="ion-close-circled smcloseicon" ng-show="bsf_exteriorClear" ng-click="clearText('bsf_exterior')"></i>
                     </div>
                 </div>
             </div>
@@ -415,7 +431,8 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <input  ng-model="filter.bsf_interior"  placeholder="Interior" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
+                        <input  ng-model="filter.bsf_interior"  placeholder="Interior" class="form-control" type="search" ng-model-options="{debounce: 1000}" ng-change="clearIconToggle('bsf_interior')"/>
+                        <i class="ion-close-circled smcloseicon" ng-show="bsf_interiorClear" ng-click="clearText('bsf_interior')"></i>
                     </div>
                 </div>
             </div>
@@ -423,7 +440,8 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <input  ng-model="filter.bsf_options"  placeholder="Options" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
+                        <input  ng-model="filter.bsf_options"  placeholder="Options" class="form-control" type="search" ng-model-options="{debounce: 1000}" ng-change="clearIconToggle('bsf_options')"/>
+                        <i class="ion-close-circled smcloseicon" ng-show="bsf_optionsClear" ng-click="clearText('bsf_options')"></i>
                     </div>
                 </div>
             </div>
@@ -431,7 +449,8 @@
             <div class="row">
                 <div class="from">
                     <div class="form-group">
-                        <input  ng-model="filter.bsf_production_month_from"  placeholder="Prod Yr Min" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
+                        <input  ng-model="filter.bsf_production_month_from"  placeholder="Prod Yr Min" class="form-control" type="search" ng-model-options="{debounce: 1000}" ng-change="clearIconToggle('bsf_production_month_from')"/>
+                        <i class="ion-close-circled spcloseicon" ng-show="bsf_production_month_fromClear" ng-click="clearText('bsf_production_month_from')"></i>
                     </div>
                 </div>
                 <div class="range">
@@ -439,7 +458,8 @@
                 </div>
                 <div class="to">
                     <div class="form-group">
-                        <input  ng-model="filter.bsf_production_month_to"  placeholder="Prod Yr Max" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
+                        <input  ng-model="filter.bsf_production_month_to"  placeholder="Prod Yr Max" class="form-control" type="search" ng-model-options="{debounce: 1000}" ng-change="clearIconToggle('bsf_production_month_to')"/>
+                        <i class="ion-close-circled sprcloseicon" ng-show="bsf_production_month_toClear" ng-click="clearText('bsf_production_month_to')"></i>
                     </div>
                 </div>
             </div>
@@ -478,7 +498,8 @@
             <div class="row">
                 <div class="from">
                     <div class="form-group">
-                        <input  ng-model="filter.pcf_msrp_from"  placeholder="%MSRP Min" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
+                        <input  ng-model="filter.pcf_msrp_from"  placeholder="%MSRP Min" class="form-control" type="search" ng-model-options="{debounce: 1000}" ng-change="clearIconToggle('pcf_msrp_from')"/>
+                        <i class="ion-close-circled spcloseicon" ng-show="pcf_msrp_fromClear" ng-click="clearText('pcf_msrp_from')"></i>
                     </div>
                 </div>
                 <div class="range">
@@ -486,7 +507,8 @@
                 </div>
                 <div class="to">
                     <div class="form-group">
-                        <input  ng-model="filter.pcf_msrp_to"  placeholder="%MSRP Max" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
+                        <input  ng-model="filter.pcf_msrp_to"  placeholder="%MSRP Max" class="form-control" type="search" ng-model-options="{debounce: 1000}" ng-change="clearIconToggle('pcf_msrp_to')"/>
+                        <i class="ion-close-circled sprcloseicon" ng-show="pcf_msrp_toClear" ng-click="clearText('pcf_msrp_to')"></i>
                     </div>
                 </div>
             </div>
@@ -598,7 +620,8 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <input  ng-model="filter.pcf_id"  placeholder="PCF ID" class="form-control" type="search" ng-model-options="{debounce: 1000}"/>
+                        <input  ng-model="filter.pcf_id"  placeholder="PCF ID" class="form-control" type="search" ng-model-options="{debounce: 1000}" ng-change="clearIconToggle('pcf_id')"/>
+                        <i class="ion-close-circled smcloseicon" ng-show="pcf_idClear" ng-click="clearText('pcf_id')"></i>
                     </div>
                 </div>
             </div>

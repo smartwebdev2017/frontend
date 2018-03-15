@@ -1,5 +1,55 @@
 @import 'common';
 
+#loaderImage {
+  position: fixed;
+    top: calc(50% - 34px);
+    left: calc(50% - 34px);
+    margin-top: -34px;
+    //margin-left: -34px;
+    width: 64px;
+    height: 64px;
+}
+.closeicon {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding-right: 30px;
+    color: #ccc;
+    font-size: 20px;
+    line-height: 50px;
+    cursor:pointer;
+}
+.smcloseicon {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding-right: 22px;
+  color: #ccc;
+  font-size: 20px;
+  line-height: 38px;
+  cursor: pointer;
+}
+
+.spcloseicon {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding-right: 8px;
+  color: #ccc;
+  font-size: 20px;
+  line-height: 38px;
+  cursor: pointer;
+}
+.sprcloseicon {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding-right: 22px;
+  color: #ccc;
+  font-size: 20px;
+  line-height: 38px;
+  cursor: pointer;
+}
 // injector
 // endinjector
 .noUi-horizontal {
@@ -116,6 +166,7 @@
 .grid {
   text-align: center;
   line-height: 25px;
+  height:367px;
 }
 .prev-btn {
   float:right;
@@ -243,11 +294,13 @@
   padding-left: 15px;
   float: left;
   width: 45%;
+  position:relative;
 }
 .to {
   width: 45%;
   float: left;
   padding-right: 15px;
+  position:relative;
 }
 .range {
   width: 10%;
@@ -426,5 +479,5 @@
 
 html,
 body {
-  overflow: auto;
+  /*overflow: auto;*/
 }

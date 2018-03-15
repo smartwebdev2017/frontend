@@ -2,8 +2,9 @@
   <div class="row">
     <div class="col-md-8">
         <div class="form-group">
-          <input ng-show="!is_mobile" placeholder='Try “997.1” or “Cayman” or “PTS” or a VIN' class="input-lg form-control" type="search" ng-model="filter.keyword" ng-model-options="{debounce: 1000}"/>
-          <input ng-show="is_mobile" placeholder='Try “997.1” or “PTS” or a VIN' class="input-lg form-control" type="search" ng-model="filter.keyword" ng-model-options="{debounce: 1000}"/>
+          <input ng-show="!is_mobile" placeholder='Try “997.1” or “Cayman” or “PTS” or a VIN' class="input-lg form-control" type="search" ng-model="filter.keyword" ng-model-options="{debounce: 2000}" ng-change="clearIconToggle('keyword')"/>
+          <input ng-show="is_mobile" placeholder='Try “997.1” or “PTS” or a VIN' class="input-lg form-control" type="search" ng-model="filter.keyword" ng-model-options="{debounce: 2000}" ng-change="clearIconToggle('keyword')"/>
+          <i class="ion-close-circled closeicon" ng-show="keywordClear" ng-click="clearText('keyword')"></i>
         </div>
     </div>
   </div>
@@ -12,6 +13,7 @@
     <div><a href="#" ng-click="openSettingDlg()" class="logo"><img src="../assets/img/slider.png"></a></div>
   </div>
 
+  <!--<div class="grid" ng-if="isLoading"  style="opacity:0.5;" ui-grid="gridOptions" ui-grid-selection ui-grid-resize-columns ui-grid-move-columns ui-grid-auto-resize></div>-->
   <div class="grid" ui-grid="gridOptions" ui-grid-selection ui-grid-resize-columns ui-grid-move-columns ui-grid-auto-resize></div>
   <!--<div class="row">-->
     <!--<div class="col-md-12">-->

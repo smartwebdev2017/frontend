@@ -50,7 +50,7 @@ function browserSyncInit(baseDir, browser) {
 }
 
 browserSync.use(browserSyncSpa({
-  selector: '[ng-app]'// Only needed for angular apps
+  //selector: '[ng-app]'// Only needed for angular apps
 }));
 
 gulp.task('serve', ['watch'], function () {
@@ -58,6 +58,7 @@ gulp.task('serve', ['watch'], function () {
 });
 
 gulp.task('serve:dist', ['build'], function () {
+  console.log(conf.paths.dist);
   browserSyncInit(conf.paths.dist);
 });
 

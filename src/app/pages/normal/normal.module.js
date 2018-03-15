@@ -11,7 +11,8 @@
     function routeConfig($stateProvider) {
         $stateProvider
             .state('normal', {
-                url: '/normal',
+                abstract:true,
+                url: '/',
                 templateUrl: 'app/pages/normal/normal.html',
                 redirectTo: 'normal.search',
                 authenticate: true

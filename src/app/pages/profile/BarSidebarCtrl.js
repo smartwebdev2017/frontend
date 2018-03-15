@@ -108,8 +108,8 @@
 
                 if ($scope.bShowMenu) {
                     $('.al-main').css('padding-left', '150px');
-                    $('.btn_container').css('width', 'calc(100vw - 150px)');
-                    $('.btn_container').css('margin-left', '150px');
+                    //$('.btn_container').css('width', 'calc(100vw - 150px)');
+                   // $('.btn_container').css('margin-left', '150px');
                 } else {
                     $('.btn_container').css('width', '100%');
                     $('.btn_container').css('margin-left', '0px');

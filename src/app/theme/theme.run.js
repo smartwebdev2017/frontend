@@ -48,8 +48,8 @@
           SearchOptions.resetFacets(DesktopDisplayOptions);
         }
 
-        $window.location = '/#/normal/search';
-        $window.location.reload();
+        $window.location.href = 'http://localhost:3000';
+        //$window.location.reload();
     };
     $rootScope.showNotify = function(title, msg, type){
 

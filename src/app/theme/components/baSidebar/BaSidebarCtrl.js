@@ -6,26 +6,226 @@
 
     /** @ngInject */
     function BaSidebarCtrl($scope, $rootScope, $filter, $window, $location, $timeout, $state, $stateParams, CFG, BSLookup, Offer, ActiveOfferDetail, Cities, States, Vins, Engines, Pcfbodies, SearchOptions){
-        $scope.main_width = 40;
-        $scope.offer = {};
-        $scope.oldFilter = null;
-        $scope.filter = SearchOptions.filter;
-        $scope.filterOptions = SearchOptions.options;
+
         var listing_year_slider = $('.listing_year_slider');
         var off=[];
 
-        $scope.load = loadOffers;
-        $scope.bShowMenu = false;
-        $scope.bShowListing = false;
-        $scope.bShowPCF = false;
-        $scope.bShowBSF = false;
-        $rootScope.isShowPrevNext = true;
-        $rootScope.isGridPageLoaded = true;
-        $rootScope.isProfilePageLoaded = false;
-        $rootScope.$totalLength = 0;
-        $rootScope.is_mobile = false;
+        $scope.clearIconToggle = function(param){
+            if($scope.filter[param].length)
+                $scope[param+'Clear'] = true;
+            else
+                $scope[param+'Clear'] = false;
+        };
 
-        if ($window.innerWidth < 480) $rootScope.is_mobile = true;
+        $scope.clearText = function(param){
+            $scope.filter[param] = '';
+            $scope.clearIconToggle(param);
+        };
+
+        $scope.initialPage = function(){
+            $scope.main_width = 40;
+            $scope.offer = {};
+            $scope.oldFilter = null;
+            $scope.filter = SearchOptions.filter;
+            $scope.filterOptions = SearchOptions.options;
+            $scope.titleClear = false;
+
+            if ($window.innerWidth < 480) $rootScope.is_mobile = true;
+
+            $scope.load = loadOffers;
+            $scope.bShowMenu = false;
+            $scope.bShowListing = false;
+            $scope.bShowPCF = false;
+            $scope.bShowBSF = false;
+            $rootScope.isShowPrevNext = true;
+            $rootScope.isGridPageLoaded = true;
+            $rootScope.isProfilePageLoaded = false;
+            $rootScope.$totalLength = 0;
+            $rootScope.is_mobile = false;
+
+                    angular.element(function(){
+            $('.al-main').css('padding-left', '0px');
+
+                loadModelNumbers();
+                loadEngines();
+                loadPcfbodies();
+            });
+
+            $scope.opts = {
+                locale: {
+                    format: 'YYYY-MM-DD'
+                }
+            };
+
+            $scope.auto_trans = [
+                {label: 'All', value: ''},
+                {label: 'Sportomatic', value: 'Sportomatic'},
+                {label: 'Tiptronic', value: 'tiptronic'},
+                {label: 'PDK', value: 'pdk'}
+            ];
+            $scope.transmissions = [
+                {label: 'All', value: ''},
+                {label: 'Auto', value: 'Auto'},
+                {label: 'Manual', value: 'Manual'}
+            ];
+            $scope.cond = [
+                {label: 'All', value: ''},
+                {label: 'New', value: 'New'},
+                {label: 'Used', value: 'Used'}
+            ];
+            $scope.seller_type = [
+                {label: 'All', value: ''},
+                {label: 'Private Party', value: 'Private Party'},
+                {label: 'Dealership', value: 'Dealership'}
+            ];
+            $scope.drivetrain = [
+                {label: 'All', value: ''},
+                {label: '2WD', value: '2WD'},
+                {label: '4WD', value: '4WD'}
+            ];
+            $scope.sold_status = [
+                {label: 'All Vehicles', value: ''},
+                {label: 'Currently For Sale', value:'0'},
+                {label: 'Not Currently for Sale', value:'1'}
+            ];
+
+            $scope.states = [
+                {label: 'All', value: ''},
+                {label: 'Alabama' , value: 'AL'},
+                {label: 'Alaska'	, value: 'AK'},
+                {label: 'Arizona'	, value: 'AZ'},
+                {label: 'Arkansas'	, value: 'AR'},
+                {label: 'California'	, value: 'CA'},
+                {label: 'Colorado'	, value: 'CO'},
+                {label: 'Connecticut'	, value: 'CT'},
+                {label: 'Delaware'	, value: 'DE'},
+                {label: 'Florida'	, value: 'FL'},
+                {label: 'Georgia'	, value: 'GA'},
+                {label: 'Hawaii'	, value: 'HI'},
+                {label: 'Idaho'	, value: 'ID'},
+                {label: 'Illinois'	, value: 'IL'},
+                {label: 'Indiana'	, value: 'IN'},
+                {label: 'Iowa'	, value: 'IA'},
+                {label: 'Kansas'	, value: 'KS'},
+                {label: 'Kentucky'	, value: 'KY'},
+                {label: 'Louisiana'	, value: 'LA'},
+                {label: 'Maine'	, value: 'ME'},
+                {label: 'Maryland'	, value: 'MD'},
+                {label: 'Massachusetts'	, value: 'MA'},
+                {label: 'Michigan'	, value: 'MI'},
+                {label: 'Minnesota'	, value: 'MN'},
+                {label: 'Mississippi'	, value: 'MS'},
+                {label: 'Missouri'	, value: 'MO'},
+                {label: 'Montana'	, value: 'MT'},
+                {label: 'Nebraska'	, value: 'NE'},
+                {label: 'Nevada'	, value: 'NV'},
+                {label: 'New Hampshire'	, value: 'NH'},
+                {label: 'New Jersey'	, value: 'NJ'},
+                {label: 'New Mexico'	, value: 'NM'},
+                {label: 'New York'	, value: 'NY'},
+                {label: 'North Carolina'	, value: 'NC'},
+                {label: 'North Dakota'	, value: 'ND'},
+                {label: 'Ohio'	, value: 'OH'},
+                {label: 'Oklahoma'	, value: 'OK'},
+                {label: 'Oregon'	, value: 'OR'},
+                {label: 'Pennsylvania'	, value: 'PA'},
+                {label: 'Rhode Island'	, value: 'RI'},
+                {label: 'South Carolina'	, value: 'SC'},
+                {label: 'South Dakota'	, value: 'SD'},
+                {label: 'Tennessee'	, value: 'TN'},
+                {label: 'Texas'	, value: 'TX'},
+                {label: 'Utah'	, value: 'UT'},
+                {label: 'Vermont'	, value: 'VT'},
+                {label: 'Virginia'	, value: 'VA'},
+                {label: 'Washington'	, value: 'WA'},
+                {label: 'West Virginia'	, value: 'WV'},
+                {label: 'Wisconsin'	, value: 'WI'},
+                {label: 'Wyoming'	, value: 'WY'},
+                {label: 'District of Columbia', value: 'DC'}
+            ];
+
+
+            off.push($scope.$watchGroup([
+                'filter.model',
+                'filter.title',
+                'filter.city',
+                'filter.state',
+                'filter.price_from',
+                'filter.price_to',
+                'filter.mileage_from',
+                'filter.mileage_to',
+                //'filter.year_from',
+                //'filter.year_to',
+                'filter.description',
+                'filter.listing_date',
+                'filter.longhood',
+                'filter.widebody',
+                'filter.pts',
+                'filter.pccb',
+                'filter.lwb',
+                'filter.aircooled',
+                'filter.auto_trans',
+                'filter.model_number',
+                'filter.transmission',
+                'filter.keyword',
+
+                'filter.listing_exterior_color',
+                'filter.listing_interior_color',
+                'filter.vin',
+                'filter.listing_transmission',
+                'filter.listing_engine_size',
+                'filter.listing_body_type',
+                'filter.listing_drivetrain',
+                'filter.cond',
+                'filter.seller_type',
+                'filter.listing_age_from',
+                'filter.listing_age_to',
+                'filter.pcf_msrp_from',
+                'filter.pcf_msrp_to',
+                'filter.pcf_id',
+                'filter.pcf_body_type',
+                'filter.pcf_listing_age_from',
+                'filter.pcf_listing_age_to',
+                'filter.bsf_msrp_from',
+                'filter.bsf_msrp_to',
+                //'filter.bsf_model_year_from',
+                //'filter.bsf_model_year_to',
+                'filter.bsf_model_detail',
+                'filter.bsf_exterior',
+                'filter.bsf_interior',
+                'filter.bsf_production_month_from',
+                'filter.bsf_production_month_to',
+                'filter.listing_sold_status',
+                'filter.bsf_options',
+            ], doSearch));
+            $scope.clearIconToggle("title");
+            $scope.clearIconToggle("model");
+            $scope.clearIconToggle("city");
+            $scope.clearIconToggle("price_from");
+            $scope.clearIconToggle("price_to");
+            $scope.clearIconToggle("mileage_from");
+            $scope.clearIconToggle("mileage_to");
+            $scope.clearIconToggle("description");
+            $scope.clearIconToggle("listing_exterior_color");
+            $scope.clearIconToggle("listing_interior_color");
+            $scope.clearIconToggle("listing_engine_size");
+            $scope.clearIconToggle("vin");
+            $scope.clearIconToggle("bsf_model_detail");
+            $scope.clearIconToggle("bsf_msrp_from");
+            $scope.clearIconToggle("bsf_msrp_to");
+            $scope.clearIconToggle("bsf_exterior");
+            $scope.clearIconToggle("bsf_interior");
+            $scope.clearIconToggle("bsf_production_month_from");
+            $scope.clearIconToggle("bsf_production_month_to");
+            $scope.clearIconToggle("bsf_options");
+            $scope.clearIconToggle("pcf_listing_age_to");
+            $scope.clearIconToggle("pcf_listing_age_from");
+            $scope.clearIconToggle("pcf_id");
+            $scope.clearIconToggle("listing_drivetrain");
+            $scope.clearIconToggle("pcf_msrp_from");
+            $scope.clearIconToggle("pcf_msrp_to");
+
+        };
 
         $(window).resize(function() {
             if ($rootScope.isGridPageLoaded) {
@@ -39,168 +239,6 @@
             }
         });
 
-        angular.element(function(){
-            $('.al-main').css('padding-left', '0px');
-
-            loadModelNumbers();
-            //loadOffers();
-            loadEngines();
-            loadPcfbodies();
-
-            //$scope.setCollaspe();
-            //$scope.setListingCollapse();
-            //$scope.setPCFCollapse();
-            //$scope.setBSFCollapse();
-
-        });
-
-        $scope.opts = {
-            //singleDatePicker: true,
-            locale: {
-                format: 'YYYY-MM-DD'
-            }
-        };
-        off.push($scope.$watchGroup([
-            'filter.model',
-            'filter.title',
-            'filter.city',
-            'filter.state',
-            'filter.price_from',
-            'filter.price_to',
-            'filter.mileage_from',
-            'filter.mileage_to',
-            //'filter.year_from',
-            //'filter.year_to',
-            'filter.description',
-            'filter.listing_date',
-            'filter.longhood',
-            'filter.widebody',
-            'filter.pts',
-            'filter.pccb',
-            'filter.lwb',
-            'filter.aircooled',
-            'filter.auto_trans',
-            'filter.model_number',
-            'filter.transmission',
-            'filter.keyword',
-
-            'filter.listing_exterior_color',
-            'filter.listing_interior_color',
-            'filter.vin',
-            'filter.listing_transmission',
-            'filter.listing_engine_size',
-            'filter.listing_body_type',
-            'filter.listing_drivetrain',
-            'filter.cond',
-            'filter.seller_type',
-            'filter.listing_age_from',
-            'filter.listing_age_to',
-            'filter.pcf_msrp_from',
-            'filter.pcf_msrp_to',
-            'filter.pcf_id',
-            'filter.pcf_body_type',
-            'filter.pcf_listing_age_from',
-            'filter.pcf_listing_age_to',
-            'filter.bsf_msrp_from',
-            'filter.bsf_msrp_to',
-            //'filter.bsf_model_year_from',
-            //'filter.bsf_model_year_to',
-            'filter.bsf_model_detail',
-            'filter.bsf_exterior',
-            'filter.bsf_interior',
-            'filter.bsf_production_month_from',
-            'filter.bsf_production_month_to',
-            'filter.listing_sold_status',
-            'filter.bsf_options',
-        ], doSearch));
-        $scope.auto_trans = [
-            {label: 'All', value: ''},
-            {label: 'Sportomatic', value: 'Sportomatic'},
-            {label: 'Tiptronic', value: 'tiptronic'},
-            {label: 'PDK', value: 'pdk'}
-        ];
-        $scope.transmissions = [
-            {label: 'All', value: ''},
-            {label: 'Auto', value: 'Auto'},
-            {label: 'Manual', value: 'Manual'}
-        ];
-        $scope.cond = [
-            {label: 'All', value: ''},
-            {label: 'New', value: 'New'},
-            {label: 'Used', value: 'Used'}
-        ];
-        $scope.seller_type = [
-            {label: 'All', value: ''},
-            {label: 'Private Party', value: 'Private Party'},
-            {label: 'Dealership', value: 'Dealership'}
-        ];
-        $scope.drivetrain = [
-            {label: 'All', value: ''},
-            {label: '2WD', value: '2WD'},
-            {label: '4WD', value: '4WD'}
-        ];
-        $scope.sold_status = [
-            {label: 'All Vehicles', value: ''},
-            {label: 'Currently For Sale', value:'0'},
-            {label: 'Not Currently for Sale', value:'1'}
-        ];
-
-        //$scope.filter.listing_sold_status= $scope.sold_status[1];
-
-        $scope.states = [
-            {label: 'All', value: ''},
-            {label: 'Alabama' , value: 'AL'},
-            {label: 'Alaska'	, value: 'AK'},
-            {label: 'Arizona'	, value: 'AZ'},
-            {label: 'Arkansas'	, value: 'AR'},
-            {label: 'California'	, value: 'CA'},
-            {label: 'Colorado'	, value: 'CO'},
-            {label: 'Connecticut'	, value: 'CT'},
-            {label: 'Delaware'	, value: 'DE'},
-            {label: 'Florida'	, value: 'FL'},
-            {label: 'Georgia'	, value: 'GA'},
-            {label: 'Hawaii'	, value: 'HI'},
-            {label: 'Idaho'	, value: 'ID'},
-            {label: 'Illinois'	, value: 'IL'},
-            {label: 'Indiana'	, value: 'IN'},
-            {label: 'Iowa'	, value: 'IA'},
-            {label: 'Kansas'	, value: 'KS'},
-            {label: 'Kentucky'	, value: 'KY'},
-            {label: 'Louisiana'	, value: 'LA'},
-            {label: 'Maine'	, value: 'ME'},
-            {label: 'Maryland'	, value: 'MD'},
-            {label: 'Massachusetts'	, value: 'MA'},
-            {label: 'Michigan'	, value: 'MI'},
-            {label: 'Minnesota'	, value: 'MN'},
-            {label: 'Mississippi'	, value: 'MS'},
-            {label: 'Missouri'	, value: 'MO'},
-            {label: 'Montana'	, value: 'MT'},
-            {label: 'Nebraska'	, value: 'NE'},
-            {label: 'Nevada'	, value: 'NV'},
-            {label: 'New Hampshire'	, value: 'NH'},
-            {label: 'New Jersey'	, value: 'NJ'},
-            {label: 'New Mexico'	, value: 'NM'},
-            {label: 'New York'	, value: 'NY'},
-            {label: 'North Carolina'	, value: 'NC'},
-            {label: 'North Dakota'	, value: 'ND'},
-            {label: 'Ohio'	, value: 'OH'},
-            {label: 'Oklahoma'	, value: 'OK'},
-            {label: 'Oregon'	, value: 'OR'},
-            {label: 'Pennsylvania'	, value: 'PA'},
-            {label: 'Rhode Island'	, value: 'RI'},
-            {label: 'South Carolina'	, value: 'SC'},
-            {label: 'South Dakota'	, value: 'SD'},
-            {label: 'Tennessee'	, value: 'TN'},
-            {label: 'Texas'	, value: 'TX'},
-            {label: 'Utah'	, value: 'UT'},
-            {label: 'Vermont'	, value: 'VT'},
-            {label: 'Virginia'	, value: 'VA'},
-            {label: 'Washington'	, value: 'WA'},
-            {label: 'West Virginia'	, value: 'WV'},
-            {label: 'Wisconsin'	, value: 'WI'},
-            {label: 'Wyoming'	, value: 'WY'},
-            {label: 'District of Columbia', value: 'DC'}
-        ];
         function loadCities() {
 
             Cities.query({}, function(cities){
@@ -470,7 +508,57 @@
                 $rootScope.handleErrors($scope,err);
             });
         }
+
         function doSearch(){
+            $state.go("normal.search", {
+                model:$scope.filter['model'],
+                title:$scope.filter['title'],
+                city:$scope.filter['city'],
+                state:typeof($scope.filter.state) === 'object'?$scope.filter.state.value:'',
+                year_from:$scope.filter['year_from']==1955?'':$scope.filter['year_from'],
+                year_to:$scope.filter['year_to']==2019?'':$scope.filter['year_to'],
+                description:$scope.filter['description'],
+                cond:typeof($scope.filter.cond) === 'object'?$scope.filter.cond.value:'',
+                seller_type:typeof($scope.filter.seller_type) === 'object'?$scope.filter.seller_type.value:'',
+                longhood:$scope.filter['longhood'],
+                widebody:$scope.filter['widebody'],
+                pts:$scope.filter['pts'],
+                pccb:$scope.filter['pccb'],
+                lwb:$scope.filter['lwb'],
+                aircooled:$scope.filter['aircooled'],
+                auto_trans:typeof($scope.filter.auto_trans) === 'object'?$scope.filter.auto_trans.value:'',
+                listing_transmission:typeof($scope.filter.listing_transmission) === 'object'?$scope.filter.listing_transmission.value:'',
+                listing_drivetrain:typeof($scope.filter.listing_drivetrain) === 'object'?$scope.filter.listing_drivetrain.value:'',
+                listing_sold_status:typeof($scope.filter.listing_sold_status) === 'object'?$scope.filter.listing_sold_status.value:'',
+                listing_exterior_color:$scope.filter['listing_exterior_color'],
+                listing_interior_color:$scope.filter['listing_interior_color'],
+                listing_engine_size:$scope.filter['listing_engine_size'],
+                mileage_from:$scope.filter['mileage_from'],
+                mileage_to:$scope.filter['mileage_to'],
+                price_from:$scope.filter['price_from'],
+                price_to:$scope.filter['price_to'],
+                model_number:typeof($scope.filter.model_number) === 'object'?$scope.filter.model_number.value:'',
+                listing_year:$scope.filter['listing_year'],
+                listing_age_from:$scope.filter['listing_age_from']==-1?'':$scope.filter['listing_age_from'],
+                listing_age_to:$scope.filter['listing_age_to']==31?'':$scope.filter['listing_age_to'],
+                pcf_listing_age_from:$scope.filter['pcf_listing_age_from']==-1?'':$scope.filter['pcf_listing_age_from'],
+                pcf_listing_age_to:$scope.filter['pcf_listing_age_to']==31?'':$scope.filter['pcf_listing_age_to'],
+                pcf_msrp_from:$scope.filter['pcf_msrp_from'],
+                pcf_msrp_to:$scope.filter['pcf_msrp_to'],
+                bs_model_detail:$scope.filter['bsf_model_detail'],
+                bs_msrp_from:$scope.filter['bsf_msrp_from'],
+                bs_msrp_to:$scope.filter['bsf_msrp_to'],
+                bs_interior:$scope.filter['bsf_interior'],
+                bs_exterior:$scope.filter['bsf_exterior'],
+                bs_model_year_from:$scope.filter['bsf_model_year_from']==1955?'':$scope.filter['bsf_model_year_from'],
+                bs_model_year_to:$scope.filter['bsf_model_year_to']==2019?'':$scope.filter['bsf_model_year_to'],
+                bs_production_month_from:$scope.filter['bsf_production_month_from'],
+                bs_production_month_to:$scope.filter['bsf_production_month_to'],
+                listing_date_start:$scope.filter['listing_date_start'],
+                listing_date_end:$scope.filter['listing_date_end'],
+                pcf_body_type:typeof($scope.filter.pcf_body_type) === 'object'?$scope.filter.pcf_body_type.value:'',
+                keyword:$scope.filter['keyword']}, {notify:false});
+
             if (!$rootScope.isLoading) {
                 $scope.offers = [];
 
@@ -479,10 +567,12 @@
                 } else {
                     $scope.filter.page = 1;
                 }
-
+                $stateParams.title = 'test';
+                //$location.search('title', $scope.filter['title']);
                 loadOffers()
             }
         }
+
         $scope.doSearch = function(){
             doSearch();
         };
@@ -504,8 +594,8 @@
                 if ($scope.bShowMenu) {
                     $('.aside_content').css('width', '300px');
                     $('.al-main').css('padding-left', '300px');
-                    $('.btn_container').css('width', 'calc(100vw - 300px)');
-                    $('.btn_container').css('margin-left', '300px');
+                    //$('.btn_container').css('width', 'calc(100vw - 300px)');
+                    //$('.btn_container').css('margin-left', '300px');
                 } else {
                     $('.btn_container').css('width', '100%');
                     $('.btn_container').css('margin-left', '0px');
@@ -513,18 +603,21 @@
                 }
             }
         }
+
         $scope.setCollaspe = function(){
             $scope.bShowMenu = !$scope.bShowMenu;
             updateBar();
         };
+
         $scope.setListingCollapse = function(){
             $scope.bShowListing = !$scope.bShowListing;
             if ($scope.bShowListing && $rootScope.is_mobile){
-                $('.listing_container .content').css('height', 'calc(100vh - 230px)');
+                $('.listing_container .content').css('height', 'calc(100% - 230px)');
                 $('.listing_container .content').css('overflow', 'scroll');
                 $('.listing_container .content').css('background', '#fff');
             }
         };
+
         $scope.setPCFCollapse = function(){
             $scope.bShowPCF = !$scope.bShowPCF;
             if ($scope.bShowPCF && $rootScope.is_mobile){
@@ -533,6 +626,7 @@
                 $('.pcf_container .content').css('background', '#fff');
             }
         };
+
         $scope.setBSFCollapse = function(){
             $scope.bShowBSF = !$scope.bShowBSF;
             if ($scope.bShowBSF && $rootScope.is_mobile){
@@ -541,5 +635,7 @@
                 $('.bsf_container .content').css('background', '#fff');
             }
         };
+
+        $scope.initialPage();
     }
 })();

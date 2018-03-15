@@ -5,7 +5,7 @@
         .controller('ProfilePageCtrl', ProfilePageCtrl);
 
     /** @ngInject */
-    function ProfilePageCtrl($scope, $rootScope, $window, SearchOptions) {
+    function ProfilePageCtrl($scope, $rootScope, $window, $state, SearchOptions) {
         $scope.filter = SearchOptions.filter;
         $rootScope.$numLimit = 150;
 
@@ -29,7 +29,8 @@
             if ($rootScope.$next_list) {
                 if ($rootScope.$next_list[$rootScope.$detailData.pcf.vid]) {
                     $rootScope.isLastListing = false;
-                    $window.location = '/#/normal/detail/' + $rootScope.$next_list[$rootScope.$detailData.pcf.vid];
+                    //$window.location.href = '/ID/' + $rootScope.$next_list[$rootScope.$detailData.pcf.vid];
+                    $state.go("normal.detail", {vin:$rootScope.$next_list[$rootScope.$detailData.pcf.vid]});
                 }else {
                     $rootScope.isLastListing = true;
                     $rootScope.nextPage();
