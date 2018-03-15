@@ -597,7 +597,7 @@
                 if ($scope.bShowMenu) {
                     $('.aside_content').css('width', '300px');
                     $('.al-main').css('padding-left', '300px');
-                    //$('.btn_container').css('width', 'calc(100vw - 300px)');
+                    $('.btn_container').css('width', 'calc(100vw - 300px)');
                     //$('.btn_container').css('margin-left', '300px');
                 } else {
                     $('.btn_container').css('width', '100%');
