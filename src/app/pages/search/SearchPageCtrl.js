@@ -64,7 +64,6 @@
             onRegisterApi: function(gridApi){
                 $rootScope.$gridApi = gridApi;
 
-
                 gridApi.selection.on.rowSelectionChanged($scope, function(row){
                     $state.go("normal.detail", {
                     vin:row.entity.pcf__vid,

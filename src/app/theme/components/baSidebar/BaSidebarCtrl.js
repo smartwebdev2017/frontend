@@ -5,7 +5,7 @@
         .controller('BaSidebarCtrl', BaSidebarCtrl);
 
     /** @ngInject */
-    function BaSidebarCtrl($scope, $rootScope, $filter, $window, $location, $timeout, $state, $stateParams, CFG, BSLookup, Offer, ActiveOfferDetail, Cities, States, Vins, Engines, Pcfbodies, SearchOptions){
+    function BaSidebarCtrl($scope, $rootScope, $filter, $window, $location, uiGridConstants, $timeout, $state, $stateParams, CFG, BSLookup, Offer, ActiveOfferDetail, Cities, States, Vins, Engines, Pcfbodies, SearchOptions){
 
         var listing_year_slider = $('.listing_year_slider');
         var off=[];
@@ -43,7 +43,7 @@
             $rootScope.$totalLength = 0;
             $rootScope.is_mobile = false;
 
-                    angular.element(function(){
+            angular.element(function(){
             $('.al-main').css('padding-left', '0px');
 
                 loadModelNumbers();
@@ -441,6 +441,7 @@
                                $state.go("normal.detail", {vin:data[0].pcf__vid});
                             }, 2000);
                         }
+
                     }, function(err){
                         $rootScope.isLoading = false;
                         $rootScope.handleErrors($scope,err);
@@ -502,6 +503,7 @@
                         }, 2000);
                     }
                 }
+                //$rootScope.$gridApi.grid.notifyDataChange(uiGridConstants.dataChange.COLUMN);
 
             }, function(err){
                 $rootScope.isLoading = false;
@@ -546,6 +548,7 @@
                 pcf_msrp_from:$scope.filter['pcf_msrp_from'],
                 pcf_msrp_to:$scope.filter['pcf_msrp_to'],
                 bs_model_detail:$scope.filter['bsf_model_detail'],
+                bs_options:$scope.filter['bsf_options'],
                 bs_msrp_from:$scope.filter['bsf_msrp_from'],
                 bs_msrp_to:$scope.filter['bsf_msrp_to'],
                 bs_interior:$scope.filter['bsf_interior'],
@@ -601,6 +604,9 @@
                     $('.btn_container').css('margin-left', '0px');
                     $('.al-main').css('padding-left', '0px');
                 }
+                $timeout(function(){
+                    $(window).trigger('resize');
+                });
             }
         }
 
@@ -612,7 +618,7 @@
         $scope.setListingCollapse = function(){
             $scope.bShowListing = !$scope.bShowListing;
             if ($scope.bShowListing && $rootScope.is_mobile){
-                $('.listing_container .content').css('height', 'calc(100% - 230px)');
+                $('.listing_container .content').css('height', 'calc(100vh - 230px)');
                 $('.listing_container .content').css('overflow', 'scroll');
                 $('.listing_container .content').css('background', '#fff');
             }
