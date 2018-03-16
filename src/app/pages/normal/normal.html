@@ -10,14 +10,14 @@
         </div>
         <div class="btn_container">
             <div class="col-xs-5">
-                <div ng-show="!is_mobile">
-                    <button class="btn btn-info prev-btn btn_space" ng-if="$prev != null && isShowPrevNext" ng-click="firstPage()">&nbsp;
-                        <i class="ion-ios-skipbackward">&nbsp;</i>
-                    </button>
-                </div>
                 <div >
                     <button class="btn btn-info prev-btn" ng-if="$prev != null && isShowPrevNext" ng-click="prevPage()">&nbsp;
                         <i class="ion-chevron-left">&nbsp;</i>
+                    </button>
+                </div>
+                <div ng-show="!is_mobile">
+                    <button class="btn btn-info prev-btn btn_space" ng-if="$prev != null && isShowPrevNext" ng-click="firstPage()">&nbsp;
+                        <i class="ion-ios-skipbackward">&nbsp;</i>
                     </button>
                 </div>
             </div>
