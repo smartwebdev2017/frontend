@@ -454,6 +454,21 @@
                         pushData(data, offers.results[i]);
                     }
 
+                    if (offers.next != null) {
+                        var lastUrlParams = new URLSearchParams(offers.next);
+                        var lastPg = parseInt(offers.count / 11) + 1;
+                        lastUrlParams.set('page', lastPg);
+
+                        $rootScope.$last = decodeURIComponent(lastUrlParams.toString());
+                    }
+
+                    if (offers.previous != null) {
+                        var firstUrlParams = new URLSearchParams(offers.previous);
+                        var firstPg = 1;
+                        firstUrlParams.set('page', firstPg);
+                        $rootScope.$first = decodeURIComponent(firstUrlParams.toString());
+                    }
+
                     $rootScope.$next = offers.next;
                     $rootScope.$prev = offers.previous;
                     $rootScope.$dataSource = data;
@@ -489,6 +504,21 @@
                         pushData(data, offers.results[i]);
                     }
 
+                    if (offers.next != null) {
+                        var lastUrlParams = new URLSearchParams(offers.next);
+                        var lastPg = parseInt(offers.count / 11) + 1;
+                        lastUrlParams.set('page', lastPg);
+
+                        $rootScope.$last = decodeURIComponent(lastUrlParams.toString());
+                    }
+
+                    if (offers.previous != null) {
+                        var firstUrlParams = new URLSearchParams(offers.previous);
+                        var firstPg = 1;
+                        firstUrlParams.set('page', firstPg);
+                        $rootScope.$first = decodeURIComponent(firstUrlParams.toString());
+                    }
+
                     $rootScope.$next = offers.next;
                     $rootScope.$prev = offers.previous;
                     $rootScope.$dataSource = data;
@@ -498,6 +528,102 @@
                 })
         };
 
+        $rootScope.firstPage = function(){
+
+            var newURL = $rootScope.extractURL($rootScope.$first);
+            if ($scope.filter.page > 1) $scope.filter.page = 0;
+            $rootScope.isLoading = true;
+            $http({
+                method: 'GET',
+                url: newURL,
+                headers: {'Authorization':'Token' + $window.sessionStorage.user_token}
+            })
+                .success(function(offers){
+                    $rootScope.isLoading = false;
+
+                    $rootScope.$next_list = {};
+                    var data = [];
+                    for ( var i = 0;  i< offers.results.length; i++){
+                        var record = {};
+                        if ( i< offers.results.length - 1 )
+                            $rootScope.$next_list[offers.results[i].pcf.vid] = offers.results[i+1].pcf.vid;
+                        pushData(data, offers.results[i]);
+                    }
+
+                    if (offers.next != null) {
+                        var lastUrlParams = new URLSearchParams(offers.next);
+                        var lastPg = parseInt(offers.count / 11) + 1;
+                        lastUrlParams.set('page', lastPg);
+
+                        $rootScope.$last = decodeURIComponent(lastUrlParams.toString());
+                    }
+
+                    if (offers.previous != null) {
+                        var firstUrlParams = new URLSearchParams(offers.previous);
+                        var firstPg = 1;
+                        firstUrlParams.set('page', firstPg);
+                        $rootScope.$first = decodeURIComponent(firstUrlParams.toString());
+                    }
+
+                    $rootScope.$next = offers.next;
+                    $rootScope.$prev = offers.previous;
+                    $rootScope.$dataSource = data;
+                })
+                .error(function(response){
+                    $rootScope.isLoading = false;
+                })
+        };
+        $rootScope.lastPage = function(){
+            if (!$rootScope.$last) return;
+
+            var newURL = $rootScope.extractURL($rootScope.$last);
+            $rootScope.isLoading = true;
+            $scope.filter.page = parseInt($rootScope.$totalCounts / 11) + 1;
+
+            $http({
+                method: 'GET',
+                url: newURL,
+                headers: {'Authorization':'Token' + $window.sessionStorage.user_token}
+            })
+                .success(function(offers){
+                    $rootScope.isLoading = false;
+
+                    $rootScope.$next_list = {};
+                    var data = [];
+                    for ( var i = 0;  i< offers.results.length; i++){
+                        var record = {};
+                        if ( i< offers.results.length - 1 )
+                            $rootScope.$next_list[offers.results[i].pcf.vid] = offers.results[i+1].pcf.vid;
+                        pushData(data, offers.results[i]);
+                    }
+
+                    if (offers.next != null) {
+                        var lastUrlParams = new URLSearchParams(offers.next);
+                        var lastPg = parseInt(offers.count / 11) + 1;
+                        lastUrlParams.set('page', lastPg);
+
+                        $rootScope.$last = decodeURIComponent(lastUrlParams.toString());
+                    }
+
+                    if (offers.previous != null) {
+                        var firstUrlParams = new URLSearchParams(offers.previous);
+                        var firstPg = 1;
+                        firstUrlParams.set('page', firstPg);
+                        $rootScope.$first = decodeURIComponent(firstUrlParams.toString());
+                    }
+
+                    $rootScope.$next = offers.next;
+                    $rootScope.$prev = offers.previous;
+                    $rootScope.$dataSource = data;
+
+                    if ($rootScope.isLastListing){
+                        if ( offers.results.length > 0) $window.location = '/ID/' + offers.results[0].pcf.vid;
+                    }
+                })
+                .error(function(offers){
+                    $rootScope.isLoading = false;
+                })
+        };
         function setDisplayOptions() {
             $scope.gridOptions.columnDefs[0].visible = false;
             $scope.gridOptions.columnDefs[1].visible = $scope.colums['title'];

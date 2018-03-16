@@ -385,6 +385,7 @@
 
                 $rootScope.$next_list = {};
                 $rootScope.$totalLength = offers.count.toLocaleString();
+                $rootScope.$totalCounts = offers.count;
 
                 if (offers.results.length == 0 && (keyword_length == 17 || vin_length == 17)){
                     var keyword = filter.keyword;
@@ -491,6 +492,21 @@
                             'pcf__body_type': offers.results[i].pcf.body_type,
                             'pcf__auto_trans': offers.results[i].pcf.auto_trans
                         });
+                    }
+
+                    if (offers.next != null) {
+                        var lastUrlParams = new URLSearchParams(offers.next);
+                        var lastPg = parseInt(offers.count / 11) + 1;
+                        lastUrlParams.set('page', lastPg);
+
+                        $rootScope.$last = decodeURIComponent(lastUrlParams.toString());
+                    }
+
+                    if (offers.previous != null) {
+                        var firstUrlParams = new URLSearchParams(offers.previous);
+                        var firstPg = 1;
+                        firstUrlParams.set('page', firstPg);
+                        $rootScope.$first = decodeURIComponent(firstUrlParams.toString());
                     }
 
                     $rootScope.$next = offers.next;
