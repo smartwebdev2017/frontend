@@ -621,7 +621,7 @@
                     $('.al-main').css('padding-left', '0px');
                 }
                 $timeout(function(){
-                    $(window).trigger('resize');
+                    //$(window).trigger('resize');
                 });
             }
         }
