@@ -65,6 +65,8 @@
                 $rootScope.$gridApi = gridApi;
 
                 gridApi.selection.on.rowSelectionChanged($scope, function(row){
+                    if ($rootScope.isLoading) return;
+
                     $state.go("normal.detail", {
                     vin:row.entity.pcf__vid,
                     model:$scope.filter['model'],
