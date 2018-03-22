@@ -104,6 +104,7 @@
                     pcf_msrp_from:$scope.filter['pcf_msrp_from'],
                     pcf_msrp_to:$scope.filter['pcf_msrp_to'],
                     bs_model_detail:$scope.filter['bsf_model_detail'],
+                    bs_options:$scope.filter['bsf_options'],
                     bs_msrp_from:$scope.filter['bsf_msrp_from'],
                     bs_msrp_to:$scope.filter['bsf_msrp_to'],
                     bs_interior:$scope.filter['bsf_interior'],
