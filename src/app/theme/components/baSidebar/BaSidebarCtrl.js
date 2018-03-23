@@ -9,6 +9,7 @@
 
         var listing_year_slider = $('.listing_year_slider');
         var off=[];
+        var qTimer;
 
         $scope.clearIconToggle = function(param){
             if($scope.filter[param].length)
@@ -40,7 +41,7 @@
             $rootScope.isShowPrevNext = true;
             $rootScope.isGridPageLoaded = true;
             $rootScope.isProfilePageLoaded = false;
-            $rootScope.$totalLength = 0;
+            //$rootScope.$totalLength = 0;
             $rootScope.is_mobile = false;
 
             angular.element(function(){
@@ -528,6 +529,11 @@
         }
 
         function doSearch(){
+            if ($rootScope.onProfilePage){
+                $rootScope.onProfilePage = false;
+                return;
+            }
+
             $state.go("normal.search", {
                 model:$scope.filter['model'],
                 title:$scope.filter['title'],
@@ -580,15 +586,21 @@
 
             if (!$rootScope.isLoading) {
                 $scope.offers = [];
+                console.log('finished loadding');
+                $timeout.cancel(qTimer);
 
                 if ($scope.oldFilter == null){
                     $scope.oldFilter = $scope.filter;
                 } else {
                     $scope.filter.page = 1;
                 }
-                $stateParams.title = 'test';
-                //$location.search('title', $scope.filter['title']);
+
                 loadOffers()
+            }else{
+                qTimer = $timeout(function(){
+                    console.log('loadding......')
+                    doSearch();
+                }, 1000);
             }
         }
 

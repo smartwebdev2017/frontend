@@ -11,6 +11,7 @@
 
         $scope.keywords = $scope.filter.keyword.split(" ");
         $rootScope.isShowPrevNext = false;
+        $rootScope.onProfilePage = true;
 
         $scope.readMore = function () {
             $rootScope.$numLimit = 100000;
