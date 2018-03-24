@@ -31,7 +31,7 @@
             $scope.filterOptions = SearchOptions.options;
             $scope.titleClear = false;
 
-            if ($window.innerWidth < 480) $rootScope.is_mobile = true;
+            if ($window.innerWidth < 760) $rootScope.is_mobile = true;
 
             $scope.load = loadOffers;
             $scope.bShowMenu = false;

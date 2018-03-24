@@ -23,7 +23,7 @@
         $rootScope.isLastListing = false;
         $scope.keywordClear = false;
 
-        if ($window.innerWidth < 480) {
+        if ($window.innerWidth < 760) {
             $rootScope.is_mobile = true;
             $scope.colums = DisplayOptions.persist(MobileDisplayOptions);
         }
@@ -44,7 +44,7 @@
         $(window).resize(function() {
             $scope.windowWidth = $(window).width();
 
-            if ($scope.windowWidth < 480) {
+            if ($scope.windowWidth < 760) {
                 $rootScope.is_mobile = true;
                 $scope.resetDisplayColumns(MobileDisplayOptions);
                 $scope.colums = DisplayOptions.persist(MobileDisplayOptions);
@@ -248,7 +248,7 @@
         $scope.reset = function(){
             $scope.windowWidth = $(window).width();
 
-            if ($scope.windowWidth < 480) {
+            if ($scope.windowWidth < 760) {
                 $rootScope.is_mobile = true;
                 $scope.resetDisplayColumns(MobileDisplayOptions);
                 $scope.colums = DisplayOptions.persist(MobileDisplayOptions);

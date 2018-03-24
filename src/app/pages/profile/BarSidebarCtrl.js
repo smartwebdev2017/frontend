@@ -20,13 +20,13 @@
         $rootScope.isProfilePageLoaded = true;
         var resizeId;
 
-        if ($window.innerWidth < 480) $rootScope.is_mobile = true;
+        if ($window.innerWidth < 760) $rootScope.is_mobile = true;
 
         $(window).resize(function() {
             if ($rootScope.isProfilePageLoaded) {
                 $scope.windowWidth = $(window).width();
 
-                if ($scope.windowWidth < 480) {
+                if ($scope.windowWidth < 760) {
                     $rootScope.is_mobile = true;
                 } else {
                     $rootScope.is_mobile = false;
