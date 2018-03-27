@@ -25,6 +25,7 @@
 
         if ($window.innerWidth < 760) {
             $rootScope.is_mobile = true;
+            $scope.resetDisplayColumns(MobileDisplayOptions);
             $scope.colums = DisplayOptions.persist(MobileDisplayOptions);
         }
 

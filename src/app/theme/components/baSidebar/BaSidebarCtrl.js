@@ -231,7 +231,7 @@
         $(window).resize(function() {
             if ($rootScope.isGridPageLoaded) {
                 $scope.windowWidth = $(window).width();
-                if ($scope.windowWidth < 480) {
+                if ($scope.windowWidth < 760) {
                     $rootScope.is_mobile = true;
                 } else {
                     $rootScope.is_mobile = false;
