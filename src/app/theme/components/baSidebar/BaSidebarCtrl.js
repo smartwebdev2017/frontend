@@ -10,6 +10,7 @@
         var listing_year_slider = $('.listing_year_slider');
         var off=[];
         var qTimer;
+        $scope.filter = {};
 
         $scope.clearIconToggle = function(param){
             if($scope.filter[param].length)
@@ -23,35 +24,7 @@
             $scope.clearIconToggle(param);
         };
 
-        $scope.initialPage = function(){
-            $scope.main_width = 40;
-            $scope.offer = {};
-            $scope.oldFilter = null;
-            $scope.filter = SearchOptions.filter;
-            $scope.filterOptions = SearchOptions.options;
-            $scope.titleClear = false;
-
-            if ($window.innerWidth < 760) $rootScope.is_mobile = true;
-
-            $scope.load = loadOffers;
-            $scope.bShowMenu = false;
-            $scope.bShowListing = false;
-            $scope.bShowPCF = false;
-            $scope.bShowBSF = false;
-            $rootScope.isShowPrevNext = true;
-            $rootScope.isGridPageLoaded = true;
-            $rootScope.isProfilePageLoaded = false;
-            //$rootScope.$totalLength = 0;
-            $rootScope.is_mobile = false;
-
-            angular.element(function(){
-            $('.al-main').css('padding-left', '0px');
-
-                loadModelNumbers();
-                loadEngines();
-                loadPcfbodies();
-            });
-
+        $scope.initialPage = function() {
             $scope.opts = {
                 locale: {
                     format: 'YYYY-MM-DD'
@@ -145,6 +118,189 @@
                 {label: 'District of Columbia', value: 'DC'}
             ];
 
+            $scope.main_width = 40;
+            $scope.offer = {};
+            $scope.oldFilter = null;
+            //$scope.filter = SearchOptions.filter;
+            $scope.filter['listing_date']= SearchOptions.filter['listing_date'];
+            $scope.filter['model'] = $location.search().model != undefined ? $location.search().model : SearchOptions.filter['model'];
+            $scope.filter['title'] = $location.search().title != undefined ? $location.search().title : SearchOptions.filter['title'];
+            $scope.filter['city'] = $location.search().city != undefined ? $location.search().city : SearchOptions.filter['city'];
+            if ($location.search().state != undefined) {
+                for (var i = 0; i < $scope.states.length; i++) {
+                    if ($scope.states[i].value == $location.search().state){
+                        $scope.filter['state']  = $scope.states[i];
+                        break;
+                    }
+                }
+            }
+
+            $scope.filter['year_from'] = $location.search().year_from != undefined?$location.search().year_from:SearchOptions.filter['year_from'];
+            $scope.filter['year_to'] = $location.search().year_to != undefined?$location.search().year_to:SearchOptions.filter['year_to'];
+            $scope.filter['description'] = $location.search().description != undefined?$location.search().description:SearchOptions.filter['description'];
+            if ($location.search().cond != undefined) {
+                for (var i = 0; i < $scope.cond.length; i++) {
+                    if ($scope.cond[i].value == $location.search().cond){
+                        $scope.filter['cond']  = $scope.cond[i];
+                        break;
+                    }
+                }
+            }
+
+            if ($location.search().seller_type != undefined) {
+                for (var i = 0; i < $scope.seller_type.length; i++) {
+                    if ($scope.seller_type[i].value == $location.search().seller_type){
+                        $scope.filter['seller_type']  = $scope.seller_type[i];
+                        break;
+                    }
+                }
+            }
+
+            if ($location.search().listing_transmission != undefined) {
+                for (var i = 0; i < $scope.transmissions.length; i++) {
+                    if ($scope.transmissions[i].value == $location.search().listing_transmission){
+                        $scope.filter['listing_transmission']  = $scope.transmissions[i];
+                        break;
+                    }
+                }
+            }
+
+            if ($location.search().listing_drivetrain != undefined) {
+                for (var i = 0; i < $scope.drivetrain.length; i++) {
+                    if ($scope.drivetrain[i].value == $location.search().listing_drivetrain){
+                        $scope.filter['listing_drivetrain']  = $scope.drivetrain[i];
+                        break;
+                    }
+                }
+            }
+
+            if ($location.search().listing_sold_status != undefined) {
+                for (var i = 0; i < $scope.sold_status.length; i++) {
+                    if ($scope.sold_status[i].value == $location.search().listing_sold_status){
+                        $scope.filter['listing_sold_status']  = $scope.sold_status[i];
+                        break;
+                    }
+                }
+            }
+
+            if ($location.search().listing_sold_status != undefined) {
+                for (var i = 0; i < $scope.sold_status.length; i++) {
+                    if ($scope.sold_status[i].value == $location.search().listing_sold_status){
+                        $scope.filter['listing_sold_status']  = $scope.sold_status[i];
+                        break;
+                    }
+                }
+            }
+
+            if ($location.search().model_number != undefined) {
+                $scope.filter['model_number']  = {'label':$location.search().model_number, 'value':$location.search().model_number}
+            }
+
+            if ($location.search().pcf_body_type != undefined) {
+                $scope.filter['pcf_body_type']  = {'label':$location.search().pcf_body_type, 'value':$location.search().pcf_body_type}
+            }
+
+            if ($location.search().auto_trans != undefined) {
+                $scope.filter['auto_trans']  = {'label':$location.search().auto_trans, 'value':$location.search().auto_trans}
+            }
+            //$scope.filter['cond']  = $location.search().cond != undefined?$location.search().cond:SearchOptions.filter['cond'];
+            //$scope.filter['seller_type']  = $location.search().seller_type != undefined?$location.search().seller_type:SearchOptions.filter['seller_type'];
+            if ($location.search().widebody == undefined || $location.search().widebody != '1'){
+                $scope.filter['widebody'] = false;
+            } else {
+                $scope.filter['widebody'] = true;
+            }
+
+            if ($location.search().longhood == undefined || $location.search().longhood != '1'){
+                $scope.filter['longhood'] = false;
+            } else {
+                $scope.filter['longhood'] = true;
+            }
+
+            if ($location.search().pts == undefined || $location.search().pts != '1'){
+                $scope.filter['pts'] = false;
+            } else {
+                $scope.filter['pts'] = true;
+            }
+
+            if ($location.search().pccb == undefined || $location.search().pccb != '1'){
+                $scope.filter['pccb'] = false;
+            } else {
+                $scope.filter['pccb'] = true;
+            }
+
+            if ($location.search().lwb == undefined || $location.search().lwb != '1'){
+                $scope.filter['lwb'] = false;
+            } else {
+                $scope.filter['lwb'] = true;
+            }
+
+            if ($location.search().aircooled == undefined || $location.search().aircooled != '1'){
+                $scope.filter['aircooled'] = false;
+            } else {
+                $scope.filter['aircooled'] = true;
+            }
+            //$scope.filter['lwb'] = $location.search().lwb != undefined?$location.search().lwb:SearchOptions.filter['lwb'];
+            //$scope.filter['aircooled'] = $location.search().aircooled != undefined?$location.search().aircooled:SearchOptions.filter['aircooled'];
+            //$scope.filter['auto_trans']  = $location.search().auto_trans != undefined?$location.search().auto_trans:SearchOptions.filter['auto_trans'];
+
+            //$scope.filter['listing_drivetrain']  = $location.search().listing_drivetrain != undefined?$location.search().listing_drivetrain:SearchOptions.filter['listing_drivetrain'];
+            //$scope.filter['listing_sold_status']  = $location.search().listing_sold_status != undefined?$location.search().listing_sold_status:SearchOptions.filter['listing_sold_status'];
+            $scope.filter['listing_exterior_color'] = $location.search().listing_exterior_color != undefined?$location.search().listing_exterior_color:SearchOptions.filter['listing_exterior_color'];
+            $scope.filter['listing_interior_color'] = $location.search().listing_interior_color != undefined?$location.search().listing_interior_color:SearchOptions.filter['listing_interior_color'];
+            $scope.filter['listing_engine_size'] = $location.search().listing_engine_size != undefined?$location.search().listing_engine_size:SearchOptions.filter['listing_engine_size'];
+            $scope.filter['mileage_from'] = $location.search().mileage_from != undefined?$location.search().mileage_from:SearchOptions.filter['mileage_from'];
+            $scope.filter['mileage_to'] = $location.search().mileage_to != undefined?$location.search().mileage_to:SearchOptions.filter['mileage_to'];
+            $scope.filter['price_from'] = $location.search().price_from != undefined?$location.search().price_from:SearchOptions.filter['price_from'];
+            $scope.filter['price_to'] = $location.search().price_to != undefined?$location.search().price_to:SearchOptions.filter['price_to'];
+            //$scope.filter['model_number'] = $location.search().model_number != undefined?$location.search().model_number:SearchOptions.filter['model_number'];
+            $scope.filter['listing_year'] = $location.search().listing_year != undefined?$location.search().listing_year:SearchOptions.filter['listing_year'];
+            //$scope.filter['listing_age_from'] = $location.search().listing_age_from != undefined?$location.search().listing_age_from:SearchOptions.filter['listing_age_from'];
+            //$scope.filter['listing_age_to'] = $location.search().listing_age_to != undefined?$location.search().listing_age_to:SearchOptions.filter['listing_age_to'];
+            $scope.filter['pcf_listing_age_from'] = $location.search().pcf_listing_age_from != undefined?$location.search().pcf_listing_age_from:SearchOptions.filter['pcf_listing_age_from'];
+            $scope.filter['pcf_listing_age_to'] = $location.search().pcf_listing_age_to != undefined?$location.search().pcf_listing_age_to:SearchOptions.filter['pcf_listing_age_to'];
+            $scope.filter['pcf_msrp_from'] = $location.search().pcf_msrp_from != undefined?$location.search().pcf_msrp_from:SearchOptions.filter['pcf_msrp_from'];
+            $scope.filter['pcf_msrp_to'] = $location.search().pcf_msrp_to != undefined?$location.search().pcf_msrp_to:SearchOptions.filter['pcf_msrp_to'];
+            $scope.filter['bsf_model_detail'] = $location.search().bs_model_detail != undefined?$location.search().bs_model_detail:SearchOptions.filter['bsf_model_detail'];
+            $scope.filter['bsf_options'] = $location.search().bs_options != undefined?$location.search().bs_options:SearchOptions.filter['bsf_options'];
+            $scope.filter['bsf_msrp_from'] = $location.search().bs_msrp_from != undefined?$location.search().bs_msrp_from:SearchOptions.filter['bsf_msrp_from'];
+            $scope.filter['bsf_msrp_to'] = $location.search().bs_msrp_to != undefined?$location.search().bs_msrp_to:SearchOptions.filter['bsf_msrp_to'];
+            $scope.filter['bsf_interior'] = $location.search().bs_interior != undefined?$location.search().bs_interior:SearchOptions.filter['bsf_interior'];
+            $scope.filter['bsf_exterior'] = $location.search().bs_exterior != undefined?$location.search().bs_exterior:SearchOptions.filter['bsf_exterior'];
+            $scope.filter['bsf_model_year_from'] = $location.search().bs_model_year_from != undefined?$location.bs_model_year_from().model:SearchOptions.filter['bsf_model_year_from'];
+            $scope.filter['bsf_model_year_to'] = $location.search().bs_model_year_to != undefined?$location.search().bs_model_year_to:SearchOptions.filter['bsf_model_year_to'];
+            $scope.filter['bsf_production_month_from'] = $location.search().bs_production_month_from != undefined?$location.search().bs_production_month_from:SearchOptions.filter['bsf_production_month_from'];
+            $scope.filter['bsf_production_month_to'] = $location.search().bs_production_month_to != undefined?$location.search().bs_production_month_to:SearchOptions.filter['bsf_production_month_to'];
+            //$scope.filter['listing_date_start'] = $location.search().listing_date_start != undefined?$location.search().listing_date_start:SearchOptions.filter['listing_date_start'];
+            //$scope.filter['listing_date_end'] = $location.search().listing_date_end != undefined?$location.search().listing_date_end:SearchOptions.filter['listing_date_end'];
+            //$scope.filter['pcf_body_type'] = $location.search().pcf_body_type != undefined?$location.search().pcf_body_type:SearchOptions.filter['pcf_body_type'];
+            $scope.filter['sort'] = $location.search().sort != undefined?$location.search().sort:SearchOptions.filter['sort'];
+            $scope.filter['direction'] = $location.search().direction != undefined?$location.search().direction:SearchOptions.filter['direction'];
+            $scope.filter['keyword'] = $location.search().keyword != undefined?$location.search().keyword:SearchOptions.filter['keyword'];
+
+            $scope.filterOptions = SearchOptions.options;
+            $scope.titleClear = false;
+
+            if ($window.innerWidth < 760) $rootScope.is_mobile = true;
+
+            $scope.load = loadOffers;
+            $scope.bShowMenu = false;
+            $scope.bShowListing = false;
+            $scope.bShowPCF = false;
+            $scope.bShowBSF = false;
+            $rootScope.isShowPrevNext = true;
+            $rootScope.isGridPageLoaded = true;
+            $rootScope.isProfilePageLoaded = false;
+            //$rootScope.$totalLength = 0;
+            $rootScope.is_mobile = false;
+
+            angular.element(function(){
+            $('.al-main').css('padding-left', '0px');
+
+                loadModelNumbers();
+                loadEngines();
+                loadPcfbodies();
+            });
 
             off.push($scope.$watchGroup([
                 'filter.model',
@@ -210,7 +366,7 @@
             $scope.clearIconToggle("listing_exterior_color");
             $scope.clearIconToggle("listing_interior_color");
             $scope.clearIconToggle("listing_engine_size");
-            $scope.clearIconToggle("vin");
+            //$scope.clearIconToggle("vin");
             $scope.clearIconToggle("bsf_model_detail");
             $scope.clearIconToggle("bsf_msrp_from");
             $scope.clearIconToggle("bsf_msrp_to");
@@ -221,8 +377,8 @@
             $scope.clearIconToggle("bsf_options");
             $scope.clearIconToggle("pcf_listing_age_to");
             $scope.clearIconToggle("pcf_listing_age_from");
-            $scope.clearIconToggle("pcf_id");
-            $scope.clearIconToggle("listing_drivetrain");
+            //$scope.clearIconToggle("pcf_id");
+            //$scope.clearIconToggle("listing_drivetrain");
             $scope.clearIconToggle("pcf_msrp_from");
             $scope.clearIconToggle("pcf_msrp_to");
 
@@ -316,7 +472,7 @@
         }
 
         function loadOffers(){
-            $scope.filter = SearchOptions.filter;
+            //$scope.filter = SearchOptions.filter;
             $rootScope.isLoading = true;
             var filter = angular.copy($scope.filter);
 
@@ -582,6 +738,8 @@
                 listing_date_start:$scope.filter['listing_date_start'],
                 listing_date_end:$scope.filter['listing_date_end'],
                 pcf_body_type:typeof($scope.filter.pcf_body_type) === 'object'?$scope.filter.pcf_body_type.value:'',
+                sort:$scope.filter['sort'],
+                direction:$scope.filter['direction'],
                 keyword:$scope.filter['keyword']}, {notify:false});
 
             if (!$rootScope.isLoading) {
