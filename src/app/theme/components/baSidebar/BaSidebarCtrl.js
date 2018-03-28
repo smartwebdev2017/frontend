@@ -472,6 +472,11 @@
         }
 
         function loadOffers(){
+            if ($rootScope.onProfilePage){
+                $rootScope.onProfilePage = false;
+                return;
+            }
+
             //$scope.filter = SearchOptions.filter;
             $rootScope.isLoading = true;
             var filter = angular.copy($scope.filter);
@@ -685,11 +690,6 @@
         }
 
         function doSearch(){
-            if ($rootScope.onProfilePage){
-                $rootScope.onProfilePage = false;
-                return;
-            }
-
             $state.go("normal.search", {
                 model:$scope.filter['model'],
                 title:$scope.filter['title'],
