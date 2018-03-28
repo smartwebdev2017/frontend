@@ -5,7 +5,7 @@
         .controller('ProfilePageCtrl', ProfilePageCtrl);
 
     /** @ngInject */
-    function ProfilePageCtrl($scope, $rootScope, $window, $state, SearchOptions) {
+    function ProfilePageCtrl($scope, $rootScope, $window, $state, SearchOptions, $location) {
         $scope.filter = SearchOptions.filter;
         $rootScope.$numLimit = 150;
 
@@ -26,6 +26,16 @@
             $('.panel-body-description').css('height', '212px');
         });
 
+        $scope.goBack = function() {
+            var ustr = $location.url();
+            var qpos = ustr.indexOf('?');
+            if (qpos > -1){
+                var pstr = ustr.substring(qpos, ustr.length);
+                $window.location.href = "/" + pstr;
+            }else{
+                $window.location.href = "/";
+            }
+        }
         $scope.nextListing = function(){
             if ($rootScope.$next_list) {
                 if ($rootScope.$next_list[$rootScope.$detailData.pcf.vid]) {

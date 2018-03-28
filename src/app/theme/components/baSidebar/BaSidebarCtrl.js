@@ -10,7 +10,7 @@
         var listing_year_slider = $('.listing_year_slider');
         var off=[];
         var qTimer;
-        $scope.filter = {};
+        $scope.filter = SearchOptions.filter;
 
         $scope.clearIconToggle = function(param){
             if($scope.filter[param].length)

@@ -102,7 +102,7 @@
   }
 }
 .detail-page {
-  .back_link { float:left;}
+  .back_link { float:left; cursor: pointer;}
   .next_link { float:right;cursor: pointer;}
   .detail_link {text-decoration: underline !important; color:blue;}
   .small_info label{font-size: 10px !important; color: gray;}

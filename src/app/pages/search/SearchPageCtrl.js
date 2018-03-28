@@ -22,8 +22,11 @@
         $rootScope.is_mobile = false;
         $rootScope.isLastListing = false;
         $scope.keywordClear = false;
+
         if ($location.search().keyword != undefined){
             $scope.filter['keyword'] = $location.search().keyword;
+        } else {
+            $scope.filter['keyword'] = '';
         }
 
         if ($window.innerWidth < 760) {
@@ -88,7 +91,7 @@
                     pts:$scope.filter['pts']==true?1:'',
                     pccb:$scope.filter['pccb']==true?1:'',
                     lwb:$scope.filter['lwb']==true?1:'',
-                    aircooled:$scope.filter['aircooled'],
+                    aircooled:$scope.filter['aircooled']==true?1:'',
                     auto_trans:typeof($scope.filter.auto_trans) === 'object'?$scope.filter.auto_trans.value:'',
                     listing_transmission:typeof($scope.filter.listing_transmission) === 'object'?$scope.filter.listing_transmission.value:'',
                     listing_drivetrain:typeof($scope.filter.listing_drivetrain) === 'object'?$scope.filter.listing_drivetrain.value:'',
