@@ -26,7 +26,7 @@
         if ($location.search().keyword != undefined){
             $scope.filter['keyword'] = $location.search().keyword;
         } else {
-            $scope.filter['keyword'] = '';
+            //$scope.filter['keyword'] = '';
         }
 
         if ($window.innerWidth < 760) {

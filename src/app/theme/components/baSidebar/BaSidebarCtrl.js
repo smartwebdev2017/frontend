@@ -756,7 +756,7 @@
                 loadOffers()
             }else{
                 qTimer = $timeout(function(){
-                    console.log('loadding......')
+                    console.log('loadding......');
                     doSearch();
                 }, 1000);
             }
