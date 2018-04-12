@@ -132,10 +132,11 @@
                 $rootScope.$gridApi.core.on.sortChanged($scope, function(grid, sortColumns){
                     if (sortColumns.length == 0){
                         $scope.filter['sort'] = '';
+                        $scope.filter['direction'] = '';
                     } else {
                         $scope.filter['sort'] = sortColumns[0].name;
                         $scope.filter['direction'] = sortColumns[0].sort.direction;
-
+                    }
                         doSearch();
 
                         $state.go("normal.search", {
@@ -189,7 +190,7 @@
                             sort:$scope.filter['sort'],
                             direction:$scope.filter['direction'],
                             keyword:$scope.filter['keyword']}, {notify:false});
-                    }
+
                 });
 
             },
