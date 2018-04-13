@@ -192,7 +192,6 @@
                             keyword:$scope.filter['keyword']}, {notify:false});
 
                 });
-
             },
             data: '$dataSource',
             useExternalSorting: true,
@@ -206,14 +205,14 @@
         };
 
         $scope.gridOptions.columnDefs = [
-            {name: 'ID', width:60},
+            {name: 'ID', width:'6%'},
             {name: 'listing_title',  displayName:'(L) Title', enableHiding: false},
             {name: 'pcf__model_number', displayName:'Model Number', width:120, enableHiding: false},
-            {name: 'mileage', displayName:'Mileage', width:100, enableHiding: false},
-            {name: 'price', displayName:'Price',width:100, enableHiding: false},
+            {name: 'mileage', displayName:'Mileage', width:80, enableHiding: false},
+            {name: 'price', displayName:'Price',width:80, enableHiding: false},
 
             {name: 'city', displayName:'City',width:100, enableHiding: false},
-            {name: 'state', displayName:'State', width:100, enableHiding: false},
+            {name: 'state', displayName:'State', width:60, enableHiding: false},
             {name: 'vin_code', displayName:'VIN', width:200, enableHiding: false},
             {name: 'listing_make', displayName:'Make', width:150, enableHiding: false},
             {name: 'listing_model', displayName:'Model', width:150, enableHiding: false},
@@ -222,11 +221,11 @@
             {name: 'cond', displayName:'Condition', width:100, enableHiding: false},
 
             {name: 'pcf__vid', displayName:'PCF', enableHiding: false},
-            {name: 'listing_year', displayName:'(L) Year', width:100, enableHiding: false},
+            {name: 'listing_year', displayName:'(L) Year', width:'100', enableHiding: false},
             {name: 'listing_exterior_color', displayName:'(L) Exterior', width:150, enableHiding: false},
             {name: 'listing_interior_color', displayName:'(L) Interior', width:150, enableHiding: false},
-            {name: 'listing_transmission', displayName:'Transmission', width:150, enableHiding: false},
-            {name: 'vin__msrp', displayName:'MSRP', width:100, enableHiding: false},
+            {name: 'listing_transmission', displayName:'Transmission', width:110, enableHiding: false},
+            {name: 'vin__msrp', displayName:'MSRP', width:80, enableHiding: false},
             {name: 'pcf__gap_to_msrp', displayName:'% of MSRP', width:100, enableHiding: false},
             {name: 'listing_engine_size', displayName:'Engine', width:100, enableHiding: false},
             {name: 'listing_drivetrain', displayName:'Drivetrain', width:100, enableHiding: false},
@@ -691,45 +690,117 @@
                     $rootScope.isLoading = false;
                 })
         };
-        function setDisplayOptions() {
+        function setDisplayOptions(){
             $scope.gridOptions.columnDefs[0].visible = false;
             $scope.gridOptions.columnDefs[1].visible = $scope.colums['title'];
-            $scope.gridOptions.columnDefs[2].visible = $scope.colums['model_number'];
-            $scope.gridOptions.columnDefs[3].visible = $scope.colums['mileage'];
-            $scope.gridOptions.columnDefs[4].visible = $scope.colums['price'];
 
+            $scope.gridOptions.columnDefs[2].visible = $scope.colums['model_number'];
+
+            $scope.gridOptions.columnDefs[3].visible = $scope.colums['mileage'];
+
+            $scope.gridOptions.columnDefs[4].visible = $scope.colums['price'];
+            
             $scope.gridOptions.columnDefs[5].visible = $scope.colums['city'];
+
             $scope.gridOptions.columnDefs[6].visible = $scope.colums['state'];
+
             $scope.gridOptions.columnDefs[7].visible = $scope.colums['vin'];
+
             $scope.gridOptions.columnDefs[8].visible = false;
             $scope.gridOptions.columnDefs[9].visible = $scope.colums['model'];
+            
             $scope.gridOptions.columnDefs[10].visible = $scope.colums['trim'];
+
             $scope.gridOptions.columnDefs[11].visible = $scope.colums['date'];
+
             $scope.gridOptions.columnDefs[12].visible = $scope.colums['condition'];
+
             $scope.gridOptions.columnDefs[13].visible = false;
             $scope.gridOptions.columnDefs[14].visible = $scope.colums['listing_year'];
+
             $scope.gridOptions.columnDefs[15].visible = $scope.colums['listing_exterior'];
+            
             $scope.gridOptions.columnDefs[16].visible = $scope.colums['listing_interior'];
+            
             $scope.gridOptions.columnDefs[17].visible = $scope.colums['transmission'];
+
             $scope.gridOptions.columnDefs[18].visible = $scope.colums['msrp'];
+
             $scope.gridOptions.columnDefs[19].visible = $scope.colums['price_msrp'];
+            
             $scope.gridOptions.columnDefs[20].visible = $scope.colums['engine'];
+            
             $scope.gridOptions.columnDefs[21].visible = $scope.colums['drivetrain'];
+
             $scope.gridOptions.columnDefs[22].visible = $scope.colums['bs_year'];
+
             $scope.gridOptions.columnDefs[23].visible = $scope.colums['bs_model'];
+
             $scope.gridOptions.columnDefs[24].visible = $scope.colums['bs_exterior'];
+
             $scope.gridOptions.columnDefs[25].visible = $scope.colums['bs_interior'];
+
             $scope.gridOptions.columnDefs[26].visible = $scope.colums['production_month'];
+
             $scope.gridOptions.columnDefs[27].visible = $scope.colums['warranty_start'];
+
             $scope.gridOptions.columnDefs[28].visible = $scope.colums['pts'];
+
             $scope.gridOptions.columnDefs[29].visible = $scope.colums['lwb'];
+
             $scope.gridOptions.columnDefs[30].visible = $scope.colums['longhood'];
+
             $scope.gridOptions.columnDefs[31].visible = $scope.colums['widebody'];
+
             $scope.gridOptions.columnDefs[32].visible = $scope.colums['pccb'];
+
             $scope.gridOptions.columnDefs[33].visible = $scope.colums['aircooled'];
+
             $scope.gridOptions.columnDefs[34].visible = $scope.colums['listing_age'];
+
             $scope.gridOptions.columnDefs[35].visible = $scope.colums['body_type'];
+
             $scope.gridOptions.columnDefs[36].visible = $scope.colums['auto_trans'];
+
+            if ($rootScope.$gridApi) {
+                if ($rootScope.$gridApi.grid.getColumn('listing_title')) $rootScope.$gridApi.grid.getColumn('listing_title').width = '*';
+
+                if ($rootScope.$gridApi.grid.getColumn('pcf__model_number')) $rootScope.$gridApi.grid.getColumn('pcf__model_number').width = 120;
+                if ($rootScope.$gridApi.grid.getColumn('mileage')) $rootScope.$gridApi.grid.getColumn('mileage').width = 80;
+                if ($rootScope.$gridApi.grid.getColumn('price')) $rootScope.$gridApi.grid.getColumn('price').width = 80;
+                if ($rootScope.$gridApi.grid.getColumn('city')) $rootScope.$gridApi.grid.getColumn('city').width = 100;
+                if ($rootScope.$gridApi.grid.getColumn('state')) $rootScope.$gridApi.grid.getColumn('state').width = 60;
+                if ($rootScope.$gridApi.grid.getColumn('vin_code')) $rootScope.$gridApi.grid.getColumn('vin_code').width = 200;
+                if ($rootScope.$gridApi.grid.getColumn('listing_model')) $rootScope.$gridApi.grid.getColumn('listing_model').width = 150;
+                if ($rootScope.$gridApi.grid.getColumn('listing_trim')) $rootScope.$gridApi.grid.getColumn('listing_trim').width = 100;
+                if ($rootScope.$gridApi.grid.getColumn('listing_date')) $rootScope.$gridApi.grid.getColumn('listing_date').width = 100;
+                if ($rootScope.$gridApi.grid.getColumn('cond')) $rootScope.$gridApi.grid.getColumn('cond').width = 100;
+                if ($rootScope.$gridApi.grid.getColumn('listing_year')) $rootScope.$gridApi.grid.getColumn('listing_year').width = 100;
+                if ($rootScope.$gridApi.grid.getColumn('listing_exterior_color')) $rootScope.$gridApi.grid.getColumn('listing_exterior_color').width = 150;
+                if ($rootScope.$gridApi.grid.getColumn('listing_interior_color')) $rootScope.$gridApi.grid.getColumn('listing_interior_color').width = 150;
+                if ($rootScope.$gridApi.grid.getColumn('listing_transmission')) $rootScope.$gridApi.grid.getColumn('listing_transmission').width = 110;
+                if ($rootScope.$gridApi.grid.getColumn('vin__msrp')) $rootScope.$gridApi.grid.getColumn('vin__msrp').width = 80;
+                if ($rootScope.$gridApi.grid.getColumn('pcf__gap_to_msrp')) $rootScope.$gridApi.grid.getColumn('pcf__gap_to_msrp').width = 100;
+                if ($rootScope.$gridApi.grid.getColumn('listing_engine_size')) $rootScope.$gridApi.grid.getColumn('listing_engine_size').width = 100;
+                if ($rootScope.$gridApi.grid.getColumn('listing_drivetrain')) $rootScope.$gridApi.grid.getColumn('listing_drivetrain').width = 100;
+                if ($rootScope.$gridApi.grid.getColumn('vin__model_year')) $rootScope.$gridApi.grid.getColumn('vin__model_year').width = 100;
+                if ($rootScope.$gridApi.grid.getColumn('vin__model_detail')) $rootScope.$gridApi.grid.getColumn('vin__model_detail').width = 300;
+                if ($rootScope.$gridApi.grid.getColumn('vin__color')) $rootScope.$gridApi.grid.getColumn('vin__color').width = 200;
+                if ($rootScope.$gridApi.grid.getColumn('vin__interior')) $rootScope.$gridApi.grid.getColumn('vin__interior').width = 200;
+                if ($rootScope.$gridApi.grid.getColumn('vin__production_month')) $rootScope.$gridApi.grid.getColumn('vin__production_month').width = 200;
+                if ($rootScope.$gridApi.grid.getColumn('vin__warranty_start')) $rootScope.$gridApi.grid.getColumn('vin__warranty_start').width = 200;
+                if ($rootScope.$gridApi.grid.getColumn('pcf__pts')) $rootScope.$gridApi.grid.getColumn('pcf__pts').width = 100;
+                if ($rootScope.$gridApi.grid.getColumn('pcf__lwb_seats')) $rootScope.$gridApi.grid.getColumn('pcf__lwb_seats').width = 100;
+                if ($rootScope.$gridApi.grid.getColumn('pcf__longhood')) $rootScope.$gridApi.grid.getColumn('pcf__longhood').width = 100;
+                if ($rootScope.$gridApi.grid.getColumn('pcf__widebody')) $rootScope.$gridApi.grid.getColumn('pcf__widebody').width = 100;
+                if ($rootScope.$gridApi.grid.getColumn('pcf__pccb')) $rootScope.$gridApi.grid.getColumn('pcf__pccb').width = 100;
+                if ($rootScope.$gridApi.grid.getColumn('pcf__air_cooled')) $rootScope.$gridApi.grid.getColumn('pcf__air_cooled').width = 100;
+                if ($rootScope.$gridApi.grid.getColumn('pcf__listing_age')) $rootScope.$gridApi.grid.getColumn('pcf__listing_age').width = 100;
+                if ($rootScope.$gridApi.grid.getColumn('pcf__body_type')) $rootScope.$gridApi.grid.getColumn('pcf__body_type').width = 100;
+                if ($rootScope.$gridApi.grid.getColumn('pcf__auto_trans')) $rootScope.$gridApi.grid.getColumn('pcf__auto_trans').width = 200;
+            }
+
+            if ($rootScope.$gridApi) $rootScope.$gridApi.grid.refresh();
         }
 
     }
