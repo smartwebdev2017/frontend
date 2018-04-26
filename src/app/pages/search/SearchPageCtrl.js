@@ -145,7 +145,7 @@
                     } else {
                         $scope.filter['sort'] = sortColumns[0].name;
                         $scope.filter['direction'] = sortColumns[0].sort.direction;
-                    }cd.
+                    }
                         doSearch();
 
                         $state.go("normal.search", {

@@ -484,8 +484,17 @@
     }
   }
 }
+.ui-grid-cell-contents {
+  height: auto !important;
+  margin-top: auto;
+  margin-bottom: auto;
+}
 
 html,
 body {
   /*overflow: auto;*/
+}
+
+.ui-grid-cell {
+  display: grid;
 }
