@@ -658,7 +658,7 @@
 
                     if (offers.next != null) {
                         var lastUrlParams = new URLSearchParams(offers.next);
-                        var lastPg = parseInt(offers.count / 11) + 1;
+                        var lastPg = parseInt(offers.count / $rootScope.rowsNum) + 1;
                         lastUrlParams.set('page', lastPg);
 
                         $rootScope.$last = decodeURIComponent(lastUrlParams.toString());

@@ -22,7 +22,7 @@
         $rootScope.is_mobile = false;
         $rootScope.isLastListing = false;
         $scope.keywordClear = false;
-
+        $rootScope.rowsNum = 11;
         if ($location.search().keyword != undefined){
             $scope.filter['keyword'] = $location.search().keyword;
         } else {
@@ -53,10 +53,14 @@
 
             if ($scope.windowWidth < 760) {
                 $rootScope.is_mobile = true;
+                $rootScope.rowsNum = 6;
+                $scope.filter['mobile'] = 1;
                 $scope.resetDisplayColumns(MobileDisplayOptions);
                 $scope.colums = DisplayOptions.persist(MobileDisplayOptions);
             } else {
                 $rootScope.is_mobile = false;
+                $scope.filter['mobile'] = 0;
+                $rootScope.rowsNum = 11;
                 //$scope.resetDisplayColumns(DesktopDisplayOptions);
                 //$scope.colums = DisplayOptions.persist(DesktopDisplayOptions);
             }
@@ -198,7 +202,7 @@
             enableRowSelection: true,
             enableColumnResizing: true,
             enableHiding: false,
-            minRowsToShow: 11,
+            minRowsToShow: $rootScope.rowsNum,
             enableRowHeaderSelection: false,
             enableHorizontalScrollbar: 0,
             enableVerticalScrollbar: 0
@@ -522,7 +526,7 @@
 
                     if (offers.next != null) {
                         var lastUrlParams = new URLSearchParams(offers.next);
-                        var lastPg = parseInt(offers.count / 11) + 1;
+                        var lastPg = parseInt(offers.count / $rootScope.rowsNum) + 1;
                         lastUrlParams.set('page', lastPg);
 
                         $rootScope.$last = decodeURIComponent(lastUrlParams.toString());
@@ -572,7 +576,7 @@
 
                     if (offers.next != null) {
                         var lastUrlParams = new URLSearchParams(offers.next);
-                        var lastPg = parseInt(offers.count / 11) + 1;
+                        var lastPg = parseInt(offers.count / $rootScope.rowsNum) + 1;
                         lastUrlParams.set('page', lastPg);
 
                         $rootScope.$last = decodeURIComponent(lastUrlParams.toString());
@@ -618,7 +622,7 @@
 
                     if (offers.next != null) {
                         var lastUrlParams = new URLSearchParams(offers.next);
-                        var lastPg = parseInt(offers.count / 11) + 1;
+                        var lastPg = parseInt(offers.count / $rootScope.rowsNum) + 1;
                         lastUrlParams.set('page', lastPg);
 
                         $rootScope.$last = decodeURIComponent(lastUrlParams.toString());
@@ -644,7 +648,7 @@
 
             var newURL = $rootScope.extractURL($rootScope.$last);
             $rootScope.isLoading = true;
-            $scope.filter.page = parseInt($rootScope.$totalCounts / 11) + 1;
+            $scope.filter.page = parseInt($rootScope.$totalCounts / $rootScope.rowsNum) + 1;
 
             $http({
                 method: 'GET',
@@ -665,7 +669,7 @@
 
                     if (offers.next != null) {
                         var lastUrlParams = new URLSearchParams(offers.next);
-                        var lastPg = parseInt(offers.count / 11) + 1;
+                        var lastPg = parseInt(offers.count / $rootScope.rowsNum) + 1;
                         lastUrlParams.set('page', lastPg);
 
                         $rootScope.$last = decodeURIComponent(lastUrlParams.toString());
