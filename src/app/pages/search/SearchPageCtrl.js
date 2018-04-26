@@ -33,6 +33,11 @@
             $rootScope.is_mobile = true;
             $scope.resetDisplayColumns(MobileDisplayOptions);
             $scope.colums = DisplayOptions.persist(MobileDisplayOptions);
+            $rootScope.rowsNum = 6;
+            $scope.filter['mobile'] = 1;
+        } else {
+            $rootScope.rowsNum = 11;
+            $scope.filter['mobile'] = 0;
         }
 
         $scope.clearIconToggle = function(param){
@@ -53,14 +58,14 @@
 
             if ($scope.windowWidth < 760) {
                 $rootScope.is_mobile = true;
-                $rootScope.rowsNum = 6;
-                $scope.filter['mobile'] = 1;
+                //$rootScope.rowsNum = 6;
+                //$scope.filter['mobile'] = 1;
                 $scope.resetDisplayColumns(MobileDisplayOptions);
                 $scope.colums = DisplayOptions.persist(MobileDisplayOptions);
             } else {
                 $rootScope.is_mobile = false;
-                $scope.filter['mobile'] = 0;
-                $rootScope.rowsNum = 11;
+                //$scope.filter['mobile'] = 0;
+                //$rootScope.rowsNum = 11;
                 //$scope.resetDisplayColumns(DesktopDisplayOptions);
                 //$scope.colums = DisplayOptions.persist(DesktopDisplayOptions);
             }
@@ -140,7 +145,7 @@
                     } else {
                         $scope.filter['sort'] = sortColumns[0].name;
                         $scope.filter['direction'] = sortColumns[0].sort.direction;
-                    }
+                    }cd.
                         doSearch();
 
                         $state.go("normal.search", {
@@ -205,7 +210,8 @@
             minRowsToShow: $rootScope.rowsNum,
             enableRowHeaderSelection: false,
             enableHorizontalScrollbar: 0,
-            enableVerticalScrollbar: 0
+            enableVerticalScrollbar: 0,
+            rowHeight:$rootScope.is_mobile?55:33,
         };
 
         $scope.gridOptions.columnDefs = [
