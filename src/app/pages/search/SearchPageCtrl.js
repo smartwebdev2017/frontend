@@ -550,7 +550,10 @@
                     $rootScope.$dataSource = data;
 
                     if ($rootScope.isLastListing){
-                        if ( offers.results.length > 0) $window.location = '/ID/' + offers.results[0].pcf.vid;
+                        if ( offers.results.length > 0) {
+                            //$window.location = '/ID/' + offers.results[0].pcf.vid;
+                            $state.go("normal.detail", {vin:offers.results[0].pcf.vid});
+                        }
                     }
                 })
                 .error(function(offers){
