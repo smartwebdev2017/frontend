@@ -25,6 +25,6 @@
 <!--<div ng-if="!$isLogged"  class="page-top clearfix" scroll-position="scrolled" max-height="50" ng-class="{'scrolled': scrolled}">-->
 <div ng-if="!$isLogged"  class="page-top clearfix">
     <a href="#" class="logo" ng-click="reset()"><img src="../assets/img/logo.png"></a>
-    <div ng-show="!isLoading"><span ng-if="$totalLength != '0'">{{$totalLength}} results</span></div>
+    <div ng-show="!isLoading"><span ng-if="$totalLength != '0' && $totalLength != null ">{{$totalLength}} results</span></div>
     <!--<a href="/#/login" class="signin"><i class="fa fa-power-off"></i>Sign In</a>-->
 </div>

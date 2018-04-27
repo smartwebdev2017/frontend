@@ -446,6 +446,7 @@
                 $rootScope.isLoading = false;
                 $rootScope.$totalLength = offers.count.toLocaleString();
                 $rootScope.$next_list = {};
+                $rootScope.$prev_list = {};
                 var data = [];
 
                 if (offers.results.length == 0){
@@ -467,8 +468,10 @@
                 }else {
                     for (var i = 0; i < offers.results.length; i++) {
                         var record = {};
-                        if (i < offers.results.length - 1)
+                        if (i < offers.results.length - 1) {
                             if (offers.results[i + 1].pcf != null) $rootScope.$next_list[offers.results[i].pcf.vid] = offers.results[i + 1].pcf.vid;
+                            $rootScope.$prev_list[offers.results[offers.results.length - 1 - i].pcf.vid] = offers.results[offers.results.length - 1 - i- 1].pcf.vid;
+                        }
                         pushData(data, offers.results[i]);
                     }
                 }
@@ -520,13 +523,16 @@
             })
                 .success(function(offers){
                     $rootScope.isLoading = false;
-
                     $rootScope.$next_list = {};
+                    $rootScope.$prev_list = {};
+
                     var data = [];
                     for ( var i = 0;  i< offers.results.length; i++){
                         var record = {};
-                        if ( i< offers.results.length - 1 )
-                            $rootScope.$next_list[offers.results[i].pcf.vid] = offers.results[i+1].pcf.vid;
+                        if ( i< offers.results.length - 1 ) {
+                            $rootScope.$next_list[offers.results[i].pcf.vid] = offers.results[i + 1].pcf.vid;
+                            $rootScope.$prev_list[offers.results[offers.results.length - 1 - i].pcf.vid] = offers.results[offers.results.length - 1 - i - 1].pcf.vid;
+                        }
                         pushData(data, offers.results[i]);
                     }
 
@@ -555,6 +561,13 @@
                             $state.go("normal.detail", {vin:offers.results[0].pcf.vid});
                         }
                     }
+
+                    if ($rootScope.isFirstListing){
+                        if ( offers.results.length > 0) {
+                            //$window.location = '/ID/' + offers.results[0].pcf.vid;
+                            $state.go("normal.detail", {vin:offers.results[$rootScope.rowsNum - 1].pcf.vid});
+                        }
+                    }
                 })
                 .error(function(offers){
                     $rootScope.isLoading = false;
@@ -573,13 +586,18 @@
             })
                 .success(function(offers){
                     $rootScope.isLoading = false;
-
                     $rootScope.$next_list = {};
+                    $rootScope.$prev_list = {};
+
                     var data = [];
+
                     for ( var i = 0;  i< offers.results.length; i++){
                         var record = {};
-                        if ( i< offers.results.length - 1 )
+                        if ( i< offers.results.length - 1 ){
                             $rootScope.$next_list[offers.results[i].pcf.vid] = offers.results[i+1].pcf.vid;
+                            $rootScope.$prev_list[offers.results[offers.results.length - 1 - i].pcf.vid] = offers.results[offers.results.length - 1 - i - 1].pcf.vid;
+                        }
+
                         pushData(data, offers.results[i]);
                     }
 
@@ -601,6 +619,13 @@
                     $rootScope.$next = offers.next;
                     $rootScope.$prev = offers.previous;
                     $rootScope.$dataSource = data;
+
+                    if ($rootScope.isFirstListing){
+                        if ( offers.results.length > 0) {
+                            //$window.location = '/ID/' + offers.results[0].pcf.vid;
+                            $state.go("normal.detail", {vin:offers.results[$rootScope.rowsNum - 1].pcf.vid});
+                        }
+                    }
                 })
                 .error(function(response){
                     $rootScope.isLoading = false;

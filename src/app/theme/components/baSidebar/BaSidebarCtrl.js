@@ -546,6 +546,7 @@
                 }
 
                 $rootScope.$next_list = {};
+                $rootScope.$prev_list = {};
                 $rootScope.$totalLength = offers.count.toLocaleString();
                 $rootScope.$totalCounts = offers.count;
 
@@ -612,8 +613,10 @@
                 }else {
                     for (var i = 0; i < offers.results.length; i++) {
                         var record = {};
-                        if (i < offers.results.length - 1)
+                        if (i < offers.results.length - 1) {
                             $rootScope.$next_list[offers.results[i].pcf.vid] = offers.results[i + 1].pcf.vid;
+                            $rootScope.$prev_list[offers.results[offers.results.length - 1 - i].pcf.vid] = offers.results[offers.results.length - 1 - i - 1].pcf.vid;
+                        }
 
                         data.push({
                             'ID': offers.results[i].id,

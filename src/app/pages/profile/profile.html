@@ -5,7 +5,9 @@
             <div class="col-md-12">
                 <a class="back_link" href="/">BACK TO RESULTS</a>
                 <!--<a class="next_link" ng-click='nextListing()'>NEXT LISTING</a>-->
-                <a ng-if="$next_list[$detailData.pcf.vid] || $next != null" class="next_link" ng-click='nextListing()'>NEXT LISTING</a>
+                <div ng-show="!is_mobile">
+                    <a ng-if="$next_list[$detailData.pcf.vid] || $next != null" class="next_link" ng-click='$nextListing()'>NEXT LISTING</a>
+                </div>
             </div>
         </div>
 
