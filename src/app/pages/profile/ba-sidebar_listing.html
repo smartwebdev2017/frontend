@@ -6,7 +6,7 @@
 <aside ng-show="bShowMenu" ng-if="!$isLogged" class="al-detail-sidebar">
     <div class="active_container">
         <div class="title" ng-click="setActiveCollapse()">
-            <div class="arrow_title"><span>ACTIVE</span></div>
+            <div class="arrow_title"><span>Current</span></div>
             <div class="arrow">
                 <i ng-show="bShowActive" class="ion-chevron-up"></i>
                 <i ng-show="!bShowActive" class="ion-chevron-down"></i>
@@ -24,7 +24,7 @@
     </div>
     <div class="inactive_container">
         <div class="title" ng-click="setInactiveCollapse()">
-            <div class="arrow_title"><span>INACTIVE</span></div>
+            <div class="arrow_title"><span>Previous</span></div>
             <div class="arrow">
                 <i ng-show="bShowInactive" class="ion-chevron-up"></i>
                 <i ng-show="!bShowInactive" class="ion-chevron-down"></i>

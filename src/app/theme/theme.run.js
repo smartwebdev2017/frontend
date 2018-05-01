@@ -51,6 +51,15 @@
         $window.location.href = 'http://localhost:3000';
         //$window.location.reload();
     };
+
+    $rootScope.clearFilter = function(){
+        if ($window.innerWidth < 480) {
+          SearchOptions.resetFacets(MobileDisplayOptions);
+        }else{
+          SearchOptions.resetFacets(DesktopDisplayOptions);
+        }
+        $window.location.href = 'http://localhost:3000';
+    };
     $rootScope.showNotify = function(title, msg, type){
 
       var settings = {};
