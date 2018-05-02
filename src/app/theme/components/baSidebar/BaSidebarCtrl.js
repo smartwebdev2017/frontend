@@ -11,12 +11,13 @@
         var off=[];
         var qTimer;
         $scope.filter = SearchOptions.filter;
-
+        $rootScope.bSetFilters = false;
         $scope.clearIconToggle = function(param){
-            if($scope.filter[param].length)
-                $scope[param+'Clear'] = true;
-            else
-                $scope[param+'Clear'] = false;
+            if($scope.filter[param].length) {
+                $scope[param + 'Clear'] = true;
+            }else {
+                $scope[param + 'Clear'] = false;
+            }
         };
 
         $scope.clearText = function(param){
@@ -539,10 +540,17 @@
                 } else {
                     keyword_length = filter.keyword.length;
                 }
+
                 if ((filter.vin == undefined) || (filter.vin == '')) {
                     vin_length = 0;
                 } else {
                     vin_length = filter.vin.length;
+                }
+
+                if (location.search !=''){
+                    $rootScope.bSetFilters = true;
+                }else{
+                    $rootScope.bSetFilters = false;
                 }
 
                 $rootScope.$next_list = {};
@@ -693,6 +701,7 @@
         }
 
         function doSearch(){
+
             $state.go("normal.search", {
                 model:$scope.filter['model'],
                 title:$scope.filter['title'],
