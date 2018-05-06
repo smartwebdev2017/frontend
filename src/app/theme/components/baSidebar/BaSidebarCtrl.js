@@ -668,18 +668,20 @@
                     }
 
                     if (offers.next != null) {
-                        var lastUrlParams = new URLSearchParams(offers.next);
+                        //var lastUrlParams = new URLSearchParams(offers.next);
                         var lastPg = parseInt(offers.count / $rootScope.rowsNum) + 1;
-                        lastUrlParams.set('page', lastPg);
+                        var lastUrlStr = $rootScope.updatePageParameter(offers.next, "page", lastPg);
+                        //lastUrlParams.set('page', lastPg);
 
-                        $rootScope.$last = decodeURIComponent(lastUrlParams.toString());
+                        $rootScope.$last = decodeURIComponent(lastUrlStr);
                     }
 
                     if (offers.previous != null) {
-                        var firstUrlParams = new URLSearchParams(offers.previous);
+                        //var firstUrlParams = new URLSearchParams(offers.previous);
                         var firstPg = 1;
-                        firstUrlParams.set('page', firstPg);
-                        $rootScope.$first = decodeURIComponent(firstUrlParams.toString());
+                         var firstUrlStr = $rootScope.updatePageParameter(offers.previous, "page", firstPg);
+                        //firstUrlParams.set('page', firstPg);
+                        $rootScope.$first = decodeURIComponent(firstUrlStr);
                     }
 
                     $rootScope.$next = offers.next;

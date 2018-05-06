@@ -41,6 +41,17 @@
     $rootScope.isLogined = function(){
       return !!localStorage.getItem(CFG.auth.localStorageName);
     };
+
+    $rootScope.updatePageParameter = function(uri, key, value) {
+      var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+      var seperator = uri.indexOf('?') !== -1?"&" : "?";
+      if (uri.match(re)) {
+        return uri.replace(re, '$1' + key + '=' + value + '$2');
+      } else {
+        return uri + seperator + key + "=" + value;
+      }
+    };
+
     $rootScope.reset = function(){
         if ($window.innerWidth < 480) {
           SearchOptions.resetFacets(MobileDisplayOptions);
