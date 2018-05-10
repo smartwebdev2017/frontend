@@ -23,6 +23,8 @@
         $rootScope.isLastListing = false;
         $scope.keywordClear = false;
         $rootScope.rowsNum = 11;
+        $rootScope.bSetFilters = false;
+
         if ($location.search().keyword != undefined){
             $scope.filter['keyword'] = $location.search().keyword;
         } else {
@@ -50,6 +52,12 @@
             $scope.filter[param] = '';
             $scope.clearIconToggle(param);
         };
+
+        if (location.search !=''){
+            $rootScope.bSetFilters = true;
+        }else{
+            $rootScope.bSetFilters = false;
+        }
 
         $scope.clearIconToggle("keyword");
 
@@ -198,7 +206,7 @@
                             pcf_body_type:typeof($scope.filter.pcf_body_type) === 'object'?$scope.filter.pcf_body_type.value:'',
                             sort:$scope.filter['sort'],
                             direction:$scope.filter['direction'],
-                            keyword:$scope.filter['keyword']}, {notify:false});
+                            keyword:$scope.filter['keyword']}, {notify:true});
 
                 });
             },

@@ -59,7 +59,7 @@
                 {label: '4WD', value: '4WD'}
             ];
             $scope.sold_status = [
-                {label: 'All Vehicles', value: ''},
+                {label: 'All Vehicles', value: '2'},
                 {label: 'Currently For Sale', value:'0'},
                 {label: 'Not Currently for Sale', value:'1'}
             ];
@@ -127,6 +127,7 @@
             $scope.filter['model'] = $location.search().model != undefined ? $location.search().model : SearchOptions.filter['model'];
             $scope.filter['title'] = $location.search().title != undefined ? $location.search().title : SearchOptions.filter['title'];
             $scope.filter['city'] = $location.search().city != undefined ? $location.search().city : SearchOptions.filter['city'];
+
             if ($location.search().state != undefined) {
                 for (var i = 0; i < $scope.states.length; i++) {
                     if ($scope.states[i].value == $location.search().state){
@@ -182,15 +183,10 @@
                         break;
                     }
                 }
-            }
+            } else {
+                $scope.filter['listing_sold_status']  = "0";
+                $scope.filter['listing_sold_status']  = $scope.sold_status[1];
 
-            if ($location.search().listing_sold_status != undefined) {
-                for (var i = 0; i < $scope.sold_status.length; i++) {
-                    if ($scope.sold_status[i].value == $location.search().listing_sold_status){
-                        $scope.filter['listing_sold_status']  = $scope.sold_status[i];
-                        break;
-                    }
-                }
             }
 
             if ($location.search().model_number != undefined) {
@@ -378,7 +374,7 @@
             $scope.clearIconToggle("bsf_options");
             $scope.clearIconToggle("pcf_listing_age_to");
             $scope.clearIconToggle("pcf_listing_age_from");
-            //$scope.clearIconToggle("pcf_id");
+            $scope.clearIconToggle("pcf_id");
             //$scope.clearIconToggle("listing_drivetrain");
             $scope.clearIconToggle("pcf_msrp_from");
             $scope.clearIconToggle("pcf_msrp_to");
@@ -723,7 +719,7 @@
                 auto_trans:typeof($scope.filter.auto_trans) === 'object'?$scope.filter.auto_trans.value:'',
                 listing_transmission:typeof($scope.filter.listing_transmission) === 'object'?$scope.filter.listing_transmission.value:'',
                 listing_drivetrain:typeof($scope.filter.listing_drivetrain) === 'object'?$scope.filter.listing_drivetrain.value:'',
-                listing_sold_status:typeof($scope.filter.listing_sold_status) === 'object'?$scope.filter.listing_sold_status.value:'',
+                listing_sold_status:typeof($scope.filter.listing_sold_status) === 'object'?$scope.filter.listing_sold_status.value:$scope.filter.listing_sold_status,
                 listing_exterior_color:$scope.filter['listing_exterior_color'],
                 listing_interior_color:$scope.filter['listing_interior_color'],
                 listing_engine_size:$scope.filter['listing_engine_size'],

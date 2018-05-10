@@ -7,25 +7,17 @@
     <input id="searchInput" type="text" placeholder="Search for...">
   </div>
 
-  <!--<div class="user-profile clearfix">-->
-    <!--<div class="al-user-profile" uib-dropdown>-->
-      <!--<a uib-dropdown-toggle class="profile-toggle-link">-->
-        <!--<img ng-src="{{::( 'Nasta' | profilePicture )}}">-->
-      <!--</a>-->
-      <!--<ul  class="top-dropdown-menu profile-dropdown" uib-dropdown-menu>-->
-        <!--<li><i class="dropdown-arr"></i></li>-->
-        <!--<li><a href="#/profile"><i class="fa fa-user"></i>Profile</a></li>-->
-        <!--<li><a href><i class="fa fa-cog"></i>Settings</a></li>-->
-        <!--<li><a href="/#/logout" class="signout"><i class="fa fa-power-off"></i>Sign out</a></li>-->
-      <!--</ul>-->
-    <!--</div>-->
-    <!--<msg-center></msg-center>-->
-  <!--</div>-->
 </div>
 <!--<div ng-if="!$isLogged"  class="page-top clearfix" scroll-position="scrolled" max-height="50" ng-class="{'scrolled': scrolled}">-->
 <div ng-if="!$isLogged"  class="page-top clearfix">
     <a href="#" class="logo" ng-click="reset()"><img src="../assets/img/logo.png"></a>
-    <div ng-show="!isLoading"><span ng-if="$totalLength != '0' && $totalLength != null ">{{$totalLength}} results</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#" ng-if="bSetFilters == true" ng-click="clearFilter()">clear filters</a></div>
-
+    <div ng-show="!isLoading"><span ng-if="$totalLength != '' && $totalLength != null ">{{$totalLength}} results</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#" ng-if="bSetFilters == true" ng-click="clearFilter()">clear filters</a></div>
+    <div ng-show="isLoading">
+        <div class="loading-dots">
+          <div class="loading-dots--dot"></div>
+          <div class="loading-dots--dot"></div>
+          <div class="loading-dots--dot"></div>
+        </div>
+    </div>
     <!--<a href="/#/login" class="signin"><i class="fa fa-power-off"></i>Sign In</a>-->
 </div>
