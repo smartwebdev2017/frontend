@@ -434,7 +434,7 @@
             if ( typeof(filter.listing_sold_status) === 'object' ) {
                 filter.listing_sold_status = filter.listing_sold_status.value;
             }else{
-                filter.listing_sold_status = 0;
+                filter.listing_sold_status = '';
             }
 
             if ( typeof(filter.state) === 'object' ) filter.state = filter.state.value;

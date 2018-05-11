@@ -59,8 +59,8 @@
                 {label: '4WD', value: '4WD'}
             ];
             $scope.sold_status = [
-                {label: 'All Vehicles', value: '2'},
-                {label: 'Currently For Sale', value:'0'},
+                {label: 'All Vehicles', value: '0'},
+                {label: 'Currently For Sale', value:''},
                 {label: 'Not Currently for Sale', value:'1'}
             ];
 
@@ -184,9 +184,7 @@
                     }
                 }
             } else {
-                $scope.filter['listing_sold_status']  = "0";
-                $scope.filter['listing_sold_status']  = $scope.sold_status[1];
-
+                $scope.filter['listing_sold_status']  = "";
             }
 
             if ($location.search().model_number != undefined) {
@@ -506,7 +504,7 @@
             if ( typeof(filter.listing_sold_status) === 'object' ) {
                 filter.listing_sold_status = filter.listing_sold_status.value;
             }else{
-                filter.listing_sold_status = 0;
+                filter.listing_sold_status = '';
             }
             if ( typeof(filter.state) === 'object' ) filter.state = filter.state.value;
             if ( typeof(filter.auto_trans) === 'object' ) filter.auto_trans = filter.auto_trans.value;
@@ -530,6 +528,7 @@
                 var data = [];
                 var keyword_length = 0;
                 var vin_length = 0;
+                var pcf_id_length = 0;
 
                 if ((filter.keyword == undefined) || (filter.keyword == '')) {
                     keyword_length = 0;
@@ -543,6 +542,12 @@
                     vin_length = filter.vin.length;
                 }
 
+                if ((filter.pcf_id == undefined) || (filter.pcf_id == '')) {
+                    pcf_id_length = 0;
+                } else {
+                    pcf_id_length = filter.pcf_id.length;
+                }
+
                 if (location.search !=''){
                     $rootScope.bSetFilters = true;
                 }else{
@@ -554,11 +559,12 @@
                 $rootScope.$totalLength = offers.count.toLocaleString();
                 $rootScope.$totalCounts = offers.count;
 
-                if (offers.results.length == 0 && (keyword_length == 17 || vin_length == 17)){
+                if (offers.results.length == 0 && ((keyword_length == 17 || vin_length == 17) || (keyword_length == 6 || pcf_id_length == 6))){
                     var keyword = filter.keyword;
                     if (filter.keyword == '') keyword = filter.vin;
 
                     BSLookup.save({}, {id:keyword}, function (offers) {
+                        $rootScope.$totalLength = offers.data.length;
                         $rootScope.isLoading = false;
                         $scope.bShowActive = false;
                         $scope.bShowInactive = false;
