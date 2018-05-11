@@ -562,6 +562,7 @@
                 if (offers.results.length == 0 && ((keyword_length == 17 || vin_length == 17) || (keyword_length == 6 || pcf_id_length == 6))){
                     var keyword = filter.keyword;
                     if (filter.keyword == '') keyword = filter.vin;
+                    if (filter.keyword == '') keyword = filter.pcf_id;
 
                     BSLookup.save({}, {id:keyword}, function (offers) {
                         $rootScope.$totalLength = offers.data.length;
