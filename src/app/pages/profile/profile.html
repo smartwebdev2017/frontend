@@ -1,6 +1,6 @@
 <div class="detail-page">
 
-    <div class="panel-content" ng-swipe-right="prev" ng-swipe-left="$nextListing()">
+    <div class="panel-content" ng-swipe-right="$prevListing()" ng-swipe-left="$nextListing()">
         <div class="row">
             <div class="col-md-12">
                 <a class="back_link" ng-click="goBack()">BACK TO RESULTS</a>
@@ -28,6 +28,12 @@
                 <div class="form-group row clearfix" ng-if="$detailData.listing_title">
                     <div class="col-sm-9">
                         <a class="detail_link" target="_blank" href={{$detailData.listing_url}}><span ng-bind-html="$detailData.listing_title | highlightWord: keywords"></span></a>
+                    </div>
+                </div>
+
+                <div class="form-group row clearfix" ng-if="!$detailData.listing_title">
+                    <div class="col-sm-9">
+                        <a class="detail_link" target="_blank" href={{$detailData.listing_url}}><span>LINK</span></a>
                     </div>
                 </div>
 

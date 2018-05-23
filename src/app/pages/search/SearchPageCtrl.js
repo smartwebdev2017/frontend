@@ -586,6 +586,7 @@
         };
 
         $rootScope.prevPage = function(){
+            if ($rootScope.$prev == null) return;
 
             var newURL = $rootScope.extractURL($rootScope.$prev);
             if ($scope.filter.page > 1) $scope.filter.page -= 1;
